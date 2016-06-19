@@ -1,8 +1,9 @@
 # bbcmicro.co.uk
-Source for bbcmicro.co.uk - to showcase vintage games for the BBC Micro Computer
+Source for http://bbcmicro.co.uk - to showcase vintage games for the BBC Micro Computer
 
-To install, Create a database, and a user to access it.
-Alter db_connect.php to contain the details of the database.
+To install, first install the standard mysql, php, apache stack.
+Create a database, and a user to access it.
+Alter config.php to contain the details of the database.
 Run db/db.sql into the database, and the site should work.
 
 Only a few disc images are included. Place these in gameimg/discs.
