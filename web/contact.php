@@ -1,3 +1,6 @@
+<?php
+require 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>BBC Micro Games - Contact us</title>
+    <title><?php echo $site_name?> - About us</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bs/css/bootstrap.min.css" rel="stylesheet">
@@ -41,11 +44,11 @@
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.php">BBC Micro Games</a>
+    <span class="navbar-brand"><?php echo $site_name?></span>
    </div>
    <div id="navbar" class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
-     <li><a href="index.php">Home</a></li>
+     <li><a href="index.php">Games</a></li>
      <li><a href="about.php">About</a></li>
      <li class="active"><a href="contact.php">Contact</a></li>
     </ul>
@@ -55,8 +58,8 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>BBC Micro Games!</h1>
-        <p>Contact us at the webmaster address.</p>
+        <h1><?php echo $site_name?></h1>
+        <p>Contact us at the <a href='http://stardot.org.uk/forums/viewforum.php?f=51' target='_blank'>StarDot forums</a></p>
       </div>
     </div>
 

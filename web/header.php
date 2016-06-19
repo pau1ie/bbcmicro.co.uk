@@ -1,6 +1,7 @@
 <?php
 
 function htmlhead() {
+global $site_name;
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@ function htmlhead() {
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>BBC Micro Games</title>
+    <title><?php echo $site_name?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="bs/css/bootstrap.min.css" rel="stylesheet">
@@ -30,6 +31,7 @@ function htmlhead() {
 }
 
 function nav() {
+global $site_name;
 ?>
  <nav class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
@@ -40,11 +42,11 @@ function nav() {
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.php">BBC Micro Games</a>
+    <span class="navbar-brand"><?php echo $site_name?></span>
    </div>
    <div id="navbar" class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
-     <li class="active"><a href="index.php">Home</a></li>
+     <li><a href="index.php">Games</a></li>
      <li><a href="about.php">About</a></li>
      <li><a href="contact.php">Contact</a></li>
     </ul>
@@ -75,8 +77,8 @@ function sidebar($title, $year, $pubid, $publisher) {
       <input id="publisher" class="typeahead form-control" type="text" placeholder="Publisher" value="<?php echo ($pubid > 0 ) ? $publisher : ""; ?>" />
      </fieldset>
      <div class="form-actions center-block" >
-       <button type="submit" class="btn btn-default">Search!</button>
-       <button id="reset" type="reset" class="btn btn-default">Clear!</button>
+       <button type="submit" class="btn btn-default">Search</button>
+       <button id="reset" type="reset" class="btn btn-default">Clear</button>
      </div><!--/div-->
     </form>
    </div><!--/.sidebar-offcanvas-->

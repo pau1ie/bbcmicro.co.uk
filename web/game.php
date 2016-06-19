@@ -1,4 +1,5 @@
 <?php
+require 'config.php';
 include 'db_connect.php';
 
 $id=0;
@@ -84,7 +85,7 @@ if ( count($genres) > 1) {
 }
 
 if ( ! empty($genres)) {
-  $genretab='<tr><th>Secondary genre' . $s . '</th><td><table class="table">';
+  $genretab='<tr><th>Secondary genre' . $s . '</th><td><table class="table" style=\"border: none\">';
   foreach ($genres as $genre) {
     $genretab=$genretab . "<tr><td>" . $genre["name"] . "</td></tr>";
   }
@@ -137,11 +138,11 @@ if ( ! empty($genres)) {
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.php">BBC Micro Games</a>
+    <span class="navbar-brand"><?php echo $site_name?></span>
    </div>
    <div id="navbar" class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
-     <li><a href="index.php">Home</a></li>
+     <li><a href="index.php">Games</a></li>
      <li><a href="about.php">About</a></li>
      <li><a href="contact.php">Contact</a></li>
     </ul>
