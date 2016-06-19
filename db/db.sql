@@ -8593,7 +8593,6 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1859, 1693, 'Disc095-Adventure.png', 1),
 (1860, 1963, 'Disc110-2048.png', 1),
 (1861, 1477, 'Disc083-3DBowlingAlley.png', 1),
-(1862, 1927, 'Disc108-3DMazeGamesOfDeduction', NULL),
 (1863, 1993, 'Disc112-3DMazeSTD.png', 1),
 (1864, 1910, 'Disc107-AirliftBugByte.png', NULL),
 (1865, 1603, 'Disc090-Alien.png', 1),
