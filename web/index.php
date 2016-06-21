@@ -1,8 +1,9 @@
 <?php
 
-include 'config.php';
-include 'db_connect.php';
-include 'header.php';
+require 'includes/config.php';
+require 'includes/db_connect.php';
+require 'includes/menu.php';
+require 'header.php';
 
 $url='';
 $year=0;

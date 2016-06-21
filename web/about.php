@@ -1,5 +1,6 @@
 <?php
-require 'config.php';
+require 'includes/config.php';
+require 'includes/menu.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@ require 'config.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="favicon.ico">
 
     <title><?php echo $site_name?> - About us</title>
 
@@ -22,10 +23,6 @@ require 'config.php';
 
     <!-- Custom styles for this template -->
     <link href="bs/css/jumbotron.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="bs/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -46,13 +43,7 @@ require 'config.php';
     </button>
     <span class="navbar-brand"><?php echo $site_name?></span>
    </div>
-   <div id="navbar" class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-     <li><a href="index.php">Games</a></li>
-     <li class="active"><a href="about.php">About</a></li>
-     <li><a href="contact.php">Contact</a></li>
-    </ul>
-   </div><!-- /.nav-collapse -->
+   <?php make_menu_bar("About")?>
   </div><!-- /.container -->
  </nav><!-- /.navbar -->
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -72,9 +63,9 @@ require 'config.php';
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="bs/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="bs/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
 

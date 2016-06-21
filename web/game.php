@@ -1,6 +1,7 @@
 <?php
-require 'config.php';
-include 'db_connect.php';
+require 'includes/config.php';
+require 'includes/db_connect.php';
+require 'includes/menu.php';
 
 $id=0;
 
@@ -103,7 +104,7 @@ if ( ! empty($genres)) {
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="favicon.ico">
 
     <title><?php echo $game["title"]; ?></title>
 
@@ -114,11 +115,7 @@ if ( ! empty($genres)) {
     <link href="bs/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="bs/js/ie-emulation-modes-warning.js"></script>
+    <link href="bs/css/jumbotron.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -140,13 +137,7 @@ if ( ! empty($genres)) {
     </button>
     <span class="navbar-brand"><?php echo $site_name?></span>
    </div>
-   <div id="navbar" class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-     <li><a href="index.php">Games</a></li>
-     <li><a href="about.php">About</a></li>
-     <li><a href="contact.php">Contact</a></li>
-    </ul>
-   </div><!-- /.nav-collapse -->
+   <?php make_menu_bar("Games")?>
   </div><!-- /.container -->
  </nav><!-- /.navbar -->
 

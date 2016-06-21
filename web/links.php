@@ -11,7 +11,7 @@ require 'includes/menu.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="../../favicon.ico">
 
     <title><?php echo $site_name?> - About us</title>
 
@@ -43,14 +43,35 @@ require 'includes/menu.php';
     </button>
     <span class="navbar-brand"><?php echo $site_name?></span>
    </div>
-   <?php make_menu_bar("Contact") ?>
+   <?php make_menu_bar("Links")?>
   </div><!-- /.container -->
  </nav><!-- /.navbar -->
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
         <h1><?php echo $site_name?></h1>
-        <p>Contact us at the <a href='http://stardot.org.uk/forums/viewforum.php?f=51' target='_blank'>StarDot forums</a></p>
+
+	<h2>Emulators</h2>
+
+	<a href='http://b-em.bbcmicro.com' target='_blank'>B-Em (Windows/Linux)</a><br>
+	<br>
+	<a href='http://www.mkw.me.uk/beebem' target='_blank'>BeebEm (Windows)</a><br>
+	<br>
+	<a href='http://www.g7jjf.com/beebemmac.htm' target='_blank'>BeebEm (Mac)</a><br>
+	<br>
+	<a href='http://bbc.godbolt.org' target='_blank'>JSBeeb (Online/Javascript)</a><br>
+	<br>
+	<a href='http://www.mamedev.org/release.html' target='_blank'>MAME (Windows)</a><br>
+	<h2>Acorn/BBC Micro Sites</h2>
+
+	<a href='http://www.stardot.org.uk' target='_blank'>StarDot Forum</a><br>
+	<br>
+	<a href='http://www.retrosoftware.co.uk' target='_blank'>Retro Software</a><br>
+	<br>
+	<a href='http://www.stairwaytohell.com' target='_blank'>Stairway To Hell (No longer maintained)</a><br>
+	<br>
+	<a href='http://www.8bs.com' target='_blank'>8-Bit Software</a><br>
+
       </div>
     </div>
 
