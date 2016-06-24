@@ -65,26 +65,23 @@ function get_publisher($id) {
 function gameitem( $id,  $name, $image, $ssd, $publisher, $year, $pubid) {
    global $sid;
 
+   $jsbeeb=JB_LOC;
+   $root=WS_ROOT;
+
    $split=explode('(',$name);
    $title=$split[0];
-   $rest="";
-   #if (count($split) > 1 ) {
-   #   $rest = '<p>(' . implode('(',array_slice($split,1)) . "</p>";
-   #}
-   #if ($sid > 0 ) {
-   #   $rest = $rest . $id . "<br/>";
-   #}
    
 ?>
      <div class="col-sm-6 col-md-4 col-lg-3">
       <div class="thumbnail text-center">
        <a href="game.php?id=<?php echo $id; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $image; ?>" class="pic"></a>
-       <h3><a href="game.php?id=<?php echo $id; ?>"><?php echo $title ?></a></h3><?php echo $rest; ?>
+       <h3><a href="game.php?id=<?php echo $id; ?>"><?php echo $title ?></a></h3>
        <a href="?pubid=<?php echo $pubid ?>"><?php echo $publisher?></a>
        -&nbsp;<a href="?year=<?php echo $year ?>"><?php echo $year; ?></a> 
 <?php
   if ($ssd != null && file_exists($ssd)) { ?>
-       <p><a href="<?php echo $ssd ?>" type="button" class="btn btn-default">Download</a></p>
+       <p><a href="<?php echo $ssd ?>" type="button" class="btn btn-default">Download</a>
+          <a id="plybtn" href="<?php echo $jsbeeb . $root . '/' . $ssd ?>" type="button" class="btn btn-default">Play</a></p>
 <?php
   }
 ?>
@@ -125,7 +122,7 @@ function pager($limit, $rows, $page, $url) {
 function grid($url, $title, $year, $publisher, $atoz) {
   global $db;
 
-  $limit = 30;
+  $limit=GD_IPP;
   if ( isset($_GET["page"])) {
     $page=$_GET["page"];
     if ($page == 0 ) {
@@ -149,7 +146,8 @@ function grid($url, $title, $year, $publisher, $atoz) {
   }
 
   if (strlen($title) > 0) {
-    $title="%".$title."%";
+    // Change space to wildcard
+    $title="%".str_replace(' ','%',$title)."%";
     $wc[]="title like :title";
     $where="WHERE ";
   }
