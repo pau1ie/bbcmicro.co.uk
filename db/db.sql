@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 05, 2016 at 09:29 PM
+-- Generation Time: Jul 05, 2016 at 10:39 PM
 -- Server version: 5.5.49
 -- PHP Version: 5.6.22
 
@@ -8791,7 +8791,7 @@ CREATE TABLE IF NOT EXISTS `screenshots` (
   `gameid` int(11) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `main` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2666 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2681 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `screenshots`
@@ -8799,7 +8799,7 @@ CREATE TABLE IF NOT EXISTS `screenshots` (
 
 INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1, 145, '180Darts.jpg', NULL),
-(2, 937, '1984.png', NULL),
+(2, 937, '1984.png', 9000),
 (3, 1225, '2002.jpg', NULL),
 (4, 1729, '32KUniverse.jpg', NULL),
 (5, 685, '3DAsteroids.jpg', NULL),
@@ -8845,7 +8845,6 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (45, 881, 'WhiteMagic.jpg', NULL),
 (46, 37, '3DMunchy.jpg', NULL),
 (47, 631, '3DTanx.jpg', NULL),
-(48, 937, '1984.png', NULL),
 (49, 1135, '747FlightSimulator-DACC.png', NULL),
 (50, 1, 'Disc001-BananaMan.png', NULL),
 (51, 2, 'Disc001-BugBlaster.png', NULL),
@@ -8868,7 +8867,6 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (73, 24, 'Disc002-CentipedeAKACentibug.png', NULL),
 (74, NULL, '10oftheBestGames-Database.png', NULL),
 (75, 145, '180Darts-AnF.png', NULL),
-(76, 937, '1984-Incentive.png', NULL),
 (77, 1225, '2002-Superior.png', NULL),
 (78, 469, '3-DeepSpace-Postern.png', NULL),
 (79, 235, '3D-Tennis--.png', NULL),
@@ -9688,7 +9686,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (893, NULL, 'Islandia-Redshift.png', NULL),
 (894, NULL, 'ItsMagic-CentralComputing.png', NULL),
 (895, 63, 'JCBDigger-Acornsoft.png', NULL),
-(896, 1918, 'JR-SoftwareForAll.png', NULL),
+(896, 1918, 'JR-SoftwareForAll.png', 9000),
 (897, 115, 'JackAndTheBeanstalk-Superior.png', NULL),
 (898, 479, 'JackAttack-Bug-Byte.png', NULL),
 (899, NULL, 'JackieWilson-ReetPetite-AH.png', NULL),
@@ -9827,7 +9825,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1032, 1557, 'MasterBreak-Superior.png', NULL),
 (1033, NULL, 'MasterCutler-Dee-KaySystems.png', NULL),
 (1034, 1575, 'Masterbrain-Acornsoft.png', NULL),
-(1035, 1937, 'Mastermind-Logic--.png', NULL),
+(1035, 1937, 'Mastermind-Logic--.png', 9000),
 (1036, NULL, 'MastermindQuizmaster-Mirrorsoft.png', NULL),
 (1037, 1683, 'MastersoftheUniverse-USGold.png', NULL),
 (1038, NULL, 'Masterspy--.png', NULL),
@@ -9851,7 +9849,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1056, NULL, 'Mexico86-Qualsoft.png', NULL),
 (1057, 1594, 'MicroDerby-Bug-Byte.png', NULL),
 (1058, NULL, 'MicroFair--.png', NULL),
-(1059, 248, 'MicroOlympics-MicroUser.png', NULL),
+(1059, 248, 'MicroOlympics-MicroUser.png', 9000),
 (1060, NULL, 'MicroQuest-Glengary.png', NULL),
 (1061, 713, 'Microball-Alternative.png', NULL),
 (1062, 65, 'Microbe-VirginGames.png', NULL),
@@ -9903,9 +9901,9 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1108, 159, 'MrWimpy-Ocean.png', NULL),
 (1109, 101, 'MrWiz-Superior.png', NULL),
 (1110, 47, 'Munchyman-MicroPower.png', NULL),
-(1111, NULL, 'Music-Bug-Byte.png', NULL);
+(1111, NULL, 'Music-Bug-Byte.png', NULL),
+(1112, NULL, 'MusicPlayer-PCW.png', NULL);
 INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
-(1112, NULL, 'MusicPlayer-PCW.png', NULL),
 (1113, NULL, 'MusicProcessor--.png', NULL),
 (1114, NULL, 'MutantBreakout-IJK.png', NULL),
 (1115, 280, 'MutantSpiders-Superior.png', NULL),
@@ -10211,7 +10209,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1415, NULL, 'SeaQueen--.png', NULL),
 (1416, 318, 'SeaWolf-Optima.png', NULL),
 (1417, NULL, 'SearchAndRescue-LittlenOrton.png', NULL),
-(1418, 1999, 'SecretDiaryOfAdrianMole-Mosaic.png', NULL),
+(1418, 1999, 'SecretDiaryOfAdrianMole-Mosaic.png', 9000),
 (1419, NULL, 'SecretSam1-BlueRibbon.png', NULL),
 (1420, 1633, 'SecretSam1-MRM.png', NULL),
 (1421, NULL, 'SecretSam2-BlueRibbon.png', NULL),
@@ -10278,7 +10276,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1482, 1690, 'Snowball-Level9.png', NULL),
 (1483, NULL, 'SoccerBoss-Alternative.png', NULL),
 (1484, NULL, 'SoccerManager-MicroUser.png', NULL),
-(1485, 1907, 'SoccerSupremo-Qualsoft.png', NULL),
+(1485, 1907, 'SoccerSupremo-Qualsoft.png', 9000),
 (1486, 625, 'Solitaire-MRM.png', NULL),
 (1487, 162, 'SonOfBlagger-Alligata.png', NULL),
 (1488, 196, 'Sorcerer-MRM.png', NULL),
@@ -10361,7 +10359,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1565, NULL, 'StarTrek-IJK.png', NULL),
 (1566, NULL, 'StarTrek-MicroPower.png', NULL),
 (1567, 1667, 'StarTrekAdventure-Superior.png', NULL),
-(1568, 1973, 'StarTrekTheGame--.png', NULL),
+(1568, 1973, 'StarTrekTheGame--.png', 9000),
 (1569, 124, 'StarWarp-Superior.png', NULL),
 (1570, 555, 'StarWars-Domark.png', NULL),
 (1571, NULL, 'StarWars-Unreleased.png', NULL),
@@ -10389,8 +10387,8 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1593, NULL, 'Stranded-Robico.png', NULL),
 (1594, 301, 'Stranded-Superior.png', NULL),
 (1595, NULL, 'Strategem-MicroUser.png', NULL),
-(1596, 1974, 'Strategy1-Invasion-ASP.png', NULL),
-(1597, 1987, 'Strategy2-HuntForTheBismark-ASP.png', NULL),
+(1596, 1974, 'Strategy1-Invasion-ASP.png', 9000),
+(1597, 1987, 'Strategy2-HuntForTheBismark-ASP.png', 9000),
 (1598, 501, 'Stratobomber-IJK.png', NULL),
 (1599, 1812, 'StrawberryFields-JBF.png', NULL),
 (1600, 449, 'StreetMachine-SoftwareInvasion.png', NULL),
@@ -10482,7 +10480,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1686, NULL, 'TimemanOne-Bourne.png', NULL),
 (1687, NULL, 'TimemanTwo-Bourne.png', NULL),
 (1688, NULL, 'TimesTables-JFairbrother.png', NULL),
-(1689, 1977, 'Timetrek-MicroPower.png', NULL),
+(1689, 1977, 'Timetrek-MicroPower.png', 9000),
 (1690, NULL, 'Tipster-Chestnut.png', NULL),
 (1691, NULL, 'Tobruk-CTMcGurk.png', NULL),
 (1692, NULL, 'Tomahawk-Kansas.png', NULL),
@@ -10995,9 +10993,9 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (2199, 1187, 'Disc066-SatelliteHavoc.png', NULL),
 (2200, 1188, 'Disc066-Squark.png', NULL),
 (2201, 1189, 'Disc067-Avenger.png', NULL),
-(2202, 1190, 'Disc067-Ballooning.png', NULL);
+(2202, 1190, 'Disc067-Ballooning.png', NULL),
+(2203, 1191, 'Disc067-Bridgehead.png', NULL);
 INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
-(2203, 1191, 'Disc067-Bridgehead.png', NULL),
 (2204, 1192, 'Disc067-CaterpillarComputerConcepts.png', NULL),
 (2205, 1193, 'Disc067-Cubert.png', NULL),
 (2206, 1194, 'Disc067-FireAKAFireRescue.png', NULL),
@@ -11337,7 +11335,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (2540, 1835, 'Disc102-Vliv.png', NULL),
 (2541, 1836, 'Disc102-VortexABartram.png', NULL),
 (2542, 1837, 'Disc103-BallGameSTD.png', NULL),
-(2543, 1838, 'Disc103-BrightEyes.png', NULL),
+(2543, 1838, 'Disc103-BrightEyes.png', 9000),
 (2544, 1839, 'Disc103-BurgerTimeMinion.png', NULL),
 (2545, 1840, 'Disc103-ChuckieEgg6.png', NULL),
 (2546, 1841, 'Disc103-Cliffhanger.png', NULL),
@@ -11383,7 +11381,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (2586, 1889, 'Disc105-Zap.png', NULL),
 (2587, 1891, 'Disc106-AtticBugInSameGame.png', NULL),
 (2588, 1893, 'Disc106-CarMaze.png', NULL),
-(2589, 1894, 'Disc106-CityDefendJ.png', NULL),
+(2589, 1894, 'Disc106-CityDefendJ.png', 9000),
 (2590, 1895, 'Disc106-Cobra.png', NULL),
 (2591, 1896, 'Disc106-GobblerSide1or2.png', NULL),
 (2592, 1897, 'Disc106-GrandPrixSoftwareForAll.png', NULL),
@@ -11426,7 +11424,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (2629, 1951, 'Disc109-Enigma.png', NULL),
 (2630, 1952, 'Disc109-Fives.png', NULL),
 (2631, 1953, 'Disc109-FloodIt.png', NULL),
-(2632, 1954, 'Disc109-GoldenShotSTD.png', NULL),
+(2632, 1954, 'Disc109-GoldenShotSTD.png', 9000),
 (2633, 1955, 'Disc109-GridderE.png', NULL),
 (2634, 1956, 'Disc109-GrijpertjeAKACatcher.png', NULL),
 (2635, 1957, 'Disc109-HiLo.png', NULL),
@@ -11435,7 +11433,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (2638, 1961, 'Disc109-Thruster.png', NULL),
 (2639, 1962, 'Disc109-WorldWar1.png', NULL),
 (2640, 1965, 'Disc110-ConnectFourAKAMakeFour.png', NULL),
-(2641, 1966, 'Disc110-Dicer2P.png', NULL),
+(2641, 1966, 'Disc110-Dicer2P.png', 9000),
 (2642, 1967, 'Disc110-EasterEggChase.png', NULL),
 (2643, 1968, 'Disc110-PercysPanic.png', NULL),
 (2644, 1969, 'Disc110-PligP.png', NULL),
@@ -11449,17 +11447,32 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (2652, 1983, 'Disc111-SCOTT.png', NULL),
 (2653, 1984, 'Disc111-Skywalker.png', NULL),
 (2654, 1985, 'Disc111-Splat.png', NULL),
-(2655, 1986, 'Disc111-StartrekRHCompendium.png', NULL),
+(2655, 1986, 'Disc111-StartrekRHCompendium.png', 9000),
 (2656, 1988, 'Disc111-SuperHangerSTD.png', NULL),
 (2657, 1989, 'Disc111-Survive.png', NULL),
 (2658, 1990, 'Disc111-Trio.png', NULL),
 (2659, 1995, 'Disc112-Doomrun.png', NULL),
 (2660, 1996, 'Disc112-MastermindRH.png', NULL),
-(2661, 1997, 'Disc112-RockPileE.png', NULL),
+(2661, 1997, 'Disc112-RockPileE.png', 9000),
 (2662, 1890, 'Disc105-ZiggyAKACaterpillerE.png', NULL),
 (2663, 1902, 'Disc106-OxbridgeEdit.png', NULL),
 (2664, 1964, 'Disc028-Astroblaster.png', NULL),
-(2665, 1992, 'Disc111-ZenSTD.png', NULL);
+(2665, 1992, 'Disc111-ZenSTD.png', NULL),
+(2666, 1838, 'DISC103-BrightEyes.png', 100),
+(2667, 248, 'DISC014-MicroOlympics.png', 100),
+(2668, 1894, 'DISC106-CityDefend.png', 100),
+(2669, 1907, 'DISC106-SoccerSupremo.png', 100),
+(2670, 1918, 'DISC107-JR.png', 100),
+(2671, 1937, 'DISC108-MastermindGamesPack1.png', 100),
+(2672, 1954, 'DISC109-GoldenShot.png', 100),
+(2673, 1966, 'DISC110-Dicer.png', 100),
+(2674, 1973, 'DISC110-StarTrekTheGame.png', 100),
+(2675, 1974, 'DISC110-Strategy1.png', 100),
+(2676, 1977, 'DISC110-Timetrek.png', 100),
+(2677, 1986, 'DISC111-StarTrekRH.png', 100),
+(2678, 1987, 'DISC111-Strategy2.png', 100),
+(2679, 1997, 'DISC111-WorldCupManager.png', 100),
+(2680, 1999, 'DISC112-SecretDiaryOfAdrianMole.png', 100);
 
 --
 -- Indexes for dumped tables
@@ -11542,7 +11555,7 @@ ALTER TABLE `publishers`
 -- AUTO_INCREMENT for table `screenshots`
 --
 ALTER TABLE `screenshots`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2666;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2681;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
