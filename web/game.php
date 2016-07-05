@@ -9,7 +9,7 @@ if ( isset($_GET["id"])) {
   $id=intval($_GET["id"]);
 }
 
-$sql = "select g.title, g.publisher, g.year, n.name as genre from games g left join genres n on n.id = g.genre where g.id  = ?";
+$sql = "select g.title, g.publisher, g.year, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -48,10 +48,15 @@ if ($sth->execute()) {
   $img=array();
 }
 
-if ( empty($img) ) {
-  $imglink="No image available";
+$ssd = 'gameimg/discs/' . $img["filename"];
+$jsbeeb=JB_LOC;
+$root=WS_ROOT;
+
+if ( $ssd != null && file_exists($ssd)) {
+  $imglink='<p><a type="button" class="btn btn-primary btn-lg center-block" href="' . $ssd . '">Download</a></p>
+            <p><a type="button" class="btn btn-primary btn-lg center-block" href="' . $jsbeeb . $root . '/' . $ssd . '" >Play</a></p>';
 } else {
-  $imglink='<a type="button" class="btn btn-primary btn-lg center-block" href="gameimg/discs/' . $img["filename"] . '">Download</a>';
+  $imglink="<p>No disc image available</p>";
 }
 
 $sql = "select * from game_genre gg, genres g where gg.gameid  = ? and gg.genreid = g.id";
@@ -159,10 +164,11 @@ if ( ! empty($genres)) {
             <tr><th>Title</th><td><?php echo $game["title"];?></td></tr>
             <tr><th>Year</th><td><?php echo $game["year"];?></td></tr>
             <tr><th>Publisher</th><td><?php echo $game["publisher"];?></td></tr>
+            <tr><th>Release Type</th><td><?php echo $game["reltype"];?></td></tr>
             <tr><th>Primary genre</th><td><?php echo $game["genre"];?></td></tr>
             <?php echo $genretab;?>
           </table>
-          <p><?php echo $imglink; ?></p>
+          <?php echo $imglink; ?>
           <p><a type="button" class="btn btn-primary btn-lg center-block" href="javascript:history.go(-1)" title="Back to list">Back to list</a></p>
        </div>
       </div>
