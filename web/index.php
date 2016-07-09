@@ -48,6 +48,17 @@ if ( isset($_GET["sid"])) {
   }
 }
 
+// Check boxes
+$rtype = array();
+
+foreach($_GET as $k => $v ) {
+  if (preg_match('/^rt_[A-Z]$/',$k)) {
+    $rtype[] = substr($k,-1);
+    $url=$url . '&' . $k . '=' . $v;
+  }
+}
+
+
 $url=htmlspecialchars($url);
 
 function get_publisher($id) {
@@ -120,7 +131,7 @@ function pager($limit, $rows, $page, $url) {
 
 
 function grid($url, $title, $year, $publisher, $atoz) {
-  global $db;
+  global $db, $rtype;
 
   $limit=GD_IPP;
   if ( isset($_GET["page"])) {
@@ -133,23 +144,19 @@ function grid($url, $title, $year, $publisher, $atoz) {
   }
   $wc=array();
   $binds=array();
-  $where='';
 
   if ($publisher > 0 ) {
     $wc[]="pubid = :publisher";
-    $where="WHERE ";
   }
 
   if ($year > 0 ) {
     $wc[]="year = :year";
-    $where="WHERE ";
   }
 
   if (strlen($title) > 0) {
     // Change space to wildcard
     $title="%".str_replace(' ','%',$title)."%";
     $wc[]="title like :title";
-    $where="WHERE ";
   }
 
   $doing_atoz_numbers=false;
@@ -161,11 +168,16 @@ function grid($url, $title, $year, $publisher, $atoz) {
 	    $atoz=substr($atoz,0,1)."%";
 	    $wc[]="title like :atoz";
     }
-    $where="WHERE ";
+  }
+
+  if (count($rtype)>0) {
+    $wc[]='FIND_IN_SET(reltype,:array)';
+  } else {
+    $wc[]=" reltype in (select id from reltype where selected = 'Y')";
   }
 
   $offset = $limit * ($page -1);
-  $sql ='select SQL_CALC_FOUND_ROWS * from games ' . $where . implode(' AND ',$wc) . ' order by title LIMIT :limit OFFSET :offset';
+  $sql ='select SQL_CALC_FOUND_ROWS * from games WHERE ' . implode(' AND ',$wc) . ' order by title LIMIT :limit OFFSET :offset';
 
   $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   if ($publisher > 0 ) {
@@ -179,6 +191,10 @@ function grid($url, $title, $year, $publisher, $atoz) {
   }
   if (strlen($atoz) > 0 && !$doing_atoz_numbers) {
     $sth->bindParam(':atoz',$atoz, PDO::PARAM_STR);
+  }
+  if (count($rtype)>0) {
+    $t=implode(',',$rtype);
+    $sth->bindParam(':array',$t);
   }
   $sth->bindParam(':limit',$limit, PDO::PARAM_INT);
   $sth->bindParam(':offset',$offset, PDO::PARAM_INT);

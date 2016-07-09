@@ -56,7 +56,24 @@ global $site_name;
 <?php
 }
 
+function get_reltypes() {
+  global $db;
+
+  $sql = "select distinct id, name, selected from reltype order by name";
+  $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+  if ($sth->execute()) {
+    $res = $sth->fetchAll();
+  } else {
+    echo "Error:";
+    echo "\n";
+    $sth->debugDumpParams ();
+    $res=array();
+  }
+  return $res;
+}
+
 function sidebar($title, $year, $pubid, $publisher) {
+  global $rtype;
   $title = htmlspecialchars($title,ENT_QUOTES);
 
 ?>
@@ -75,6 +92,31 @@ function sidebar($title, $year, $pubid, $publisher) {
       <label for="publisher">Publisher</label>
       <input name="pubid" id="pubid" class="hidden" type="hidden" value="<?php echo ($pubid > 0 ) ? $pubid : ""; ?>" />
       <input id="publisher" class="typeahead form-control" type="text" placeholder="Publisher" value="<?php echo ($pubid > 0 ) ? $publisher : ""; ?>" />
+     </fieldset>
+     <label for="reltypes">Release Type</label>
+     <fieldset class="form-group" id="reltypes" >
+<?php
+   $reltyps=get_reltypes();
+   foreach ( $reltyps as $reltyp ) {
+      $checked='';
+      if (count($rtype)==0){
+         if ($reltyp['selected'] == 'Y') {
+            $checked='checked';
+         }
+      } else {
+         if (array_search($reltyp['id'],$rtype)===False) {
+            ;
+         }else{
+            $checked='checked';
+         }
+      }
+?>
+      <div class="checkbox">
+       <label><input type="checkbox" name="rt_<?php echo $reltyp['id']; ?>" <?php echo $checked ?>><?php echo $reltyp['name'] ?></label>
+      </div>
+<?php
+   }
+?>
      </fieldset>
      <div class="form-actions center-block" >
        <button type="submit" class="btn btn-default">Search</button>
@@ -229,6 +271,7 @@ $('.typeahead').on('typeahead:selected typeahead:autocompleted', function(e, dat
   $("#pubid" ).val(datum.id);
 });
   </script>
+<?php include_once("includes/googleid.php") ?>
 </body>
 </html><?php
 }

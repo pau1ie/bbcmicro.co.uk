@@ -182,6 +182,7 @@ if ( ! empty($genres)) {
     <script src="bs/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bs/js/ie10-viewport-bug-workaround.js"></script>
+<?php include_once("includes/googleid.php") ?>
   </body>
 </html>
 
