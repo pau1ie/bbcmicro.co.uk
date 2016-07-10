@@ -1,0 +1,21 @@
+<?php
+# This file needs to be renamed to config.php
+# then updated for your site.
+# Mostly the database stuff.
+
+# Constant for now, might be data-driven (e.g. if
+# same code used for Electron or Atom archives)
+$site_name="Complete BBC Games Archive";
+
+define('DB_HOST','localhost');
+define('DB_NAME','bbc');
+define('DB_USER','bbc');
+define('DB_PASS','password');
+
+# (Mostly) For use with jsbeeb
+define('WS_ROOT','http://localhost/');
+define('JB_LOC', WS_ROOT . '/jsbeeb/?autoboot&disc=');
+
+#Items per page on the grid. Ideally has factors of 3,4
+define('GD_IPP',36);
+?>

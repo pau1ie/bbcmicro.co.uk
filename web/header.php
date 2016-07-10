@@ -11,7 +11,8 @@ global $site_name;
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/png">
+    <link type="image/png" rel="shortcut icon" href="favicon.ico"/>
 
     <title><?php echo $site_name?></title>
 
@@ -45,11 +46,7 @@ global $site_name;
     <span class="navbar-brand"><?php echo $site_name?></span>
    </div>
    <div id="navbar" class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-     <li><a href="index.php">Games</a></li>
-     <li><a href="about.php">About</a></li>
-     <li><a href="contact.php">Contact</a></li>
-    </ul>
+   <?php make_menu_bar("Games")?>
    </div><!-- /.nav-collapse -->
   </div><!-- /.container -->
  </nav><!-- /.navbar -->
