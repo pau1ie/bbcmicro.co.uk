@@ -19,13 +19,6 @@ if ( isset($_GET["title"])) {
   }
 }
 
-if ( isset($_GET["atoz"])) {
-  $atoz=$_GET["atoz"];
-  if (strlen($atoz) > 0 ) {
-    $url=$url . '&atoz='.$atoz;
-  }
-}
-
 if ( isset($_GET["pubid"])) {
   $pubid=intval($_GET["pubid"]);
   if ($pubid > 0 ) {
@@ -48,6 +41,7 @@ if ( isset($_GET["sid"])) {
   }
 }
 
+
 // Check boxes
 $rtype = array();
 
@@ -58,6 +52,14 @@ foreach($_GET as $k => $v ) {
   }
 }
 
+$azurl=htmlspecialchars($url);
+
+if ( isset($_GET["atoz"])) {
+  $atoz=$_GET["atoz"];
+  if (strlen($atoz) > 0 ) {
+    $url=$url . '&atoz='.$atoz;
+  }
+}
 
 $url=htmlspecialchars($url);
 
@@ -260,13 +262,14 @@ print_r($sth->ErrorInfo());
 }
 
 function atoz_line($current='') {
+	global $azurl;
 ?>
 <?php
     	echo "<form id=\"atozform\" action=\"index.php\" method=\"get\">";
 	echo "<ul class=\"pagination\">";
 	foreach (array('#','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z') as $char) {
 		$active=($current==$char)?' class="active"':'';
-		echo "<li$active><a href='index.php?atoz=".urlencode($char)."'>$char</a></li>";
+		echo "<li$active><a href='index.php?atoz=".urlencode($char).$azurl."'>$char</a></li>";
 	}
 	echo "</ul>";
 	echo "</form>";

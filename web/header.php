@@ -69,6 +69,10 @@ function get_reltypes() {
   return $res;
 }
 
+function setup_reltypes() {
+
+}
+
 function sidebar($title, $year, $pubid, $publisher) {
   global $rtype;
   $title = htmlspecialchars($title,ENT_QUOTES);
@@ -131,7 +135,7 @@ function containstart() {
   <div class="row row-offcanvas row-offcanvas-right">
    <div class="col-xs-12 col-sm-10">
     <p class="pull-right visible-xs">
-     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Search</button>
     </p>
 <?php
 }
