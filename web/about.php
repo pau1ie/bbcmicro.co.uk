@@ -50,9 +50,62 @@ require 'includes/menu.php';
     <div class="jumbotron">
       <div class="container">
         <h1><?php echo $site_name?></h1>
-        <p>Over the last few years we have been lovingly restoring some BBC micro games from the 1980s onwards. We have put them here so you can play them in an emulator, on a real BBC Micro, or on the web.</p>
+        <p>Over the last few years we have been lovingly restoring some BBC micro games from the 1980s onwards. We have put them here so you can play them in an emulator, on a real BBC Micro, or on the web. If you would like to help us improve the site, join us in the Stardot forums. See the <a href="contact.php">contact page</a> for more information.</p>
       </div>
     </div>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Games</h2>
+          <p>Which game should you play? There are more than 2000 games on the website, but which are the very best? In the <a href="http://stardot.org.uk/forums/viewtopic.php?f=1&t=8259">Stardot forums</a>, members contributed their faviourite games. The top 20 are:</p>
+          <ol>
+            <li><a href="game.php?id=366">Elite</a>. The classic space trading game.</li>
+            <li><a href="game.php?id=25">Chuckie Egg</a>. There are also some unofficial variants.</li>
+            <li><a href="game.php?id=425">Repton 3</a>. Search for other Repton games.</li>
+            <li><a href="game.php?id=709">Exile</a></li>
+            <li><a href="game.php?id=35">Starship Command</a></li>
+            <li><a href="game.php?id=432">Thrust</a></li>
+            <li><a href="game.php?id=290">Citadel</a></li>
+            <li><a href="game.php?id=298">Repton 2</a></li>
+            <li><a href="game.php?id=267">Revs</a>. See also, <a href="game.php?id=1128">Revs 4 tracks.</a></li>
+            <li><a href="game.php?id=266">Repton</a></li>
+            <li><a href="game.php?id=512">Imogen</a></li>
+            <li><a href="game.php?id=564">Codename: Droid</a></li>
+            <li><a href="game.php?id=598">Firetrack</a></li>
+            <li><a href="game.php?id=20">Arcadians</a></li>
+            <li><a href="game.php?id=85">Mr Ee</a></li>
+            <li><a href="game.php?id=54">Zalaga</a></li>
+            <li><a href="game.php?id=238">Castle Quest</a></li>
+            <li><a href="game.php?id=438">Galaforce</a>. The sequel, <a href="game.php?id=692">Aliens' Revenge</a> came in at 51</li>
+            <li><a href="game.php?id=822">Skirmish</a></li>
+            <li><a href="game.php?id=14">Snapper</a>. This looks very much like Pacman. Hmmm</li>
+          </ol>
+          <p> What do you think? Have we missed your favourite game? Sign up and let us know at the forum!</p>
+        </div>
+        <div class="col-md-4">
+          <h2>Source</h2>
+          <p>This web site is open source. and the <A href="https://github.com/pau1ie/bbcmicro.co.uk">source is on github</a>. Please feel free to take it and use it for your own website. We would be interested to hear what you have done with it in the forums. </p>
+       </div>
+        <div class="col-md-4">
+           <h2>Who we are</h2><p>
+The games on this website, almost without exception, were originally curated by Mick Brown, who announced the "30th Anniversary BBC & Electron Collection" in 2014 and started <a href="http://www.stardot.org.uk/forums/viewtopic.php?f=32&t=8270">releasing disc images on the Stardot forum</a> in May of that year. 
+</p><p>
+The collection is made up of games that Mick had first copied to his own "unofficial" compilation discs thirty years before. 
+</p><p>
+Mick has enhanced the games by adding user-friendly instructions (taken from cassette inlays or other authentic sources) and ensuring that the games are compatible with a range of emulators as well as real Acorn hardware.
+</p><p>
+Our thanks go to Mick for the countless hours of work he has put into compiling, enhancing, testing, and re-testing the games in this collection.
+</p><p>
+Thanks also to Paul Houghton for developing the bbcmicro.co.uk website, and to Gary for hosting it.
+</p><p>
+Lee "Eagle Eyes" Newsome proofread the game instructions, tested every game several times, and coordinated the work on the website project.
+Huge thanks to Dave Moore (user Arcadian on Stardot) for his enduring commitment to preserving and promoting all things Acorn, online and off, including the creation of the invaluable <a href="http://www.stairwaytohell.com">Stairway To Hell</a> archive. 
+</p><p>
+We're grateful to the incredibly knowledgeable members of the Stardot forum for their generous help and support.
+</p>
+        </div>
+      </div>
 
       <hr>
 
