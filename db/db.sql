@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 24, 2016 at 10:25 PM
+-- Generation Time: Jul 26, 2016 at 04:11 PM
 -- Server version: 5.5.49
 -- PHP Version: 5.6.22
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `games` (
   `year` varchar(4) DEFAULT NULL,
   `genre` int(11) DEFAULT NULL,
   `reltype` char(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2007 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2012 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `games`
@@ -161,7 +161,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (118, 'Martian Attack', 4, 'Micro Power', '1983', 3, 'R'),
 (119, 'Missile Base (V1.0)', 6, 'Acornsoft', '1982', 3, 'R'),
 (120, 'Pool Hall (2P)', 33, 'Dynabyte', '1983', 7, 'R'),
-(121, 'Secta Invaders (STD)', 35, 'PSS', '1983', 3, 'R'),
+(121, 'Invaders (AKA Secta Invaders)', 35, 'PSS', '1983', 3, 'R'),
 (122, 'Space Pilot', 5, 'Superior Software', '1984', 2, 'R'),
 (123, 'Star Striker (V2)', 5, 'Superior Software', '1984', 3, 'R'),
 (124, 'Star Warp', 5, 'Superior Software', '1984', 3, 'R'),
@@ -441,7 +441,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (398, 'Chuckie Egg #2 (Upgrade)', 3, 'A&F Software (The Caretaker)', '1984', 4, 'C'),
 (399, 'Condition Red (P)', 80, 'Blue Ribbon', '1986', 4, 'R'),
 (400, 'Cruncher', 8, 'Virgin Games', '1983', 1, 'R'),
-(401, 'Estra (Sides 1 And 2) (D)', 40, 'Firebird', '1984', 11, 'R'),
+(401, 'Estra (Sides A & B)', 40, 'Firebird', '1984', 11, 'R'),
 (402, 'Fruity Tooty (Games Galore 1)', 43, 'Computer Concepts', '1982', 8, 'R'),
 (403, 'Galactic Patrol', 12, 'Mastertronic', '1984', 3, 'R'),
 (404, 'Humphrey', 94, 'Mr. Micro', '1984', 4, 'R'),
@@ -1692,7 +1692,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1647, 'Secret Mission (Adventure 3)', 269, 'Adventure International', '1984', 13, 'R'),
 (1648, 'Seventh Star, The', 6, 'Acornsoft', '1984', 13, 'R'),
 (1649, 'Shrinking Professor''s Quest, The', 3, 'A&F Software', '1983', 13, 'R'),
-(1650, 'Snowball (D)', 155, 'Level 9 Computing', '1983', 13, 'R'),
+(1650, 'Snowball (STD)', 155, 'Level 9 Computing', '1983', 13, 'R'),
 (1651, 'Sorcerer''s Kingdom, The (STD)', 197, 'Glengary', '1983', 13, 'R'),
 (1652, 'Supergran: The Adventure (STD)', 95, 'Tynesoft', '1985', 13, 'R'),
 (1653, 'Time Travel Adventure (AKA Time Adventure)', 151, 'Software For All', '1982', 13, 'R'),
@@ -1749,7 +1749,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1704, 'Pony Express (E)', 278, 'Holl-Soft', '1984', 13, 'R'),
 (1705, 'Puppet Man, The (Adventure No.5)', 275, 'Larsoft', '1987', 13, 'R'),
 (1706, 'Questprobe 3 (Fantastic Four - Part One)', 269, 'Adventure International', '1985', 13, 'R'),
-(1707, 'Return To Eden (D)', 155, 'Level 9 Computing', '1984', 13, 'R'),
+(1707, 'Return To Eden (STT)', 155, 'Level 9 Computing', '1984', 13, 'R'),
 (1708, 'Savage Island Part 1 (Adventure 10)', 269, 'Adventure International', '1984', 13, 'R'),
 (1709, 'Temple Of Terror (STD)', 64, 'U.S. Gold', '1986', 13, 'R'),
 (1710, 'Wychwood (Adventure No.3)', 275, 'Larsoft', '1984', 13, 'R'),
@@ -1794,7 +1794,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1749, 'Fire Island (E)', 278, 'Holl-Soft', '1984', 13, 'R'),
 (1750, 'Galadriel In Distress', 277, 'Potter Programs', '1984', 13, 'R'),
 (1751, 'Inner Space', 277, 'Potter Programs', '1984', 13, 'R'),
-(1752, 'Lords Of Time (D)', 155, 'Level 9 Computing', '1983', 13, 'R'),
+(1752, 'Lords Of Time (STD)', 155, 'Level 9 Computing', '1983', 13, 'R'),
 (1753, 'Mountains Of Ket, The (Ket Trilogy Part 1)', 77, 'Incentive', '1985', 13, 'R'),
 (1754, 'Myorem (Rick Hanson Trilogy Part 3)', 45, 'Robico', '1986', 13, 'R'),
 (1755, 'Project Thesius: (Rick Hanson Trilogy Part 2)', 45, 'Robico', '1986', 13, 'R'),
@@ -2044,7 +2044,12 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2003, 'Palace Of Death', 339, 'S. Wallace', '1989', 5, 'O'),
 (2004, 'Pandemonia', 340, 'Jeffrey Cooke', '1985', 11, 'O'),
 (2005, 'Poc-Man', 341, 'Ganymede', '19XX', 1, 'R'),
-(2006, 'Quest Of Gondor, The', 15, 'Doctor Soft', '1983', 36, 'R');
+(2006, 'Quest Of Gondor, The', 15, 'Doctor Soft', '1983', 36, 'R'),
+(2007, 'Draughts (Micro Power)', 4, 'Micro Power', '1983', 31, 'O'),
+(2008, 'Empire', 221, 'Shards Software', '19XX', NULL, 'O'),
+(2009, 'Fishing', 121, 'Alternative (Triple Decker 04)', '19XX', NULL, 'O'),
+(2010, 'Invaders (Ganymede)', 341, 'Ganymede', '19XX', NULL, 'O'),
+(2011, 'Zark', NULL, NULL, '19XX', NULL, 'O');
 
 -- --------------------------------------------------------
 
@@ -2056,7 +2061,7 @@ CREATE TABLE IF NOT EXISTS `game_genre` (
   `id` int(11) NOT NULL,
   `gameid` int(11) NOT NULL,
   `genreid` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6714 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6715 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `game_genre`
@@ -3971,7 +3976,8 @@ INSERT INTO `game_genre` (`id`, `gameid`, `genreid`) VALUES
 (6710, 2000, 91),
 (6711, 2001, 64),
 (6712, 2002, 70),
-(6713, 2005, 201);
+(6713, 2005, 201),
+(6714, 2007, 105);
 
 -- --------------------------------------------------------
 
@@ -4374,7 +4380,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `gameid` int(11) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `main` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2055 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2060 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `images`
@@ -4501,7 +4507,7 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `main`) VALUES
 (118, 118, 'Disc007-MartianAttack.ssd', NULL),
 (119, 119, 'Disc007-MissileBase.ssd', NULL),
 (120, 120, 'Disc007-PoolHall2P.ssd', NULL),
-(121, 121, 'Disc007-SectaInvadersSTD.ssd', NULL),
+(121, 121, 'Disc007-InvadersSectaSTD.ssd', NULL),
 (122, 122, 'Disc007-SpacePilot.ssd', NULL),
 (123, 123, 'Disc007-StarStriker.ssd', NULL),
 (124, 124, 'Disc007-StarWarp.ssd', NULL),
@@ -4781,7 +4787,7 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `main`) VALUES
 (398, 398, 'Disc023-ChuckieEgg2.ssd', NULL),
 (399, 399, 'Disc023-ConditionRedP.ssd', NULL),
 (400, 400, 'Disc023-Cruncher.ssd', NULL),
-(401, 401, 'Disc023-EstraD.ssd', NULL),
+(401, 401, 'Disc023-Estra.ssd', NULL),
 (402, 402, 'Disc023-FruityTooty.ssd', NULL),
 (403, 403, 'Disc023-GalacticPatrol.ssd', NULL),
 (404, 404, 'Disc023-Humphrey.ssd', NULL),
@@ -6031,7 +6037,7 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `main`) VALUES
 (1647, 1647, 'Disc092-SecretMission-Adventure3.ssd', NULL),
 (1648, 1648, 'Disc092-SeventhStar.ssd', NULL),
 (1649, 1649, 'Disc092-ShrinkingProfessorsQuest.ssd', NULL),
-(1650, 1650, 'Disc092-SnowballD.ssd', NULL),
+(1650, 1650, 'Disc092-SnowballSTD.ssd', NULL),
 (1651, 1651, 'Disc092-SorcerersKingdomSTD.ssd', NULL),
 (1652, 1652, 'Disc092-Supergran.ssd', NULL),
 (1653, 1653, 'Disc092-TimeTravel.ssd', NULL),
@@ -6088,7 +6094,7 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `main`) VALUES
 (1704, 1704, 'Disc095-PonyExpress.ssd', NULL),
 (1705, 1705, 'Disc095-PuppetMan.ssd', NULL),
 (1706, 1706, 'Disc095-Questprobe3FantasticFour.ssd', NULL),
-(1707, 1707, 'Disc095-ReturnToEdenD.ssd', NULL),
+(1707, 1707, 'Disc095-ReturnToEdenSTT.ssd', NULL),
 (1708, 1708, 'Disc095-SavageIslandPart1-Adventure10.ssd', NULL),
 (1709, 1709, 'Disc095-TempleOfTerrorSTD.ssd', NULL),
 (1710, 1710, 'Disc095-Wychwood.ssd', NULL),
@@ -6133,7 +6139,7 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `main`) VALUES
 (1749, 1749, 'Disc098-FireIsland.ssd', NULL),
 (1750, 1750, 'Disc098-GaladrielInDistress.ssd', NULL),
 (1751, 1751, 'Disc098-InnerSpace.ssd', NULL),
-(1752, 1752, 'Disc098-LordsOfTime.ssd', NULL),
+(1752, 1752, 'Disc098-LordsOfTimeSTD.ssd', NULL),
 (1753, 1753, 'Disc098-MountainsOfKet.ssd', NULL),
 (1754, 1754, 'Disc098-MyoremRickHanson3.ssd', NULL),
 (1755, 1755, 'Disc098-ProjectThesiusRickHanson2.ssd', NULL),
@@ -6360,7 +6366,7 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `main`) VALUES
 (1976, 1976, 'Disc110-ThaiBoxingED.ssd', NULL),
 (1977, 1977, 'Disc110-Timetrek.ssd', NULL),
 (1978, 1978, 'Disc110-Viper.ssd', NULL),
-(1979, 1979, 'Disc111-Artemidorus.ssd', NULL),
+(1979, 1979, 'Disc112-Artemidorus.ssd', NULL),
 (1980, 1980, 'Disc111-BlockadeUnoriginalGames2P.ssd', NULL),
 (1981, 1981, 'Disc111-ChampionshipBoxing.ssd', NULL),
 (1982, 1982, 'Disc111-LazerChessSTD.ssd', NULL),
@@ -6387,7 +6393,12 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `main`) VALUES
 (2051, 2003, 'Disc111-PalaceOfDeath.ssd', 100),
 (2052, 2002, 'Disc111-FruitMachineAKABandit.ssd', 100),
 (2053, 2001, 'Disc110-Timerun.ssd', 100),
-(2054, 2000, 'Disc110-HowzatTD42P.ssd', 100);
+(2054, 2000, 'Disc110-HowzatTD42P.ssd', 100),
+(2055, 2007, 'Disc112-DraughtsMicroPower.ssd', NULL),
+(2056, 2008, 'Disc112-Empire.ssd', NULL),
+(2057, 2009, 'Disc112-FishingTD4.ssd', NULL),
+(2058, 2010, 'Disc112-InvadersGanymede.ssd', NULL),
+(2059, 2011, 'Disc112-Zark.ssd', 100);
 
 -- --------------------------------------------------------
 
@@ -8813,7 +8824,7 @@ CREATE TABLE IF NOT EXISTS `screenshots` (
   `gameid` int(11) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `main` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3108 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3113 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `screenshots`
@@ -10822,7 +10833,12 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (3104, 1944, 'Disc108-YesPrimeMinisterSTD.png', 100),
 (3105, 1958, 'Disc109-Postman.png', 100),
 (3106, 1970, 'Disc110-PucmanUnoriginalGames.png', 100),
-(3107, 1991, 'Disc111-WorldCupManager.png', 100);
+(3107, 1991, 'Disc111-WorldCupManager.png', 100),
+(3108, 2007, 'Disc112-DraughtsMicroPower.png', NULL),
+(3109, 2008, 'Disc112-Empire.png', NULL),
+(3110, 2009, 'Disc112-FishingTD4.png', NULL),
+(3111, 2010, 'Disc112-InvadersGanymede.png', NULL),
+(3112, 2011, 'Disc112-Zark.png', 100);
 
 --
 -- Indexes for dumped tables
@@ -10880,12 +10896,12 @@ ALTER TABLE `screenshots`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2007;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2012;
 --
 -- AUTO_INCREMENT for table `game_genre`
 --
 ALTER TABLE `game_genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6714;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6715;
 --
 -- AUTO_INCREMENT for table `genres`
 --
@@ -10895,7 +10911,7 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2055;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2060;
 --
 -- AUTO_INCREMENT for table `publishers`
 --
@@ -10905,7 +10921,7 @@ ALTER TABLE `publishers`
 -- AUTO_INCREMENT for table `screenshots`
 --
 ALTER TABLE `screenshots`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3108;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3113;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
