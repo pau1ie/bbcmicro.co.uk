@@ -73,7 +73,7 @@ function setup_reltypes() {
 
 }
 
-function sidebar($title, $year, $pubid, $publisher) {
+function sidebar($title, $year, $pubid, $publisher, $genre1id, $genre1) {
   global $rtype;
   $title = htmlspecialchars($title,ENT_QUOTES);
 
@@ -118,6 +118,11 @@ function sidebar($title, $year, $pubid, $publisher) {
 <?php
    }
 ?>
+     </fieldset>
+     <fieldset class="form-group" id="genre1-search" >
+      <label for="genre1">Genre</label>
+      <input name="genre1id" id="genre1id" class="hidden" type="hidden" value="<?php echo ($genre1id > 0 ) ? $genre1id : ""; ?>" />
+      <input id="genre1" class="typeahead form-control" type="text" placeholder="Primary Genre" value="<?php echo ($genre1id > 0 ) ? $genre1 : ""; ?>" />
      </fieldset>
      <div class="form-actions center-block" >
        <button type="submit" class="btn btn-default">Search</button>
@@ -249,9 +254,19 @@ function setSearchAutocomplete() {
     }
   });
   setTypeaheadBinding('#pub-search .typeahead', publishers);
+
+  var genre1 = new Bloodhound({
+    datumTokenizer: function(d) {return Bloodhound.tokenizers.whitespace(d.name); },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: 'q?qt=genre1&qv=%QUERY%',
+      wildcard: '%QUERY%'
+    }
+  });
+  setTypeaheadBinding('#genre1-search .typeahead', genre1);
 }
 
-function setTypeaheadBinding(selector, adapter) {
+function setTypeaheadBinding(selector, adapter,emptymsg) {
   $(selector).typeahead(null, {
     name: 'publishers',
     displayKey: 'name',
@@ -259,7 +274,7 @@ function setTypeaheadBinding(selector, adapter) {
     templates: {
       empty: [
         '<div class="empty-message text-center">',
-        'No publishers found.<br>',
+	'Nothing found.<br>',
         '</div>',
       ].join('\n')
     }
@@ -270,6 +285,9 @@ function setTypeaheadBinding(selector, adapter) {
 
 $('.typeahead').on('typeahead:selected typeahead:autocompleted', function(e, datum) {
   $("#pubid" ).val(datum.id);
+});
+$('.typeahead').on('typeahead:selected typeahead:autocompleted', function(e, datum) {
+  $("#genre1id" ).val(datum.id);
 });
   </script>
 <?php include_once("includes/googleid.php") ?>

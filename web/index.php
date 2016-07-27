@@ -27,6 +27,14 @@ if ( isset($_GET["pubid"])) {
   }
 }
 
+if ( isset($_GET["genre1id"])) {
+  $genre1id=intval($_GET["genre1id"]);
+  if ($genre1id > 0 ) {
+    $url=$url . '&genre1id='.$genre1id;
+    $genre1=get_genre($genre1id);
+  }
+}
+
 if ( isset($_GET["year"])) {
   $year=intval($_GET["year"]);
   if ($year > 0 ) {
@@ -74,6 +82,16 @@ function get_publisher($id) {
   return $str;
 }
 
+function get_genre($id) {
+  global $db;
+
+  $sql = 'select name from genres where id = ?';
+  $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+  $sth->bindParam(1, $id, PDO::PARAM_INT);
+  $sth->execute(); 
+  $str=$sth->fetchColumn();
+  return $str;
+}
 
 function gameitem( $id,  $name, $image, $ssd, $publisher, $year, $pubid) {
    global $sid;
@@ -132,7 +150,7 @@ function pager($limit, $rows, $page, $url) {
 }
 
 
-function grid($url, $title, $year, $publisher, $atoz) {
+function grid($url, $title, $year, $publisher, $genre, $atoz) {
   global $db, $rtype;
 
   $limit=GD_IPP;
@@ -149,6 +167,10 @@ function grid($url, $title, $year, $publisher, $atoz) {
 
   if ($publisher > 0 ) {
     $wc[]="pubid = :publisher";
+  }
+
+  if ($genre > 0 ) {
+    $wc[]="genre = :genre";
   }
 
   if ($year > 0 ) {
@@ -184,6 +206,8 @@ function grid($url, $title, $year, $publisher, $atoz) {
   $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   if ($publisher > 0 ) {
     $sth->bindParam(':publisher',$publisher, PDO::PARAM_INT);
+  }  if ($genre > 0 ) {
+    $sth->bindParam(':genre',$genre, PDO::PARAM_INT);
   }
   if ($year > 0 ) {
     $sth->bindParam(':year',$year, PDO::PARAM_INT);
@@ -281,8 +305,8 @@ htmlhead();
 nav();
 containstart();
 atoz_line($atoz);
-grid($url, $title, $year, $pubid, $atoz);
-sidebar($title,$year,$pubid,$publisher);
+grid($url, $title, $year, $pubid, $genre1id, $atoz);
+sidebar($title,$year,$pubid,$publisher,$genre1id,$genre1);
 containend();
 htmlfoot();
 
