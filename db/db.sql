@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2016 at 04:11 PM
+-- Generation Time: Aug 03, 2016 at 11:17 PM
 -- Server version: 5.5.49
 -- PHP Version: 5.6.22
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `games` (
   `year` varchar(4) DEFAULT NULL,
   `genre` int(11) DEFAULT NULL,
   `reltype` char(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2012 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2016 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `games`
@@ -254,7 +254,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (211, 'Night World', 2, 'Alligata', '1985', 19, 'R'),
 (212, 'Screwball (V6.4)', 1, 'MRM Software', '1984', 4, 'R'),
 (213, 'Space Hi-Way', 49, 'Amcom', '1983', 3, 'R'),
-(214, 'Space Invaders', 50, 'Pro Software', '1982', 3, 'R'),
+(214, 'Space Invaders (Pro Software)', 50, 'Pro Software', '1982', 3, 'R'),
 (215, 'Spooks And Spiders', 14, 'Software Invasion', '1984', 4, 'R'),
 (216, 'Ultron', 48, 'Icon', '1984', 3, 'R'),
 (217, 'Alien 8', 34, 'Ultimate Play The Game', '1984', 5, 'R'),
@@ -2034,7 +2034,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1993, '3D-Maze (STD)', 240, 'Acorn Computing', '1993', 1, 'O'),
 (1994, 'Blokkendoos (STD)', 299, 'JBF Software', '1989', 1, 'O'),
 (1995, 'Doomrun', 78, 'Micro User, The', '1984', 3, 'O'),
-(1996, 'Mastermind (R.H. Compendium)', 58, 'RH Software', '1983', 17, 'R'),
+(1996, 'Mastermind (R.H. Compendium)', 58, 'R. H. Software', '1983', 17, 'R'),
 (1997, 'Rock Pile (E)', 338, 'Paul Lear', '1988', 8, 'A'),
 (1998, 'Rockfall (Unoriginal Games)', 323, 'David McKeran', '1983', 20, 'R'),
 (1999, 'Secret Diary Of Adrian Mole Aged 13¾, The (D)', 154, 'Level 9 Computing / Mosaic Publishing Ltd.', '1985', 13, 'R'),
@@ -2043,13 +2043,17 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2002, 'Fruit Machine (AKA Bandit)', 22, 'Beebug', '1983', 8, 'O'),
 (2003, 'Palace Of Death', 339, 'S. Wallace', '1989', 5, 'O'),
 (2004, 'Pandemonia', 340, 'Jeffrey Cooke', '1985', 11, 'O'),
-(2005, 'Poc-Man', 341, 'Ganymede', '19XX', 1, 'R'),
+(2005, 'Poc-Man (Classic Arcade Games) (V1.0)', 341, 'Ganymede', '19XX', 1, 'R'),
 (2006, 'Quest Of Gondor, The', 15, 'Doctor Soft', '1983', 36, 'R'),
 (2007, 'Draughts (Micro Power)', 4, 'Micro Power', '1983', 31, 'O'),
-(2008, 'Empire', 221, 'Shards Software', '19XX', NULL, 'O'),
-(2009, 'Fishing', 121, 'Alternative (Triple Decker 04)', '19XX', NULL, 'O'),
-(2010, 'Invaders (Ganymede)', 341, 'Ganymede', '19XX', NULL, 'O'),
-(2011, 'Zark', NULL, NULL, '19XX', NULL, 'O');
+(2008, 'Empire', 221, 'Shards Software', '1984', 21, 'O'),
+(2009, 'Fishing (Triple Decker 4)', 121, 'Alternative (Triple Decker 04)', '1987', 8, 'O'),
+(2010, 'Invaders (Ganymede) (Classic Arcade Games) (V1.0)', 341, 'Ganymede', '1983', 3, 'R'),
+(2011, 'Zark', 343, 'Simon Wallace', '1989', 1, 'O'),
+(2012, 'Balloons', 342, 'CJE Micros', '1983', 11, 'O'),
+(2013, 'Fireman (Games Compendium 1)', 98, 'Salamander', '1983', 46, 'R'),
+(2014, 'Shuttle (Molimrex)', 254, 'Molimerx Ltd.', '1983', 8, 'R'),
+(2015, 'Startrek (Games Pack 1)', 202, 'Logic Systems', '1983', 8, 'R');
 
 -- --------------------------------------------------------
 
@@ -2061,7 +2065,7 @@ CREATE TABLE IF NOT EXISTS `game_genre` (
   `id` int(11) NOT NULL,
   `gameid` int(11) NOT NULL,
   `genreid` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6715 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6725 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `game_genre`
@@ -3969,6 +3973,9 @@ INSERT INTO `game_genre` (`id`, `gameid`, `genreid`) VALUES
 (1021, 1991, 79),
 (6445, 1993, 275),
 (6446, 1994, 216),
+(6715, 1995, 64),
+(6716, 1995, 230),
+(6717, 1995, 292),
 (6447, 1996, 143),
 (1022, 1997, 70),
 (1023, 1999, 73),
@@ -3977,7 +3984,13 @@ INSERT INTO `game_genre` (`id`, `gameid`, `genreid`) VALUES
 (6711, 2001, 64),
 (6712, 2002, 70),
 (6713, 2005, 201),
-(6714, 2007, 105);
+(6714, 2007, 105),
+(6720, 2009, 89),
+(6722, 2010, 45),
+(6721, 2010, 64),
+(6719, 2013, 94),
+(6723, 2014, 76),
+(6724, 2015, 146);
 
 -- --------------------------------------------------------
 
@@ -4380,7 +4393,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `gameid` int(11) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `main` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2060 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2064 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `images`
@@ -6398,7 +6411,11 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `main`) VALUES
 (2056, 2008, 'Disc112-Empire.ssd', NULL),
 (2057, 2009, 'Disc112-FishingTD4.ssd', NULL),
 (2058, 2010, 'Disc112-InvadersGanymede.ssd', NULL),
-(2059, 2011, 'Disc112-Zark.ssd', 100);
+(2059, 2011, 'Disc112-Zark.ssd', 100),
+(2060, 2012, 'Disc112-Balloons.ssd', 100),
+(2061, 2013, 'Disc112-FiremanGamesCompendiumB1.ssd', 100),
+(2062, 2014, 'Disc112-ShuttleMolimerx.ssd', 100),
+(2063, 2015, 'Disc112-StartrekGamesPackOne.ssd', 100);
 
 -- --------------------------------------------------------
 
@@ -8440,7 +8457,7 @@ INSERT INTO `importgames` (`disc`, `title`, `filename`, `publisher`, `genre1`, `
 CREATE TABLE IF NOT EXISTS `publishers` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=342 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `publishers`
@@ -8504,7 +8521,7 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (55, 'Comsoft'),
 (56, 'Palace'),
 (57, 'Database'),
-(58, 'RH Software'),
+(58, 'R. H. Software'),
 (59, 'Voyager'),
 (60, 'Anirog'),
 (61, 'Ubik'),
@@ -8787,7 +8804,9 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (338, 'Paul Lear'),
 (339, 'S. Wallace'),
 (340, 'Jeffrey Cooke'),
-(341, 'Ganymede');
+(341, 'Ganymede'),
+(342, 'CJE Micros'),
+(343, 'Simon Wallace');
 
 -- --------------------------------------------------------
 
@@ -8824,7 +8843,7 @@ CREATE TABLE IF NOT EXISTS `screenshots` (
   `gameid` int(11) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `main` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3113 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3117 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `screenshots`
@@ -10838,7 +10857,11 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (3109, 2008, 'Disc112-Empire.png', NULL),
 (3110, 2009, 'Disc112-FishingTD4.png', NULL),
 (3111, 2010, 'Disc112-InvadersGanymede.png', NULL),
-(3112, 2011, 'Disc112-Zark.png', 100);
+(3112, 2011, 'Disc112-Zark.png', 100),
+(3113, 2012, 'Disc112-Balloons.png', 100),
+(3114, 2013, 'Disc112-FiremanGamesCompendiumB1.png', 100),
+(3115, 2014, 'Disc112-ShuttleMolimerx.png', 100),
+(3116, 2015, 'Disc112-StartrekGamesPackOne.png', 100);
 
 --
 -- Indexes for dumped tables
@@ -10896,12 +10919,12 @@ ALTER TABLE `screenshots`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2012;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2016;
 --
 -- AUTO_INCREMENT for table `game_genre`
 --
 ALTER TABLE `game_genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6715;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6725;
 --
 -- AUTO_INCREMENT for table `genres`
 --
@@ -10911,17 +10934,17 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2060;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2064;
 --
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=342;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=344;
 --
 -- AUTO_INCREMENT for table `screenshots`
 --
 ALTER TABLE `screenshots`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3117;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
