@@ -1,5 +1,7 @@
 <?php
 
+
+
 function htmlhead() {
 global $site_name;
 ?><!DOCTYPE html>
@@ -69,43 +71,69 @@ function get_reltypes() {
   return $res;
 }
 
-function setup_reltypes() {
 
+function sidebar($state) {
+  searchbox($state);
+  if (array_key_exists('search',$state)) {
+    refines($state);
+  }
+  searchbuttons();
 }
 
-function sidebar($title, $year, $pubid, $publisher, $genre1id, $genre1) {
-  global $rtype;
-  $title = htmlspecialchars($title,ENT_QUOTES);
-
+function searchbox($state) {
+  if (array_key_exists('search',$state)) {
+    $search = htmlspecialchars($state['search'],ENT_QUOTES);
+  } else {
+    $search= "";
+  }
 ?>
    <div class="col-xs-3 col-sm-2 sidebar-offcanvas" id="sidebar"><!--div class="sidebar-nav-fixed pull-right affix" -->
-    <h3>Search</h3>
-    <form id="searchform" action="index.php" method="get">
-     <fieldset class="form-group" >
-      <label for="title">Title</label>
-      <input id="title" name="title" class="form-control" type="text" placeholder="Title" value="<?php echo $title ; ?>" />
+    
+
+     <fieldset class="form-group" id="search">
+      <label for="search"><h3>Search</h3></label>
+      <input id="searchbox" name="search" class="typeahead form-control" type="text" placeholder="Search" value="<?php echo $search ; ?>" />
      </fieldset>
-     <fieldset class="form-group" id="year-search" >
-      <label for="year">Publication Year</label>
-      <input id="year" name="year" class="typeahead form-control" type="text" placeholder="Year" value="<?php echo ($year > 0) ? $year :  ""; ?>" />
-     </fieldset>
-     <fieldset class="form-group" id="pub-search" >
-      <label for="publisher">Publisher</label>
-      <input name="pubid" id="pubid" class="hidden" type="hidden" value="<?php echo ($pubid > 0 ) ? $pubid : ""; ?>" />
-      <input id="publisher" class="typeahead form-control" type="text" placeholder="Publisher" value="<?php echo ($pubid > 0 ) ? $publisher : ""; ?>" />
-     </fieldset>
-     <label for="reltypes">Release Type</label>
-     <fieldset class="form-group" id="reltypes" >
+<?php
+}
+
+function refines($state) { ?>
+     <h4>Only include matches on:</h4>
+<?php
+  $types=array('T'=>'Title','Y'=>'Year','P'=>'Publisher','G'=>'Primary Genre','S'=>'Subgenre');
+  foreach ( $types as $tid => $type ) {
+    $checked='';
+    if (array_key_exists('only',$state) && count($state['only'])==0){
+      $checked='checked';
+    } else {
+      if (array_key_exists('only',$state) && array_search($tid,$state['only'])===False) {
+        ;
+      }else{
+        $checked='checked';
+      }
+    }
+?>
+      <div class="checkbox">
+       <label><input type="checkbox" name="on_<?php echo $tid; ?>" <?php echo $checked ?>><?php echo $type ?></label>
+      </div>
+<?php
+  }
+}
+
+function reltypes($state) {
+?>
+     <h4>Browse release types:</h4>
+      <div id="reltypes" class="form-inline">
 <?php
    $reltyps=get_reltypes();
    foreach ( $reltyps as $reltyp ) {
       $checked='';
-      if (count($rtype)==0){
+      if (!array_key_exists('rtype',$state) || count($state['rtype'])==0){
          if ($reltyp['selected'] == 'Y') {
             $checked='checked';
          }
       } else {
-         if (array_search($reltyp['id'],$rtype)===False) {
+         if (array_key_exists('rtype',$state) && array_search($reltyp['id'],$state['rtype'])===False) {
             ;
          }else{
             $checked='checked';
@@ -113,29 +141,28 @@ function sidebar($title, $year, $pubid, $publisher, $genre1id, $genre1) {
       }
 ?>
       <div class="checkbox">
-       <label><input type="checkbox" name="rt_<?php echo $reltyp['id']; ?>" <?php echo $checked ?>><?php echo $reltyp['name'] ?></label>
+       <label><input type="checkbox" name="rt_<?php echo $reltyp['id']; ?>" <?php echo $checked ?>> <?php echo $reltyp['name'] ?>&emsp; </label>
       </div>
 <?php
    }
+   echo "      </div>";
+}
+
+function searchbuttons() {
 ?>
-     </fieldset>
-     <fieldset class="form-group" id="genre1-search" >
-      <label for="genre1">Genre</label>
-      <input name="genre1id" id="genre1id" class="hidden" type="hidden" value="<?php echo ($genre1id > 0 ) ? $genre1id : ""; ?>" />
-      <input id="genre1" class="typeahead form-control" type="text" placeholder="Primary Genre" value="<?php echo ($genre1id > 0 ) ? $genre1 : ""; ?>" />
-     </fieldset>
-     <div class="form-actions center-block" >
+     <div id="refine" class="form-actions center-block" >
+      <div class="form-actions center-block" >
        <button type="submit" class="btn btn-default">Search</button>
        <button id="reset" type="reset" class="btn btn-default">Clear</button>
-     </div><!--/div-->
-    </form>
-   </div><!--/.sidebar-offcanvas-->
-
+      </div>
+     </div>
+    </div><!--/.sidebar-offcanvas-->
 <?php
 }
 
-function containstart() {
+function containstart($state) {
 ?>
+ <form id="searchform" action="index.php" method="get">
  <div class="container">
   <div class="row row-offcanvas row-offcanvas-right">
    <div class="col-xs-12 col-sm-10">
@@ -143,154 +170,61 @@ function containstart() {
      <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Search</button>
     </p>
 <?php
+  reltypes($state);
 }
 
 function containend() { 
 ?>
   </div><!-- Container -->
  </div>
+ </form>
 <?php
 }
 
-function yeararray() {
-  global $db;
-
-  $sql = "select distinct year from games order by year";
-  $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-  if ($sth->execute()) {
-    $res = $sth->fetchAll();
-  } else {
-    echo "Error:";
-    echo "\n";
-    $sth->debugDumpParams ();
-    $res=array();
-  }
-  $str= "var dates = [";
-  foreach ($res as $row) {
-    $str=$str . "'" . htmlspecialchars($row["year"]) . "',"; 
-  }
-  $str=rtrim($str,", ");
-  $str = $str . '];';
-  echo $str . "\n";
-}
-
-
 function htmlfoot() {
 ?>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+
+ <script src="bs/jquery.min.js"></script>
  <script src="bs/js/bootstrap.min.js"></script>
  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
  <script src="bs/js/ie10-viewport-bug-workaround.js"></script>
  <script src="bs/offcanvas.js"></script>
  <script src="bs/js/typeahead.js"></script>
  <script>
-var substringMatcher = function(strs) {
-  return function findMatches(q, cb) {
-    var matches, substringRegex;
-
-    // an array that will be populated with substring matches
-    matches = [];
-
-    // regex used to determine if a string contains the substring `q`
-    substrRegex = new RegExp(q, 'i');
-
-    // iterate through the pool of strings and for any string that
-    // contains the substring `q`, add it to the `matches` array
-    $.each(strs, function(i, str) {
-      if (substrRegex.test(str)) {
-        matches.push(str);
-      }
-    });
-
-    cb(matches);
-  };
-};
-
-<?php 
-yeararray();
-
-// Set up the year typeahead search
-?>
-
-$('#year-search .typeahead').typeahead({
-  hint: true,
-  highlight: true,
-  minLength: 0
-},
-{
-  name: 'dates',
-  source: substringMatcher(dates),
-  limit: 11
-}).on('typeahead:selected', function(e){
-    e.target.form.submit();
-});
-
-<?php // Set up the publisher typeahead search ?>
+<?php // Set up the typeahead search ?>
 $(document).ready(function() {
-  setSearchAutocomplete();
-  $( "#searchform" ).submit(function( event ) {
-      if ($("#publisher" ).val().length==0 ) {
-        $("#pubid" ).val("");
-      }
-      $("#publisher" ).val("");
+  var suggestions = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    //prefetch: '../data/films/post_1960.json',
+    remote: {
+      url: 'q?qt=suggestions&qv=%QUERY%',
+      wildcard: '%QUERY'
+    }
+  });
+
+  $('#search .typeahead').typeahead(null, {
+    name: 'suggestions',
+    displayKey: 'title',
+    source: suggestions,
+    matcher: function (t) {
+        return t;
+    }
   });
   // Make the clear button work
   $( "#reset" ).click(function() {
-    $("#title").val('');
-    $("#year").val('');
-    $("#publisher").val('');
+    $("#searchbox").val('');
     return false;
   });
+  // Make release type tick boxes dynamic
+  $( "#reltypes" ).change(function() {
+     $("form").submit();
+  });
 });
 
-function setSearchAutocomplete() {
-  var publishers = new Bloodhound({
-    datumTokenizer: function(d) {return Bloodhound.tokenizers.whitespace(d.name); },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote: {
-      url: 'q?qt=publisher&qv=%QUERY%',
-      wildcard: '%QUERY%'
-    }
-  });
-  setTypeaheadBinding('#pub-search .typeahead', publishers);
-
-  var genre1 = new Bloodhound({
-    datumTokenizer: function(d) {return Bloodhound.tokenizers.whitespace(d.name); },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote: {
-      url: 'q?qt=genre1&qv=%QUERY%',
-      wildcard: '%QUERY%'
-    }
-  });
-  setTypeaheadBinding('#genre1-search .typeahead', genre1);
-}
-
-function setTypeaheadBinding(selector, adapter,emptymsg) {
-  $(selector).typeahead(null, {
-    name: 'publishers',
-    displayKey: 'name',
-    source: adapter.ttAdapter(),
-    templates: {
-      empty: [
-        '<div class="empty-message text-center">',
-	'Nothing found.<br>',
-        '</div>',
-      ].join('\n')
-    }
-  }).on('typeahead:selected', function(e){
-    e.target.form.submit();
-  });
-}
-
-$('.typeahead').on('typeahead:selected typeahead:autocompleted', function(e, datum) {
-  $("#pubid" ).val(datum.id);
-});
-$('.typeahead').on('typeahead:selected typeahead:autocompleted', function(e, datum) {
-  $("#genre1id" ).val(datum.id);
-});
   </script>
 <?php include_once("includes/googleid.php") ?>
 </body>
 </html><?php
 }
+
