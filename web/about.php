@@ -85,7 +85,9 @@ require 'includes/menu.php';
         </div>
         <div class="col-md-4">
           <h2>Source</h2>
-          <p>This web site is open source. and the <A href="https://github.com/pau1ie/bbcmicro.co.uk">source is on github</a>. Please feel free to take it and use it for your own website. We would be interested to hear what you have done with it in the forums. </p>
+          <p>This web site is open source. and the <A href="https://github.com/pau1ie/bbcmicro.co.uk">source is on github</a>. Please feel free to take it and use it for your own website. We would be interested to hear what you have done with it in the forums. </p><p>&nbsp;</p>
+          <h2>Status</h2>
+          <p>The site is still under development. We believe we have most of the games written for the BBC micro apart from a few very obscure ones which we are still trying to track down. If you know of a game we have missed, or even better if you own one, contact us in the forums and we will get it added to the database. We maintain a list of titles which we believe to be <a href="http://stardot.org.uk/forums/viewtopic.php?f=7&t=3437&start=90#p134474">missing from the archive</a> in the forums. </p>
        </div>
         <div class="col-md-4">
            <h2>Who we are</h2><p>
