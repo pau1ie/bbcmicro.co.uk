@@ -11,7 +11,7 @@ require 'includes/menu.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="favicon.ico">
 
     <title><?php echo $site_name?> - About us</title>
 
@@ -41,7 +41,7 @@ require 'includes/menu.php';
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <span class="navbar-brand"><?php echo $site_name?></span>
+    <a href="index.php" class="navbar-brand"><?php echo $site_name?></a>
    </div>
    <?php make_menu_bar("Links")?>
   </div><!-- /.container -->

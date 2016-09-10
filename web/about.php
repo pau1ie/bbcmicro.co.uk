@@ -41,7 +41,7 @@ require 'includes/menu.php';
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <span class="navbar-brand"><?php echo $site_name?></span>
+    <a href="index.php" class="navbar-brand"><?php echo $site_name?></a>
    </div>
    <?php make_menu_bar("About")?>
   </div><!-- /.container -->
@@ -84,10 +84,14 @@ require 'includes/menu.php';
           <p> What do you think? Have we missed your favourite game? Sign up and let us know at the forum!</p>
         </div>
         <div class="col-md-4">
-          <h2>Source</h2>
-          <p>This web site is open source. and the <A href="https://github.com/pau1ie/bbcmicro.co.uk">source is on github</a>. Please feel free to take it and use it for your own website. We would be interested to hear what you have done with it in the forums. </p><p>&nbsp;</p>
           <h2>Status</h2>
-          <p>The site is still under development. We believe we have most of the games written for the BBC micro apart from a few very obscure ones which we are still trying to track down. If you know of a game we have missed, or even better if you own one, contact us in the forums and we will get it added to the database. We maintain a list of titles which we believe to be <a href="http://stardot.org.uk/forums/viewtopic.php?f=7&t=3437&start=90#p134474">missing from the archive</a> in the forums. </p>
+          <p>The site is still under development. We believe we have most of the games written for the BBC Micro apart from a few very obscure ones which we are still trying to track down. If you know of a game we have missed, or even better if you own one, contact us in the forums and we will get it added to the database. We maintain a list of titles which we believe to be <a href="http://stardot.org.uk/forums/viewtopic.php?f=7&t=3437&start=90#p134474">missing from the archive</a> in the forums. </p>
+	  <p>&nbsp;</p>
+          <h2>Thanks</h2>
+          <p>In addition to the people who worked on the archive and the website, we would like to give a big <strong>thank you</strong> to <a href="https://plus.google.com/+MattGodbolt">Matt Godbolt</a> for developing <a href="http://bbc.godbolt.org">jsbeeb</a>, and sharing it with the world on <a href="https://github.com/mattgodbolt/jsbeeb">github</a>. It makes the website come alive - anyone can play the BBC Micro games right in the browser!</p>
+	  <p>&nbsp;</p>
+          <h2>Source</h2>
+          <p>This web site is open source. and the <A href="https://github.com/pau1ie/bbcmicro.co.uk">source is on github</a>. Please feel free to take it and use it for your own website. We would be interested to hear what you have done with it in the forums. </p>
        </div>
         <div class="col-md-4">
            <h2>Who we are</h2><p>
@@ -99,7 +103,7 @@ Mick has enhanced the games by adding user-friendly instructions (taken from cas
 </p><p>
 Our thanks go to Mick for the countless hours of work he has put into compiling, enhancing, testing, and re-testing the games in this collection.
 </p><p>
-Thanks also to Paul Houghton for developing the bbcmicro.co.uk website, and to Gary for hosting it.
+Thanks also to Paul Houghton for developing the <a href="bbcmicro.co.uk">bbcmicro.co.uk</a> website, and to Gary for hosting it.
 </p><p>
 Lee "Eagle Eyes" Newsome proofread the game instructions, tested every game several times, and coordinated the work on the website project.
 Huge thanks to Dave Moore (user Arcadian on Stardot) for his enduring commitment to preserving and promoting all things Acorn, online and off, including the creation of the invaluable <a href="http://www.stairwaytohell.com">Stairway To Hell</a> archive. 

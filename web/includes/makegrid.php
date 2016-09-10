@@ -24,7 +24,7 @@ function gameitem( $id,  $name, $image, $ssd, $publisher, $year, $pubid) {
    $title=$split[0];
    
 ?>
-     <div class="col-sm-6 col-md-4 col-lg-3">
+     <div class="col-sm-6 col-md-4 col-lg-3 thumb1">
       <div class="thumbnail text-center">
        <a href="game.php?id=<?php echo $id; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $image; ?>" class="pic"></a>
        <p><span class="lead"><a href="game.php?id=<?php echo $id; ?>"><?php echo $title ?></a></span><br/>

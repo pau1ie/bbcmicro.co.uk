@@ -79,7 +79,14 @@ if (count($split) > 1 ) {
    $title = $title . '</h1>';
 }
 
-
+$back_url='index.php';
+$back_desc='home page';
+if (array_key_exists('HTTP_REFERER', $_SERVER)) {
+  if ( parse_url($_SERVER["HTTP_REFERER"],PHP_URL_HOST) == $_SERVER["SERVER_NAME"] ) {
+    $back_url = "javascript:history.go(-1)";
+    $back_desc='list';
+  }
+}
 // echo $sql;
 // print_r($game);
 // print_r($shot);
@@ -91,11 +98,11 @@ if ( count($genres) > 1) {
 }
 
 if ( ! empty($genres)) {
-  $genretab='<tr><th>Secondary genre' . $s . '</th><td><table class="table" style=\"border: none\">';
+  $genretab='<tr><th>Secondary genre' . $s . '</th><td>';
   foreach ($genres as $genre) {
-    $genretab=$genretab . "<tr><td>" . $genre["name"] . "</td></tr>";
+    $genretab=$genretab . "<p>" . $genre["name"] . "</p>";
   }
-  $genretab=$genretab . "</table></td></tr>";
+  $genretab=$genretab . "</td></tr>";
 } else {
   $genretab="";
 }
@@ -140,7 +147,7 @@ if ( ! empty($genres)) {
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <span class="navbar-brand"><?php echo $site_name?></span>
+    <a href="index.php" class="navbar-brand"><?php echo $site_name?></a>
    </div>
    <?php make_menu_bar("Games")?>
   </div><!-- /.container -->
@@ -169,7 +176,7 @@ if ( ! empty($genres)) {
             <?php echo $genretab;?>
           </table>
           <?php echo $imglink; ?>
-          <p><a type="button" class="btn btn-primary btn-lg center-block" href="javascript:history.go(-1)" title="Back to list">Back to list</a></p>
+          <p><a type="button" class="btn btn-primary btn-lg center-block" href="<?php echo $back_url ?>" title="Back">Back to <?php echo $back_desc ?></a></p>
        </div>
       </div>
       <hr>

@@ -41,7 +41,7 @@ require 'includes/menu.php';
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <span class="navbar-brand"><?php echo $site_name?></span>
+    <a href="index.php" class="navbar-brand"><?php echo $site_name?></a>
    </div>
    <?php make_menu_bar("Contact") ?>
   </div><!-- /.container -->

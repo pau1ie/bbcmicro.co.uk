@@ -23,6 +23,15 @@ global $site_name;
     <link href="bs/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="bs/offcanvas.css">
     <link rel="stylesheet" href="bs/css/typeahead.css">
+    <style type="text/css">
+      .thumbnail {
+        height: 100%;
+        margin-bottom: 0;
+      }
+      .thumb1 {
+        padding-bottom: 20px;
+      }
+    </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -45,7 +54,7 @@ global $site_name;
      <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <span class="navbar-brand"><?php echo $site_name?></span>
+    <a class="navbar-brand" href="index.php"><?php echo $site_name?></a>
    </div>
    <div id="navbar" class="collapse navbar-collapse">
    <?php make_menu_bar("Games")?>
@@ -191,6 +200,18 @@ function htmlfoot() {
  <script src="bs/offcanvas.js"></script>
  <script src="bs/js/typeahead.js"></script>
  <script>
+// Make the boxes the same height
+function equalHeight(group) {    
+    var tallest = 0;    
+    group.each(function() {       
+        var thisHeight = $(this).height();       
+        if(thisHeight > tallest) {          
+            tallest = thisHeight;       
+        }    
+    });    
+    group.each(function() { $(this).height(tallest); });
+} 
+
 <?php // Set up the typeahead search ?>
 $(document).ready(function() {
   var suggestions = new Bloodhound({
@@ -220,6 +241,8 @@ $(document).ready(function() {
   $( "#reltypes" ).change(function() {
      $("form").submit();
   });
+
+ // equalHeight($(".row"));
 });
 
   </script>
