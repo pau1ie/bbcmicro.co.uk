@@ -50,7 +50,7 @@ require 'includes/menu.php';
     <div class="jumbotron">
       <div class="container">
         <h1><?php echo $site_name?></h1>
-        <p>Over the last few years we have been lovingly restoring some BBC micro games from the 1980s onwards. We have put them here so you can play them in an emulator, on a real BBC Micro, or on the web. If you would like to help us improve the site, join us in the Stardot forums. See the <a href="contact.php">contact page</a> for more information.</p>
+        <p>Over the last few years we have been lovingly restoring some BBC Micro games from the 1980s onwards. We have put them here so you can play them in an emulator, on a real BBC Micro, or on the web. If you would like to help us improve the site, join us in the Stardot forums. See the <a href="contact.php">contact page</a> for more information.</p>
       </div>
     </div>
     <div class="container">
