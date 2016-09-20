@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 03, 2016 at 11:17 PM
+-- Generation Time: Sep 20, 2016 at 08:03 PM
 -- Server version: 5.5.49
 -- PHP Version: 5.6.22
 
@@ -8825,10 +8825,10 @@ CREATE TABLE IF NOT EXISTS `reltype` (
 --
 
 INSERT INTO `reltype` (`id`, `name`, `selected`) VALUES
-('A', 'Alternative version of a released game', 'N'),
-('C', 'Cheat version or cheat enhancement.', 'N'),
-('N', 'New software (year 2000 onwards)', 'Y'),
-('O', 'Listings or magazine/book type in', 'N'),
+('A', 'Alternative versions', 'N'),
+('C', 'Cheat versions', 'N'),
+('N', 'Year 2000 on', 'Y'),
+('O', 'Magazine/book type in', 'N'),
 ('R', 'Commercial release', 'Y'),
 ('U', 'Unreleased Game', 'Y');
 
@@ -10694,7 +10694,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (2834, 1703, 'DISC095-NineDancers.png', 101),
 (2835, 1704, 'DISC095-PonyExpress.png', 101),
 (2836, 1705, 'DISC095-PuppetMan.png', 101),
-(2837, 1706, 'DISC095-Questprobe3FantasticFour.png', 101),
+(2837, 1706, 'Disc095-Questprobe3FantasticFour.jpg', 101),
 (2838, 1707, 'DISC095-ReturnToEdenD.png', 101),
 (2839, 1708, 'DISC095-SavageIslandPart1-Adventure10.png', 101),
 (2840, 1709, 'DISC095-TempleOfTerrorSTD.png', 101),
