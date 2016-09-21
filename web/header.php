@@ -1,7 +1,4 @@
 <?php
-
-
-
 function htmlhead() {
 global $site_name;
 ?><!DOCTYPE html>
@@ -56,9 +53,7 @@ global $site_name;
     </button>
     <a class="navbar-brand" href="index.php"><?php echo $site_name?></a>
    </div>
-   <div id="navbar" class="collapse navbar-collapse">
    <?php make_menu_bar("Games")?>
-   </div><!-- /.nav-collapse -->
   </div><!-- /.container -->
  </nav><!-- /.navbar -->
 <?php
@@ -162,7 +157,6 @@ function searchbuttons() {
      <div id="refine" class="form-actions center-block" >
       <div class="form-actions center-block" >
        <button type="submit" class="btn btn-default">Search</button>
-       <button id="reset" type="reset" class="btn btn-default">Clear</button>
       </div>
      </div>
     </div><!--/.sidebar-offcanvas-->
@@ -231,11 +225,6 @@ $(document).ready(function() {
     matcher: function (t) {
         return t;
     }
-  });
-  // Make the clear button work
-  $( "#reset" ).click(function() {
-    $("#searchbox").val('');
-    return false;
   });
   // Make release type tick boxes dynamic
   $( "#reltypes" ).change(function() {
