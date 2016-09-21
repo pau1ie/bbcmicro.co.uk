@@ -62,6 +62,7 @@ function json_state($state, $ko, $vo) {
 }
 
 function url_state($state, $k, $v) {
+  unset($state['page']);
   $state[$k]=$v;
   $url='';
 
