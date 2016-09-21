@@ -58,7 +58,7 @@ require 'includes/menu.php';
       <div class="row">
         <div class="col-md-4">
           <h2>Games</h2>
-          <p>Which game should you play? There are more than 2000 games on the website, but which are the very best? In the <a href="http://stardot.org.uk/forums/viewtopic.php?f=1&t=8259">Stardot forums</a>, members contributed their faviourite games. The top 20 are:</p>
+          <p>Which game should you play? There are more than 2000 games on the website, but which are the very best? In the <a href="http://stardot.org.uk/forums/viewtopic.php?f=1&t=8259">Stardot forums</a>, members contributed their favourite games. The top 20 are:</p>
           <ol>
             <li><a href="game.php?id=366">Elite</a>. The classic space trading game.</li>
             <li><a href="game.php?id=25">Chuckie Egg</a>. There are also some unofficial variants.</li>
