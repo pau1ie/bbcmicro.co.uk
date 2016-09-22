@@ -1,0 +1,3 @@
+<?php
+$dbh=mysqli_connect(ADMIN_DB_HOST,ADMIN_DB_USER,ADMIN_DB_PASS,ADMIN_DB_NAME);
+?>

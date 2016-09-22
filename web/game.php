@@ -71,6 +71,18 @@ if ($sth->execute()) {
   $genres=array();
 }
 
+$sql = "select a.name from games_authors ga, authors a where ga.games_id  = ? and ga.authors_id = a.id";
+$sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth->bindParam(1, $id, PDO::PARAM_INT);
+if ($sth->execute()) {
+  $authors = $sth->fetchAll();
+} else {
+  echo "Error:";
+  echo "\n";
+  $sth->debugDumpParams ();
+  $authors=array();
+}
+
 $split=explode('(',$game["title"]);
 $title='<h1>' . $split[0];
 if (count($split) > 1 ) {
@@ -100,11 +112,28 @@ if ( count($genres) > 1) {
 if ( ! empty($genres)) {
   $genretab='<tr><th>Secondary genre' . $s . '</th><td>';
   foreach ($genres as $genre) {
-    $genretab=$genretab . "<p>" . $genre["name"] . "</p>";
+//    $genretab=$genretab . "<p>" . $genre["name"] . "</p>";
+    $genretab=$genretab . $genre["name"] . "<br/>";
   }
   $genretab=$genretab . "</td></tr>";
 } else {
   $genretab="";
+}
+
+$s = '';
+if ( count($authors) > 1) {
+  $s = 's';
+}
+
+if ( ! empty($authors)) {
+  $authortab='<tr><th>Author' . $s . '</th><td>';
+  foreach ($authors as $author) {
+//    $authortab=$authortab . "<p>" . $author["name"] . "</p>";
+    $authortab=$authortab . $author["name"] . "<br/>";
+  }
+  $authortab=$authortab . "</td></tr>";
+} else {
+  $authortab="";
 }
 
 ?><!DOCTYPE html>
@@ -171,6 +200,7 @@ if ( ! empty($genres)) {
             <tr><th>Title</th><td><?php echo $game["title"];?></td></tr>
             <tr><th>Year</th><td><?php echo $game["year"];?></td></tr>
             <tr><th>Publisher</th><td><?php echo $game["publisher"];?></td></tr>
+            <?php echo $authortab;?>
             <tr><th>Release Type</th><td><?php echo $game["reltype"];?></td></tr>
             <tr><th>Primary genre</th><td><?php echo $game["genre"];?></td></tr>
             <?php echo $genretab;?>
