@@ -8,6 +8,11 @@ $id=0;
 if ( isset($_GET["id"])) {
   $id=intval($_GET["id"]);
 }
+if ( isset($_GET["h"])) {
+  $h=$_GET["h"];
+} else { 
+  $h="i";
+}
 
 $sql = "select g.title, g.publisher, g.year, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -93,16 +98,12 @@ if (count($split) > 1 ) {
 
 $back_url='index.php';
 $back_desc='home page';
-if (array_key_exists('HTTP_REFERER', $_SERVER)) {
+if ($h != "h" && array_key_exists('HTTP_REFERER', $_SERVER)) {
   if ( parse_url($_SERVER["HTTP_REFERER"],PHP_URL_HOST) == $_SERVER["SERVER_NAME"] ) {
     $back_url = "javascript:history.go(-1)";
     $back_desc='list';
   }
 }
-// echo $sql;
-// print_r($game);
-// print_r($shot);
-// print_r($genres);
 
 $s = '';
 if ( count($genres) > 1) {
@@ -112,7 +113,6 @@ if ( count($genres) > 1) {
 if ( ! empty($genres)) {
   $genretab='<tr><th>Secondary genre' . $s . '</th><td>';
   foreach ($genres as $genre) {
-//    $genretab=$genretab . "<p>" . $genre["name"] . "</p>";
     $genretab=$genretab . $genre["name"] . "<br/>";
   }
   $genretab=$genretab . "</td></tr>";
@@ -128,7 +128,6 @@ if ( count($authors) > 1) {
 if ( ! empty($authors)) {
   $authortab='<tr><th>Author' . $s . '</th><td>';
   foreach ($authors as $author) {
-//    $authortab=$authortab . "<p>" . $author["name"] . "</p>";
     $authortab=$authortab . $author["name"] . "<br/>";
   }
   $authortab=$authortab . "</td></tr>";

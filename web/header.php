@@ -77,11 +77,17 @@ function get_reltypes() {
 
 
 function sidebar($state) {
+?>   <div class="col-xs-3 col-sm-2 sidebar-offcanvas" id="sidebar">
+<?php
   searchbox($state);
   if (array_key_exists('search',$state)) {
     refines($state);
   }
   searchbuttons();
+  if (!array_key_exists('search',$state)) {
+    randomgame();
+  }
+  echo "    </div>\r";
 }
 
 function searchbox($state) {
@@ -91,13 +97,42 @@ function searchbox($state) {
     $search= "";
   }
 ?>
-   <div class="col-xs-3 col-sm-2 sidebar-offcanvas" id="sidebar"><!--div class="sidebar-nav-fixed pull-right affix" -->
-    
-
      <fieldset class="form-group" id="search">
       <label for="search"><h3>Search</h3></label>
       <input id="searchbox" name="search" class="typeahead form-control" type="text" placeholder="Search" value="<?php echo $search ; ?>" />
      </fieldset>
+<?php
+}
+
+function randomgame() {
+  global $db;
+
+  $sql = "select count(*) from games";
+  $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+  if ($sth->execute()) {
+    $res = $sth->fetchAll();
+  } else {
+    echo "Error:";
+    echo "\n";
+    $sth->debugDumpParams ();
+    $res=array();
+  }
+  $n=rand(1,$res[0][0]);
+
+  $sql = "select id from games limit ?,1";
+  $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+  $sth->bindParam(1, $n, PDO::PARAM_INT);
+  if ($sth->execute()) {
+    $res = $sth->fetchAll();
+  } else {
+    echo "Error:";
+    echo "\n";
+    $sth->debugDumpParams ();
+    $res=array();
+  }
+  $id=$res[0][0];
+?>     <p>&nbsp;</p><h3>Random Game</h3>
+       <p><a href="game.php?id=<?php echo $id; ?>&h=h" class="btn btn-default btn-lg btn-block">Lucky Dip</a></p>
 <?php
 }
 
@@ -154,12 +189,11 @@ function reltypes($state) {
 
 function searchbuttons() {
 ?>
-     <div id="refine" class="form-actions center-block" >
-      <div class="form-actions center-block" >
-       <button type="submit" class="btn btn-default">Search</button>
-      </div>
-     </div>
-    </div><!--/.sidebar-offcanvas-->
+     <!--div id="refine" class="form-actions center-block" -->
+      <!--div class="form-actions center-block" -->
+       <button type="submit" class="btn btn-default btn-lg btn-block">Search</button>
+      <!--/div-->
+     <!--/div-->
 <?php
 }
 
