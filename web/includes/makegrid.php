@@ -1,11 +1,11 @@
 <?php
 
 
-function atoz_line($current='',$chars) {
+function atoz_line($current='',$chars,$margin) {
   global $state;
 
   echo "<div>";
-  echo "<ul style=\"margin-bottom:0;\" class=\"pagination\">";
+  echo "<ul style=\"margin-$margin:0;\" class=\"pagination\">";
   foreach ($chars as $char) {
     $active=($current==$char)?' class="active"':'';
     echo "<li$active><a href='?" . url_state($state,'atoz', urlencode($char))."'>$char</a></li>";
@@ -262,7 +262,7 @@ function grid($state) {
     } else {
       $atoz="";
     }
-    atoz_line($atoz,$chars);
+    atoz_line($atoz,$chars,'bottom');
 
     pager($limit,$rows,$page,$state);
     echo '    <div class="row" style="display:flex; flex-wrap: wrap;">'."\n";
@@ -294,8 +294,9 @@ function grid($state) {
 
       gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $ssd ,htmlspecialchars($game["publisher"]),$game["year"],$game["pubid"]);
     }
-     echo "    </div>\n";
-     pager($limit,$rows,$page,$state);
+    echo "    </div>\n";
+    pager($limit,$rows,$page,$state);
+    atoz_line($atoz,$chars,'top');
   } else {
     echo '    <div class="row" style="display:flex; flex-wrap: wrap;">'."\n<h2>No games found!</h2>";
     echo "    </div>\n";
