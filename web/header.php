@@ -28,6 +28,13 @@ global $site_name;
       .thumb1 {
         padding-bottom: 20px;
       }
+      .row-title {
+        height: 48px;
+        line-height: 21px;
+        font-size: 20px;
+        font-weight: 300;
+        padding-top: 6px;
+      }
     </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

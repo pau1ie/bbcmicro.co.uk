@@ -27,9 +27,9 @@ function gameitem( $id,  $name, $image, $ssd, $publisher, $year, $pubid) {
      <div class="col-sm-6 col-md-4 col-lg-3 thumb1">
       <div class="thumbnail text-center">
        <a href="game.php?id=<?php echo $id; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $image; ?>" class="pic"></a>
-       <p><span class="lead"><a href="game.php?id=<?php echo $id; ?>"><?php echo $title ?></a></span><br/>
-       <a href="?pubid=<?php echo $pubid ?>"><?php echo $publisher?></a>
-       -&nbsp;<a href="?year=<?php echo $year ?>"><?php echo $year; ?></a></p> 
+       <div class="row-title"><span class="row-title"><a href="game.php?id=<?php echo $id; ?>"><?php echo $title ?></a></span></div>
+       <div class="row-pubdt"><span class="row-pubdt"><a href="?pubid=<?php echo $pubid ?>"><?php echo $publisher?></a>
+       <br/><a href="?year=<?php echo $year ?>"><?php echo $year; ?></a></span></div>
 <?php
   if ($ssd != null && file_exists($ssd)) { ?>
        <p><a href="<?php echo $ssd ?>" type="button" class="btn btn-default">Download</a>
