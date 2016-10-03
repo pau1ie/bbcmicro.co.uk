@@ -14,7 +14,7 @@ if ( isset($_GET["h"])) {
   $h="i";
 }
 
-$sql = "select g.title, g.publisher, g.year, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title, g.publisher, g.year, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -162,6 +162,13 @@ if ( ! empty($authors)) {
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- fb meta tags -->
+    <meta property="og:url"                content="<?php echo WS_ROOT . "/game.php?id=" . $game["id"] . "&amp;h=h" ?>" />
+    <meta property="og:type"               content="website" />
+    <meta property="og:title"              content="<?php echo $game["title"]; ?>" />
+    <meta property="og:description"        content="<?php echo "Published by " . $game["publisher"] . " in " . $game["year"];?>" />
+    <meta property="og:image"              content="<?php echo WS_ROOT . "/gameimg/screenshots/" . $shot[0]["filename"]; ?>" />
   </head>
 
   <body>
