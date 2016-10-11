@@ -15,3 +15,7 @@ Development is being coordinated via the stairway to hell forums at:
 
 http://stardot.org.uk/forums/viewtopic.php?f=51&t=11165
 
+To play games on the website, download jsbeeb, and install it in its own directory.
+
+Copy play.php into the jsbeeb directory, and alter config.php to point to it as the
+player. This will call jsbeeb in a window that looks like the rest of the website.
