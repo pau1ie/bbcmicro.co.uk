@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 16, 2016 at 12:13 AM
+-- Generation Time: Oct 16, 2016 at 08:33 PM
 -- Server version: 10.1.18-MariaDB
 -- PHP Version: 7.0.12
 
@@ -118,7 +118,7 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (79, 'Andrew Lee', NULL),
 (80, 'Andrew Logan', NULL),
 (81, 'Andrew McMaster', NULL),
-(82, 'Andrew Nibbs', NULL),
+(82, 'Andrew Nibbs', 'Swig'),
 (83, 'Andrew Oliver', NULL),
 (84, 'Andrew Pepperell', NULL),
 (85, 'Andrew Pillidge', NULL),
@@ -491,7 +491,7 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (452, 'Jasobabes', NULL),
 (453, 'Jason Alcock', NULL),
 (454, 'Jason Chown', NULL),
-(455, 'Jason Nicholls', NULL),
+(455, 'Jason Nicholls', 'jnbeeb'),
 (456, 'Jason Sobell', NULL),
 (457, 'Jean Burgess', NULL),
 (458, 'Jeff Pratt', NULL),
@@ -973,7 +973,7 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (934, 'Simon Pick', NULL),
 (935, 'Simon Pithers', NULL),
 (936, 'Simon Ryder-Smith', NULL),
-(937, 'Simon Storr', NULL),
+(937, 'Simon Storr', 'Symo'),
 (938, 'Simon T. Ainsworth', NULL),
 (939, 'Simon Vout', NULL),
 (940, 'Simon W Hessel', NULL),
@@ -1084,7 +1084,8 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (1045, 'Woolleysoft', NULL),
 (1046, 'Wynand Thompson', NULL),
 (1047, 'Zen', NULL),
-(1048, 'Geoff Larsen', NULL);
+(1048, 'Geoff Larsen', NULL),
+(1049, 'Anthony A. Birch', NULL);
 
 -- --------------------------------------------------------
 
@@ -1428,7 +1429,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (319, 'Sentinel, The', 35, 'PSS', '1983', 3, 'R'),
 (320, 'Sorcery (V2)', 25, 'Pace', '1984', 4, 'R'),
 (321, 'Spy Hunter (Speech Version)', 64, 'U. S. Gold', '1985', 6, 'R'),
-(322, 'Steve Davis Snooker', 76, 'CDS', '1985', 7, 'R'),
+(322, 'Steve Davis Snooker', 76, 'CDS Software Ltd.', '1985', 7, 'R'),
 (323, 'SubKiller', 68, 'Dk\'Tronics', '1983', 2, 'R'),
 (324, 'Tomahawk (V2) (Unreleased)', 16, 'Kansas City Systems (Unreleased)', '1985', 2, 'U'),
 (325, 'Acid Drops', 40, 'Firebird Software', '1984', 3, 'R'),
@@ -1701,7 +1702,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (592, 'Teletext Invaders', 113, 'A&B Computing', '1982', 3, 'O'),
 (593, 'Video Card Arcade (V3.86)', 80, 'Blue Ribbon', '1987', 34, 'R'),
 (594, 'Wall Destroyer', 88, 'Home Computer Weekly', '1985', 18, 'O'),
-(595, 'Birdie Barrage (Version 2.0)', 76, 'CDS', '1983', 7, 'R'),
+(595, 'Birdie Barrage (Version 2.0)', 76, 'CDS Software Ltd.', '1983', 7, 'R'),
 (596, 'Crunchback', 107, 'Computer Gamer', '1986', 4, 'O'),
 (597, 'Elixir (Disc Version) (D)', 5, 'Superior Software', '1987', 19, 'R'),
 (598, 'FireTrack (V1.02)', 17, 'Aardvark', '1987', 3, 'R'),
@@ -1940,7 +1941,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (830, 'Burger Time (VC1.2)', 22, 'Beebug', '1986', 4, 'O'),
 (831, 'Camelot (AKA Quest 2) (V3)', 5, 'Superior Software', '1989', 5, 'R'),
 (832, 'Cat And Mouse', 4, 'Micro Power', '1982', 1, 'R'),
-(833, 'Colossus Chess 4.0', 76, 'CDS', '1985', 31, 'R'),
+(833, 'Colossus Chess 4.0', 76, 'CDS Software Ltd.', '1985', 31, 'R'),
 (834, 'Flash (Fun Games) (V2)', 6, 'Acornsoft', '1982', 17, 'R'),
 (835, 'Fruit Machine (V2)', 164, 'Simonsoft', '1983', 8, 'R'),
 (836, 'Hunchback ', 165, 'PCW', '1984', 4, 'O'),
@@ -2006,7 +2007,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (896, 'Maze Man', 178, 'Go Software', '1984', 1, 'O'),
 (897, 'Reversi', 5, 'Superior Software', '1983', 31, 'R'),
 (898, 'Scrabble', 179, 'Leisure Genius', '1984', 31, 'R'),
-(899, 'Tank Attack (V1.3) (2P)', 76, 'CDS', '1989', 21, 'R'),
+(899, 'Tank Attack (V1.3) (2P)', 76, 'CDS Software Ltd.', '1989', 21, 'R'),
 (900, 'Wild Fruities', 78, 'Micro User, The', '1983', 4, 'O'),
 (901, 'Chase (V2)', 180, 'JMD Soft', '1982', 1, 'O'),
 (902, 'China Drop (STT)', 78, 'Micro User, The', '1986', 10, 'O'),
@@ -2115,8 +2116,8 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1005, 'Space Panic', 194, 'Esmifrasoft', '1988', 3, 'O'),
 (1006, 'Spiderman', 113, 'A&B Computing', '1983', 1, 'O'),
 (1007, 'Tanker', 188, 'Cascade', '1984', 3, 'R'),
-(1008, 'Wordsearch (Complete Home Entertainment Centre)', 76, 'CDS', '1988', 17, 'R'),
-(1009, 'Backgammon (Complete Home Entertainment Centre)', 76, 'CDS', '1988', 31, 'R'),
+(1008, 'Wordsearch (Complete Home Entertainment Centre)', 76, 'CDS Software Ltd.', '1988', 17, 'R'),
+(1009, 'Backgammon (Complete Home Entertainment Centre)', 76, 'CDS Software Ltd.', '1988', 31, 'R'),
 (1010, 'Blockade!', 134, 'Disk User, The', '1987', 1, 'O'),
 (1011, 'Chicken Feed', 88, 'Home Computer Weekly', '1985', 11, 'O'),
 (1012, 'City Smasher', 165, 'PCW', '1984', 2, 'O'),
@@ -2297,7 +2298,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1187, 'Satellite Havoc', 206, '8-Bit Software', '1991', 3, 'O'),
 (1188, 'Squark (Cassette 9)', 97, 'Model B Computing', '1984', 3, 'O'),
 (1189, 'Avenger', 118, 'Your Computer', '1983', 3, 'O'),
-(1190, 'Ballooning', 210, 'JNB Software', '1983', 8, 'O'),
+(1190, 'Ballooning', 210, 'J N B Software', '1983', 8, 'O'),
 (1191, 'Bridgehead', 211, 'Pavillion Software', '1987', 2, 'A'),
 (1192, 'Caterpillar', 43, 'Computer Concepts', '1984', 2, 'R'),
 (1193, 'Cubert', 118, 'Your Computer', '1983', 4, 'O'),
@@ -2315,7 +2316,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1205, 'Wallie\'s Castle', 44, 'Public Domain', '1985', 19, 'O'),
 (1206, 'Wilfred The Warlock', 218, 'W Croston', '1984', 2, 'O'),
 (1207, 'Castle Of Nightmares (STD)', 92, 'Acorn User, The', '1986', 19, 'O'),
-(1208, 'Colossus Bridge (Disc Edit)', 76, 'CDS', '1988', 38, 'R'),
+(1208, 'Colossus Bridge (Disc Edit)', 76, 'CDS Software Ltd.', '1988', 38, 'R'),
 (1209, 'Confrontation (STD)', 167, 'Lothlorien', '1983', 21, 'R'),
 (1210, 'Cosmic Containers (Whizz Games Pack 2)', 219, 'Whizz!', '1985', 10, 'O'),
 (1211, 'Dungeon Quest', 107, 'Computer Gamer', '1986', 13, 'O'),
@@ -2612,7 +2613,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1502, 'Cubit (E)', 163, 'Electron User, The', '1987', 4, 'O'),
 (1503, 'Dogfight (2P)', 165, 'PCW', '1983', 2, 'O'),
 (1504, 'Hangman', 80, 'Blue Ribbon', '1985', 34, 'R'),
-(1505, 'Jumbo', 254, 'Molimerx', '1982', 8, 'R'),
+(1505, 'Jumbo', 254, 'Molimerx Ltd.', '1982', 8, 'R'),
 (1506, 'Mouse Trap ', 118, 'Your Computer', '1983', 1, 'O'),
 (1507, 'Radium (E)', 163, 'Electron User, The', '1990', 3, 'O'),
 (1508, 'Samantha Fox Strip Poker (D)', 38, 'Martech', '1988', 38, 'R'),
@@ -2636,7 +2637,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1526, 'Pontoon', 19, 'H-Soft', '1983', 38, 'R'),
 (1527, 'Power Boats (E)', 230, 'Elbug', '1984', 6, 'O'),
 (1528, 'Snip Snap', 22, 'Beebug', '1984', 1, 'O'),
-(1529, 'Sporting Triangles (Disc Version)', 76, 'CDS', '1989', 29, 'R'),
+(1529, 'Sporting Triangles (Disc Version)', 76, 'CDS Software Ltd.', '1989', 29, 'R'),
 (1530, 'Train Trouble (E)', 163, 'Electron User, The', '1986', 2, 'O'),
 (1531, 'Battle 1917', 176, 'CCS', '1983', 21, 'R'),
 (1532, 'Black Widow II', 240, 'Acorn Computing', '1994', 5, 'O'),
@@ -2675,7 +2676,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1565, 'Tennis', 168, 'Acorn Programs', '1984', 33, 'O'),
 (1566, 'Vultures', 259, 'Practical Computing', '1984', 2, 'O'),
 (1567, 'Battlefields (Disc Edit)', 10, 'BBC Soft', '1985', 21, 'R'),
-(1568, 'Brian Clough\'s Football Fortunes (2P)', 76, 'CDS', '1987', 8, 'R'),
+(1568, 'Brian Clough\'s Football Fortunes (2P)', 76, 'CDS Software Ltd.', '1987', 8, 'R'),
 (1569, 'Bridge Challenge', 203, 'Livewire Software Ltd.', '1984', 38, 'R'),
 (1570, 'Bridge Master (Disc Edit)', 260, 'J Keyne', '1983', 38, 'R'),
 (1571, 'Crypton (E)', 163, 'Electron User, The', '1988', 1, 'O'),
@@ -2696,14 +2697,14 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1586, 'Alien Blaster', 165, 'PCW', '1983', 3, 'O'),
 (1587, 'Bomb Alert (E)', 163, 'Electron User, The', '1988', 2, 'O'),
 (1588, 'Champions', 132, 'Peaksoft', '1982', 8, 'R'),
-(1589, 'Football Director (STD)', 76, 'CDS', '1988', 8, 'R'),
+(1589, 'Football Director (STD)', 76, 'CDS Software Ltd.', '1988', 8, 'R'),
 (1590, 'Gold Mine', 261, 'David Yip', '1985', 1, 'O'),
 (1591, 'Hilo', 44, 'Public Domain', '1986', 34, 'O'),
 (1592, 'Maltese Cross', 78, 'Micro User, The', '1986', 34, 'O'),
-(1593, 'Megaroids', 78, 'Micro User, The', '1986', 20, 'O'),
-(1594, 'Micro Derby', 26, 'Bug-Byte', '1982', 7, 'R'),
-(1595, 'Microgo1', 262, 'Edge Computers Ltd.', '1984', 31, 'R');
+(1593, 'Megaroids', 78, 'Micro User, The', '1986', 20, 'O');
 INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `reltype`) VALUES
+(1594, 'Micro Derby', 26, 'Bug-Byte', '1982', 7, 'R'),
+(1595, 'Microgo1', 262, 'Edge Computers Ltd.', '1984', 31, 'R'),
 (1596, 'Question Of Sport, A (1770 Version)', 263, 'Elite/Superior Software', '1988', 29, 'R'),
 (1597, 'Roving Robot', 264, 'Games Computing', '1985', 4, 'O'),
 (1598, 'Snap Dragon (2P) (Triple Decker 6)', 121, 'Alternative (Triple Decker 06)', '1987', 38, 'R'),
@@ -3000,9 +3001,9 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1891, 'Attic Bug In SameGame, The', 314, 'Retro Software', '2012', 17, 'N'),
 (1892, 'British Isles Quiz', 319, 'Computer Market', '1983', 29, 'R'),
 (1893, 'Car Maze', 202, 'Logic Systems', '1983', 1, 'R'),
-(1894, 'City Defend (Joysticks Only)', 320, 'MGB Software Support', '1983', 2, 'R'),
+(1894, 'City Defend (Joysticks Only)', 320, 'M.G.B Software Support', '1983', 2, 'R'),
 (1895, 'Cobra', 151, 'Software For All', '1982', 1, 'R'),
-(1896, 'Gobbler (Side 1 or 2)', 320, 'MGB Software Support', '1983', 1, 'R'),
+(1896, 'Gobbler (Side 1 or 2)', 320, 'M.G.B Software Support', '1983', 1, 'R'),
 (1897, 'Grand Prix', 151, 'Software For All', '1982', 6, 'R'),
 (1898, 'Invaders', 79, 'MP Software', '1982', 3, 'R'),
 (1899, 'jSnake', 314, 'Retro Software', '2013', 1, 'N'),
@@ -3047,7 +3048,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1940, 'Snowball (2P)', 327, 'Soft Centre', '1985', 2, 'R'),
 (1941, 'Telephone Mania', 240, 'Acorn Computing', '1992', 21, 'O'),
 (1942, 'Three Crystals, The (Arcade 4 Pack)', 277, 'Potter Programs', '1985', 5, 'R'),
-(1943, 'William The Conqueror', 254, 'Molimerx', '1984', 21, 'R'),
+(1943, 'William The Conqueror', 254, 'Molimerx Ltd.', '1984', 21, 'R'),
 (1944, 'Yes Prime Minister (Disc version) (STD)', 281, 'Mosaic Publishing Ltd.', '1988', 13, 'R'),
 (1945, 'Alien Fallout (v2)', 88, 'Home Computer Weekly', '1984', 3, 'O'),
 (1946, 'Anti-Ballistic Missile Command', 2, 'Alligata (Superior Systems)', '1982', 3, 'R'),
@@ -3844,7 +3845,6 @@ INSERT INTO `games_authors` (`id`, `games_id`, `authors_id`) VALUES
 (705, 539, 918),
 (706, 556, 551),
 (707, 572, 553),
-(708, 572, 554),
 (709, 574, 69),
 (710, 577, 652),
 (711, 581, 720),
@@ -4087,7 +4087,6 @@ INSERT INTO `games_authors` (`id`, `games_id`, `authors_id`) VALUES
 (948, 1464, 622),
 (949, 1469, 944),
 (950, 1473, 553),
-(951, 1473, 554),
 (952, 1482, 4),
 (953, 1495, 67),
 (954, 1506, 233),
@@ -4237,8 +4236,6 @@ INSERT INTO `games_authors` (`id`, `games_id`, `authors_id`) VALUES
 (1586, 108, 462),
 (1587, 111, 411),
 (1588, 111, 625),
-(1589, 1563, 788),
-(1590, 1563, 260),
 (1591, 127, 670),
 (1592, 127, 241),
 (1593, 138, 138),
@@ -4519,7 +4516,6 @@ INSERT INTO `games_authors` (`id`, `games_id`, `authors_id`) VALUES
 (1868, 1780, 139),
 (1869, 1780, 1037),
 (1870, 1782, 139),
-(1871, 1782, 1037),
 (1872, 1797, 668),
 (1873, 1797, 139),
 (1874, 1814, 397),
@@ -4546,7 +4542,20 @@ INSERT INTO `games_authors` (`id`, `games_id`, `authors_id`) VALUES
 (1895, 2007, 775),
 (1896, 2013, 86),
 (1897, 2009, 659),
-(1898, 2014, 151);
+(1898, 2014, 151),
+(1899, 122, 788),
+(1900, 122, 260),
+(1901, 932, 1049),
+(1902, 1541, 25),
+(1903, 1541, 224),
+(1904, 1661, 1048),
+(1905, 1686, 1048),
+(1906, 1690, 1048),
+(1907, 1703, 1048),
+(1908, 1705, 1048),
+(1909, 1710, 1048),
+(1910, 1782, 182),
+(1911, 2011, 941);
 
 -- --------------------------------------------------------
 
@@ -11375,7 +11384,7 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (73, 'Elite'),
 (74, 'Watford Electronics'),
 (75, 'Matthew Newman'),
-(76, 'CDS'),
+(76, 'CDS Software Ltd.'),
 (77, 'Incentive'),
 (78, 'Micro User, The'),
 (79, 'MP Software'),
@@ -11509,7 +11518,7 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (207, 'James Cavanagh'),
 (208, 'CSL'),
 (209, 'Personal Computer Games'),
-(210, 'JNB Software'),
+(210, 'J N B Software'),
 (211, 'Pavillion Software'),
 (212, 'Rob Northern'),
 (213, 'Arrdy Software'),
@@ -11553,7 +11562,7 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (251, 'W Scholton'),
 (252, 'Melvyn Wright'),
 (253, 'A Crump'),
-(254, 'Molimerx'),
+(254, 'Molimerx Ltd.'),
 (255, 'Cervin Games'),
 (256, 'LCL'),
 (257, 'Electro'),
@@ -11619,7 +11628,7 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (317, 'P Jones'),
 (318, 'RGS Company'),
 (319, 'Computer Market'),
-(320, 'MGB Software Support'),
+(320, 'M.G.B Software Support'),
 (321, 'Graphic Research Ltd.'),
 (322, 'Qual-Soft'),
 (323, 'David McKeran'),
@@ -13768,7 +13777,7 @@ ALTER TABLE `screenshots`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1049;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1050;
 --
 -- AUTO_INCREMENT for table `games`
 --
@@ -13778,7 +13787,7 @@ ALTER TABLE `games`
 -- AUTO_INCREMENT for table `games_authors`
 --
 ALTER TABLE `games_authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1899;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1912;
 --
 -- AUTO_INCREMENT for table `game_genre`
 --
