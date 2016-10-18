@@ -1,6 +1,51 @@
 <?php
 
 
+function get_reltypes() {
+  global $db;
+
+  $sql = "select distinct id, name, selected from reltype order by rel_order";
+  $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+  if ($sth->execute()) {
+    $res = $sth->fetchAll();
+  } else {
+    echo "Error:";
+    echo "\n";
+    $sth->debugDumpParams ();
+    $res=array();
+  }
+  return $res;
+}
+
+
+function reltypes($state) {
+?>
+     <h4>Browse release types:</h4>
+      <div id="reltypes" class="form-inline">
+<?php
+   $reltyps=get_reltypes();
+   foreach ( $reltyps as $reltyp ) {
+      $checked='';
+      if (!array_key_exists('rtype',$state) || count($state['rtype'])==0){
+         if ($reltyp['selected'] == 'Y') {
+            $checked='checked';
+         }
+      } else {
+         if (array_key_exists('rtype',$state) && array_search($reltyp['id'],$state['rtype'])===False) {
+            ;
+         }else{
+            $checked='checked';
+         }
+      }
+?>
+      <div class="checkbox">
+       <label><input type="checkbox" name="rt_<?php echo $reltyp['id']; ?>" <?php echo $checked ?>> <?php echo $reltyp['name'] ?>&emsp; </label>
+      </div>
+<?php
+   }
+   echo "      </div>";
+}
+
 function atoz_line($current='',$chars,$margin) {
   global $state;
 
@@ -88,21 +133,21 @@ function pager($limit, $rows, $page, $state) {
 
   echo '    <ul class="pagination">';
   if ( $page != 1 ) {
-      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page - 1)).', function(data){ $("#maingrid").html(data); }); return false;\' href="?'. url_state($state,'page', ($page - 1)). '">&laquo;</a></li>' . "\n";
+      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page - 1)).', function(data){ $("#maingrid").html(data); $(\'html, body\').scrollTop(0); }); return false;\' href="?'. url_state($state,'page', ($page - 1)). '">&laquo;</a></li>' . "\n";
   }else{
      echo '     <li class="disabled"><span>&laquo;</span></li> '. "\n";
   }
   for ( $i=1; $i <= $pages; $i++ ) {
     if ( ($i % 5 == 0 ) || (($i > ($page - 4)) && ( $i < ($page + 4))) || ( $i == 1) || ( $i == $pages) ) {
       if ($i != $page ) {
-        echo '     <li><a onclick=\'$.get("getgrid.php", '.json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li>' . "\n";
+        echo '     <li><a onclick=\'$.get("getgrid.php", '.json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); $(\'html, body\').scrollTop(0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li>' . "\n";
       } else {
-        echo '     <li class="active"><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li> '. "\n";
+        echo '     <li class="active"><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); $(\'html, body\').scrollTop(0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li> '. "\n";
       }
     }
   }
   if ( $page != $pages ) {
-      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page + 1)).', function(data){ $("#maingrid").html(data); }); return false;\' href="?'. url_state($state,'page', ($page + 1)). '">&raquo;</a></li>' . "\n";
+      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page + 1)).', function(data){ $("#maingrid").html(data); }); $(\'html, body\').scrollTop(0); return false;\' href="?'. url_state($state,'page', ($page + 1)). '">&raquo;</a></li>' . "\n";
   }else{
      echo '     <li class="disabled"><span>&raquo;</span></li> '. "\n";
   }
@@ -262,6 +307,9 @@ function grid($state) {
     } else {
       $atoz="";
     }
+
+    reltypes($state);
+
     atoz_line($atoz,$chars,'bottom');
 
     pager($limit,$rows,$page,$state);
