@@ -66,22 +66,6 @@ global $site_name;
 <?php
 }
 
-function get_reltypes() {
-  global $db;
-
-  $sql = "select distinct id, name, selected from reltype order by rel_order";
-  $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-  if ($sth->execute()) {
-    $res = $sth->fetchAll();
-  } else {
-    echo "Error:";
-    echo "\n";
-    $sth->debugDumpParams ();
-    $res=array();
-  }
-  return $res;
-}
-
 
 function sidebar($state) {
 ?>   <div class="col-xs-3 col-sm-2 sidebar-offcanvas" id="sidebar">
@@ -166,33 +150,7 @@ function refines($state) { ?>
   }
 }
 
-function reltypes($state) {
-?>
-     <h4>Browse release types:</h4>
-      <div id="reltypes" class="form-inline">
-<?php
-   $reltyps=get_reltypes();
-   foreach ( $reltyps as $reltyp ) {
-      $checked='';
-      if (!array_key_exists('rtype',$state) || count($state['rtype'])==0){
-         if ($reltyp['selected'] == 'Y') {
-            $checked='checked';
-         }
-      } else {
-         if (array_key_exists('rtype',$state) && array_search($reltyp['id'],$state['rtype'])===False) {
-            ;
-         }else{
-            $checked='checked';
-         }
-      }
-?>
-      <div class="checkbox">
-       <label><input type="checkbox" name="rt_<?php echo $reltyp['id']; ?>" <?php echo $checked ?>> <?php echo $reltyp['name'] ?>&emsp; </label>
-      </div>
-<?php
-   }
-   echo "      </div>";
-}
+
 
 function searchbuttons() {
 ?>
@@ -214,7 +172,6 @@ function containstart($state) {
      <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Search</button>
     </p>
 <?php
-  reltypes($state);
 }
 
 function containend() { 
