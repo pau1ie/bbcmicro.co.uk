@@ -172,6 +172,9 @@ function grid($state) {
     if ( $all || !(array_search('P',$state['only'])===False )) {
       $sls[] = "pubid in (select id from publishers where name like :search)\n";
     }
+    if ( $all || !(array_search('A',$state['only'])===False )) {
+      $sls[] = "id in (select games_id from games_authors ga, authors a where a.id = ga.authors_id and (a.name like :search or a.alias like :search))\n";
+    }
     if ( $all || !(array_search('Y',$state['only'])===False )) {
       $sls[] = "year like :search\n";
     }

@@ -44,7 +44,11 @@ foreach ($res as $line) {
   $auths=array();
   // print_r($ags);
   foreach ($ags as $auth) { 
-    $auths[]=$auth['name'];
+    if ( count($auth['alias']) > 0 ) {
+      $auths[]=$auth['name'] . ' (' . $auth['alias'] . ')';
+    }else{
+      $auths[]=$auth['name'];
+    }
   }
 
   $ol=array();
@@ -78,13 +82,22 @@ foreach ($res as $line) {
   $ol[]='C';       		// Source
   $ol[]='';        		// Availability
   if (count($auths) > 1) {
-    $sauths=array_slice($auths,0,count($auths)-1);
-    $aus='"'.implode(', ',$sauths);
-    $aus=$aus . ' & ' . $auths[count($auths)-1] . '"';
-    $ol[]=$aus;
+    $ol[]='"'.implode(', ',$auths).'"';
   } else {
-    $ol[]=implode('',$auths);
+    if (count($auths) == 0 ) {
+      $ol[]='';
+    } else {
+      $ol[]=$auths[0];
+    }
   }
+#  if (count($auths) > 1) {
+#    $sauths=array_slice($auths,0,count($auths)-1);
+#    $aus='"'.implode(', ',$sauths);
+#    $aus=$aus . ' & ' . $auths[count($auths)-1] . '"';
+#    $ol[]=$aus;
+#  } else {
+#    $ol[]=implode('',$auths);
+#  }
   $ol2=implode(',',$ol);
   print ($ol2 . "\n");
 

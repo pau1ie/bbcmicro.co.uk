@@ -11,7 +11,7 @@ Please note that the game disc images have their own licenses.
 Please check each disc for its license, or retrosoftware.co.uk where most
 images came from.
 
-Development is being coordinated via the stairway to hell forums at:
+Development is being coordinated via the stardot forums at:
 
 http://stardot.org.uk/forums/viewtopic.php?f=51&t=11165
 
