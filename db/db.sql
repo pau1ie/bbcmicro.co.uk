@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 31, 2016 at 12:07 AM
+-- Generation Time: Oct 31, 2016 at 11:10 PM
 -- Server version: 10.1.18-MariaDB
 -- PHP Version: 7.0.12
 
@@ -1081,7 +1081,8 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (1092, 'Richard Yapp', NULL),
 (1093, 'Malcolm F. Williams', NULL),
 (1094, 'Caroline Holden', NULL),
-(1095, 'Richard Kelly', NULL);
+(1095, 'Richard Kelly', NULL),
+(1096, 'Crystalsoft', NULL);
 
 -- --------------------------------------------------------
 
@@ -1262,7 +1263,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (156, 'Jump Jet (V1)', 15, 'Doctor Soft', '1984', 2, 'R'),
 (157, 'Karl\'s Cavern', 41, 'Software Projects', '1984', 4, 'R'),
 (158, 'Ledgeman (AKA Ledge Man)', 41, 'Software Projects', '1984', 4, 'R'),
-(159, 'Mr. Wimpy', 42, 'Ocean', '1983', 1, 'R'),
+(159, 'Mr. Wimpy', 42, 'Ocean', '1983', 1, 'O'),
 (160, 'Pedro', 23, 'Imagine', '1984', 1, 'R'),
 (161, 'Sea Lord', 26, 'Bug-Byte (Bug Byte)', '1983', 2, 'R'),
 (162, 'Son Of Blagger', 2, 'Alligata', '1984', 4, 'R'),
@@ -1382,7 +1383,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (276, 'Chip Buster', 14, 'Software Invasion', '1985', 1, 'R'),
 (277, 'Devil\'s Domain, The', 4, 'Micro Power (Unreleased)', '1984', 13, 'U'),
 (278, 'Hellforce (AKA Hell Force)', 6, 'Acornsoft (Unreleased)', '1983', 3, 'U'),
-(279, 'Match Day', 42, 'Ocean', '1985', 7, 'R'),
+(279, 'Match Day', 42, 'Ocean', '1985', 7, 'O'),
 (280, 'Mutant Spiders', 5, 'Superior Software', '1983', 3, 'R'),
 (281, 'Nifty Lifty', 24, 'Visions Software', '1984', 4, 'R'),
 (282, 'Pantry Antics', 10, 'BBC Soft', '1985', 4, 'R'),
@@ -1613,7 +1614,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (507, 'Battle Planet', 114, 'ISP', '1984', 3, 'R'),
 (508, 'Caterpillar (V3)', 7, 'Gemini', '1983', 1, 'R'),
 (509, 'Chuckie Egg #3 (Unofficial)', 3, 'A&F Software (Bit Twiddlers)', '1984', 4, 'C'),
-(510, 'Crazy Balloon', 6, 'Acornsoft (Unreleased)', '1983', 1, 'O'),
+(510, 'Crazy Balloon', 344, 'Unknown', '1983', 1, 'O'),
 (511, 'Hyperdrive', 13, 'IJK Software', '1982', 3, 'R'),
 (512, 'Imogen', 4, 'Micro Power', '1986', 19, 'R'),
 (513, 'Jet Set Willy II (V0.1)', 95, 'Tynesoft', '1986', 19, 'R'),
@@ -1659,7 +1660,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (553, 'Roboto', 26, 'Bug-Byte (Bug Byte)', '1985', 19, 'R'),
 (554, 'Space Caverns', 95, 'Tynesoft', '1986', 16, 'R'),
 (555, 'Star Wars', 122, 'Domark', '1987', 3, 'R'),
-(556, 'Starquake (P)', 123, 'Bubble Bus', '1987', 19, 'R'),
+(556, 'Starquake (AKA Star Quake) (P)', 123, 'Bubble Bus', '1987', 19, 'R'),
 (557, 'Uridium', 124, 'Hewson Consultants', '1987', 3, 'R'),
 (558, 'XOR', 125, 'Logotron', '1987', 1, 'R'),
 (559, '3D Dotty', 80, 'Blue Ribbon', '1987', 1, 'R'),
@@ -1669,7 +1670,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (563, 'Chieftan', 8, 'Virgin Games', '1984', 2, 'R'),
 (564, 'Codename: Droid (Stryker\'s Run Part 2)', 5, 'Superior Software', '1987', 5, 'R'),
 (565, 'Dune Hunter', 78, 'Micro User, The', '1987', 3, 'O'),
-(566, 'Manic Mole', 121, 'Alternative (Triple Decker 01)', '1987', 4, 'R'),
+(566, 'Manic Mole', 121, 'Alternative (Triple Decker 01)', '1987', 4, 'O'),
 (567, 'Mr. Do!', 127, 'Paul Haigh', '1983', 1, 'A'),
 (568, 'Return Of R2', 80, 'Blue Ribbon', '1987', 5, 'R'),
 (569, 'Skyhawk (AKA Sky Hawk)', 26, 'Bug-Byte (Bug Byte)', '1986', 2, 'R'),
@@ -1677,7 +1678,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (571, 'Space Lords (2P)', 22, 'Beebug', '1983', 3, 'O'),
 (572, 'Space Ranger (BBC Bonanza)', 82, 'Audiogenic Software Ltd.', '1986', 3, 'R'),
 (573, 'Starforce Lander', 128, 'First Byte', '1983', 16, 'R'),
-(574, 'System Wadgebury (Disc Edit)', 129, 'Andrew Cook', '1987', 1, 'R'),
+(574, 'System Wadgebury (Disc Edit)', 129, 'Andrew Cook', '1987', 1, 'O'),
 (575, 'Tetris', 32, 'Mirrorsoft', '1987', 17, 'R'),
 (576, 'Train Game, The', 92, 'Acorn User, The', '1984', 21, 'O'),
 (577, '3D Convoy (V2)', 15, 'Doctor Soft', '1984', 2, 'R'),
@@ -1687,7 +1688,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (581, 'George And The Dragon (VB0.3)', 22, 'Beebug', '1984', 4, 'O'),
 (582, 'Graham Gooch\'s Test Cricket', 82, 'Audiogenic Software Ltd.', '1987', 7, 'R'),
 (583, 'Grand Prix Construction Set ', 5, 'Superior Software', '1987', NULL, 'R'),
-(584, 'Haunted House', 121, 'Alternative (Triple Decker 02)', '1987', 1, 'R'),
+(584, 'Haunted House', 121, 'Alternative (Triple Decker 02)', '1987', 1, 'O'),
 (585, 'Perils Of Percival Penguin, The', 131, 'Willow', '1984', 1, 'R'),
 (586, 'Plan B', 26, 'Bug-Byte (Bug Byte)', '1987', 19, 'R'),
 (587, 'Spitfire Flight Simulator', 2, 'Alligata', '1983', 8, 'R'),
@@ -1737,10 +1738,10 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (631, '3D Tanx', 68, 'Dk\'Tronics (D.K. Tronics)', '1984', 2, 'R'),
 (632, 'Arkanoid', 23, 'Imagine', '1987', 18, 'R'),
 (633, 'Bone Cruncher (Disc Version)', 5, 'Superior Software', '1987', 1, 'R'),
-(634, 'Daley Thompson\'s Super-Test', 42, 'Ocean', '1985', 15, 'R'),
+(634, 'Daley Thompson\'s Super-Test', 42, 'Ocean', '1985', 15, 'O'),
 (635, 'Empire Strikes Back, The', 122, 'Domark', '1988', 3, 'R'),
 (636, 'Grid Runner', 22, 'Beebug', '1986', 1, 'O'),
-(637, 'Invasion Force (E)', 121, 'Alternative (Triple Decker 02)', '1987', 3, 'R'),
+(637, 'Invasion Force (E)', 121, 'Alternative (Triple Decker 02)', '1987', 3, 'O'),
 (638, 'Jouster', 136, 'Westsoft', '1985', 2, 'O'),
 (639, 'League Challenge', 119, 'Atlantis', '1986', 8, 'R'),
 (640, 'Monkey Nuts', 26, 'Bug-Byte (Bug Byte)', '1988', 1, 'R'),
@@ -1784,7 +1785,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (678, 'Rondaxians', 113, 'A&B Computing', '1987', 3, 'O'),
 (679, 'See Emily Play', 144, 'Fast Access', '1988', 2, 'O'),
 (680, 'Shark', 82, 'Audiogenic Software Ltd.', '1988', 4, 'R'),
-(681, 'Skramble', 121, 'Alternative (Triple Decker 05)', '1987', 3, 'R'),
+(681, 'Skramble', 121, 'Alternative (Triple Decker 05)', '1987', 3, 'O'),
 (682, 'Snake', 43, 'Computer Concepts', '1982', 1, 'R'),
 (683, 'Syncron', 5, 'Superior Software', '1988', 2, 'R'),
 (684, 'Zenon', 145, 'Impact', '1988', 3, 'R'),
@@ -1796,7 +1797,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (690, 'Cubert (VB0.1)', 22, 'Beebug', '1986', 4, 'O'),
 (691, 'Froggy', 147, 'JSD Software', '1982', 4, 'R'),
 (692, 'Galaforce 2: Aliens\' Revenge', 5, 'Superior Software', '1988', 3, 'R'),
-(693, 'Golf', 121, 'Alternative (Triple Decker 04)', '1987', 7, 'R'),
+(693, 'Golf', 121, 'Alternative (Triple Decker 04)', '1987', 7, 'O'),
 (694, 'Joe Blade II', 96, 'Players', '1988', 5, 'R'),
 (695, 'Kourtyard', 148, 'Go-Dax (Go Dax)', '1988', 2, 'R'),
 (696, 'Mega Force (Four Great Games Vol. 2)', 95, 'Tynesoft', '1987', 3, 'R'),
@@ -1826,7 +1827,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (720, 'Uranians (Speech Chip)', 26, 'Bug-Byte (Bug Byte)', '1986', 3, 'R'),
 (721, 'Big K.O.!, The (Disc Version)', 95, 'Tynesoft', '1987', 7, 'R'),
 (722, 'Boat Race (Cassette 10)', 97, 'Model B Computing', '1985', 6, 'O'),
-(723, 'Cavern Capers (E)', 121, 'Alternative (Triple Decker 06)', '1987', 3, 'R'),
+(723, 'Cavern Capers (E)', 121, 'Alternative (Triple Decker 06)', '1987', 3, 'O'),
 (724, 'Darts (2P)', 1, 'MRM Software', '1984', 7, 'R'),
 (725, 'Dingbat (Unreleased)', 15, 'Doctor Soft (Unreleased)', '1984', 1, 'U'),
 (726, 'Frog, The', 151, 'Software For All', '1983', 4, 'R'),
@@ -1863,7 +1864,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (757, 'Barbarian (Sides A Or B)', 5, 'Superior Software', '1988', 35, 'R'),
 (758, 'Bouncer', 139, 'Computer & Video Games', '1984', 4, 'O'),
 (759, 'Brick \'Em In', 151, 'Software For All', '1982', 1, 'R'),
-(760, 'Chuckie Egg #4 (Unofficial)', 3, 'A&F Software (Unofficial)', '1984', 4, 'R'),
+(760, 'Chuckie Egg #4 (Unofficial)', 3, 'A&F Software (Unofficial)', '1984', 4, 'C'),
 (761, 'Corpuscle', 153, 'Micrograf', '1984', 2, 'R'),
 (762, 'Fighter Pilot', 16, 'Kansas City Systems', '1983', 8, 'R'),
 (763, 'Galactic Invaders', 78, 'Micro User, The', '1983', 3, 'O'),
@@ -1872,7 +1873,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (766, 'Gunner', 118, 'Your Computer', '1984', 2, 'O'),
 (767, 'Hobgoblin (V2.00)', 119, 'Atlantis', '1989', 4, 'R'),
 (768, 'Living Daylights, The (Disc Version)', 122, 'Domark', '1987', 2, 'R'),
-(769, 'Parachute', 121, 'Alternative (Triple Decker 02)', '1987', 10, 'R'),
+(769, 'Parachute', 121, 'Alternative (Triple Decker 02)', '1987', 10, 'O'),
 (770, 'Saga Of Erik The Viking, The', 154, 'Level 9 Computing / Mosaic Publishing Ltd.', '1985', 13, 'R'),
 (771, 'Serpent\'s Lair (Tape Edit) (E)', 55, 'Comsoft', '1984', 13, 'R'),
 (772, 'Sleigh Bells', 7, 'Gemini', '1983', 1, 'R'),
@@ -1902,7 +1903,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (796, 'Chess', 4, 'Micro Power', '1983', 31, 'R'),
 (797, 'Frantic Farmer', 139, 'Computer & Video Games', '1985', 1, 'O'),
 (798, 'Gate, The', 78, 'Micro User, The', '1989', 1, 'O'),
-(799, 'Grand Prix', 121, 'Alternative (Triple Decker 01)', '1987', 6, 'R'),
+(799, 'Grand Prix', 121, 'Alternative (Triple Decker 01)', '1987', 6, 'O'),
 (800, 'Light Cycles', 159, 'Paean', '1983', 1, 'R'),
 (801, 'Moon Buggy', 107, 'Computer Gamer', '1985', 1, 'O'),
 (802, 'Neuzone', 144, 'Fast Access', '1989', 2, 'O'),
@@ -1927,7 +1928,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (820, 'Master, The (AKA Karate Kid) (2P)', 134, 'Disk User, The', '1987', 7, 'O'),
 (821, 'Perplexity', 5, 'Superior Software', '1989', 1, 'R'),
 (822, 'Skirmish (AKA Joust!)', 148, 'Go-Dax (Go Dax)', '1988', 4, 'R'),
-(823, 'Star Fighter Pilot', 121, 'Alternative (Triple Decker 05)', '1987', 3, 'R'),
+(823, 'Star Fighter Pilot', 121, 'Alternative (Triple Decker 05)', '1987', 3, 'O'),
 (824, 'Sword Master (2P)', 92, 'Acorn User, The', '1983', 7, 'R'),
 (825, 'Tanks', 118, 'Your Computer', '1985', 2, 'O'),
 (826, 'Tutankhamun\'s Revenge (Disc Edit)', 26, 'Bug-Byte (Bug Byte)', '1987', 19, 'R'),
@@ -1957,7 +1958,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (850, 'Dennis In The Mines', 168, 'Acorn Programs', '1984', 1, 'O'),
 (851, 'Fruit Machine Simulator', 169, 'Codemasters', '1989', 8, 'R'),
 (852, 'Hobgoblin 2', 119, 'Atlantis', '1990', 4, 'R'),
-(853, 'Knockout', 121, 'Alternative (Triple Decker 07)', '1987', 18, 'R'),
+(853, 'Knockout', 121, 'Alternative (Triple Decker 07)', '1987', 18, 'O'),
 (854, 'Krazy John', 118, 'Your Computer', '1984', 4, 'O'),
 (855, 'Lunar Escape (V1 B1.26)', 22, 'Beebug', '1983', 3, 'O'),
 (856, 'Miner Bill', 78, 'Micro User, The', '1984', 4, 'O'),
@@ -1977,7 +1978,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (870, 'Boot Hill (2P) (Games Compendium B3)', 98, 'Salamander', '1984', 2, 'R'),
 (871, 'Gambit (Black Box And Gambit) (Version 1) (2P)', 6, 'Acornsoft', '1984', 21, 'R'),
 (872, 'Gunfighter', 119, 'Atlantis', '1990', 2, 'R'),
-(873, 'Karate (AKA Karate Warrior) (2P)', 121, 'Alternative (Triple Decker 05)', '1987', 7, 'R'),
+(873, 'Karate (AKA Karate Warrior) (2P)', 121, 'Alternative (Triple Decker 05)', '1987', 7, 'O'),
 (874, 'Key Man, The', 174, 'Let\'s Compute! (Tape 1)', '1990', 1, 'O'),
 (875, 'Orcrest', 134, 'Disk User, The', '1988', 19, 'O'),
 (876, 'Pipe Mania', 175, 'Empire', '1990', 17, 'R'),
@@ -2015,7 +2016,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (908, 'Johnny Reb', 167, 'Lothlorien', '1983', 21, 'R'),
 (909, 'Licence To Kill', 122, 'Domark', '1990', 2, 'R'),
 (910, 'Lost Crystal, The (Adventure No.5) (Disc Version)', 172, 'Epic Adventures', '1987', 13, 'R'),
-(911, 'Mr. Freeze (E)', 121, 'Alternative (Triple Decker 08)', '1987', 1, 'R'),
+(911, 'Mr. Freeze (E)', 121, 'Alternative (Triple Decker 08)', '1987', 1, 'O'),
 (912, 'Pearl Harbour (V1.0)', 141, 'Microgame Simulations', '1983', 21, 'R'),
 (913, 'Polaris', 26, 'Bug-Byte (Bug Byte)', '1983', 2, 'R'),
 (914, 'Prison (Disc Version)', 116, 'Swift', '1985', 4, 'R'),
@@ -2026,7 +2027,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (919, 'Beastiroids', 78, 'Micro User, The', '1988', 3, 'O'),
 (920, 'Bird Basher', 174, 'Let\'s Compute! (Tape 1)', '1990', 2, 'O'),
 (921, 'Bobby Charlton Soccer', 87, 'DACC', '1985', 7, 'R'),
-(922, 'Castles Of Sand', 121, 'Alternative (Triple Decker 06)', '1987', 17, 'R'),
+(922, 'Castles Of Sand', 121, 'Alternative (Triple Decker 06)', '1987', 17, 'O'),
 (923, 'Cellars', 113, 'A&B Computing', '1984', 4, 'O'),
 (924, 'Chess (V2.1)', 6, 'Acornsoft', '1983', 31, 'R'),
 (925, 'Crystal Castle', 182, 'Graham Nelson', '1984', 19, 'O'),
@@ -2050,7 +2051,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (943, 'Fawkes Run (E)', 163, 'Electron User, The', '1988', 1, 'O'),
 (944, 'Froot Raid (Power Pack - Volume 2) (E)', 82, 'Audiogenic Software Ltd.', '1987', 8, 'R'),
 (945, 'Galactic Attack', 188, 'Cascade', '1984', 3, 'R'),
-(946, 'Grebit (E)', 121, 'Alternative (Triple Decker 08)', '1987', 4, 'R'),
+(946, 'Grebit (E)', 121, 'Alternative (Triple Decker 08)', '1987', 4, 'O'),
 (947, 'Monopoly (2P)', 179, 'Leisure Genius', '1985', 31, 'R'),
 (948, 'Moon Patrol (V B1.0)', 22, 'Beebug', '1990', 3, 'O'),
 (949, 'Ricochet (Disc Version)', 5, 'Superior Software', '1989', 5, 'R'),
@@ -2070,7 +2071,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (963, 'Loopz (V1.0)', 82, 'Audiogenic Software Ltd.', '1991', 17, 'R'),
 (964, 'Lunar Lander', 3, 'A&F Software', '1982', 16, 'R'),
 (965, 'Maniac Mower (E)', 16, 'Kansas City Systems', '1983', 1, 'R'),
-(966, 'Money Maze', 121, 'Alternative (Triple Decker 10)', '1987', 1, 'R'),
+(966, 'Money Maze', 121, 'Alternative (Triple Decker 10)', '1987', 1, 'O'),
 (967, 'Pooperpig (AKA Pooper Pig)', 191, 'Marc Young', '1985', 4, 'O'),
 (968, 'Reversi (Draughts and Reversi) (V1)', 6, 'Acornsoft', '1983', 31, 'R'),
 (969, 'Snake Maze', 107, 'Computer Gamer', '1985', 1, 'O'),
@@ -2080,7 +2081,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (973, '3D Terror Chase (AKA Ghost House)', 8, 'Virgin Games', '1983', 1, 'O'),
 (974, 'Air Raid', 168, 'Acorn Programs', '1984', 2, 'O'),
 (975, 'Barbarian II: Dungeon Of Drax ', 5, 'Superior Software', '1989', 35, 'R'),
-(976, 'Chuckie Egg #5 (Unofficial)', 3, 'A&F Software (Crystalsoft)', '1985', 4, 'R'),
+(976, 'Chuckie Egg #5 (Unofficial)', 3, 'A&F Software (Crystalsoft)', '1985', 4, 'C'),
 (977, 'Cluedo', 179, 'Leisure Genius', '1986', 31, 'R'),
 (978, 'Countdown (2P)', 187, 'Macsen', '1987', 29, 'R'),
 (979, 'Destron', 88, 'Home Computing Weekly', '1984', 3, 'O'),
@@ -2089,7 +2090,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (982, 'Grand Prix (2P)', 22, 'Beebug', '1984', 6, 'O'),
 (983, 'Laser Range (Cassette 6)', 97, 'Model B Computing', '1984', 2, 'O'),
 (984, 'Miner, The', 107, 'Computer Gamer', '1985', 1, 'O'),
-(985, 'Missile Jammer (E)', 121, 'Alternative (Triple Decker 09)', '1987', 10, 'R'),
+(985, 'Missile Jammer (E)', 121, 'Alternative (Triple Decker 09)', '1987', 10, 'O'),
 (986, 'Omniopoly (V1.40) (2P)', 165, 'PCW', '1983', 31, 'O'),
 (987, 'Paint Roller! (E)', 163, 'Electron User, The', '1987', 1, 'O'),
 (988, 'Robin Of Sherwood', 192, 'Reflections Software', '1985', 2, 'R'),
@@ -2122,7 +2123,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1015, 'F-111B (AKA Falcon Pilot)', 113, 'A&B Computing', '1984', 2, 'O'),
 (1016, 'Infinity (Disc Version)', 196, 'White Panther', '1988', 4, 'R'),
 (1017, 'Island Adventure', 197, 'Glengary', '1983', 13, 'R'),
-(1018, 'Lander', 121, 'Alternative (Triple Decker 03)', '1987', 16, 'R'),
+(1018, 'Lander', 121, 'Alternative (Triple Decker 03)', '1987', 16, 'O'),
 (1019, 'Monkey Maze (AKA Jungle Maze)', 168, 'Acorn Programs', '1983', 1, 'O'),
 (1020, 'Munchman (E) (AKA Munchy Man)', 16, 'Kansas City Systems', '1983', 1, 'R'),
 (1021, 'Pipe Loonacy', 78, 'Micro User, The', '1990', 17, 'O'),
@@ -2133,7 +2134,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1026, 'Winter Olympiad \'88', 95, 'Tynesoft', '1988', 15, 'R'),
 (1027, 'Astrorun (AKA Astro Run)', 198, 'Ivan Bach', '1983', 3, 'O'),
 (1028, 'Beverly Hills Cop', 95, 'Tynesoft', '1990', 6, 'R'),
-(1029, 'Bunny Blitz', 121, 'Alternative (Triple Decker 10)', '1987', 1, 'R'),
+(1029, 'Bunny Blitz', 121, 'Alternative (Triple Decker 10)', '1987', 1, 'O'),
 (1030, 'Dallas', 176, 'CCS', '1983', 8, 'R'),
 (1031, 'Dauntless Dave', 88, 'Home Computing Weekly', '1985', 1, 'O'),
 (1032, 'Digger (VB0.1)', 22, 'Beebug', '1984', 4, 'O'),
@@ -2152,7 +2153,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1045, 'Air Attack (AKA Argon Attack)', 168, 'Acorn Programs', '1984', 3, 'O'),
 (1046, 'Apollo (Sides A Or B)', 14, 'Software Invasion', '1983', 16, 'R'),
 (1047, 'Bombed: The Gate II (V1.0)', 78, 'Micro User, The', '1991', 1, 'O'),
-(1048, 'Breakfree (E) (AKA Break Free)', 121, 'Alternative (Triple Decker 09)', '1987', 18, 'R'),
+(1048, 'Breakfree (E) (AKA Break Free)', 121, 'Alternative (Triple Decker 09)', '1987', 18, 'O'),
 (1049, 'Caveman (E)', 16, 'Kansas City Systems', '1984', 4, 'R'),
 (1050, 'Curse Of The Middle Kingdom, The', 50, 'Pro Software', '1982', 36, 'R'),
 (1051, 'Defuse', 139, 'Computer & Video Games', '1985', 1, 'O'),
@@ -2301,10 +2302,10 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1194, 'Fire! (AKA Fire Rescue)', 212, 'Rob Northern', '1983', 10, 'O'),
 (1195, 'Man-Hole', 213, 'Arrdy Software', '1985', 10, 'O'),
 (1196, 'Micro Olympics', 214, 'Splanger-Soft', '1984', 15, 'O'),
-(1197, 'Millipede', 6, 'Acornsoft', '1983', 1, 'O'),
+(1197, 'Millipede', 44, 'Public Domain', '1983', 1, 'O'),
 (1198, 'Odd-Ball', 1, 'MRM Software (Unreleased)', '1983', 1, 'O'),
 (1199, 'Saint, The', 126, 'Oak Software', '1983', 1, 'A'),
-(1200, 'Sorcerer\'s Domain (+ Editor)', 215, 'AMF-Soft (AMF Soft)', '1990', 19, 'R'),
+(1200, 'Sorcerer\'s Domain (+ Editor)', 215, 'AMF-Soft (AMF Soft)', '1990', 19, 'O'),
 (1201, 'Star Hawks', 216, 'Orion Software', '1983', 3, 'R'),
 (1202, 'Tanks', 44, 'Public Domain', '1984', 2, 'O'),
 (1203, 'Tennis & Walltrap (Joysticks Only) (2P)', 217, 'Laserbug', '1982', 18, 'O'),
@@ -2316,7 +2317,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1209, 'Confrontation', 167, 'Lothlorien', '1983', 21, 'R'),
 (1210, 'Cosmic Containers', 219, 'Whizz!', '1985', 10, 'O'),
 (1211, 'Dungeon Quest', 107, 'Computer Gamer', '1986', 13, 'O'),
-(1212, 'Exiz (+RAM)', 215, 'AMF-Soft (AMF Soft)', '1989', 3, 'R'),
+(1212, 'Exiz (+RAM)', 215, 'AMF-Soft (AMF Soft)', '1989', 3, 'O'),
 (1213, 'Fernando The Flea', 118, 'Your Computer', '1985', 4, 'O'),
 (1214, 'First Moves Chess', 220, 'Longman', '1984', 31, 'R'),
 (1215, 'Four In A Row', 22, 'Beebug', '1983', 34, 'O'),
@@ -2341,7 +2342,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1234, 'Hunchy', 118, 'Your Computer', '1985', 4, 'O'),
 (1235, 'Martians', 4, 'Micro Power', '1982', 10, 'R'),
 (1236, 'Moving Maze', 168, 'Acorn Programs', '1984', 1, 'O'),
-(1237, 'Omegas', 215, 'AMF-Soft (AMF Soft)', '1989', 3, 'R'),
+(1237, 'Omegas', 215, 'AMF-Soft (AMF Soft)', '1989', 3, 'O'),
 (1238, 'Phantom (Disc Version)', 95, 'Tynesoft', '1987', 5, 'R'),
 (1239, 'Power Raider', 78, 'Micro User, The', '1992', 3, 'O'),
 (1240, 'Satellite Havoc II', 206, '21-Bit Software (8 Bit Software)', '1992', 3, 'O'),
@@ -2364,7 +2365,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1257, 'Stuntman', 118, 'Your Computer', '1984', 6, 'O'),
 (1258, 'Tetriz', 206, '23-Bit Software (8 Bit Software)', '1992', 17, 'O'),
 (1259, 'Wacky Bats', 88, 'Home Computing Weekly', '1984', 18, 'O'),
-(1260, 'Zedon (+RAM)', 215, 'AMF-Soft (AMF Soft)', '1989', 3, 'R'),
+(1260, 'Zedon (+RAM)', 215, 'AMF-Soft (AMF Soft)', '1989', 3, 'O'),
 (1261, '737 Flight Simulator', 98, 'Salamander', '1983', 8, 'R'),
 (1262, 'Alien Invasion', 78, 'Micro User, The', '1984', 3, 'O'),
 (1263, 'Caterpillar (E)', 63, 'Romik', '1984', 2, 'R'),
@@ -2402,7 +2403,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1295, 'Snakes And Ladders (Cassette 3) (2P)', 97, 'Model B Computing', '1983', 31, 'O'),
 (1296, 'Wheeler Dealer', 225, 'OIC', '1983', 8, 'R'),
 (1297, 'Blocbusta', 78, 'Micro User, The', '1991', 1, 'O'),
-(1298, 'Day At The Races, A', 121, 'Alternative (Triple Decker 01)', '1987', 7, 'R'),
+(1298, 'Day At The Races, A', 121, 'Alternative (Triple Decker 01)', '1987', 7, 'O'),
 (1299, 'Dominoes', 226, 'Garland Computing', '1984', 34, 'R'),
 (1300, 'Egg Head (VB1.3)', 22, 'Beebug', '1989', 1, 'O'),
 (1301, 'Helicopter Rescue', 165, 'PCW', '1984', 1, 'O'),
@@ -2462,7 +2463,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1355, 'Dragon Rider', 98, 'Salamander', '1983', 11, 'R'),
 (1356, 'Elevasion (VB1.0)', 22, 'Beebug', '1984', 4, 'O'),
 (1357, 'Hangman (V2.00)', 229, 'Sigma Soft', '1984', 34, 'R'),
-(1358, 'Infection', 215, 'AMF-Soft (AMF Soft)', '1989', 17, 'R'),
+(1358, 'Infection', 215, 'AMF-Soft (AMF Soft)', '1989', 17, 'O'),
 (1359, 'Missile Command', 118, 'Your Computer', '1983', 3, 'O'),
 (1360, 'Moon-Pod (E)', 230, 'Elbug', '1985', 3, 'O'),
 (1361, 'Nightflite (V1.0)', 124, 'Hewson Consultants', '1983', 8, 'R'),
@@ -2523,7 +2524,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1416, 'Santa\'s Sleigh', 78, 'Micro User, The', '1986', 4, 'O'),
 (1417, 'Sea Battle', 118, 'Your Computer', '1983', 2, 'O'),
 (1418, 'Shoot-\'Em-Up (Joystick Only)', 171, 'Personal Computer News', '1984', 2, 'O'),
-(1419, 'Sorcerer\'s Domain II (+ Editor)', 215, 'AMF-Soft (AMF Soft)', '1991', 19, 'R'),
+(1419, 'Sorcerer\'s Domain II (+ Editor)', 215, 'AMF-Soft (AMF Soft)', '1991', 19, 'O'),
 (1420, 'Space Hawk', 113, 'A&B Computing', '1986', 3, 'O'),
 (1421, 'Starwars (AKA Star Encounter) (AKA Star Wars)', 113, 'A&B Computing', '1984', 3, 'O'),
 (1422, 'Waiter!', 237, 'A. Baker & R. Horton', '1985', 4, 'O'),
@@ -2563,7 +2564,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1456, 'Super Fruit', 44, 'Public Domain', '1985', 8, 'O'),
 (1457, 'Tex \'n\' Dan (E)', 163, 'Electron User, The', '1985', 2, 'O'),
 (1458, 'Wall Of Death', 247, 'G. Stafford', '1984', 3, 'O'),
-(1459, 'Backgammon', 121, 'Alternative', '1987', 31, 'R'),
+(1459, 'Backgammon', 344, 'Unknown', '1987', 31, 'O'),
 (1460, 'Battleships', 248, 'R. Darlington', '1982', 34, 'O'),
 (1461, 'Beebmaze (AKA Beeb Maze)', 44, 'Public Domain', '1984', 1, 'O'),
 (1462, 'Cycles', 44, 'Public Domain', '1985', 1, 'O'),
@@ -2622,7 +2623,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1515, 'Beebgammon', 26, 'Bug-Byte (Bug Byte)', '1982', 31, 'R'),
 (1516, 'Black Holes (Cassette 7)', 97, 'Model B Computing', '1984', 17, 'O'),
 (1517, 'Cheese', 165, 'PCW', '1983', 10, 'O'),
-(1518, 'Code Breaker', 121, 'Alternative (Triple Decker 09)', '1987', 17, 'R'),
+(1518, 'Code Breaker', 121, 'Alternative (Triple Decker 09)', '1987', 17, 'O'),
 (1519, 'Colony (AKA Lemmings)', 240, 'Acorn Computing', '1994', NULL, 'O'),
 (1520, 'Corn Cropper', 176, 'CCS', '1983', 8, 'R'),
 (1521, 'Cricket (AKA Howzat Cricket)', 3, 'A&F Software', '1983', 7, 'R'),
@@ -2651,7 +2652,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1544, 'Santa On The Tiles (E)', 163, 'Electron User, The', '1987', 4, 'O'),
 (1545, 'Santa\'s Slip-Up!', 78, 'Micro User, The', '1991', 4, 'O'),
 (1546, 'Santa\'s Workshop (E)', 163, 'Electron User, The', '1988', 1, 'O'),
-(1547, 'Tomb Of Syrinx', 143, 'Power House, The', '1987', 1, 'R'),
+(1547, 'Tomb Of Syrinx', 143, 'Power House, The', '1987', 1, 'U'),
 (1548, 'Zuyder Zee', 1, 'MRM Software (Unreleased)', '1984', 2, 'O'),
 (1549, 'Airline', 176, 'CCS', '1983', 8, 'R'),
 (1550, 'Darts', 78, 'Micro User, The', '1988', 7, 'O'),
@@ -2663,7 +2664,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1556, 'Identify Europe (Disk Edit)', 258, 'Kosmos', '1983', 29, 'R'),
 (1557, 'Master Break (Disk Version)', 5, 'Superior Software', '1991', 29, 'R'),
 (1558, 'Poker Dice', 4, 'Micro Power', '1982', 34, 'R'),
-(1559, 'Reaction Tester', 121, 'Alternative (Triple Decker 07)', '1987', NULL, 'R'),
+(1559, 'Reaction Tester', 121, 'Alternative (Triple Decker 07)', '1987', NULL, 'O'),
 (1560, 'Roll Of Honour (VB0.4)', 22, 'Beebug', '1987', 34, 'O'),
 (1561, 'Roulette', 4, 'Micro Power', '1982', 34, 'R'),
 (1562, 'Shape Match (2P)', 22, 'Beebug', '1982', 17, 'O'),
@@ -2679,7 +2680,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1572, 'Dungeon Quest (E)', 163, 'Electron User, The', '1985', 13, 'O'),
 (1573, 'Escape The Goulogs', 78, 'Micro User, The', '1984', 1, 'O'),
 (1574, 'Knight Game', 240, 'Acorn Computing', '1994', 31, 'O'),
-(1575, 'Masterbrain (Games Of Strategy)', 6, 'Acornsoft', '1982', 17, 'R'),
+(1575, 'Masterbrain (Games Of Strategy)', 10, 'BBC Soft', '1982', 17, 'R'),
 (1576, 'Mindbender (V2.3)', 22, 'Beebug', '1982', 17, 'O'),
 (1577, 'Owzat (Disc Edit)', 8, 'Virgin Games', '1983', 7, 'R'),
 (1578, 'Pinball', 78, 'Micro User, The', '1988', 8, 'O'),
@@ -2703,7 +2704,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1595, 'Microgo1 (AKA Micro Go 1)', 262, 'Edge Computers Ltd.', '1984', 31, 'R'),
 (1596, 'Question Of Sport, A (WDFS/1770 Version)', 263, 'Superior Software', '1988', 29, 'R'),
 (1597, 'Roving Robot', 264, 'Games Computing', '1985', 4, 'O'),
-(1598, 'Snap Dragon (2P)', 121, 'Alternative (Triple Decker 06)', '1987', 38, 'R'),
+(1598, 'Snap Dragon (2P)', 121, 'Alternative (Triple Decker 06)', '1987', 38, 'O'),
 (1599, 'Space Blaster (E)', 163, 'Electron User, The', '1985', 3, 'O'),
 (1600, 'System 8', 80, 'Blue Ribbon', '1988', 7, 'R'),
 (1601, 'Transport Android: Roving Robot II', 264, 'Games Computing', '1985', 1, 'O'),
@@ -2901,7 +2902,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1793, 'Jungle Adventure (Parts 1 & 2)', 22, 'Beebug', '1987', 13, 'O'),
 (1794, 'Mirror Of Khoronz, The (STD)', 292, 'Derek L. Haslam', '1987', 13, 'O'),
 (1795, 'Puss In Boots (Adventuresoft)', 113, 'A&B Computing', '1983', 13, 'O'),
-(1796, 'Return Of The Diamond', 22, 'Beebug', '1984', 13, 'O'),
+(1796, 'Return Of The Diamond', 22, 'Beebug', '1983', 13, 'O'),
 (1797, 'Robin Of Sherwood', 269, 'Adventure International', '1985', 13, 'R'),
 (1798, 'Secret Agent (Adventuresoft)', 113, 'A&B Computing', '1984', 13, 'O'),
 (1799, 'Village Of Lost Souls (Realm Of Chaos Trilogy Part 1) (STT)', 45, 'Robico', '1987', 13, 'R'),
@@ -2922,7 +2923,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1814, 'Uggies Garden (2P)', 5, 'Superior Software (Unreleased)', '1990', 1, 'U'),
 (1815, 'US Invaders (AKA U.S. Invaders)', 44, 'Public Domain', '2000', 3, 'N'),
 (1816, 'X*L*C*R: Squiggly Snake II (Play It Again Sam 19)', 300, 'ProAction (Pro Action)', '1992', 1, 'R'),
-(1817, 'Xenapor', 301, 'Mark C Wheadon', '1990', 3, 'O'),
+(1817, 'Xenapor', 301, 'Mark C. Wheadon', '1990', 3, 'O'),
 (1818, 'XOR: Procyon\'s Mazes', 125, 'Logotron (Unofficial)', '2007', 1, 'N'),
 (1819, 'Cosmic Lander', 302, 'Minion', '1987', 16, 'O'),
 (1820, 'Defence Com', 92, 'Acorn User, The', '1983', 3, 'O'),
@@ -3052,7 +3053,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1948, 'Claustrophobia', 78, 'Micro User, The', '1986', 1, 'O'),
 (1949, 'Dotty', 139, 'Computer & Video Games', '1985', 1, 'O'),
 (1950, 'English Civil War', 328, 'Red Shift', '1984', 21, 'R'),
-(1951, 'Enigma!', 329, 'Dealer Deals Ltd.', '1983', 38, 'R'),
+(1951, 'Enigma!', 345, 'Brainbox Software', '1983', 38, 'R'),
 (1952, 'Fives', 78, 'Micro User, The', '1986', 31, 'O'),
 (1953, 'Flood It', 314, 'Retro Software', '2011', 17, 'N'),
 (1954, 'Golden Shot (STD)', 44, 'Public Domain', '1992', 29, 'O'),
@@ -3083,7 +3084,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1979, 'Artemidorus (New Screens)', 335, 'Orchiewall Software', '1986', 1, 'O'),
 (1980, 'Blockade (Unoriginal Games) (2P)', 323, 'David McKeran', '1983', 1, 'R'),
 (1981, 'Championship Boxing', 336, 'P. Stanley & C. Aslin', '1992', 7, 'O'),
-(1982, 'LazerChess (STD) (AKA Lazer Chess)', 337, 'Andre Sihera', '1990', 31, 'R'),
+(1982, 'LazerChess (STD) (AKA Lazer Chess)', 337, 'Andre Sihera', '1990', 31, 'O'),
 (1983, 'S.C.O.T.T. (E)', 232, 'Electron Computing', '1984', 3, 'O'),
 (1984, 'Skywalker (AKA Sky Walker)', 139, 'Computer & Video Games', '1984', 10, 'O'),
 (1985, 'Splat!', 78, 'Micro User, The', '1984', 1, 'O'),
@@ -3099,9 +3100,9 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1995, 'Doomrun', 78, 'Micro User, The', '1984', 3, 'O'),
 (1996, 'Mastermind (R.H. Compendium)', 58, 'R.H. Software', '1983', 17, 'R'),
 (1997, 'Rock Pile (E)', 338, 'Paul Lear', '1988', 8, 'A'),
-(1998, 'Rockfall (Unoriginal Games)', 323, 'David McKeran', '1983', 20, 'R'),
+(1998, 'Rockfall (AKA Rock Fall) (Unoriginal Games)', 323, 'David McKeran', '1983', 20, 'R'),
 (1999, 'Secret Diary Of Adrian Mole Aged 13¾, The', 154, 'Level 9 Computing / Mosaic Publishing Ltd.', '1985', 13, 'R'),
-(2000, 'Howzat', 121, 'Alternative', '1987', 7, 'R'),
+(2000, 'Howzat', 121, 'Alternative', '1987', 7, 'O'),
 (2001, 'Timerun (AKA Time Run)', 310, 'Anthony Bartram', '1989', 3, 'O'),
 (2002, 'Fruit Machine (AKA Bandit)', 22, 'Beebug', '1983', 8, 'O'),
 (2003, 'Palace Of Death', 339, 'S. Wallace', '1989', 5, 'O'),
@@ -3110,7 +3111,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2006, 'Quest Of Gondor, The', 15, 'Doctor Soft', '1983', 36, 'R'),
 (2007, 'Draughts (Micro Power)', 4, 'Micro Power', '1983', 31, 'O'),
 (2008, 'Empire', 221, 'Shards Software', '1984', 21, 'O'),
-(2009, 'Fishing (Triple Decker 4)', 121, 'Alternative (Triple Decker 04)', '1987', 8, 'O'),
+(2009, 'Fishing (Triple Decker 4)', 121, 'Alternative (Triple Decker 04)', '1987', 8, 'R'),
 (2010, 'Invaders (Ganymede) (Classic Arcade Games) (V1.0)', 341, 'Ganymede', '1983', 3, 'R'),
 (2011, 'Zark', 343, 'Simon Wallace', '1989', 1, 'O'),
 (2012, 'Balloons', 342, 'CJE Micros', '1983', 11, 'O'),
@@ -5096,7 +5097,8 @@ INSERT INTO `games_authors` (`id`, `games_id`, `authors_id`) VALUES
 (4654, 1999, 1094),
 (4655, 1999, 772),
 (4656, 1999, 1095),
-(4657, 1600, 1067);
+(4657, 1600, 1067),
+(4658, 976, 1096);
 
 -- --------------------------------------------------------
 
@@ -12072,7 +12074,9 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (340, 'Jeffrey Cooke'),
 (341, 'Ganymede'),
 (342, 'CJE Micros'),
-(343, 'Simon Wallace');
+(343, 'Simon Wallace'),
+(344, 'Unknown'),
+(345, 'Brainbox Software');
 
 -- --------------------------------------------------------
 
@@ -14198,7 +14202,7 @@ ALTER TABLE `screenshots`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1096;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1097;
 --
 -- AUTO_INCREMENT for table `games`
 --
@@ -14208,7 +14212,7 @@ ALTER TABLE `games`
 -- AUTO_INCREMENT for table `games_authors`
 --
 ALTER TABLE `games_authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4658;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4659;
 --
 -- AUTO_INCREMENT for table `game_genre`
 --
@@ -14228,7 +14232,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=344;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=346;
 --
 -- AUTO_INCREMENT for table `screenshots`
 --
