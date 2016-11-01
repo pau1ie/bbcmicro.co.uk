@@ -68,6 +68,9 @@ function gameitem( $id,  $name, $image, $ssd, $publisher, $year, $pubid) {
    $split=explode('(',$name);
    $title=$split[0];
    
+   $split=explode('(',$publisher);
+   $publisher=$split[0];
+   
 ?>
      <div class="col-sm-6 col-md-4 col-lg-3 thumb1">
       <div class="thumbnail text-center">
