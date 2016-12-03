@@ -114,6 +114,7 @@ function url_state($state, $k, $v) {
   $state[$k]=$v;
   $url='';
 
+#echo "Here!";
   foreach ($state as $key => $value) {
     if ( $key == 'only' ) {
        foreach ($state['only'] as $k => $v ) {
@@ -124,7 +125,7 @@ function url_state($state, $k, $v) {
          $url=$url.'&rt_'.$v.'=on';
        }
     } else {
-      $url=$url.'&'.$key.'='.$value;
+      $url=$url.'&'.$key.'='.urlencode ( $value );
     }
   }
   return substr($url,1);  //Skip first &
@@ -136,21 +137,21 @@ function pager($limit, $rows, $page, $state) {
 
   echo '    <ul class="pagination">';
   if ( $page != 1 ) {
-      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page - 1)).', function(data){ $("#maingrid").html(data); $(\'html, body\').scrollTop(0); }); return false;\' href="?'. url_state($state,'page', ($page - 1)). '">&laquo;</a></li>' . "\n";
+      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page - 1)).', function(data){ $("#maingrid").html(data); window.scrollTo(0,0); }); return false;\' href="?'. url_state($state,'page', ($page - 1)). '">&laquo;</a></li>' . "\n";
   }else{
      echo '     <li class="disabled"><span>&laquo;</span></li> '. "\n";
   }
   for ( $i=1; $i <= $pages; $i++ ) {
     if ( ($i % 5 == 0 ) || (($i > ($page - 4)) && ( $i < ($page + 4))) || ( $i == 1) || ( $i == $pages) ) {
       if ($i != $page ) {
-        echo '     <li><a onclick=\'$.get("getgrid.php", '.json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); $(\'html, body\').scrollTop(0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li>' . "\n";
+        echo '     <li><a onclick=\'$.get("getgrid.php", '.json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li>' . "\n";
       } else {
-        echo '     <li class="active"><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); $(\'html, body\').scrollTop(0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li> '. "\n";
+        echo '     <li class="active"><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li> '. "\n";
       }
     }
   }
   if ( $page != $pages ) {
-      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page + 1)).', function(data){ $("#maingrid").html(data); }); $(\'html, body\').scrollTop(0); return false;\' href="?'. url_state($state,'page', ($page + 1)). '">&raquo;</a></li>' . "\n";
+      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page + 1)).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'. url_state($state,'page', ($page + 1)). '">&raquo;</a></li>' . "\n";
   }else{
      echo '     <li class="disabled"><span>&raquo;</span></li> '. "\n";
   }
