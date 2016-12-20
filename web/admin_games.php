@@ -14,7 +14,8 @@ show_admin_menu();
 
 
 $s="	SELECT 		id,title,publisher,year,
-					(SELECT GROUP_CONCAT(CONCAT(authors.id,'|',authors.name) SEPARATOR '@') FROM games_authors LEFT JOIN authors ON authors_id=authors.id WHERE games_id=games.id) AS authors
+					(SELECT GROUP_CONCAT(CONCAT(authors.id,'|',authors.name) SEPARATOR '@') FROM games_authors LEFT JOIN authors ON authors_id=authors.id WHERE games_id=games.id) AS authors,
+					(SELECT GROUP_CONCAT(CONCAT(genres.id,'|',genres.name) SEPARATOR '@') FROM game_genre LEFT JOIN genres ON genreid=genres.id WHERE gameid=games.id) AS genres
 		FROM 		games 
 		ORDER BY 	title";
 $q=@$dbh->query($s);
@@ -22,7 +23,7 @@ if (!$dbh->errno) {
 	if ($q->num_rows) {
 		echo "$q->num_rows games<hr>";
 		echo "<table>\n";
-		echo "<tr><td><b>Title</b></td><td><b>Publisher</b></td><td><b>Year</b></td><td><b>Authors</b></tr>\n";
+		echo "<tr><td><b>Title</b></td><td><b>Publisher</b></td><td><b>Year</b></td><td><b>Authors</b></td><td><b>Genres</td></tr>\n";
 		while ($r=$q->fetch_object()) {
 			echo "<tr><td>$r->title</td><td>$r->publisher</td><td>$r->year</td>";
 
@@ -32,6 +33,22 @@ if (!$dbh->errno) {
 			foreach ($authors as $author) {
 				if ($author) {
 					list($id,$name)=explode('|',$author);
+					if ($name) $names.="$name, ";
+				}
+			}
+			if ($names) {
+				echo substr($names,0,strlen($names)-2);
+			} else {
+				echo "<i>None</i>";
+			}
+			echo "</a></td>";
+
+			echo "<td><a href='admin_game_genre.php?id=$r->id'>";
+			$genres=explode('@',$r->genres);
+			$names='';
+			foreach ($genres as $genre) {
+				if ($genre) {
+					list($id,$name)=explode('|',$genre);
 					if ($name) $names.="$name, ";
 				}
 			}

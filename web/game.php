@@ -2,6 +2,7 @@
 require 'includes/config.php';
 require 'includes/db_connect.php';
 require 'includes/menu.php';
+require 'includes/playlink.php';
 
 $id=0;
 
@@ -57,11 +58,17 @@ $ssd = 'gameimg/discs/' . $img["filename"];
 $jsbeeb=JB_LOC;
 $root=WS_ROOT;
 
-if ( $ssd != null && file_exists($ssd)) {
-  $imglink='<p><a type="button" class="btn btn-primary btn-lg center-block" href="' . $ssd . '">Download</a></p>
-            <p><a type="button" class="btn btn-primary btn-lg center-block" href="' . $jsbeeb . $root . '/' . $ssd . '" >Play</a></p>';
+$playlink=get_playlink($img,$jsbeeb,$root);
+if ( $ssd != NULL && file_exists($ssd)) {
+  $imglink='<p><a type="button" class="btn btn-primary btn-lg center-block" href="' . $ssd . '">Download</a></p>';
 } else {
   $imglink="<p>No disc image available</p>";
+}
+
+if ($playlink != NULL ) {
+  $imglink=$imglink .'<p><a type="button" class="btn btn-primary btn-lg center-block" href="' . $playlink . '" >Play</a></p>';
+} else {
+  $imglink=$imglink."<p>Can't be played online.</p>";
 }
 
 $sql = "select * from game_genre gg, genres g where gg.gameid  = ? and gg.genreid = g.id";

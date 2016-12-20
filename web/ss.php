@@ -3,7 +3,7 @@
 require 'includes/config.php';
 require 'includes/db_connect.php';
 
-$sql="select g.id, g.title, g.publisher, g.year, g.genre, g.reltype, i.filename, r.name from games g left join images i on g.id = i.gameid left join genres r on g.genre = r.id order by filename COLLATE utf8_bin";
+$sql="select g.id, g.title, g.publisher, g.year, g.genre, g.reltype, i.filename, r.name from games g left join images i on g.id = i.gameid left join genres r on g.genre = r.id order by upper(substr(filename,1,7)), upper(g.title), i.filename COLLATE utf8_bin";
 
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if ($sth->execute()) {
@@ -72,7 +72,7 @@ foreach ($res as $line) {
   $ol[]=$line['reltype'];	// Release Type
   $ol[]=$line['name'];		// Authors
   if ( count($gen2) > 1 ) {
-    $ol[]='"'.implode(',',$gen2).'"';
+    $ol[]='"'.implode(', ',$gen2).'"';
   } else {
     $ol[]=implode('',$gen2);
   }
