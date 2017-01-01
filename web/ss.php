@@ -15,7 +15,7 @@ if ($sth->execute()) {
   $res=array();
 }
 
-$gsql="select g.name from genres g left join game_genre gg on gg.genreid = g.id where gg.gameid = ?";
+$gsql="select g.name from genres g left join game_genre gg on gg.genreid = g.id where gg.gameid = ? order by gg.ord";
 $gsth = $db->prepare($gsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $gsth->bindParam(1, $id, PDO::PARAM_INT);
 
@@ -77,10 +77,10 @@ foreach ($res as $line) {
     $ol[]=implode('',$gen2);
   }
   $ol[]=$line['year'];		// Year
-  $ol[]='B';       		// Platform
-  $ol[]='';        		// Problems
-  $ol[]='C';       		// Source
-  $ol[]='';        		// Availability
+//  $ol[]='B';       		// Platform
+//  $ol[]='';        		// Problems
+//  $ol[]='C';       		// Source
+//  $ol[]='';        		// Availability
   if (count($auths) > 1) {
     $ol[]='"'.implode(', ',$auths).'"';
   } else {

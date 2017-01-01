@@ -87,7 +87,7 @@ if (!$dbh->errno) {
 
 if ($game_id) {
 	$s="	SELECT 		id,title,publisher,year,
-						(SELECT GROUP_CONCAT(CONCAT(genres.id,'|',genres.name) SEPARATOR '@') FROM game_genre LEFT JOIN genres ON genreid=genres.id WHERE gameid=games.id) AS genres
+						(SELECT GROUP_CONCAT(CONCAT(genres.id,'|',genres.name) SEPARATOR '@') FROM game_genre LEFT JOIN genres ON genreid=genres.id WHERE gameid=games.id order by game_genre.id) AS genres
 			FROM 		games 
 			WHERE		id=$game_id";
 

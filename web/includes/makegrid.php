@@ -1,5 +1,5 @@
 <?php
-
+require 'playlink.php';
 
 function get_reltypes() {
   global $db;
@@ -59,7 +59,7 @@ function atoz_line($current='',$chars,$margin) {
   echo "</div>";
 }
 
-function gameitem( $id,  $name, $image, $ssd, $publisher, $year, $pubid) {
+function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
    global $sid;
 
    $jsbeeb=JB_LOC;
@@ -70,7 +70,7 @@ function gameitem( $id,  $name, $image, $ssd, $publisher, $year, $pubid) {
    
    $split=explode('(',$publisher);
    $publisher=$split[0];
-   
+   $ssd = 'gameimg/discs/' . $img["filename"];
 ?>
      <div class="col-sm-6 col-md-4 col-lg-3 thumb1">
       <div class="thumbnail text-center">
@@ -79,8 +79,11 @@ function gameitem( $id,  $name, $image, $ssd, $publisher, $year, $pubid) {
        <div class="row-pubdt"><span class="row-pubdt"><a href="?pubid=<?php echo $pubid ?>"><?php echo $publisher?></a>
        <br/><a href="?year=<?php echo $year ?>"><?php echo $year; ?></a></span></div>
 <?php
+  $playlink=get_playlink($img,$jsbeeb,$root);
   if ($ssd != null && file_exists($ssd)) { ?>
-       <p><a href="<?php echo $ssd ?>" type="button" class="btn btn-default">Download</a>
+       <p><a href="<?php echo $ssd ?>" type="button" class="btn btn-default">Download</a><?php
+  }
+  if ($playlink != null) { ?>
           <a id="plybtn" href="<?php echo $jsbeeb . $root . '/' . $ssd ?>" type="button" class="btn btn-default">Play</a></p>
 <?php
   }
@@ -134,28 +137,30 @@ function url_state($state, $k, $v) {
 function pager($limit, $rows, $page, $state) {
   global $publisher, $year;
   $pages = ceil($rows/$limit);
+  $pl='';
 
-  echo '    <ul class="pagination">';
+  $pl.= '    <ul class="pagination">';
   if ( $page != 1 ) {
-      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page - 1)).', function(data){ $("#maingrid").html(data); window.scrollTo(0,0); }); return false;\' href="?'. url_state($state,'page', ($page - 1)). '">&laquo;</a></li>' . "\n";
+      $pl.= '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page - 1)).', function(data){ $("#maingrid").html(data); window.scrollTo(0,0); }); return false;\' href="?'. url_state($state,'page', ($page - 1)). '">&laquo;</a></li>' . "\n";
   }else{
-     echo '     <li class="disabled"><span>&laquo;</span></li> '. "\n";
+     $pl.= '     <li class="disabled"><span>&laquo;</span></li> '. "\n";
   }
   for ( $i=1; $i <= $pages; $i++ ) {
     if ( ($i % 5 == 0 ) || (($i > ($page - 4)) && ( $i < ($page + 4))) || ( $i == 1) || ( $i == $pages) ) {
       if ($i != $page ) {
-        echo '     <li><a onclick=\'$.get("getgrid.php", '.json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li>' . "\n";
+        $pl.= '     <li><a onclick=\'$.get("getgrid.php", '.json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li>' . "\n";
       } else {
-        echo '     <li class="active"><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li> '. "\n";
+        $pl.= '     <li class="active"><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', $i).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'.url_state($state,'page', $i).'">' . $i . '</a></li> '. "\n";
       }
     }
   }
   if ( $page != $pages ) {
-      echo '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page + 1)).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'. url_state($state,'page', ($page + 1)). '">&raquo;</a></li>' . "\n";
+      $pl.= '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page + 1)).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'. url_state($state,'page', ($page + 1)). '">&raquo;</a></li>' . "\n";
   }else{
-     echo '     <li class="disabled"><span>&raquo;</span></li> '. "\n";
+     $pl.= '     <li class="disabled"><span>&raquo;</span></li> '. "\n";
   }
-  echo "    </ul>\n";
+  $pl.= "    </ul>\n";
+  return $pl;
 }
 
 function grid($state) {
@@ -291,7 +296,7 @@ function grid($state) {
   }
 
   $scrsql = 'select filename from screenshots where gameid = :gameid order by main, id limit 1';
-  $dscsql = 'select filename from images where gameid = :gameid order by main, id limit 1';
+  $dscsql = 'select filename, customurl from images where gameid = :gameid order by main, id limit 1';
   $scrpdo = $db->prepare($scrsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $dscpdo = $db->prepare($dscsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
@@ -319,7 +324,8 @@ function grid($state) {
 
     atoz_line($atoz,$chars,'bottom');
 
-    pager($limit,$rows,$page,$state);
+    $pl=pager($limit,$rows,$page,$state);
+    echo $pl;
     echo '    <div class="row" style="display:flex; flex-wrap: wrap;">'."\n";
     foreach ( $res as $game ) {
       $scrpdo->bindParam(':gameid',$game["id"], PDO::PARAM_INT);
@@ -337,20 +343,15 @@ function grid($state) {
       }
       if ($dscpdo->execute()) {
         $dnl=$dscpdo->fetch(PDO::FETCH_ASSOC);
-        if (is_null($dnl["filename"])) {
-          $ssd=null;
-        } else {
-          $ssd = 'gameimg/discs/' . $dnl["filename"];
-        }
       } else {
         echo "Error:";
         $sim->debugDumpParams ();
       }
 
-      gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $ssd ,htmlspecialchars($game["publisher"]),$game["year"],$game["pubid"]);
+      gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $dnl ,htmlspecialchars($game["publisher"]),$game["year"],$game["pubid"]);
     }
     echo "    </div>\n";
-    pager($limit,$rows,$page,$state);
+    echo $pl;
     atoz_line($atoz,$chars,'top');
   } else {
     echo '    <div class="row" style="display:flex; flex-wrap: wrap;">'."\n<h2>No games found!</h2>";
