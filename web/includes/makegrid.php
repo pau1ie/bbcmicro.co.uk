@@ -84,7 +84,7 @@ function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
        <p><a href="<?php echo $ssd ?>" type="button" class="btn btn-default">Download</a><?php
   }
   if ($playlink != null) { ?>
-          <a id="plybtn" href="<?php echo $jsbeeb . $root . '/' . $ssd ?>" type="button" class="btn btn-default">Play</a></p>
+          <a id="plybtn" href="<?php echo $playlink ?>" type="button" class="btn btn-default">Play</a></p>
 <?php
   }
 ?>

@@ -15,7 +15,7 @@ if ( isset($_GET["h"])) {
   $h="i";
 }
 
-$sql = "select g.id, g.title, g.publisher, g.year, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title, g.publisher, g.year, g.notes, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -204,8 +204,13 @@ if ( ! empty($authors)) {
       <div class="row">
         <div class="col-md-8">
           <h2>Screen Shot</h2>
-          <p><img src="gameimg/screenshots/<?php echo $shot[0]["filename"];?>" class="img-responsive"></p>
-          
+          <p><img src="gameimg/screenshots/<?php echo $shot[0]["filename"];?>" class="img-responsive"></p><p>&nbsp;</p>
+<?php
+
+   if ($game["notes"]!=Null ) {
+      echo "<h2>Notes</h2><p>".$game["notes"]."</p>";
+   }
+?>
         </div>
         <div class="col-md-4">
           <h2>Details</h2>
