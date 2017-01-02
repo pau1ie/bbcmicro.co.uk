@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 01, 2017 at 11:00 PM
+-- Generation Time: Jan 02, 2017 at 10:41 PM
 -- Server version: 10.1.20-MariaDB
 -- PHP Version: 7.0.14
 
@@ -1220,7 +1220,15 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (1237, 'Jeff Minter', NULL),
 (1238, 'Richard Edwards', NULL),
 (1239, 'Joel Rowbottom', NULL),
-(1240, 'Michael Nathenson', NULL);
+(1240, 'Michael Nathenson', NULL),
+(1241, 'Guy Ulrich Wilhelmy', NULL),
+(1242, 'Geoff Halprin', NULL),
+(1243, 'Peter Beresford', NULL),
+(1244, 'LynC', NULL),
+(1245, 'Paul Kidd', NULL),
+(1246, 'Michael O\'Rourke', NULL),
+(1247, 'Jon R. Lemmon', NULL),
+(1248, 'Tim Kemp', NULL);
 
 -- --------------------------------------------------------
 
@@ -3566,7 +3574,14 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2321, 'Real You, The (AKA Can You Find... The Real You)', 414, 'Collins', '1986', 568, 'R', NULL),
 (2323, 'Sixers', 225, 'OIC', '1984', 21, 'R', NULL),
 (2324, 'Murdac (AKA Monsters Of Murdac)', 346, 'Topologika', '1987', 13, 'R', NULL),
-(2325, 'Avon', 346, 'Topologika', '1987', 13, 'R', NULL);
+(2325, 'Avon', 346, 'Topologika', '1987', 13, 'R', NULL),
+(2326, 'Lunar Run', 415, 'Chris Nixon', '1985', 3, 'O', NULL),
+(2327, 'Cascade Cassette 50', 188, 'Cascade', '1983', 599, 'R', NULL),
+(2328, 'Galaxias', 314, 'Retro Software', '2011', 13, 'N', NULL),
+(2329, 'Hobbit, The (Universal Disc Version) (+R)', 66, 'Melbourne House', '1985', 13, 'A', NULL),
+(2330, 'Lord Of The Rings (Universal Text Only) (+R)', 66, 'Melbourne House', '19XX', 13, 'A', NULL),
+(2331, 'Project X: The Micro Man', 66, 'Retro Software', '2012', 13, 'N', NULL),
+(2332, 'Project X: The Micro Man II (The O Zone)', 66, 'Retro Software', '2012', 13, 'N', NULL);
 
 -- --------------------------------------------------------
 
@@ -5852,7 +5867,24 @@ INSERT INTO `games_authors` (`id`, `games_id`, `authors_id`) VALUES
 (4991, 2325, 516),
 (4992, 2325, 1099),
 (4993, 2324, 516),
-(4994, 2324, 1099);
+(4994, 2324, 1099),
+(4995, 1681, 256),
+(4996, 2326, 175),
+(4997, 2327, 1241),
+(4998, 2328, 317),
+(4999, 2329, 1029),
+(5000, 2329, 805),
+(5001, 2329, 256),
+(5002, 2329, 1242),
+(5003, 2329, 1243),
+(5004, 2330, 805),
+(5005, 2330, 1244),
+(5006, 2330, 1245),
+(5007, 2330, 1246),
+(5008, 2331, 1247),
+(5009, 2331, 1248),
+(5010, 2332, 1247),
+(5011, 2332, 1248);
 
 -- --------------------------------------------------------
 
@@ -7922,7 +7954,20 @@ INSERT INTO `game_genre` (`id`, `gameid`, `genreid`, `ord`) VALUES
 (7754, 1221, 573, 1),
 (7755, 1352, 85, 3),
 (7756, 1572, 573, 1),
-(7757, 2091, 85, 3);
+(7757, 2091, 85, 3),
+(7758, 2326, 218, NULL),
+(7759, 2327, 638, NULL),
+(7760, 2328, 73, NULL),
+(7761, 2328, 451, NULL),
+(7762, 2329, 73, 1),
+(7763, 2329, 451, 2),
+(7764, 2329, 85, 3),
+(7765, 2330, 73, NULL),
+(7766, 2330, 451, NULL),
+(7767, 2331, 73, NULL),
+(7768, 2331, 451, NULL),
+(7769, 2332, 73, NULL),
+(7770, 2332, 451, NULL);
 
 -- --------------------------------------------------------
 
@@ -8384,7 +8429,8 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (634, 'Piquet'),
 (635, 'Pelmanism'),
 (636, 'Galaxy'),
-(637, 'Masterbrain');
+(637, 'Masterbrain'),
+(638, 'Shovelware');
 
 -- --------------------------------------------------------
 
@@ -10730,7 +10776,14 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `customurl`, `main`) VALUES
 (2385, 2321, 'Disc999-RealYou.ssd', NULL, 100),
 (2386, 2323, 'Disc999-Sixers.ssd', NULL, 100),
 (2387, 2324, 'Disc999-Murdac.ssd', NULL, 100),
-(2388, 2325, 'Disc999-Avon.ssd', NULL, 100);
+(2388, 2325, 'Disc999-Avon.ssd', NULL, 100),
+(2389, 2326, 'Disc113-LunarRun.ssd', NULL, 100),
+(2390, 2327, 'Disc999-Cascade50.dsd', NULL, 100),
+(2391, 2328, 'Disc999-Galaxias.ssd', NULL, 100),
+(2392, 2329, 'Disc999-HobbitUniversalDiscVersion.ssd', NULL, 100),
+(2393, 2330, 'Disc999-LordOfTheRingsUniversalTextOnly.ssd', NULL, 100),
+(2394, 2331, 'Disc999-ProjectXTheMicroMan.ssd', NULL, 100),
+(2395, 2332, 'Disc999-ProjectXTheMicroManIITheOZone.ssd', NULL, 100);
 
 -- --------------------------------------------------------
 
@@ -11159,7 +11212,8 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (411, 'D.D. Green'),
 (412, 'Llamasoft'),
 (413, 'Mad Rabbit Software'),
-(414, 'Collins');
+(414, 'Collins'),
+(415, 'Chris Nixon');
 
 -- --------------------------------------------------------
 
@@ -13530,7 +13584,14 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (3442, 2321, 'Disc999-RealYou.jpg', 100),
 (3443, 2323, 'Disc999-Sixers.jpg', 100),
 (3444, 2324, 'Disc999-Murdac.jpg', 100),
-(3445, 2325, 'Disc999-Avon.jpg', 100);
+(3445, 2325, 'Disc999-Avon.jpg', 100),
+(3446, 2326, 'Disc113-LunarRun.jpg', 100),
+(3447, 2327, 'Disc999-Cascade50.jog', 100),
+(3448, 2328, 'Disc999-Galaxias.jpg', 100),
+(3449, 2329, 'Disc999-HobbitUniversalDiscVersion.jpg', 100),
+(3450, 2330, 'Disc999-LordOfTheRingsUniversalTextOnly.jpg', 100),
+(3451, 2331, 'Disc999-ProjectXTheMicroMan.jpg', 100),
+(3452, 2332, 'Disc999-ProjectXTheMicroManIITheOZone.jpg', 100);
 
 --
 -- Indexes for dumped tables
@@ -13600,42 +13661,42 @@ ALTER TABLE `screenshots`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1241;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1249;
 --
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2326;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2333;
 --
 -- AUTO_INCREMENT for table `games_authors`
 --
 ALTER TABLE `games_authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4995;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5012;
 --
 -- AUTO_INCREMENT for table `game_genre`
 --
 ALTER TABLE `game_genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7758;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7771;
 --
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=638;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=639;
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2389;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2396;
 --
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=415;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=416;
 --
 -- AUTO_INCREMENT for table `screenshots`
 --
 ALTER TABLE `screenshots`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3446;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3453;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
