@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 02, 2017 at 10:41 PM
+-- Generation Time: Jan 02, 2017 at 10:50 PM
 -- Server version: 10.1.20-MariaDB
 -- PHP Version: 7.0.14
 
@@ -13586,7 +13586,7 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (3444, 2324, 'Disc999-Murdac.jpg', 100),
 (3445, 2325, 'Disc999-Avon.jpg', 100),
 (3446, 2326, 'Disc113-LunarRun.jpg', 100),
-(3447, 2327, 'Disc999-Cascade50.jog', 100),
+(3447, 2327, 'Disc999-Cascade50.jpg', 100),
 (3448, 2328, 'Disc999-Galaxias.jpg', 100),
 (3449, 2329, 'Disc999-HobbitUniversalDiscVersion.jpg', 100),
 (3450, 2330, 'Disc999-LordOfTheRingsUniversalTextOnly.jpg', 100),
