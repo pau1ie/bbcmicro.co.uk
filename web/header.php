@@ -34,6 +34,7 @@ global $site_name;
         font-size: 20px;
         font-weight: 300;
         padding-top: 6px;
+        overflow: hidden;
       }
     </style>
 
