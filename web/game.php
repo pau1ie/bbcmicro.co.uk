@@ -15,7 +15,7 @@ if ( isset($_GET["h"])) {
   $h="i";
 }
 
-$sql = "select g.id, g.title, g.publisher, g.year, g.notes, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title, g.publisher, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.edit, g.series, g.series_no, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -206,9 +206,75 @@ if ( ! empty($authors)) {
           <h2>Screen Shot</h2>
           <p><img src="gameimg/screenshots/<?php echo $shot[0]["filename"];?>" class="img-responsive"></p><p>&nbsp;</p>
 <?php
-
    if ($game["notes"]!=Null ) {
       echo "<h2>Notes</h2><p>".$game["notes"]."</p>";
+   }
+
+   switch ($game['joystick']) {
+    case "O":
+        $js = "Optional";
+        break;
+    case "R":
+        $js = "Required";
+        break;
+    default:
+        $js = "Not Supported";
+   }
+
+   switch ($game['save']) {
+    case "D":
+        $sa = "Disc";
+        break;
+    case "T":
+        $sa = "Cassette Tape";
+        break;
+    default:
+        $sa = "Not Supported";
+   }
+
+   $hw='';
+   if (!empty($game['hardware'])) {
+      $hw = "<tr><th>Hardware required</th><td>" . $game['hardware'] . "</td></tr>";
+   }
+
+   $ver='';
+   if (!empty($game['version'])) {
+      $ver = "<tr><th>Version</th><td>" . $game['version'] . "</td></tr>";
+   }
+
+   $el='';
+   if (!empty($game['electron'])) {
+      if ( $game['electron'] == 'Y' ) {
+          $el = 'Electron conversion';
+      } else {
+          $el=$game['electron'];
+      }
+      $el = "<tr><th>Source</th><td>" . $el . "</td></tr>";
+   }
+
+   $sr='';
+   if (!empty($game['series'])) {
+      $sr = "<tr><th>Series</th><td>" . $game['series'] . "</td></tr>";
+   }
+
+   $sn='';
+   if (!empty($game['series_no'])) {
+      $sn = "<tr><th>Series number</th><td>" . $game['series_no'] . "</td></tr>";
+   }
+
+   $ed='';
+   if (!empty($game['edit'])) {
+      $ed = "<tr><th>Edit</th><td>" . $game['edit'] . "</td></tr>";
+   }
+
+   if ($game["players_min"] == $game["players_max"]) {
+      if ($game["players_min"] == 1) {
+         $players="Single player";
+      } else {
+         $players=$game["players_min"] . " players";
+      }
+   } else {
+      $players=$game["players_min"] . " to " . $game["players_max"];
    }
 ?>
         </div>
@@ -222,6 +288,16 @@ if ( ! empty($authors)) {
             <tr><th>Release Type</th><td><?php echo $game["reltype"];?></td></tr>
             <tr><th>Primary genre</th><td><?php echo $game["genre"];?></td></tr>
             <?php echo $genretab;?>
+            <tr><th>Joystick</th><td><?php echo $js;?></td></tr>
+            <tr><th>Players</th><td><?php echo $players;?></td></tr>
+            <tr><th>Save</th><td><?php echo $sa;?></td></tr>
+            <?php echo $hw;?>
+            <?php echo $el;?>
+            <?php echo $ver;?>
+            <?php echo $sr;?>
+            <?php echo $sn;?>
+            <?php echo $ed;?>
+
           </table>
           <?php echo $imglink; ?>
           <p><a type="button" class="btn btn-primary btn-lg center-block" href="<?php echo $back_url ?>" title="Back">Back to <?php echo $back_desc ?></a></p>

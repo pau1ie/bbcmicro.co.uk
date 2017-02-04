@@ -187,6 +187,9 @@ function grid($state) {
     if ( $all || !(array_search('Y',$state['only'])===False )) {
       $sls[] = "year like :search\n";
     }
+    if ( $all || !(array_search('Z',$state['only'])===False )) {
+      $sls[] = "series like :search\n";
+    }
     if ( $all || !(array_search('G',$state['only'])===False )) {
       $sls[] = "genre in (select id from genres where name like :search)\n";
     }
