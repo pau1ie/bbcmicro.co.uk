@@ -1,40 +1,17 @@
--- phpMyAdmin SQL Dump
--- version 4.6.6
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Feb 02, 2017 at 10:16 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `bbc`
---
 
--- --------------------------------------------------------
-
---
--- Table structure for table `authors`
---
-
-CREATE TABLE `authors` (
+CREATE TABLE IF NOT EXISTS `authors` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `alias` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `authors`
---
+) ENGINE=InnoDB AUTO_INCREMENT=1252 DEFAULT CHARSET=utf8;
 
 INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (1, 'A. Baker', NULL),
@@ -651,7 +628,7 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (646, 'Matthew Eastmond', NULL),
 (647, 'Matthew Fifield', NULL),
 (648, 'Matthew Holroyd', NULL),
-(649, 'Matthew O\'Donnell', NULL),
+(649, 'Matthew O''Donnell', NULL),
 (650, 'Matthew Waltham', NULL),
 (651, 'Max Taylor', NULL),
 (652, 'Melvyn Wright', NULL),
@@ -670,7 +647,7 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (665, 'Michael Simpson', NULL),
 (666, 'Michael St. Aubyn', NULL),
 (667, 'Michael Winter', NULL),
-(670, 'Mick O\'Neill', NULL),
+(670, 'Mick O''Neill', NULL),
 (671, 'Mighty Bad', NULL),
 (672, 'Mike Austin', NULL),
 (673, 'Mike Biscoe-Taylor', NULL),
@@ -682,7 +659,7 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (679, 'Mike Kennedy', NULL),
 (680, 'Mike Male', NULL),
 (681, 'Mike Masters', NULL),
-(682, 'Mike O\'Leary', NULL),
+(682, 'Mike O''Leary', NULL),
 (683, 'Mike Singleton', NULL),
 (684, 'Mike Tinning', NULL),
 (685, 'Mike Williams', NULL),
@@ -758,7 +735,7 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (760, 'Paul Johnson', NULL),
 (761, 'Paul Lear', NULL),
 (762, 'Paul Newell', NULL),
-(763, 'Paul O\'Malley', NULL),
+(763, 'Paul O''Malley', NULL),
 (764, 'Paul Proctor', NULL),
 (765, 'Paul Radcliffe', NULL),
 (766, 'Paul Robson', NULL),
@@ -853,7 +830,7 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (859, 'Rob Walmsley', NULL),
 (860, 'Robert MacMillan', NULL),
 (861, 'Robert Moss', NULL),
-(862, 'Robert O\'Leary', NULL),
+(862, 'Robert O''Leary', NULL),
 (863, 'Robert Turner', NULL),
 (864, 'Robin Burgess', NULL),
 (865, 'Robin J. Leatherbarrow', NULL),
@@ -1040,7 +1017,7 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (1051, 'Jo Austin', NULL),
 (1052, 'Owen R. Thomas', NULL),
 (1053, 'John', NULL),
-(1054, 'Caretaker', NULL),
+(1054, 'The Caretaker', NULL),
 (1055, 'Dylan', NULL),
 (1056, 'Andrew Pickford', NULL),
 (1057, 'Stuart Cheshire', 'Delos D. Harriman'),
@@ -1226,19 +1203,14 @@ INSERT INTO `authors` (`id`, `name`, `alias`) VALUES
 (1243, 'Peter Beresford', NULL),
 (1244, 'LynC', NULL),
 (1245, 'Paul Kidd', NULL),
-(1246, 'Michael O\'Rourke', NULL),
+(1246, 'Michael O''Rourke', NULL),
 (1247, 'Jon R. Lemmon', NULL),
 (1248, 'Tim Kemp', NULL),
 (1249, 'J.A. McHugh', NULL),
-(1250, 'Noel Williams', NULL);
+(1250, 'Noel Williams', NULL),
+(1251, 'John Blythe', NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `games`
---
-
-CREATE TABLE `games` (
+CREATE TABLE IF NOT EXISTS `games` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `pubid` int(11) DEFAULT NULL,
@@ -1257,11 +1229,7 @@ CREATE TABLE `games` (
   `edit` varchar(40) DEFAULT NULL,
   `series` varchar(40) DEFAULT NULL,
   `series_no` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `games`
---
+) ENGINE=InnoDB AUTO_INCREMENT=2346 DEFAULT CHARSET=utf8;
 
 INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `reltype`, `notes`, `players_min`, `players_max`, `joystick`, `save`, `hardware`, `electron`, `version`, `edit`, `series`, `series_no`) VALUES
 (1, 'Banana Man', 1, 'MRM Software', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1334,7 +1302,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (68, 'Penguin (AKA Pengo)', 19, 'H-Soft (H. Soft)', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (69, 'Snake', 6, 'Acornsoft', '1982', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '5', NULL, 'Fun Games', NULL),
 (70, 'Super Golf', 20, 'Squirrel Soft', '1982', 465, 'R', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(71, 'Transistor\'s Revenge', 21, 'Softspot', '1983', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(71, 'Transistor''s Revenge', 21, 'Softspot', '1983', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (72, 'Wallaby ', 5, 'Superior Software', '1984', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
 (73, 'Astro Tracker ', 22, 'Beebug', '1982', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '2.1', NULL, NULL, NULL),
 (74, 'Attack On Alpha Centauri', 14, 'Software Invasion', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1367,7 +1335,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (101, 'Mr. Wiz!', 5, 'Superior Software', '1984', 1, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (102, 'Plutonium Plunder', 4, 'Micro Power (Program Power)', '1984', 1, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (103, 'Pole Position', 30, 'Atarisoft', '1984', 6, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(104, 'Protector', 31, 'Quicksilva', '1983', 45, 'R', 'While the play button has been enabled, the game requires a joystick, and joysticks are not emulated in jsbeeb. Therefore it won\'t be possible actually to play the game.', 1, 2, 'R', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(104, 'Protector', 31, 'Quicksilva', '1983', 45, 'R', 'While the play button has been enabled, the game requires a joystick, and joysticks are not emulated in jsbeeb. Therefore it won''t be possible actually to play the game.', 1, 2, 'R', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (105, 'Rocky', 5, 'Superior Software', '1983', 1, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (106, 'Space Fighter', 5, 'Superior Software', '1982', 3, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (107, 'Stock Car', 4, 'Micro Power (Program Power)', '1983', 467, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1420,7 +1388,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (154, 'Hacker, The', 40, 'Firebird Software', '1984', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (155, 'Jet-Boot Jack', 37, 'English Software', '1984', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (156, 'Jump Jet ', 15, 'Doctor Soft', '1984', 473, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
-(157, 'Karl\'s Cavern', 41, 'Software Projects', '1984', 4, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(157, 'Karl''s Cavern', 41, 'Software Projects', '1984', 4, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (158, 'Ledgeman (AKA Ledge Man)', 41, 'Software Projects', '1984', 4, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (159, 'Mr. Wimpy', 42, 'Ocean', '1983', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (160, 'Pedro', 23, 'Imagine', '1984', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1435,7 +1403,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (169, 'Cosmic Kidnap', 5, 'Superior Software', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (170, 'Galactic Commander (AKA Space Test)', 4, 'Micro Power (Program Power)', '1983', 16, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (171, 'Galactic Firebird', 16, 'Kansas City Systems', '1983', 454, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(172, 'Gisburne\'s Castle', 38, 'Martech', '1984', 473, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(172, 'Gisburne''s Castle', 38, 'Martech', '1984', 473, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (173, 'Maze ', 6, 'Acornsoft', '1984', 1, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, '1', NULL, NULL, NULL),
 (174, 'Neanderthal Man (Chartbuster)', 2, 'Alligata', '1984', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (175, 'Nemesis', 4, 'Micro Power (Program Power)', '1983', 2, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1454,7 +1422,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (188, 'Manic Miner', 41, 'Software Projects', '1984', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (189, 'Microcosm', 40, 'Firebird Software', '1985', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (190, 'Pengwyn', 46, 'Postern', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(191, 'Q-Man\'s Brother', 1, 'MRM Software', '1983', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(191, 'Q-Man''s Brother', 1, 'MRM Software', '1983', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (192, 'Robotron: 2084', 30, 'Atarisoft', '1984', 454, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (193, 'Rubble Trouble', 4, 'Micro Power (Program Power)', '1983', 1, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (194, 'Sabre Wulf', 34, 'Ultimate Play The Game', '1984', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1463,7 +1431,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (197, 'Space Rescue (AKA Lunar Rescue) ', 2, 'Alligata', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
 (198, 'Tales Of The Arabian Nights', 47, 'Interceptor', '1985', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (199, 'Asteroid Storm', 4, 'Micro Power (Program Power)', '1982', 454, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(200, 'Bandits At 3 O\'Clock (AKA Dogfight)', 4, 'Micro Power (Program Power)', '1983', 2, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(200, 'Bandits At 3 O''Clock (AKA Dogfight)', 4, 'Micro Power (Program Power)', '1983', 2, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (201, 'Banjax', 45, 'Robico', '1985', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (202, 'Bug Eyes (AKA Zelda Meets The Bug Eyes)', 48, 'Icon', '1985', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (203, 'Combat Lynx', 29, 'Durell', '1985', 460, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1485,10 +1453,10 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (219, 'Chicane', 51, 'Kempston', '1985', 6, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (220, 'Contraption', 48, 'Icon', '1985', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (221, 'Cube Master ', 6, 'Acornsoft', '1982', 475, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
-(222, 'Eagle\'s Wing', 14, 'Software Invasion', '1984', 461, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(222, 'Eagle''s Wing', 14, 'Software Invasion', '1984', 461, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (223, 'Flip! The Cartoon Strategy Game', 48, 'Icon', '1985', 17, 'R', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (224, 'Frenzy', 4, 'Micro Power (Program Power)', '1983', 20, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(225, 'Kissin\' Kousins', 37, 'English Software', '1985', 4, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(225, 'Kissin'' Kousins', 37, 'English Software', '1985', 4, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (226, 'Maze In Space, A', 11, 'Opus', '1983', 3, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (227, 'Mr. Mephisto', 52, 'Euro-Byte (Euro Byte)', '1983', 4, 'R', NULL, 1, 1, 'O', 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (228, 'Neutron', 5, 'Superior Software', '1984', 1, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1540,7 +1508,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (274, 'Boffin', 39, 'Addictive Games', '1985', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (275, 'Bouncer (AKA Space Bouncer)', 3, 'A&F Software', '1983', 10, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (276, 'Chip Buster', 14, 'Software Invasion', '1985', 466, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(277, 'Devil\'s Domain, The', 4, 'Micro Power (Program Power)', '1984', 13, 'U', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(277, 'Devil''s Domain, The', 4, 'Micro Power (Program Power)', '1984', 13, 'U', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (278, 'Hellforce (AKA Hell Force)', 6, 'Acornsoft', '1983', 454, 'U', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (279, 'Match Day', 42, 'Ocean', '1985', 459, 'O', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (280, 'Mutant Spiders', 5, 'Superior Software', '1983', 454, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1560,7 +1528,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (294, 'Nightmare Maze', 1, 'MRM Software', '1984', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (295, 'Omega Probe', 67, 'Optima', '1984', 3, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (296, 'Phantom Combat', 15, 'Doctor Soft', '1985', 460, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(297, 'Proteans', 68, 'Dk\'Tronics (D.K. Tronics)', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(297, 'Proteans', 68, 'Dk''Tronics (D.K. Tronics)', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (298, 'Repton 2', 5, 'Superior Software', '1985', 466, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (299, 'Side Fighter', 69, 'David J. Hoskins', '1984', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (300, 'Space Intruders ', 47, 'Interceptor', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
@@ -1579,17 +1547,17 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (313, 'High-Rise Horror', 8, 'Virgin Games', '1984', 4, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (314, 'Jeremy Goes Jumping', 5, 'Superior Software', '1984', 482, 'U', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (315, 'Lode Runner', 41, 'Software Projects', '1985', 4, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, 'Disc', NULL, NULL),
-(316, 'Merry Xmas Santa (AKA Santa\'s Delivery)', 48, 'Icon', '1985', 4, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(316, 'Merry Xmas Santa (AKA Santa''s Delivery)', 48, 'Icon', '1985', 4, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (317, 'Nightshade (AKA Night Shade)', 34, 'Ultimate Play The Game', '1985', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (318, 'Sea Wolf', 67, 'Optima', '1984', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (319, 'Sentinel, The', 35, 'PSS', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (320, 'Sorcery ', 25, 'Pace', '1984', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '2', NULL, NULL, NULL),
 (321, 'Spy Hunter', 64, 'U.S. Gold (US Gold)', '1985', 6, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Speech', NULL, NULL),
 (322, 'Steve Davis Snooker', 76, 'CDS Software Ltd.', '1985', 458, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(323, 'SubKiller (AKA Sub Killer)', 68, 'Dk\'Tronics (D.K. Tronics)', '1983', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(323, 'SubKiller (AKA Sub Killer)', 68, 'Dk''Tronics (D.K. Tronics)', '1983', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (324, 'Tomahawk ', 16, 'Kansas City Systems', '1985', 461, 'U', NULL, 1, 1, 'O', NULL, NULL, NULL, '2', NULL, NULL, NULL),
 (325, 'Acid Drops', 40, 'Firebird Software', '1984', 454, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(326, 'Boffin 2 (Modified)', 39, 'Addictive Games', '1985', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(326, 'Boffin 2', 39, 'Addictive Games', '1985', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (327, 'Caterpillar (AKA Centipede)', 13, 'IJK Software', '1983', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Cassette', '18'),
 (328, 'Chrysalis', 48, 'Icon', '1985', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '.1', NULL, NULL, NULL),
 (329, 'Confuzion', 77, 'Incentive', '1985', 17, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1601,7 +1569,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (335, 'Ghost Hunter', 1, 'MRM Software', '1983', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (336, 'Panzer Attack', 78, 'Micro User, The', '1984', 2, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, 'Classic Arcade Games', NULL),
 (337, 'Q*Boyd', 4, 'Micro Power (Program Power)', '1983', 4, 'U', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(338, 'Slicker Puzzle', 68, 'Dk\'Tronics (D.K. Tronics)', '1984', 17, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(338, 'Slicker Puzzle', 68, 'Dk''Tronics (D.K. Tronics)', '1984', 17, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (339, 'Spaceguard (AKA Space Guard)', 79, 'MP Software', '1983', 454, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (340, 'Staircase Stampede', 55, 'Comsoft', '1984', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (341, 'Way Of The Exploding Fist, The', 66, 'Melbourne House', '1985', 484, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1627,7 +1595,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (361, 'Alien Intruders', 78, 'Micro User, The', '1984', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Classic Arcade Games', NULL),
 (362, 'Arena 3000', 85, 'Microdeal', '1983', 454, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (363, 'Bruce Lee', 64, 'U.S. Gold (US Gold)', '1985', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(364, 'Desperate Dan\'s Dungeon', 86, 'Thor', '1984', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(364, 'Desperate Dan''s Dungeon', 86, 'Thor', '1984', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (365, 'Diamond Mine 2', 80, 'Blue Ribbon', '1985', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (366, 'Elite', 6, 'Acornsoft', '1984', 3, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (367, 'Galactic Wipeout', 58, 'R.H. Software', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1657,11 +1625,11 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (391, 'Run Silent, Run Deep', 92, 'Acorn User, The', '1985', 21, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (392, 'Space Invaders (Arcade Action)', 6, 'Acornsoft', '1982', 454, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
 (393, 'Stix', 93, 'Supersoft', '1984', 20, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(394, 'Swarmers\' Revenge ', 22, 'Beebug', '1983', 454, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, '1.0', NULL, NULL, NULL),
+(394, 'Swarmers'' Revenge ', 22, 'Beebug', '1983', 454, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, '1.0', NULL, NULL, NULL),
 (395, 'Warp-1 (AKA Trek II)', 48, 'Icon', '1984', 21, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(396, 'Wizzy\'s Mansion', 82, 'Audiogenic Software Ltd.', '1985', 452, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'BBC Bonanza', NULL),
+(396, 'Wizzy''s Mansion', 82, 'Audiogenic Software Ltd.', '1985', 452, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'BBC Bonanza', NULL),
 (397, 'Breakout', 6, 'Acornsoft', '1982', 18, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, 'Fun Games', NULL),
-(398, 'Chuckie Egg #2 (Upgrade)', 3, 'A&F Software (The Caretaker)', '1984', 4, 'C', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(398, 'Chuckie Egg #2 (Upgrade)', 3, 'A&F Software', '1984', 4, 'C', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (399, 'Condition Red', 80, 'Blue Ribbon', '1986', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (400, 'Cruncher', 8, 'Virgin Games', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (401, 'Estra (Sides A & B)', 40, 'Firebird Software', '1984', 11, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1675,7 +1643,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (408, 'Maze Mauler', 88, 'Home Computing Weekly', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (409, 'Moon Buggy ', 16, 'Kansas City Systems', '1985', 3, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, '1', NULL, NULL, NULL),
 (410, 'Painter (AKA Pyramid Painter)', 86, 'Thor', '1984', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1.00', NULL, NULL, NULL),
-(411, 'Quasimodo\'s Quest', 78, 'Micro User, The', '1986', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(411, 'Quasimodo''s Quest', 78, 'Micro User, The', '1986', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (412, 'Ravenskull (Castle Ravenskull)', 5, 'Superior Software', '1986', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (413, 'Siege', 46, 'Postern', '1984', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (414, 'Space Pilot Test', 87, 'DACC', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Super 7', NULL),
@@ -1693,7 +1661,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (426, 'Snake Pit', 46, 'Postern', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (427, 'Space Bandits', 97, 'Model B Computing', '1984', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Cassette', '6'),
 (428, 'Space Rescue', 87, 'DACC', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Super 7', NULL),
-(429, 'Stryker\'s Run', 5, 'Superior Software', '1986', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Stryker\'s Run', 'Part 1'),
+(429, 'Stryker''s Run', 5, 'Superior Software', '1986', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Stryker''s Run', 'Part 1'),
 (430, 'Swamp Monsters ', 79, 'MP Software', '1982', 1, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, '1.0', NULL, NULL, NULL),
 (431, 'Tennis', 26, 'Bug-Byte (Bug Byte)', '1986', 478, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (432, 'Thrust', 5, 'Superior Software', '1986', 3, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1730,7 +1698,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (463, 'Spectramania', 92, 'Acorn User, The', '1986', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (464, 'Thunderstruck', 82, 'Audiogenic Software Ltd.', '1985', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (465, 'Vegas Jackpot', 12, 'Mastertronic', '1986', 462, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(466, 'Video\'s Revenge', 2, 'Alligata', '1985', 3, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, 'MK1', NULL, 'Budgie', NULL),
+(466, 'Video''s Revenge', 2, 'Alligata', '1985', 3, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, 'MK1', NULL, 'Budgie', NULL),
 (467, 'Wiggles (AKA Catapilla)', 104, 'Partis-Soft (Partis Soft) (Unreleased)', '1983', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (468, 'Yoyo!', 105, 'Top Ten', '1985', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Peter Scott Trilogy', NULL),
 (469, '3Deep Space', 46, 'Postern', '1984', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1748,7 +1716,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (481, 'Mad Monty', 108, 'Screenplay', '1983', 1, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (482, 'Mikie ', 23, 'Imagine', '1986', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
 (483, 'Network, The', 105, 'Top Ten', '1986', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Peter Scott Trilogy', NULL),
-(484, 'Pharaoh\'s Curse', 19, 'H-Soft (H. Soft)', '1984', 466, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(484, 'Pharaoh''s Curse', 19, 'H-Soft (H. Soft)', '1984', 466, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (485, 'Play Your Cards Right', 109, 'Britannia', '1986', 26, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (486, 'Tombs Of Tutankhamen, The', 22, 'Beebug', '1986', 19, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B.01', NULL, NULL, NULL),
 (487, 'Asteroid Miner', 67, 'Optima', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1761,7 +1729,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (494, 'Grabit', 59, 'Voyager', '1984', 11, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (495, 'Greenham Common', 88, 'Home Computing Weekly', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (496, 'Hunkie-Egg', 78, 'Micro User, The', '1987', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(497, 'Ian Botham\'s Test Match', 95, 'Tynesoft', '1986', 489, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(497, 'Ian Botham''s Test Match', 95, 'Tynesoft', '1986', 489, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (498, 'Interstellar Raider', 22, 'Beebug', '1984', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B0.3', NULL, NULL, NULL),
 (499, 'Pandemonium', 105, 'Top Ten', '1986', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Peter Scott Trilogy', NULL),
 (500, 'Sliding Block Puzzles', 6, 'Acornsoft', '1983', 17, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '2.3', NULL, NULL, NULL),
@@ -1809,7 +1777,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (542, 'Bar Billiards', 80, 'Blue Ribbon', '1987', 493, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (543, 'Barrel Battle', 78, 'Micro User, The', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (544, 'Blocker', 86, 'Thor', '1984', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(545, 'Cops \'n\' Robbers', 119, 'Atlantis', '1987', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(545, 'Cops ''n'' Robbers', 119, 'Atlantis', '1987', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (546, 'Galactic Invasion', 22, 'Beebug', '1983', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (547, 'Jedi Battle', 120, 'Mark Williams', '1985', 494, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (548, 'Last Of The Free, The', 82, 'Audiogenic Software Ltd.', '1986', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1828,7 +1796,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (561, 'Alphatron', 95, 'Tynesoft', '1986', 3, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (562, 'Bouncing Bill', 126, 'Oak Software', '1983', 4, 'A', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (563, 'Chieftan', 8, 'Virgin Games', '1984', 2, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(564, 'Codename: Droid', 5, 'Superior Software', '1987', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Stryker\'s Run', 'Part 2'),
+(564, 'Codename: Droid', 5, 'Superior Software', '1987', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Stryker''s Run', 'Part 2'),
 (565, 'Dune Hunter', 78, 'Micro User, The', '1987', 3, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (566, 'Manic Mole', 121, 'Alternative', '1987', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Triple Decker', '01'),
 (567, 'Mr. Do!', 127, 'Paul Haigh', '1983', 1, 'A', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1846,7 +1814,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (579, 'Bomber Baron', 130, 'Optyx', '1982', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (580, 'European Knowledge', 4, 'Micro Power (Program Power)', '1984', 29, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (581, 'George And The Dragon', 22, 'Beebug', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B0.3', NULL, NULL, NULL),
-(582, 'Graham Gooch\'s Test Cricket', 82, 'Audiogenic Software Ltd.', '1987', 489, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(582, 'Graham Gooch''s Test Cricket', 82, 'Audiogenic Software Ltd.', '1987', 489, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (583, 'Grand Prix Construction Set ', 5, 'Superior Software', '1987', 30, 'R', NULL, 1, 2, 'O', 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (584, 'Haunted House', 121, 'Alternative', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Triple Decker', '02'),
 (585, 'Perils Of Percival Penguin, The', 131, 'Willow', '1984', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1871,7 +1839,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (604, 'Plan B2 (Mission Unlikely)', 26, 'Bug-Byte (Bug Byte)', '1987', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (605, 'Pogo Pete', 133, 'Electrosoft', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (606, 'Polar Perils', 20, 'Squirrel Soft', '1984', 4, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(607, 'Q*Bert\'s Revenge', 88, 'Home Computing Weekly', '1985', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(607, 'Q*Bert''s Revenge', 88, 'Home Computing Weekly', '1985', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (608, 'Rik The Roadie', 121, 'Alternative', '1987', 477, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (609, 'Sentinel, The', 40, 'Firebird Software', '1986', 21, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (610, 'Thunderstruck II: The Mindmaster', 82, 'Audiogenic Software Ltd.', '1986', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1891,14 +1859,14 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (624, 'Saracoid', 82, 'Audiogenic Software Ltd.', '1987', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, 'Power Pack - Volume 2', NULL),
 (625, 'Solitaire', 1, 'MRM Software (Unreleased)', '1983', 498, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (626, 'Spellbinder', 5, 'Superior Software', '1987', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(627, 'Spitfire \'40', 32, 'Mirrorsoft', '1987', 460, 'R', NULL, 1, 1, 'O', 'T', NULL, NULL, NULL, NULL, NULL, NULL),
+(627, 'Spitfire ''40', 32, 'Mirrorsoft', '1987', 460, 'R', NULL, 1, 1, 'O', 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (628, 'Squeekaliser', 26, 'Bug-Byte (Bug Byte)', '1986', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (629, 'Trafalgar', 20, 'Squirrel Soft', '1983', 21, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(630, 'Wizard\'s Castle', 78, 'Micro User, The', '1984', 5, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(631, '3D Tanx', 68, 'Dk\'Tronics (D.K. Tronics)', '1984', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(630, 'Wizard''s Castle', 78, 'Micro User, The', '1984', 5, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(631, '3D Tanx', 68, 'Dk''Tronics (D.K. Tronics)', '1984', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (632, 'Arkanoid', 23, 'Imagine', '1987', 18, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (633, 'Bone Cruncher', 5, 'Superior Software', '1987', 466, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
-(634, 'Daley Thompson\'s Super-Test', 42, 'Ocean', '1985', 474, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(634, 'Daley Thompson''s Super-Test', 42, 'Ocean', '1985', 474, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (635, 'Empire Strikes Back, The', 122, 'Domark', '1988', 454, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (636, 'Grid Runner', 22, 'Beebug', '1986', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (637, 'Invasion Force ', 121, 'Alternative', '1987', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, 'Triple Decker', '02'),
@@ -1906,7 +1874,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (639, 'League Challenge', 119, 'Atlantis', '1986', 472, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (640, 'Monkey Nuts', 26, 'Bug-Byte (Bug Byte)', '1988', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (641, 'Mouse Trap', 95, 'Tynesoft', '1986', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(642, 'Orlond\'s Meanies', 134, 'Disk User, The', '1988', 466, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(642, 'Orlond''s Meanies', 134, 'Disk User, The', '1988', 466, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (643, 'Pyramid Painter', 78, 'Micro User, The', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (644, 'Revenge Of The Flying Bunnies', 137, 'Simon Pithers', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (645, 'Spooksville', 80, 'Blue Ribbon', '1988', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1936,7 +1904,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (669, 'Boulder Dash (AKA Boulderdash)', 95, 'Tynesoft', '1988', 466, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (670, 'Chichen-Itza', 2, 'Alligata', '1984', 4, 'U', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (671, 'Detonator Dan (AKA Bomb-Run)', 22, 'Beebug', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B0.5', NULL, NULL, NULL),
-(672, 'Dodge\'Em ', 141, 'Microgame Simulations', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '2', NULL, NULL, NULL),
+(672, 'Dodge''Em ', 141, 'Microgame Simulations', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '2', NULL, NULL, NULL),
 (673, 'Eye vs Eye ', 142, 'Romsoft', '1987', 33, 'O', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (674, 'Hercules', 143, 'Power House, The', '1987', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (675, 'Joe Blade', 96, 'Players', '1988', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1956,7 +1924,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (689, 'Bun Fun', 20, 'Squirrel Soft', '1984', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (690, 'Cubert', 22, 'Beebug', '1986', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B0.1', NULL, NULL, NULL),
 (691, 'Froggy', 147, 'JSD Software', '1982', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(692, 'Galaforce 2: Aliens\' Revenge', 5, 'Superior Software', '1988', 454, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(692, 'Galaforce 2: Aliens'' Revenge', 5, 'Superior Software', '1988', 454, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (693, 'Golf', 121, 'Alternative', '1987', 465, 'O', NULL, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, 'Triple Decker', '04'),
 (694, 'Joe Blade II', 96, 'Players', '1988', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (695, 'Kourtyard', 148, 'Go-Dax (Go Dax)', '1988', 2, 'R', NULL, 1, 1, 'O', 'D', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2017,25 +1985,25 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (750, 'Omega', 22, 'Beebug', '1983', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (751, 'Ribbet!', 88, 'Home Computing Weekly', '1984', 4, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (752, 'Shanghai Warriors', 96, 'Players', '1989', 35, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(753, 'Shuggy\'s Garden', 92, 'Acorn User, The', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(753, 'Shuggy''s Garden', 92, 'Acorn User, The', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (754, 'Space Arena ', 78, 'Micro User, The', '1987', 454, 'O', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (755, 'Sphere Of Destiny 2', 82, 'Audiogenic Software Ltd.', '1989', 25, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Fab Four', NULL),
 (756, 'Storm Cycle', 119, 'Atlantis', '1989', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (757, 'Barbarian (Sides A Or B)', 5, 'Superior Software', '1988', 35, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (758, 'Bouncer', 139, 'Computer & Video Games', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(759, 'Brick \'Em In', 151, 'Software For All', '1982', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(759, 'Brick ''Em In', 151, 'Software For All', '1982', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (760, 'Chuckie Egg #4 (Unofficial)', 3, 'A&F Software (Unofficial)', '1984', 4, 'C', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (761, 'Corpuscle', 153, 'Micrograf', '1984', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (762, 'Fighter Pilot', 16, 'Kansas City Systems', '1983', 460, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (763, 'Galactic Invaders', 78, 'Micro User, The', '1983', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(764, 'Gideon\'s Gamble', 5, 'Superior Software', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(764, 'Gideon''s Gamble', 5, 'Superior Software', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (765, 'Grid Runner II (The Blobs Revenge)', 22, 'Beebug', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (766, 'Gunner', 118, 'Your Computer', '1984', 2, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (767, 'Hobgoblin', 119, 'Atlantis', '1989', 452, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '2.00', NULL, NULL, NULL),
 (768, 'Living Daylights, The', 122, 'Domark', '1987', 461, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (769, 'Parachute', 121, 'Alternative', '1987', 10, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Triple Decker', '02'),
 (770, 'Saga Of Erik The Viking, The', 154, 'Level 9 Computing / Mosaic Publishing Ltd.', '1985', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
-(771, 'Serpent\'s Lair', 55, 'Comsoft', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, 'Tape', NULL, NULL),
+(771, 'Serpent''s Lair', 55, 'Comsoft', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, 'Tape', NULL, NULL),
 (772, 'Sleigh Bells', 7, 'Gemini', '1983', 1, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (773, 'Snaker', 144, 'Fast Access', '1989', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (774, 'Subway Vigilante', 96, 'Players', '1989', 35, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2067,7 +2035,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (800, 'Light Cycles', 159, 'Paean', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (801, 'Moon Buggy', 107, 'Computer Gamer', '1985', 1, 'O', NULL, 1, 1, 'O', 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (802, 'Neuzone', 144, 'Fast Access', '1989', 461, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(803, 'Pharaoh\'s Tomb', 3, 'A&F Software', '1982', 36, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(803, 'Pharaoh''s Tomb', 3, 'A&F Software', '1982', 36, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (804, 'Predator', 5, 'Superior Software', '1989', 461, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (805, 'Repton Thru Time', 5, 'Superior Software', '1987', 466, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (806, 'Sea Adventure', 8, 'Virgin Games', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2075,7 +2043,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (808, 'Wee Shuggy', 22, 'Beebug', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B0.2', NULL, NULL, NULL),
 (809, 'Woks ', 161, 'Artic & Unicorn Software', '1986', 4, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (810, 'Wolfpack III (AKA Wolf Pack III)', 15, 'Doctor Soft', '1983', 469, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(811, 'Alien From Outta Space, The', 77, 'Incentive', '1987', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(811, 'Alien From Outer Space, The', 77, 'Incentive', '1987', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (812, 'Around The World In 40 Screens', 5, 'Superior Software', '1987', 466, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, 'Repton', NULL),
 (813, 'Bandits', 162, 'Deskflair Games', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '2.0', NULL, NULL, NULL),
 (814, 'Cowboy Shootout', 97, 'Model B Computing', '1983', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Cassette', '1'),
@@ -2091,7 +2059,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (823, 'Star Fighter Pilot', 121, 'Alternative', '1987', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Triple Decker', '05'),
 (824, 'Sword Master ', 92, 'Acorn User, The', '1983', 502, 'R', NULL, 2, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (825, 'Tanks', 118, 'Your Computer', '1985', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(826, 'Tutankhamun\'s Revenge', 26, 'Bug-Byte (Bug Byte)', '1987', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
+(826, 'Tutankhamun''s Revenge', 26, 'Bug-Byte (Bug Byte)', '1987', 19, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (827, 'White Knight MK12', 10, 'BBC Soft', '1984', 501, 'R', NULL, 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (828, 'Wishing Wells, The ', 163, 'Electron User, The', '1989', 461, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (829, 'Baron', 5, 'Superior Software', '1989', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Play It Again Sam', '11'),
@@ -2139,7 +2107,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (871, 'Gambit (Black Box And Gambit)', 6, 'Acornsoft', '1984', 21, 'R', NULL, 2, 4, 'O', NULL, NULL, NULL, '1', NULL, NULL, NULL),
 (872, 'Gunfighter', 119, 'Atlantis', '1990', 473, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (873, 'Karate (AKA Karate Warrior) ', 121, 'Alternative', '1987', 486, 'O', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Triple Decker', '05'),
-(874, 'Key Man, The', 174, 'Let\'s Compute!', '1990', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Tape 1', NULL),
+(874, 'Key Man, The', 174, 'Let''s Compute!', '1990', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Tape 1', NULL),
 (875, 'Orcrest', 134, 'Disk User, The', '1988', 19, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (876, 'Pipe Mania', 175, 'Empire', '1990', 17, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (877, 'Pipeline!', 78, 'Micro User, The', '1988', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2183,9 +2151,9 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (915, 'Prisoner, The', 144, 'Fast Access', '1989', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (916, 'Q-Man', 113, 'A&B Computing', '1985', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (917, 'Robot Attack', 22, 'Beebug', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, '1A', NULL, NULL, NULL),
-(918, 'Sea Wolf', 174, 'Let\'s Compute!', '1990', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Tape 1', NULL),
+(918, 'Sea Wolf', 174, 'Let''s Compute!', '1990', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Tape 1', NULL),
 (919, 'Beastiroids', 78, 'Micro User, The', '1988', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(920, 'Bird Basher', 174, 'Let\'s Compute!', '1990', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Tape 1', NULL),
+(920, 'Bird Basher', 174, 'Let''s Compute!', '1990', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Tape 1', NULL),
 (921, 'Bobby Charlton Soccer', 87, 'DACC', '1985', 459, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (922, 'Castles Of Sand', 121, 'Alternative', '1987', 17, 'O', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, 'Triple Decker', '06'),
 (923, 'Cellars', 113, 'A&B Computing', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2200,7 +2168,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (932, 'Pentominoes', 22, 'Beebug', '1990', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (933, 'Pro Golf (Games 1 And 2)', 119, 'Atlantis', '1988', 465, 'R', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (934, 'Sim City', 5, 'Superior Software', '1990', 507, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
-(935, 'Super Fruit', 68, 'Dk\'Tronics (D.K. Tronics)', '1983', 462, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(935, 'Super Fruit', 68, 'Dk''Tronics (D.K. Tronics)', '1983', 462, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (936, 'Tanks! ', 98, 'Salamander', '1983', 2, 'R', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (937, '1984', 77, 'Incentive', '1985', 508, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (938, '747 Flight Simulator (Sides A or B)', 15, 'Doctor Soft', '1983', 460, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2258,7 +2226,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (990, 'Smash The Windows', 188, 'Cascade', '1984', 462, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (991, 'Battle Of Britain', 65, 'Betasoft', '1985', 460, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (992, 'Battlezone 2000', 167, 'Lothlorien', '1983', 21, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(993, 'Commonwealth Games \'86', 95, 'Tynesoft', '1986', 474, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(993, 'Commonwealth Games ''86', 95, 'Tynesoft', '1986', 474, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (994, 'Dickie Brickie', 78, 'Micro User, The', '1990', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (995, 'Difendor', 88, 'Home Computing Weekly', '1985', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (996, 'Hunchback Rescue', 139, 'Computer & Video Games', '1985', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2291,7 +2259,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1023, 'Randall Rabbit ', 163, 'Electron User, The', '1988', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1024, 'Robo Brain', 320, 'M.G.B Software Support (MGB Software)', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1025, 'Shuttle Simulator', 85, 'Microdeal', '1983', 469, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1026, 'Winter Olympiad \'88', 95, 'Tynesoft', '1988', 474, 'R', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1026, 'Winter Olympiad ''88', 95, 'Tynesoft', '1988', 474, 'R', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1027, 'Astrorun (AKA Astro Run)', 198, 'Ivan Bach', '1983', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1028, 'Beverly Hills Cop', 95, 'Tynesoft', '1990', 513, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1029, 'Bunny Blitz', 121, 'Alternative', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Triple Decker', '10'),
@@ -2326,14 +2294,14 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1058, 'Omniscient ', 199, 'Peter Brown', '1991', 5, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1059, 'Paras', 167, 'Lothlorien', '1983', 21, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1060, 'Plasma Bolt (AKA Death Stars)', 188, 'Cascade', '1984', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1061, 'Spooks \'n\' Spirits', 22, 'Beebug', '1987', 452, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B1.0', NULL, NULL, NULL),
+(1061, 'Spooks ''n'' Spirits', 22, 'Beebug', '1987', 452, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B1.0', NULL, NULL, NULL),
 (1062, 'Villains', 78, 'Micro User, The', '1984', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1063, 'Baby Monty', 165, 'PCW', '1983', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1064, 'Balls! ', 200, 'Yes Marketing', '1988', 33, 'R', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1065, 'Beeb Chess', 26, 'Bug-Byte (Bug Byte)', '1982', 501, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (1066, 'Caterpillar (AKA Caterpillar Bill)', 139, 'Computer & Video Games', '1984', 466, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1067, 'Dungeon', 144, 'Fast Access', '1991', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1068, 'Dunjunz', 26, 'Bug-Byte (Bug Byte)', '1986', 36, 'R', 'This game is one of a very few that doesn\'t work in jsbeeb. This is being investigated, but in the mean time it can\'t be played online. Either try it in an emulator, or in a real BBC Micro.', 1, 1, NULL, NULL, 'Two banks of sideways RAM Required', NULL, NULL, NULL, NULL, NULL),
+(1068, 'Dunjunz', 26, 'Bug-Byte (Bug Byte)', '1986', 36, 'R', 'This game is one of a very few that doesn''t work in jsbeeb. This is being investigated, but in the mean time it can''t be played online. Either try it in an emulator, or in a real BBC Micro.', 1, 1, NULL, NULL, 'Two banks of sideways RAM Required', NULL, NULL, NULL, NULL, NULL),
 (1069, 'Haunted House', 113, 'A&B Computing', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1070, 'Knight Quest', 22, 'Beebug', '1988', 5, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B1.02', NULL, NULL, NULL),
 (1071, 'Mazemunch (AKA Maze Munch)', 78, 'Micro User, The', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2399,11 +2367,11 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1131, 'Roller-Invaders', 97, 'Model B Computing', '1983', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Cassette', '1'),
 (1132, 'Skulls', 78, 'Micro User, The', '1988', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1133, 'Sky Pilot', 97, 'Model B Computing', '1984', 454, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, 'Cassette', '3'),
-(1134, 'Storker\'s Run ', 163, 'Electron User, The', '1989', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
+(1134, 'Storker''s Run ', 163, 'Electron User, The', '1989', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1135, '747 Flight Simulator', 87, 'DACC', '1983', 460, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1136, 'Adventure', 92, 'Acorn User, The', '1985', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1137, 'Balls Of Destiny', 78, 'Micro User, The', '1992', 33, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1138, 'Devil\'s Causeway', 57, 'Database', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1138, 'Devil''s Causeway', 57, 'Database', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1139, 'Dodgems', 139, 'Computer & Video Games', '1984', 483, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1140, 'Five Alive', 78, 'Micro User, The', '1989', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1141, 'Fruit Catcher', 203, 'Livewire Software Ltd.', '1988', 462, 'U', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2446,10 +2414,10 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1178, 'Jumpers', 113, 'A&B Computing', '1986', 10, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1179, 'Main-Line', 208, 'CSL', '1982', 523, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1180, 'Maze ', 163, 'Electron User, The', '1987', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
-(1181, 'Mechanic \'Mike\'', 107, 'Computer Gamer', '1986', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1181, 'Mechanic ''Mike''', 107, 'Computer Gamer', '1986', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1182, 'Monstermania (AKA Monster Mash)', 209, 'Personal Computer Games', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1183, 'Nevryon', 158, '4th Dimension', '1990', 3, 'R', 'This game gives you a password on completing a level. This can be used to skip to the next level the next time the game is played. These may be listed as an easter egg somewhere in the instructions screens. Try pressing P.', 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
-(1184, 'Parky\'s Peril ', 163, 'Electron User, The', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
+(1184, 'Parky''s Peril ', 163, 'Electron User, The', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1185, 'Rock-Race', 107, 'Computer Gamer', '1985', 466, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1186, 'Rondo', 78, 'Micro User, The', '1987', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1187, 'Satellite Havoc', 206, '8-Bit Software (8 Bit Software)', '1991', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2465,12 +2433,12 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1197, 'Millipede', 44, 'Public Domain', '1983', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1198, 'Odd-Ball', 1, 'MRM Software (Unreleased)', '1983', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1199, 'Saint, The', 126, 'Oak Software', '1983', 1, 'A', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1200, 'Sorcerer\'s Domain (+ Editor)', 215, 'AMF-Soft (AMF Soft)', '1990', 19, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(1200, 'Sorcerer''s Domain (+ Editor)', 215, 'AMF-Soft (AMF Soft)', '1990', 19, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1201, 'Star Hawks', 216, 'Orion Software', '1983', 454, 'R', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1202, 'Tanks', 44, 'Public Domain', '1984', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1203, 'Tennis & Walltrap', 217, 'Laserbug', '1982', 18, 'O', NULL, 2, 2, 'R', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1204, 'WallBall (AKA Wall Ball)', 217, 'Laserbug', '1982', 18, 'O', NULL, 1, 1, 'R', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1205, 'Wallie\'s Castle', 44, 'Public Domain', '1985', 19, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1205, 'Wallie''s Castle', 44, 'Public Domain', '1985', 19, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1206, 'Wilfred The Warlock', 1, 'MRM Software', '1984', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1207, 'Castle Of Nightmares ', 92, 'Acorn User, The', '1986', 19, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1208, 'Colossus Bridge', 76, 'CDS Software Ltd.', '1988', 512, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2487,7 +2455,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1218, 'Helicopter Holocaust ', 206, '8-Bit Software (8 Bit Software)', '1991', 2, 'O', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1219, 'Hippo Quest', 107, 'Computer Gamer', '1985', 4, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1220, 'Loopy Loop', 206, '8-Bit Software (8 Bit Software)', '1992', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1221, 'Pettigrew\'s Diary', 221, 'Shards Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1221, 'Pettigrew''s Diary', 221, 'Shards Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1222, 'Space Base', 78, 'Micro User, The', '1986', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1223, 'Splurge', 88, 'Home Computing Weekly', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1224, 'Surround', 171, 'Personal Computer News', '1983', 1, 'O', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2548,7 +2516,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1279, 'Bio-Chip', 144, 'Fast Access', '1988', 1, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1280, 'Blue Meanie', 78, 'Micro User, The', '1990', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1281, 'Bouncing Bomb Chase ', 13, 'IJK Software', '1984', 2, 'R', NULL, 1, 1, 'O', NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
-(1282, 'Dictator', 68, 'Dk\'Tronics (D.K. Tronics)', '1983', 21, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1282, 'Dictator', 68, 'Dk''Tronics (D.K. Tronics)', '1983', 21, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1283, 'Flitty Flea', 22, 'Beebug', '1987', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B0.1', NULL, NULL, NULL),
 (1284, 'Football Krazy (AKA Footer)', 22, 'Beebug', '1984', 18, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B1.0', NULL, NULL, NULL),
 (1285, 'Grand Prix', 88, 'Home Computing Weekly', '1984', 6, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2571,7 +2539,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1302, 'Hyper Sports', 23, 'Imagine', '1984', 474, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (1303, 'Minefield', 171, 'Personal Computer News', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1304, 'Missile Attack ', 163, 'Electron User, The', '1985', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
-(1305, 'Paul Daniels\' Magic Show ', 6, 'Acornsoft', '1984', 26, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
+(1305, 'Paul Daniels'' Magic Show ', 6, 'Acornsoft', '1984', 26, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL),
 (1306, 'Peg Leg ', 13, 'IJK Software', '1983', 5, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1307, 'Rally Driver ', 163, 'Electron User, The', '1988', 457, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1308, 'Robot', 227, 'Viking Software', '1982', 1, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2605,7 +2573,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1336, 'Doodlebug', 113, 'A&B Computing', '1984', 20, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1337, 'Dunefighters  (AKA Dune Fighters)', 113, 'A&B Computing', '1983', 2, 'O', NULL, 2, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1338, 'Dynamite', 188, 'Cascade', '1984', 2, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1339, 'Frogs \'n\' Dogs', 78, 'Micro User, The', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1339, 'Frogs ''n'' Dogs', 78, 'Micro User, The', '1984', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1340, 'Hectic Henry! ', 163, 'Electron User, The', '1987', 1, 'O', NULL, 1, 1, 'O', NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1341, 'Mars Lander', 22, 'Beebug', '1983', 16, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, '1A', NULL, NULL, NULL),
 (1342, 'Mazechase (AKA Maze Chase)', 206, '8-Bit Software (8 Bit Software)', '1983', 457, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2667,7 +2635,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1398, 'Mower', 118, 'Your Computer', '1983', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1399, 'Navigator ', 163, 'Electron User, The', '1988', 16, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1400, 'Race-Chase', 118, 'Your Computer', '1984', 457, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1401, 'Rodeo Games (AKA Buffalo Bill\'s Wild West Show)', 95, 'Tynesoft', '1989', 474, 'R', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1401, 'Rodeo Games (AKA Buffalo Bill''s Wild West Show)', 95, 'Tynesoft', '1989', 474, 'R', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1402, 'Spacewar (AKA Space War)', 113, 'A&B Computing', '1983', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1403, 'Trivial Pursuit', 122, 'Domark', '1988', 29, 'R', NULL, 1, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1404, 'White Widow', 78, 'Micro User, The', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2682,10 +2650,10 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1413, 'Miner', 235, 'Ixion', '1984', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1414, 'Moon Patrol', 78, 'Micro User, The', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1415, 'Phoenix', 236, 'B. Newall', '1985', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1416, 'Santa\'s Sleigh', 78, 'Micro User, The', '1986', 4, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1416, 'Santa''s Sleigh', 78, 'Micro User, The', '1986', 4, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1417, 'Sea Battle', 118, 'Your Computer', '1983', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1418, 'Shoot-\'Em-Up', 171, 'Personal Computer News', '1984', 2, 'O', NULL, 1, 1, 'R', 'D', NULL, NULL, NULL, NULL, NULL, NULL),
-(1419, 'Sorcerer\'s Domain II (+ Editor)', 215, 'AMF-Soft (AMF Soft)', '1991', 19, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(1418, 'Shoot-''Em-Up', 171, 'Personal Computer News', '1984', 2, 'O', NULL, 1, 1, 'R', 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(1419, 'Sorcerer''s Domain II (+ Editor)', 215, 'AMF-Soft (AMF Soft)', '1991', 19, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1420, 'Space Hawk', 113, 'A&B Computing', '1986', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1421, 'Starwars (AKA Star Encounter) (AKA Star Wars)', 113, 'A&B Computing', '1984', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1422, 'Waiter!', 237, 'A. Baker & R. Horton', '1985', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2704,7 +2672,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1435, 'Ohio', 134, 'Disk User, The', '1988', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1436, 'Rabid Rider', 44, 'Public Domain', '1986', 471, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1437, 'Raving Roller ', 163, 'Electron User, The', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
-(1438, 'Roobix Timepiece', 174, 'Let\'s Compute!', '1990', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Tape 1', NULL),
+(1438, 'Roobix Timepiece', 174, 'Let''s Compute!', '1990', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Tape 1', NULL),
 (1439, 'Splat The Rat!', 44, 'Public Domain', '1984', 457, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1440, 'Volt Zone ', 232, 'Electron Computing', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1441, 'Alien 32', 240, 'Acorn Computing', '1993', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2723,7 +2691,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1454, 'Robol', 22, 'Beebug', '1993', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, 'B2.1', NULL, NULL, NULL),
 (1455, 'Slatter', 206, '8-Bit Software (8 Bit Software)', '1991', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1456, 'Super Fruit', 44, 'Public Domain', '1985', 462, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1457, 'Tex \'n\' Dan ', 163, 'Electron User, The', '1985', 2, 'O', NULL, 1, 2, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
+(1457, 'Tex ''n'' Dan ', 163, 'Electron User, The', '1985', 2, 'O', NULL, 1, 2, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1458, 'Wall Of Death', 247, 'G. Stafford', '1984', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1459, 'Backgammon', 344, 'Unknown', '1987', 511, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1460, 'Battleships', 248, 'R. Darlington', '1982', 34, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2734,7 +2702,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1465, 'Gladiator', 22, 'Beebug', '1983', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1466, 'Grid Iron', 105, 'Top Ten', '1987', 472, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1467, 'Mine Sweeper', 206, '8-Bit Software (8 Bit Software)', '1993', 21, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
-(1468, 'Monster\'s Gold ', 230, 'Elbug', '1986', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
+(1468, 'Monster''s Gold ', 230, 'Elbug', '1986', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1469, 'Pontoon', 249, 'Snailman', '1989', 520, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1470, 'Reverse Coins', 250, 'Paul Bedford', '1984', 504, 'A', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1471, 'Reversi', 251, 'Wouter Scholton', '1989', 504, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2757,7 +2725,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1488, 'Noughts And Crosses', 44, 'Public Domain', '1982', 534, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1489, 'Patience', 13, 'IJK Software', '1982', 26, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Cassette', '16'),
 (1490, 'Rover', 78, 'Micro User, The', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1491, 'Rubik\'s Cube', 44, 'Public Domain', '1984', 475, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1491, 'Rubik''s Cube', 44, 'Public Domain', '1984', 475, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1492, 'Solitaire', 144, 'Fast Access', '1992', 498, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1493, 'Spooky House', 44, 'Public Domain', '1985', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1494, 'Starfire (AKA Star Fire)', 22, 'Beebug', '1982', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2811,8 +2779,8 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1542, 'Pyron Slayer', 257, 'Electro', '1983', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1543, 'Revenge Of The Snowmen ', 78, 'Micro User, The', '1990', 2, 'O', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1544, 'Santa On The Tiles ', 163, 'Electron User, The', '1987', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
-(1545, 'Santa\'s Slip-Up!', 78, 'Micro User, The', '1991', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1546, 'Santa\'s Workshop ', 163, 'Electron User, The', '1988', 466, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
+(1545, 'Santa''s Slip-Up!', 78, 'Micro User, The', '1991', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1546, 'Santa''s Workshop ', 163, 'Electron User, The', '1988', 466, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1547, 'Tomb Of Syrinx', 143, 'Power House, The', '1987', 466, 'U', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1548, 'Zuyder Zee', 1, 'MRM Software (Unreleased)', '1984', 2, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1549, 'Airline', 176, 'CCS', '1983', 496, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2834,7 +2802,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1565, 'Tennis', 168, 'Acorn Programs', '1984', 32, 'O', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1566, 'Vultures', 259, 'Practical Computing', '1984', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1567, 'Battlefields', 10, 'BBC Soft', '1985', 21, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
-(1568, 'Brian Clough\'s Football Fortunes ', 76, 'CDS Software Ltd.', '1987', 472, 'R', NULL, 2, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1568, 'Brian Clough''s Football Fortunes ', 76, 'CDS Software Ltd.', '1987', 472, 'R', NULL, 2, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1569, 'Bridge Challenge', 203, 'Livewire Software Ltd.', '1984', 512, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1570, 'Bridge Master', 260, 'J. Keyne', '1983', 512, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (1571, 'Crypton ', 163, 'Electron User, The', '1988', 466, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
@@ -2877,7 +2845,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1608, 'Boss, The', 132, 'Peaksoft', '1984', 472, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (1609, 'Gridman', 78, 'Micro User, The', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1610, 'Hangdroid', 267, 'Micromode', '1982', 514, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1611, 'Higher Or Lower', 268, 'Ceefax (Alan Samuels)', '1983', 26, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1611, 'Higher Or Lower', 268, 'Ceefax', '1983', 26, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1612, 'Mazebugs  (AKA Maze Bugs)', 163, 'Electron User, The', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1613, 'Moon Rescue ', 163, 'Electron User, The', '1984', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1614, 'Red Alert! ', 22, 'Beebug', '1984', 21, 'O', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2885,9 +2853,9 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1616, 'Shove Penny ', 163, 'Electron User, The', '1988', 542, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1617, 'Tower Bridge', 78, 'Micro User, The', '1983', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1618, 'UK PM (AKA U.K. P.M.) ', 13, 'IJK Software', '1984', 508, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
-(1619, 'Wordmaster (AKA Word Master)', 138, 'ASP Software', '1983', 543, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1619, 'Wordmaster (AKA Word Master)', 138, 'ASP Software', '1983', 543, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1620, 'World Geography', 4, 'Micro Power (Program Power)', '1982', 29, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `reltype`, `notes`, `players_min`, `players_max`, `joystick`, `save`, `hardware`, `electron`, `version`, `edit`, `series`, `series_no`) VALUES
-(1620, 'World Geography', 4, 'Micro Power (Program Power)', '1982', 29, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1621, 'Adventureland', 269, 'Adventure International', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', '1'),
 (1622, 'Castle Of Riddles ', 6, 'Acornsoft', '1982', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (1623, 'Dragon Quest (Part 1)', 26, 'Bug-Byte (Bug Byte)', '1982', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2904,7 +2872,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1634, 'Secret Sam 2 (AKA Mission Two)', 1, 'MRM Software', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1635, 'Seek', 4, 'Micro Power (Program Power)', '1982', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1636, 'Sphinx Adventure', 6, 'Acornsoft', '1982', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1637, 'Wizard\'s Challenge, The ', 4, 'Micro Power (Program Power)', '1983', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
+(1637, 'Wizard''s Challenge, The ', 4, 'Micro Power (Program Power)', '1983', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (1638, 'Woodland Terror ', 79, 'MP Software', '1983', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (1639, 'Adventure', 4, 'Micro Power (Program Power)', '1982', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1640, 'Blue Dragon', 79, 'MP Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2916,9 +2884,9 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1646, 'Ring Of Time, The ', 16, 'Kansas City Systems', '1983', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, 'Ring Of Time', 'Part I'),
 (1647, 'Secret Mission', 269, 'Adventure International', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', '3'),
 (1648, 'Seventh Star, The ', 6, 'Acornsoft', '1984', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
-(1649, 'Shrinking Professor\'s Quest, The', 3, 'A&F Software', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1649, 'Shrinking Professor''s Quest, The', 3, 'A&F Software', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1650, 'Snowball ', 155, 'Level 9 Computing', '1983', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
-(1651, 'Sorcerer\'s Kingdom, The ', 197, 'Glengary', '1983', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(1651, 'Sorcerer''s Kingdom, The ', 197, 'Glengary', '1983', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1652, 'Super Gran: The Adventure (AKA Supergran)', 95, 'Tynesoft', '1985', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1653, 'Time Travel Adventure (AKA Time Adventure)', 151, 'Software For All', '1982', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1654, 'Voodoo Castle', 269, 'Adventure International', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', '4'),
@@ -2926,13 +2894,13 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1656, 'Xanadu Cottage', 2, 'Alligata', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1657, 'Land Of Chark (AKA Chark)', 273, 'Delta 4', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1658, 'Count, The', 269, 'Adventure International', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', '5'),
-(1659, 'Dragon\'s Tooth', 77, 'Incentive', '1987', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1659, 'Dragon''s Tooth', 77, 'Incentive', '1987', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1660, 'Golden Baton, The', 274, 'Digital Fantasia', '1981', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Mysterious Adventure', '1'),
 (1661, 'Hex (The Legend Of Vianna)', 275, 'Larsoft', '1988', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', 'No. 6'),
 (1662, 'Kayleth (AKA Killing Of Kayleth, The) ', 64, 'U.S. Gold (US Gold)', '1986', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1663, 'Labyrinths Of LaCoshe', 4, 'Micro Power (Program Power)', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1664, 'Magic Adventure 1', 16, 'Kansas City Systems', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1665, 'Philosopher\'s Quest ', 6, 'Acornsoft', '1982', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(1665, 'Philosopher''s Quest ', 6, 'Acornsoft', '1982', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1666, 'Runestaff', 276, 'Squaresoft', '1987', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1667, 'Star Trek: The Adventure ', 5, 'Superior Software', '1983', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (1668, 'Strange Odyssey', 269, 'Adventure International', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', '6'),
@@ -2941,7 +2909,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1671, 'Time Machine', 274, 'Digital Fantasia', '1981', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Mysterious Adventure', '2'),
 (1672, 'Woodbury End', 221, 'Shards Software', '1985', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1673, 'Worm In Paradise, The', 155, 'Level 9 Computing', '1985', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1674, 'Revenge Of Zor (AKA Zor\'s Revenge)', 16, 'Kansas City Systems', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Ring Of Time', 'Part II'),
+(1674, 'Revenge Of Zor (AKA Zor''s Revenge)', 16, 'Kansas City Systems', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Ring Of Time', 'Part II'),
 (1675, 'Arrow Of Death Part 1', 274, 'Digital Fantasia', '1981', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Mysterious Adventure', '3'),
 (1676, 'Caveman Adventure (AKA Neanderthal Man)', 4, 'Micro Power (Program Power)', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1677, 'Classic Adventure', 66, 'Melbourne House', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2966,7 +2934,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1696, 'Firienwood (AKA Firien Wood)', 79, 'MP Software', '1982', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1697, 'Five Stones Of Anadon, The', 271, 'Softek', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1698, 'Flint Strikes Back', 277, 'Potter Programs', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1699, 'Flint\'s Gold', 153, 'Micrograf', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1699, 'Flint''s Gold', 153, 'Micrograf', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1700, 'Ghost Town', 269, 'Adventure International', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', '9'),
 (1701, 'Kingdom Of Klein', 172, 'Epic Adventures', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', 'No. 3'),
 (1702, 'Mayday', 78, 'Micro User, The', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Classic Arcade Games', NULL),
@@ -2989,7 +2957,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1719, 'Haunted Abbey, The', 3, 'A&F Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1720, 'Island Of Xaan', 45, 'Robico', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (1721, 'Pen And The Dark, The (Unorthodox Engineers)', 281, 'Mosaic Publishing Ltd.', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1722, 'Philosopher\'s Stone, The', 277, 'Potter Programs', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1722, 'Philosopher''s Stone, The', 277, 'Potter Programs', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1723, 'Savage Island Part 2', 269, 'Adventure International', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', '11'),
 (1724, 'Space Adventure 1: Mission Vadros', 128, 'First Byte', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1725, 'Spooky Manor', 6, 'Acornsoft', '1984', 13, 'R', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3001,10 +2969,10 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1731, 'Adventures Of Buckaroo Banzai Across The 8th Dimension, The', 269, 'Adventure International', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', '15'),
 (1732, 'Circus', 274, 'Digital Fantasia', '1982', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, 'Mysterious Adventure', '6'),
 (1733, 'Sorcerer Of Claymorgue Castle, The', 269, 'Adventure International', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure', '13'),
-(1734, 'Druid\'s Circle, The ', 278, 'Holl-Soft (Holl Soft)', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
+(1734, 'Druid''s Circle, The ', 278, 'Holl-Soft (Holl Soft)', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1735, 'Dungeon Adventure', 155, 'Level 9 Computing', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1736, 'Fantasia Diamond ', 124, 'Hewson Consultants', '1985', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
-(1737, 'Franklin\'s Tomb', 98, 'Salamander', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
+(1737, 'Franklin''s Tomb', 98, 'Salamander', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (1738, 'Locks Of Luck', 283, 'Magus', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1739, 'Price Of Magik, The ', 155, 'Level 9 Computing', '1986', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
 (1740, 'Rebel Planet', 64, 'U.S. Gold (US Gold)', '1985', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3023,13 +2991,13 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1753, 'Mountains Of Ket, The', 77, 'Incentive', '1985', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Ket Trilogy', 'Part 1'),
 (1754, 'Myorem', 45, 'Robico', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Saga Of A Spy – The Rick Hanson Trilogy', 'Part 3'),
 (1755, 'Project Thesius', 45, 'Robico', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Saga Of A Spy – The Rick Hanson Trilogy', 'Part 2'),
-(1756, 'Quest For The Last Baked Bean, The', 44, 'Public Domain', '1985', 13, 'O', 'This game was written in <a href=\"https://en.wikipedia.org/wiki/The_Quill\">The Quill</a> adventure system.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1756, 'Quest For The Last Baked Bean, The', 44, 'Public Domain', '1985', 13, 'O', 'This game was written in <a href="https://en.wikipedia.org/wiki/The_Quill">The Quill</a> adventure system.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1757, 'Rick Hanson (AKA Assassin)', 45, 'Robico', '1985', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Saga Of A Spy – The Rick Hanson Trilogy', 'Part 1'),
 (1758, 'Shipwreck', 97, 'Model B Computing', '1985', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1759, 'Sticky Fingers', 284, 'Eclipse', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1760, 'Temple Of Vran, The', 77, 'Incentive', '1985', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Ket Trilogy', 'Part 2'),
 (1761, 'Valley Of The Kings', 79, 'MP Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1762, 'What\'s Eeyore\'s', 283, 'Magus', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1762, 'What''s Eeyore''s', 283, 'Magus', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1763, 'Wizard Of Akyrz, The', 274, 'Digital Fantasia', '1983', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, 'Mysterious Adventure', '8'),
 (1764, 'Xadomy', 285, 'Brassington', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1765, 'Adventure Quest ', 155, 'Level 9 Computing', '1984', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3037,7 +3005,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1767, 'Bungle Brothers, The ', 44, 'Public Domain', '1985', 13, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1768, 'Crown Of Mardan', 79, 'MP Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1769, 'Dinosaur Adventure', 44, 'Public Domain', '1985', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1770, 'Dracula\'s Castle', 286, 'Andrew Grifo', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1770, 'Dracula''s Castle', 286, 'Andrew Grifo', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1771, 'Inca Treasure, The', 287, 'D.W. Gore', '1989', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1772, 'Kidnapped', 288, 'B. Neville-Lee', '1983', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1773, 'Land Of Tezrel', 289, 'Omen', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3076,7 +3044,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1806, 'Invatron', 294, 'Dano Software', '1988', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1807, 'Manic Mansion', 295, 'Chris Dewhurst', '1999', 5, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1808, 'Pac-2000', 296, 'James Watson Software', '2000', 1, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1809, 'Percy\'s Revenge: Percy Panic II', 297, 'Garadan', '1986', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1809, 'Percy''s Revenge: Percy Panic II', 297, 'Garadan', '1986', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1810, 'Professor Blubble', 295, 'Chris Dewhurst', '1999', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1811, 'Ship Wrecked ', 298, 'Electron User Group', '1996', 19, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1812, 'Strawberry Fields', 299, 'JBF Software', '1992', 1, 'O', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3085,10 +3053,10 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1815, 'US Invaders (AKA U.S. Invaders)', 44, 'Public Domain', '2000', 454, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1816, 'X*L*C*R: Squiggly Snake II', 300, 'ProAction (Pro Action)', '1992', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Play It Again Sam', '19'),
 (1817, 'Xenapor', 301, 'Mark C. Wheadon', '1990', 3, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1818, 'XOR: Procyon\'s Mazes', 125, 'Logotron (Unofficial)', '2007', 466, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1818, 'XOR: Procyon''s Mazes', 125, 'Logotron (Unofficial)', '2007', 466, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1819, 'Cosmic Lander', 302, 'Minion', '1987', 16, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1820, 'Defence Com', 92, 'Acorn User, The', '1983', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1821, 'Father Christmas\'s Crackers', 295, 'Chris Dewhurst', '1999', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1821, 'Father Christmas''s Crackers', 295, 'Chris Dewhurst', '1999', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1822, 'Froggy Game, The', 206, '8-Bit Software (8 Bit Software)', '1991', 2, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1823, 'Fruitmania (AKA Fruit Mania)', 206, '8-Bit Software (8 Bit Software)', '1998', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1824, 'Headcase Hotel', 303, 'Stephen Scott', '1995', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, '1.11', NULL, NULL, NULL),
@@ -3116,14 +3084,14 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1846, 'Litterbug (AKA Litter Bug)', 295, 'Chris Dewhurst', '1998', 4, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1847, 'MazezaM ', 314, 'Retro Software', '2011', 17, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, '2.1', NULL, NULL, NULL),
 (1848, 'Ms. Pac Man', 302, 'Minion', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1849, 'OddJob (AKA Odd Job)', 315, 'Mike Wyatt', '1986', 4, 'O', 'This game is one of a very few that won\'t work in Jsbeeb, so can\'t be played online at present. The reasons for this are being investigated, but in the mean time, try downloading the image to play in an emulator or on a real BBC Micro.', 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
+(1849, 'OddJob (AKA Odd Job)', 315, 'Mike Wyatt', '1986', 4, 'O', 'This game is one of a very few that won''t work in Jsbeeb, so can''t be played online at present. The reasons for this are being investigated, but in the mean time, try downloading the image to play in an emulator or on a real BBC Micro.', 1, 1, NULL, NULL, NULL, NULL, NULL, 'Disc', NULL, NULL),
 (1850, 'Oozeman', 295, 'Chris Dewhurst', '1999', 545, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1851, 'ShipWrecked II: Jupiter 3 ', 316, 'Dominic Ford', '1997', 19, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1852, 'Sparse Invaders ', 314, 'Retro Software', '2009', 454, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, '1.0', NULL, NULL, NULL),
 (1853, 'Stunt Motorbike', 44, 'Public Domain', '1985', 471, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1854, 'Wall Wally', 206, '8-Bit Software (8 Bit Software)', '1993', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1855, 'Bomber Command', 296, 'James Watson Software', '2002', 2, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1856, 'Build \'n\' Break (+ Editor)', 307, 'M.S. Garcia', '1989', 1, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1856, 'Build ''n'' Break (+ Editor)', 307, 'M.S. Garcia', '1989', 1, 'O', NULL, 1, 1, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1857, 'Car Wars', 151, 'Software For All', '1982', 457, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1858, 'Caving', 44, 'Public Domain', '1984', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1859, 'Cosmos', 58, 'R.H. Software', '1983', 454, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '3 In 1A', NULL),
@@ -3231,10 +3199,10 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1965, 'Connect Four (AKA Make Four)', 78, 'Micro User, The', '1991', 34, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1966, 'Dicer! ', 327, 'Soft Centre', '1985', 48, 'R', NULL, 2, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1967, 'Easter Egg Chase, The ', 163, 'Electron User, The', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
-(1968, 'Percy\'s Panic ', 163, 'Electron User, The', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
+(1968, 'Percy''s Panic ', 163, 'Electron User, The', '1985', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1969, 'Plig ', 298, 'Electron User Group', '2002', 1, 'N', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1970, 'Pucman', 323, 'David McKeran', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Unoriginal Games', NULL),
-(1971, 'King\'s Ransom (AKA Ransom) ', 77, 'Incentive', '1987', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(1971, 'King''s Ransom (AKA Ransom) ', 77, 'Incentive', '1987', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1972, 'Simon', 332, 'Steven Flintham', '1988', 565, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, '1.00', NULL, NULL, NULL),
 (1973, 'Star Trek: The Game', 333, 'Computer Telesoftware', '1983', 550, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, '1.4', NULL, NULL, NULL),
 (1974, 'Strategy I: Invasion', 138, 'ASP Software', '1983', 21, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3242,7 +3210,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1976, 'Thai Boxing  ', 334, 'Anco Software', '1986', 551, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', '2', NULL, NULL, NULL),
 (1977, 'Timetrek (AKA Time Trek)', 4, 'Micro Power (Program Power)', '1982', 550, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1978, 'Viper', 58, 'R.H. Software', '1983', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1979, 'Artemidorus', 335, 'Orchiewall Software', '1986', 1, 'O', 'In common with most of the games on this website, the game was restored by Mick Brown. While he was able to aquire the program, he was not able to find the data files which make up the levels. Undaunted, Mick created some new levels so the game can be played again. Read the story on the <a href=\"http://stardot.org.uk/forums/viewtopic.php?f=6&t=9891&p=118458\">stardot forums</a>. If you have access to the original data files, please <a href=\"http://stardot.org.uk/forums/viewtopic.php?f=6&t=11274&p=139922\">let us know in the stardot forums</a>.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1979, 'Artemidorus', 335, 'Orchiewall Software', '1986', 1, 'O', 'In common with most of the games on this website, the game was restored by Mick Brown. While he was able to aquire the program, he was not able to find the data files which make up the levels. Undaunted, Mick created some new levels so the game can be played again. Read the story on the <a href="http://stardot.org.uk/forums/viewtopic.php?f=6&t=9891&p=118458">stardot forums</a>. If you have access to the original data files, please <a href="http://stardot.org.uk/forums/viewtopic.php?f=6&t=11274&p=139922">let us know in the stardot forums</a>.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1980, 'Blockade', 323, 'David McKeran', '1983', 1, 'R', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Unoriginal Games', NULL),
 (1981, 'Championship Boxing', 336, 'P. Stanley & C. Aslin', '1992', 500, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1982, 'LazerChess  (AKA Lazer Chess)', 337, 'Andre Sihera', '1990', 501, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3255,12 +3223,12 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (1989, 'Survive!', 78, 'Micro User, The', '1987', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1990, 'Trio', 240, 'Acorn Computing', '1993', 17, 'O', NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1991, 'World Cup Manager', 325, 'Cosma', '1982', 472, 'R', 'This game will only work on OS1.2, which is the latest official version of the operating system supplied with the BBC Model B.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1992, 'Zen  (WTD)', 129, 'Andrew Cook', '2012', 5, 'N', 'This can\'t be played in the browser at present because the game needs to write to the disc and this is currently not possible in jsbeeb. To play, download the disc image and run it in an emulator, with write protect turned off.', 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(1992, 'Zen  (WTD)', 129, 'Andrew Cook', '2012', 5, 'N', 'This can''t be played in the browser at present because the game needs to write to the disc and this is currently not possible in jsbeeb. To play, download the disc image and run it in an emulator, with write protect turned off.', 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1993, '3D-Maze ', 240, 'Acorn Computing', '1993', 1, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (1994, 'Blokkendoos ', 299, 'JBF Software', '1989', 1, 'O', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
-(1995, 'Doomrun', 78, 'Micro User, The', '1984', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1995, 'Doomrun', 78, 'Micro User, The', '1984', 454, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1996, 'Mastermind', 58, 'R.H. Software', '1983', 17, 'R', NULL, 1, 9, NULL, NULL, NULL, NULL, NULL, NULL, 'R H Compendium', NULL);
 INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `reltype`, `notes`, `players_min`, `players_max`, `joystick`, `save`, `hardware`, `electron`, `version`, `edit`, `series`, `series_no`) VALUES
-(1996, 'Mastermind', 58, 'R.H. Software', '1983', 17, 'R', NULL, 1, 9, NULL, NULL, NULL, NULL, NULL, NULL, 'R H Compendium', NULL),
 (1997, 'Rock Pile ', 338, 'Paul Lear', '1988', 462, 'A', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (1998, 'Rockfall (AKA Rock Fall)', 323, 'David McKeran', '1983', 20, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Unoriginal Games', NULL),
 (1999, 'Secret Diary Of Adrian Mole Aged 13¾, The', 154, 'Level 9 Computing / Mosaic Publishing Ltd.', '1985', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3300,7 +3268,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2033, 'Anthrosin', 113, 'A&B Computing', '1985', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventurescape', NULL),
 (2034, 'Apocalypse', 359, 'Command', '19XX', 21, 'R', NULL, 1, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2035, 'Archers, The', 281, 'Mosaic Publishing Ltd.', '1985', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2036, 'Aussie Suds ', 57, 'Database', '1988', 13, 'U', 'This is part one of a series. Unfortunately the author died before he was able to write any further episodes. However, if you liked this game, try <a href=\"http://bbcmicro.co.uk/game.php?id=2237\">Suds</a>, and <a href=\"http://bbcmicro.co.uk/game.php?id=2028\">American Suds</a> by the same author.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2036, 'Aussie Suds ', 57, 'Database', '1988', 13, 'U', 'This is part one of a series. Unfortunately the author died before he was able to write any further episodes. However, if you liked this game, try <a href="http://bbcmicro.co.uk/game.php?id=2237">Suds</a>, and <a href="http://bbcmicro.co.uk/game.php?id=2028">American Suds</a> by the same author.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2037, 'Axe Of Kolt, The (Parts 1 to 4) ', 348, 'Elk Adventure Club', '1987', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (2038, 'Beastie Adventure', 294, 'Dano Software', '1989', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2039, 'Bells, Mini Adventure', 44, 'Public Domain', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3322,7 +3290,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2055, 'Cloudburst', 365, 'Micronet', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2056, 'Coffee Adventure', 44, 'Public Domain', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2057, 'Complete Home Entertainment Centre', 76, 'CDS Software Ltd.', '1986', 553, 'R', NULL, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2058, 'Computer Maniac\'s Diary 1989', 122, 'Domark', '1989', 555, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2058, 'Computer Maniac''s Diary 1989', 122, 'Domark', '1989', 555, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2059, 'Conquering Everest', 138, 'ASP Software', '19XX', 36, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2060, 'Cops', 366, 'Alpine', '19XX', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2061, 'Cordelia', 144, 'Fast Access', '1988', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3336,7 +3304,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2069, 'Curse Of Borgan Castle, The', 168, 'Acorn Programs', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2070, 'Daark', 344, 'Unknown', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2071, 'Death In Poglovia', 113, 'A&B Computing', '1983', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventuresoft', NULL),
-(2072, 'Death\'s Head Hole', 132, 'Peaksoft', '19XX', 557, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2072, 'Death''s Head Hole', 132, 'Peaksoft', '19XX', 557, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2073, 'Demon Knight', 138, 'ASP Software', '19XX', 36, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2074, 'Detective', 138, 'ASP Software', '19XX', 21, 'R', NULL, 1, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2075, 'Diamond Adventure', 113, 'A&B Computing', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventuresoft', NULL),
@@ -3345,8 +3313,8 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2078, 'Dodgy Geezers (Parts 1 and 2)', 66, 'Melbourne House', '1986', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2079, 'Dominion', 313, 'Cronosoft', '2004', 13, 'U', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2080, 'Double Phantom Combat', 15, 'Doctor Soft', '19XX', 460, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2081, 'Dracula\'s Castle (AKA Dracula)', 362, 'Interface Publications', '1983', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2082, 'Dracula\'s Castle', 57, 'Database', '1987', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure Anthology', NULL),
+(2081, 'Dracula''s Castle (AKA Dracula)', 362, 'Interface Publications', '1983', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2082, 'Dracula''s Castle', 57, 'Database', '1987', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure Anthology', NULL),
 (2083, 'Dreadnought', 44, 'Public Domain', '1987', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2084, 'Dreamtime (AKA Dream Time)', 349, 'Heyley', '1987', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2085, 'Dungeon Adventure', 113, 'A&B Computing', '1985', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3373,8 +3341,8 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2106, 'Forest Adventure', 168, 'Acorn Programs', '1983', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2107, 'Fortune Valley', 44, 'Public Domain', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2108, 'Four Wands, The (Parts 1 To 3)', 287, 'D.W. Gore', '1988', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2109, 'French On The Run (Parts 1 to 4)', 57, 'Database Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2110, 'Discovery, The', 372, 'Magic Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Galaxy\'s Edge', 'Part 1'),
+(2109, 'French On The Run (Parts 1 to 4)', 57, 'Database', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2110, 'Discovery, The', 372, 'Magic Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Galaxy''s Edge', 'Part 1'),
 (2111, 'Galilee', 221, 'Shards Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2112, 'Gamerquest (AKA Gamer Quest)', 107, 'Computer Gamer', '1985', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2113, 'Games Of Strategy', 373, 'BBC Soft (Acornsoft)', '19XX', 21, 'R', NULL, 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3388,27 +3356,27 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2121, 'Hareraiser Prelude', 374, 'Haresoft', '1984', 559, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2122, 'Hareraiser Finale', 374, 'Haresoft', '1984', 559, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2123, 'Haunted House', 353, 'Usborne Publishing', '1983', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2124, 'Haunted House (Expanded)', 44, 'Public Domain', '1983', 13, 'O', 'This is an expanded version of the <i>Haunted House</i> game published in the Usborne book <a href=\"https://drive.google.com/file/d/0Bxv0SsvibDMTYkFJbUswOHFQclE/view\">Write Your Own Adventure Programs for your micromputer, by Jenny Tyler and Les Howarth</a>. Unfortunately we don\'t know who expanded it. Usborne have generously <a href=\"https://usborne.com/browse-books/features/computer-and-coding-books/\">released their vintage programming books</a>, including this one to the public. Thank you Usborne!', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2124, 'Haunted House (Expanded)', 44, 'Public Domain', '1983', 13, 'O', 'This is an expanded version of the <i>Haunted House</i> game published in the Usborne book <a href="https://drive.google.com/file/d/0Bxv0SsvibDMTYkFJbUswOHFQclE/view">Write Your Own Adventure Programs for your micromputer, by Jenny Tyler and Les Howarth</a>. Unfortunately we don''t know who expanded it. Usborne have generously <a href="https://usborne.com/browse-books/features/computer-and-coding-books/">released their vintage programming books</a>, including this one to the public. Thank you Usborne!', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2125, 'Head Coach Deluxe', 376, 'Coda', '1986', 560, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2126, 'Holmes: The Mystery Of The Dark Shadow', 125, 'Logotron', '1986', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2127, 'House – It\'s Quite Good Really', 308, 'Bazzasoft', '1992', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2127, 'House – It''s Quite Good Really', 308, 'Bazzasoft', '1992', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2128, 'House Adventure (AKA House!)', 44, 'Public Domain', '1995', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2129, 'I Spy Red', 377, 'Ian Hudson', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2130, 'In Search Of Atahaulpa (Parts 1 And 2)', 358, 'Lee Software', '1987', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2131, 'Inca Treasure', 378, 'C.J. Richardson', '1991', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2132, 'Ingrid\'s Back ', 155, 'Level 9 Computing', '1988', 13, 'R', 'See also, <a href=\"http://bbcmicro.co.uk/game.php?id=2294\">Ingrid\'s Back Picture Disc</a>', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2132, 'Ingrid''s Back ', 155, 'Level 9 Computing', '1988', 13, 'R', 'See also, <a href="http://bbcmicro.co.uk/game.php?id=2294">Ingrid''s Back Picture Disc</a>', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2133, 'Insomnia', 44, 'Public Domain', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2134, 'Inu', 379, 'MRJ', '19XX', 21, 'R', NULL, 2, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2135, 'Island Of Secrets', 353, 'Usborne Publishing', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2136, 'Island, The', 113, 'A&B Computing', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventurescape', NULL),
-(2138, 'It\'s Magic (Parts 1 and 2)', 350, 'Central Computing', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2138, 'It''s Magic (Parts 1 and 2)', 350, 'Central Computing', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2139, 'Jewels And Caves', 44, 'Public Domain', '1995', 36, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2140, 'Jingle Bells (AKA Jingle Bells Adventure)', 380, 'Jack And Jill Software', '1986', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2141, 'Johnny', 57, 'Database', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventure Anthology', NULL),
 (2142, 'Journey To Freedom (AKA Journey)', 362, 'Interface Publications', '1983', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2143, 'Jungle Quest', 113, 'A&B Computing', '1985', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventurescape', NULL),
 (2144, 'Jungle Search', 88, 'Home Computing Weekly', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2145, 'King\'s Quest', 107, 'Computer Gamer', '1986', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2145, 'King''s Quest', 107, 'Computer Gamer', '1986', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2146, 'Kingdom Of Hamil ', 6, 'Acornsoft', '1983', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (2147, 'L: A Mathemagical Adventure', 381, 'TATM', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2148, 'Laboratory Adventure', 44, 'Public Domain', '19XX', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3427,7 +3395,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2161, 'Magnetic Moon (Parts 1 to 3) ', 348, 'Elk Adventure Club', '1987', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
 (2162, 'Martello Tower', 347, 'ESM', '1986', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2163, 'Martian Adventure', 344, 'Unknown', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2164, 'Merlin\'s Castle', 347, 'ESM', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2164, 'Merlin''s Castle', 347, 'ESM', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2165, 'Microquest (AKA Micro Quest)', 197, 'Glengary', '1983', 29, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2166, 'Mini-Adventure', 364, 'Penguin', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2167, 'Moonstone Of Arkra, The', 107, 'Computer Gamer', '1985', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3445,23 +3413,23 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2179, 'Party', 227, 'Viking Software', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2180, 'Passport To Death', 184, 'Silverlind', '1983', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2181, 'Pay Off', 384, 'Bignose Software (Atari)', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2182, 'Pharoah\'s Curse', 44, 'Public Domain', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2183, 'Philosopher\'s Quest ', 346, 'Topologika', '1987', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
-(2184, 'Pilgrim\'s Progress', 385, 'SU (S.U.)', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2182, 'Pharoah''s Curse', 44, 'Public Domain', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2183, 'Philosopher''s Quest ', 346, 'Topologika', '1987', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(2184, 'Pilgrim''s Progress', 385, 'SU (S.U.)', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2185, 'Pimania', 386, 'Automata', '1982', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2186, 'Pirate', 352, 'Chalksoft', '1983', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2187, 'Pirate\'s Peril', 349, 'Heyley', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2187, 'Pirate''s Peril', 349, 'Heyley', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2188, 'Plague Planet', 366, 'Alpine', '1988', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2189, 'Plane Crash', 387, 'Labyrinth', '19XX', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2190, 'Planet Of Muton', 201, 'Duckworth', '1985', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2191, 'Planetfall (AKA Planet Fall)', 138, 'ASP Software', '19XX', 36, 'R', NULL, 2, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2192, 'Please Find My Young \'Uns', 370, 'Jet Software', '1989', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2192, 'Please Find My Young ''Uns', 370, 'Jet Software', '1989', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2193, 'Pobjoy Special, The', 113, 'A&B Computing', '1985', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Adventurescape', NULL),
-(2194, 'Programmer\'s Revenge', 388, 'Colisoft', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2194, 'Programmer''s Revenge', 388, 'Colisoft', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2195, 'Puff', 347, 'ESM', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2196, 'Quest For The Gobal', 294, 'Dano Software', '1987', 13, 'W', 'This game will only work on a BBC Master.', 1, 1, NULL, NULL, 'Master Only', NULL, NULL, NULL, NULL, NULL),
 (2197, 'Quest For The Truth', 44, 'Public Domain', '1995', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2198, 'Rainbow\'s End', 411, 'D.D. Green', '19XX', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2198, 'Rainbow''s End', 411, 'D.D. Green', '19XX', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2199, 'Game Of Rassilion, The (AKA Rassilion)', 389, 'Marcus K. Donnelly', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2200, 'Red Button Game', 44, 'Public Domain', '1986', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2201, 'Reluctant Hero (Parts 1 and 2) ', 348, 'Elk Adventure Club', '1987', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
@@ -3471,8 +3439,8 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2205, 'Roman Adventure', 364, 'Penguin', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2206, 'Roulette', 13, 'IJK Software', '19XX', 538, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2207, 'Roundheads', 167, 'Lothlorien', '1986', 21, 'W', NULL, 1, 2, 'O', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2208, 'Secret River (AKA Runemagic Adventure 1)', 390, 'Triffid Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2209, 'Satan\'s Challenge or Nevil Rides Out', 391, 'John Sekula', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2208, 'Secret River', 390, 'Triffid Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Runemagic', 'Adventure 1'),
+(2209, 'Satan''s Challenge or Nevil Rides Out', 391, 'John Sekula', '19XX', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2210, 'Scoop', 392, 'British Telecom', '1986', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2211, 'Sea Queen, The', 393, 'Jon Oates', '1988', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2212, 'Search For Princess Lavinia, The', 394, 'Robert Crowe', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3527,14 +3495,14 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2261, 'Yukon Gold', 144, 'Fast Access', '19XX', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2262, 'Zoo', 347, 'ESM', '1984', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2263, 'Catcher (AKA Catch) ', 163, 'Electron User, The', '1985', 10, 'O', NULL, 1, 1, NULL, NULL, NULL, 'Y', NULL, NULL, NULL, NULL),
-(2264, 'Division One \'85 (Edit)', 322, 'Qual-Soft', '1984', 472, 'R', 'This game has been slightly edited to save space.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2264, 'Division One ''85 (Edit)', 322, 'Qual-Soft', '1984', 472, 'R', 'This game has been slightly edited to save space.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2265, 'Minefield', 44, 'Public Domain', '1984', 21, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2266, 'Battle Of Britain', 400, 'Design People Software', '1987', 564, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (2267, 'Beebtrek', 151, 'Software For All', '1982', 550, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2268, 'Castle Blacknight', 295, 'Chris Dewhurst', '2009', 5, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2269, 'Espionage', 401, 'Modular Resources Software', '1984', 21, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2270, 'Fruits!', 78, 'Micro User, The', '1988', 462, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2271, 'Mexico \'86 ', 322, 'Qual-Soft', '1985', 472, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
+(2271, 'Mexico ''86 ', 322, 'Qual-Soft', '1985', 472, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (2272, 'System 15000  ', 402, 'AVS', '1984', 562, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, '2', NULL, NULL, NULL),
 (2273, 'Tennis', 341, 'Ganymede', '1983', 478, 'R', NULL, 1, 2, 'O', NULL, NULL, NULL, '1.0', NULL, 'Classic Arcade Games', NULL),
 (2274, '5 In A Row', 403, 'Hill MacGibbon', '1984', 34, 'W', NULL, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3542,7 +3510,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2276, 'Crack-It Towers (AKA Crack It Towers)', 32, 'Mirrorsoft', '1985', 17, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2278, 'Kingdom Of Hamil ', 346, 'Topologika', '1987', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, NULL, NULL),
 (2279, 'Mallory Manor', 347, 'ESM', '1983', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2280, 'Neptune\'s Caverns (AKA Undersea Adventure)', 404, 'Watts Franklin', '1985', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2280, 'Neptune''s Caverns (AKA Undersea Adventure)', 404, 'Watts Franklin', '1985', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2281, 'Pelmanism', 78, 'Micro User, The', '1983', 17, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2282, 'Flight Path', 405, 'Storm Software', '19XX', 563, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2283, 'Alphabet Soup (AKA ABC Puzzle)', 98, 'Salamander', '1983', 17, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Games Compendium B1', NULL),
@@ -3556,13 +3524,13 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2291, 'Jet-Pack Rescue', 78, 'Micro User, The', '1986', 454, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2292, 'Photon Cycle Duel', 407, 'Laserbug', '1983', 1, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2293, 'Hangman', 98, 'Salamander', '1983', 514, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Games Compendium B1', NULL),
-(2294, 'Ingrid\'s Back Picture Disc', 155, 'Level 9 Computing', '1988', 13, 'R', 'This disc contains the pictures for the adventure game <a href=\"http://bbcmicro.co.uk/game.php?id=2132\">Ingrids Back</a>. It can\'t be played online. To see the pictures, download this disc, and <a href=\"http://bbcmicro.co.uk/game.php?id=2132\">Ingrids Back</a>, and once the adventure game has loaded swap this disc into the disc drive.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2294, 'Ingrid''s Back Picture Disc', 155, 'Level 9 Computing', '1988', 13, 'R', 'This disc contains the pictures for the adventure game <a href="http://bbcmicro.co.uk/game.php?id=2132">Ingrids Back</a>. It can''t be played online. To see the pictures, download this disc, and <a href="http://bbcmicro.co.uk/game.php?id=2132">Ingrids Back</a>, and once the adventure game has loaded swap this disc into the disc drive.', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2295, 'Lords Of Time', 155, 'Level 9 Computing', '1983', 13, 'R', NULL, 1, 1, NULL, 'D', '8271 DFS Only', NULL, NULL, NULL, NULL, NULL),
-(2296, 'Pop Quiz Master', 344, 'Unknown', '19XX', 29, 'W', '<p>The game needs to write some configuration to the disc, and this isn\'t possible in jsbeeb at present. To play, download the disc and play it in an emulator, but switch off the write protect first.</p><p>The discs below are additional questions. Both this and the database disc need to be in the drives .\n<ul>\n<li><a href=\"http://bbcmicro.co.uk/game.php?id=2297\">Pop Quiz Master (Database Disc 1)</a></li>\n<li><a href=\"http://bbcmicro.co.uk/game.php?id=2298\">Pop Quiz Master (Database Disc 2)</a></li>\n<li><a href=\"http://bbcmicro.co.uk/game.php?id=2299\">Pop Quiz Master (Database Disc 3)</a></li>\n<li><a href=\"http://bbcmicro.co.uk/game.php?id=2300\">Pop Quiz Master (Database Disc 4)</a></li>	\n</ul>\n</p>', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', NULL),
-(2297, 'Pop Quiz Master', 344, 'Unknown', '19XX', 567, 'W', 'This is an additional database disc for the pop master quiz. The game doesn\'t currently work because the disc is read only and the program writes configuration to disc before it starts the quiz. Hopefully jsbeeb can be modified to allow writing to images, but until then, the best way to run this disc is to download this disc image and the <a href=\"http://bbcmicro.co.uk/game.php?id=2296\">Pop Quiz Master</a> disc, and run them in an emulator. <a href=\"http://bbcmicro.co.uk/game.php?id=2296\">Pop Quiz Master</a> needs to be disc 1, and this disc needs to be disc 2 for the program to work properly.', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', 'Database Disc 1'),
-(2298, 'Pop Quiz Master', 344, 'Unknown', '19XX', 567, 'W', 'This is an additional database disc for the pop master quiz. The game doesn\'t currently work because the disc is read only and the program writes configuration to disc before it starts the quiz. Hopefully jsbeeb can be modified to allow writing to images, but until then, the best way to run this disc is to download this disc image and the <a href=\"http://bbcmicro.co.uk/game.php?id=2296\">Pop Quiz Master</a> disc, and run them in an emulator. <a href=\"http://bbcmicro.co.uk/game.php?id=2296\">Pop Quiz Master</a> needs to be disc 1, and this disc needs to be disc 2 for the program to work properly.', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', 'Database Disc 2'),
-(2299, 'Pop Quiz Master', 344, 'Unknown', '19XX', 567, 'W', 'This is an additional database disc for the pop master quiz. The game doesn\'t currently work because the disc is read only and the program writes configuration to disc before it starts the quiz. Hopefully jsbeeb can be modified to allow writing to images, but until then, the best way to run this disc is to download this disc image and the <a href=\"http://bbcmicro.co.uk/game.php?id=2296\">Pop Quiz Master</a> disc, and run them in an emulator. <a href=\"http://bbcmicro.co.uk/game.php?id=2296\">Pop Quiz Master</a> needs to be disc 1, and this disc needs to be disc 2 for the program to work properly.', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', 'Database Disc 3'),
-(2300, 'Pop Quiz Master', 344, 'Unknown', '19XX', 567, 'W', 'This is an additional database disc for the pop master quiz. The game doesn\'t currently work because the disc is read only and the program writes configuration to disc before it starts the quiz. Hopefully jsbeeb can be modified to allow writing to images, but until then, the best way to run this disc is to download this disc image and the <a href=\"http://bbcmicro.co.uk/game.php?id=2296\">Pop Quiz Master</a> disc, and run them in an emulator. <a href=\"http://bbcmicro.co.uk/game.php?id=2296\">Pop Quiz Master</a> needs to be disc 1, and this disc needs to be disc 2 for the program to work properly.', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', 'Database Disc 4'),
+(2296, 'Pop Quiz Master', 344, 'Unknown', '19XX', 29, 'W', '<p>The game needs to write some configuration to the disc, and this isn''t possible in jsbeeb at present. To play, download the disc and play it in an emulator, but switch off the write protect first.</p><p>The discs below are additional questions. Both this and the database disc need to be in the drives .\n<ul>\n<li><a href="http://bbcmicro.co.uk/game.php?id=2297">Pop Quiz Master (Database Disc 1)</a></li>\n<li><a href="http://bbcmicro.co.uk/game.php?id=2298">Pop Quiz Master (Database Disc 2)</a></li>\n<li><a href="http://bbcmicro.co.uk/game.php?id=2299">Pop Quiz Master (Database Disc 3)</a></li>\n<li><a href="http://bbcmicro.co.uk/game.php?id=2300">Pop Quiz Master (Database Disc 4)</a></li>	\n</ul>\n</p>', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', NULL),
+(2297, 'Pop Quiz Master', 344, 'Unknown', '19XX', 567, 'W', 'This is an additional database disc for the pop master quiz. The game doesn''t currently work because the disc is read only and the program writes configuration to disc before it starts the quiz. Hopefully jsbeeb can be modified to allow writing to images, but until then, the best way to run this disc is to download this disc image and the <a href="http://bbcmicro.co.uk/game.php?id=2296">Pop Quiz Master</a> disc, and run them in an emulator. <a href="http://bbcmicro.co.uk/game.php?id=2296">Pop Quiz Master</a> needs to be disc 1, and this disc needs to be disc 2 for the program to work properly.', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', 'Database Disc 1'),
+(2298, 'Pop Quiz Master', 344, 'Unknown', '19XX', 567, 'W', 'This is an additional database disc for the pop master quiz. The game doesn''t currently work because the disc is read only and the program writes configuration to disc before it starts the quiz. Hopefully jsbeeb can be modified to allow writing to images, but until then, the best way to run this disc is to download this disc image and the <a href="http://bbcmicro.co.uk/game.php?id=2296">Pop Quiz Master</a> disc, and run them in an emulator. <a href="http://bbcmicro.co.uk/game.php?id=2296">Pop Quiz Master</a> needs to be disc 1, and this disc needs to be disc 2 for the program to work properly.', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', 'Database Disc 2'),
+(2299, 'Pop Quiz Master', 344, 'Unknown', '19XX', 567, 'W', 'This is an additional database disc for the pop master quiz. The game doesn''t currently work because the disc is read only and the program writes configuration to disc before it starts the quiz. Hopefully jsbeeb can be modified to allow writing to images, but until then, the best way to run this disc is to download this disc image and the <a href="http://bbcmicro.co.uk/game.php?id=2296">Pop Quiz Master</a> disc, and run them in an emulator. <a href="http://bbcmicro.co.uk/game.php?id=2296">Pop Quiz Master</a> needs to be disc 1, and this disc needs to be disc 2 for the program to work properly.', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', 'Database Disc 3'),
+(2300, 'Pop Quiz Master', 344, 'Unknown', '19XX', 567, 'W', 'This is an additional database disc for the pop master quiz. The game doesn''t currently work because the disc is read only and the program writes configuration to disc before it starts the quiz. Hopefully jsbeeb can be modified to allow writing to images, but until then, the best way to run this disc is to download this disc image and the <a href="http://bbcmicro.co.uk/game.php?id=2296">Pop Quiz Master</a> disc, and run them in an emulator. <a href="http://bbcmicro.co.uk/game.php?id=2296">Pop Quiz Master</a> needs to be disc 1, and this disc needs to be disc 2 for the program to work properly.', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Pop Quiz Master', 'Database Disc 4'),
 (2301, 'Pyramid And Casino', 226, 'Garland Computing', '1984', 26, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2302, 'Simon', 98, 'Salamander', '1983', 565, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Games Compendium B1', NULL),
 (2303, 'Snowball', 155, 'Level 9 Computing', '1983', 13, 'R', NULL, 1, 1, NULL, 'D', '8271 DFS Only', NULL, NULL, NULL, NULL, NULL),
@@ -3573,7 +3541,7 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2308, 'History Quiz', 6, 'Acornsoft', '1983', 29, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Ivan Berg, Grandmaster Series', NULL),
 (2309, 'I Do', 6, 'Acornsoft', '1983', 568, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Ivan Berg', NULL),
 (2310, 'Music Quiz', 6, 'Acornsoft', '1983', 29, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Ivan Berg, Grandmaster Series', NULL),
-(2311, 'Philosopher\'s Quest ', 6, 'Acornsoft', '1982', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, 'Disc', NULL, NULL),
+(2311, 'Philosopher''s Quest ', 6, 'Acornsoft', '1982', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, 'Disc', NULL, NULL),
 (2312, 'Return To Eden', 155, 'Level 9 Computing', '1984', 13, 'R', NULL, 1, 1, NULL, 'D', '8271 DFS Only', NULL, NULL, NULL, NULL, NULL),
 (2313, 'Royal Quiz', 6, 'Acornsoft', '1983', 29, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Ivan Berg, Grandmaster Series', NULL),
 (2314, 'Science Fiction Quiz', 6, 'Acornsoft', '1983', 29, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Ivan Berg, Grandmaster Series', NULL),
@@ -3594,27 +3562,25 @@ INSERT INTO `games` (`id`, `title`, `pubid`, `publisher`, `year`, `genre`, `relt
 (2330, 'Lord Of The Rings: Game One, The (Universal Text Only)', 66, 'Melbourne House', '1985', 13, 'A', NULL, 1, 1, NULL, NULL, 'Sideways Ram Required', NULL, NULL, NULL, NULL, NULL),
 (2331, 'Project X: The Micro Man', 418, 'Retro Software', '2012', 13, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2332, 'Project X: The Micro Man II (The O Zone)', 418, 'Retro Software', '2012', 13, 'N', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2333, 'Wizard\'s Citadel, The (AKA Runemagic Adventure 2)', 390, 'Triffid Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2334, 'Escape From Solaris', 372, 'Magic Software', '1984', 13, 'R', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Galaxy\'s Edge', 'Part 2'),
+(2333, 'Wizard''s Citadel, The', 390, 'Triffid Software', '1984', 13, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Runemagic', 'Adventure 2'),
+(2334, 'Escape From Solaris', 372, 'Magic Software', '1984', 13, 'R', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Galaxy''s Edge', 'Part 2'),
 (2335, 'Adventure', 416, 'J.A. McHugh', '1993', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2336, 'Starship Adventure', 113, 'A&B Computing', '1983', 13, 'W', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2337, 'Opal Lily, The', 417, 'McGraw-Hill Book Company', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(2337, 'Opal Lily, The', 417, 'McGraw-Hill Book Company', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2338, 'Rendezvous', 353, 'Usborne Publishing', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2339, 'Micro Puzzle (AKA Micropuzzle)', 353, 'Usborne Publishing', '1984', 13, 'O', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2340, 'Darkness Of Raven Wood, The', 419, 'Rucksack Games', '2017', 13, 'N', NULL, 1, 1, NULL, 'D', NULL, NULL, '1.3', NULL, NULL, NULL),
+(2341, 'Price Of Magik, The', 155, 'Level 9 Computing', '1986', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
+(2342, 'Red Moon', 155, 'Level 9 Computing', '1985', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
+(2343, 'Time And Magik Trilogy, The', 155, 'Mandarin, Level 9 Computing', '1988', 13, 'R', NULL, 1, 1, NULL, 'D', NULL, NULL, NULL, NULL, 'Time And Magik', NULL),
+(2344, 'Worm In Paradise, The', 155, 'Level 9 Computing', '1985', 13, 'R', NULL, 1, 1, NULL, 'T', NULL, NULL, NULL, NULL, NULL, NULL),
+(2345, 'Snapper', 6, 'Acornsoft', '1982', 1, 'R', NULL, 1, 1, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `games_authors`
---
-
-CREATE TABLE `games_authors` (
+CREATE TABLE IF NOT EXISTS `games_authors` (
   `id` int(11) NOT NULL,
   `games_id` int(11) NOT NULL DEFAULT '0',
   `authors_id` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `games_authors`
---
+) ENGINE=InnoDB AUTO_INCREMENT=5036 DEFAULT CHARSET=utf8;
 
 INSERT INTO `games_authors` (`id`, `games_id`, `authors_id`) VALUES
 (1912, 1, 677),
@@ -5907,24 +5873,31 @@ INSERT INTO `games_authors` (`id`, `games_id`, `authors_id`) VALUES
 (5015, 2334, 356),
 (5016, 2335, 1249),
 (5017, 2336, 967),
-(5018, 2337, 1250);
+(5018, 2337, 1250),
+(5019, 2338, 1169),
+(5020, 2338, 1151),
+(5021, 2339, 1150),
+(5022, 2340, 1251),
+(5023, 2341, 772),
+(5024, 2341, 710),
+(5025, 2341, 672),
+(5026, 2341, 277),
+(5027, 2342, 277),
+(5028, 2342, 772),
+(5029, 2343, 672),
+(5030, 2343, 710),
+(5031, 2343, 772),
+(5032, 2343, 277),
+(5033, 2344, 672),
+(5034, 2344, 710),
+(5035, 2344, 772);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `game_genre`
---
-
-CREATE TABLE `game_genre` (
+CREATE TABLE IF NOT EXISTS `game_genre` (
   `id` int(11) NOT NULL,
   `gameid` int(11) NOT NULL,
   `genreid` int(11) NOT NULL,
   `ord` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `game_genre`
---
+) ENGINE=InnoDB AUTO_INCREMENT=7805 DEFAULT CHARSET=utf8;
 
 INSERT INTO `game_genre` (`id`, `gameid`, `genreid`, `ord`) VALUES
 (23, 39, 69, 1),
@@ -8002,22 +7975,28 @@ INSERT INTO `game_genre` (`id`, `gameid`, `genreid`, `ord`) VALUES
 (7785, 2336, 73, NULL),
 (7786, 2336, 451, NULL),
 (7787, 2337, 73, NULL),
-(7788, 2337, 451, NULL);
+(7788, 2337, 451, NULL),
+(7789, 2338, 73, NULL),
+(7790, 2338, 451, NULL),
+(7791, 2339, 73, NULL),
+(7792, 2339, 451, NULL),
+(7793, 2340, 73, NULL),
+(7794, 2340, 451, NULL),
+(7795, 2340, 85, NULL),
+(7796, 2341, 73, NULL),
+(7797, 2341, 451, NULL),
+(7798, 2342, 73, NULL),
+(7799, 2342, 451, NULL),
+(7800, 2343, 73, NULL),
+(7801, 2343, 451, NULL),
+(7802, 2343, 85, NULL),
+(7803, 2344, 73, NULL),
+(7804, 2344, 451, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `genres`
---
-
-CREATE TABLE `genres` (
+CREATE TABLE IF NOT EXISTS `genres` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `genres`
---
+) ENGINE=InnoDB AUTO_INCREMENT=639 DEFAULT CHARSET=utf8;
 
 INSERT INTO `genres` (`id`, `name`) VALUES
 (1, 'Maze'),
@@ -8027,17 +8006,17 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (5, 'Arcade Adventure'),
 (6, 'Driving'),
 (8, 'Simulation'),
-(10, 'Catch \'em'),
-(11, 'Collect \'Em Up'),
-(12, 'Spray \'em Up'),
+(10, 'Catch ''em'),
+(11, 'Collect ''Em Up'),
+(12, 'Spray ''em Up'),
 (13, 'Adventure'),
 (16, 'Lunar Lander'),
 (17, 'Puzzle'),
 (18, 'Bat And Ball'),
 (19, 'Platform Puzzler'),
-(20, 'Avoid \'em'),
+(20, 'Avoid ''em'),
 (21, 'Strategy'),
-(22, 'Run \'n\' Gun'),
+(22, 'Run ''n'' Gun'),
 (25, 'Ball Control'),
 (26, 'Card Games'),
 (27, 'Breakout'),
@@ -8048,7 +8027,7 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (32, 'Pong'),
 (33, 'Ball Game'),
 (34, 'Traditional Games'),
-(35, 'Beat \'Em Up'),
+(35, 'Beat ''Em Up'),
 (36, 'RPG'),
 (38, 'Card Game'),
 (39, 'Classic Games'),
@@ -8056,7 +8035,7 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (41, 'Platform Shooter'),
 (43, 'Multi Event'),
 (45, 'Space'),
-(46, 'Save \'em Up'),
+(46, 'Save ''em Up'),
 (47, 'Reaction Tester'),
 (48, 'Dice Game'),
 (50, 'Horse Racing Season Record Keeper'),
@@ -8182,7 +8161,7 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (286, 'Elite'),
 (287, 'Head Butt Bombs...'),
 (289, 'Pole Position On Bikes'),
-(290, 'Scrolling Beat \'em Up'),
+(290, 'Scrolling Beat ''em Up'),
 (291, 'Shoot'),
 (294, 'Tetris'),
 (295, 'Track Construction'),
@@ -8205,7 +8184,7 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (316, 'Super Sprint in a boat'),
 (318, 'Snake minus the growth'),
 (319, 'The Pit'),
-(323, 'Ghosts \'n\' Goblins'),
+(323, 'Ghosts ''n'' Goblins'),
 (324, 'Soccer'),
 (325, 'Thrust'),
 (326, 'Hunchback in China'),
@@ -8230,7 +8209,7 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (353, 'Poker with Dice'),
 (356, 'Light Cycles with Swans'),
 (358, 'Geography Quiz'),
-(359, 'Mr. Do\'s Castle'),
+(359, 'Mr. Do''s Castle'),
 (360, 'Circus Skills'),
 (361, 'R-Type'),
 (362, 'Invisible maze'),
@@ -8305,7 +8284,7 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (472, 'Simulation (Football Management)'),
 (473, 'Shooter'),
 (474, 'Sports (Multi Event)'),
-(475, 'Simulation (Rubik\'s Cube)'),
+(475, 'Simulation (Rubik''s Cube)'),
 (476, 'Driving (Boat)'),
 (477, 'Driving (Vertical)'),
 (478, 'Sport (Tennis)'),
@@ -8467,23 +8446,13 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 (637, 'Masterbrain'),
 (638, 'Shovelware');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `images`
---
-
-CREATE TABLE `images` (
+CREATE TABLE IF NOT EXISTS `images` (
   `id` int(11) NOT NULL,
   `gameid` int(11) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `customurl` varchar(255) DEFAULT NULL,
   `main` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `images`
---
+) ENGINE=InnoDB AUTO_INCREMENT=2410 DEFAULT CHARSET=utf8;
 
 INSERT INTO `images` (`id`, `gameid`, `filename`, `customurl`, `main`) VALUES
 (1, 1, 'Disc001-BananaMan.ssd', NULL, NULL),
@@ -10821,22 +10790,20 @@ INSERT INTO `images` (`id`, `gameid`, `filename`, `customurl`, `main`) VALUES
 (2397, 2334, 'Disc999-EscapeFromSolaris.ssd', NULL, 100),
 (2398, 2335, 'Disc999-AdventureMcHugh.ssd', NULL, 100),
 (2399, 2336, 'Disc999-StarshipAdventure.ssd', NULL, 100),
-(2400, 2337, 'Disc999-OpalLily.ssd', NULL, 100);
+(2400, 2337, 'Disc999-OpalLily.ssd', NULL, 100),
+(2401, 2338, 'Disc999-Rendezvous.ssd', NULL, 100),
+(2402, 2339, 'Disc999-MicroPuzzle.ssd', NULL, 100),
+(2403, 2340, 'Disc999-DarknessOfRavenWoodSTD.ssd', NULL, 100),
+(2404, 2341, 'Disc999-PriceOfMagikSTT.ssd', NULL, 100),
+(2405, 2342, 'Disc999-RedMoonSTT.ssd', NULL, 100),
+(2406, 2343, 'Disc999-TimeAndMagikTrilogySTD.dsd', NULL, 100),
+(2408, 2344, 'Disc999-WormInParadiseSTT.ssd', NULL, 100),
+(2409, 2345, 'DiscA01-SnapperV1.ssd', NULL, 100);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `publishers`
---
-
-CREATE TABLE `publishers` (
+CREATE TABLE IF NOT EXISTS `publishers` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `publishers`
---
+) ENGINE=InnoDB AUTO_INCREMENT=420 DEFAULT CHARSET=utf8;
 
 INSERT INTO `publishers` (`id`, `name`) VALUES
 (1, 'MRM Software'),
@@ -10906,7 +10873,7 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (65, 'Betasoft'),
 (66, 'Melbourne House'),
 (67, 'Optima'),
-(68, 'Dk\'Tronics (D.K. Tronics)'),
+(68, 'Dk''Tronics (D.K. Tronics)'),
 (69, 'David J. Hoskins'),
 (70, 'TDS'),
 (71, 'Artic'),
@@ -11012,7 +10979,7 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (171, 'Personal Computer News'),
 (172, 'Epic Adventures'),
 (173, 'SilIcon'),
-(174, 'Let\'s Compute!'),
+(174, 'Let''s Compute!'),
 (175, 'Empire'),
 (176, 'CCS'),
 (177, 'CME'),
@@ -11254,24 +11221,15 @@ INSERT INTO `publishers` (`id`, `name`) VALUES
 (415, 'Chris Nixon'),
 (416, 'J.A. McHugh'),
 (417, 'McGraw-Hill Book Company'),
-(418, 'Retro Software');
+(418, 'Retro Software'),
+(419, 'Rucksack Games');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `reltype`
---
-
-CREATE TABLE `reltype` (
+CREATE TABLE IF NOT EXISTS `reltype` (
   `id` char(1) NOT NULL DEFAULT '',
   `name` varchar(255) DEFAULT NULL,
   `selected` char(1) NOT NULL,
   `rel_order` int(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `reltype`
---
 
 INSERT INTO `reltype` (`id`, `name`, `selected`, `rel_order`) VALUES
 ('A', 'Alternative versions', 'Y', 3),
@@ -11282,22 +11240,12 @@ INSERT INTO `reltype` (`id`, `name`, `selected`, `rel_order`) VALUES
 ('U', 'Unreleased Game', 'Y', 4),
 ('W', 'Awaiting Categorisation', 'Y', 7);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `screenshots`
---
-
-CREATE TABLE `screenshots` (
+CREATE TABLE IF NOT EXISTS `screenshots` (
   `id` int(11) NOT NULL,
   `gameid` int(11) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `main` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `screenshots`
---
+) ENGINE=InnoDB AUTO_INCREMENT=3466 DEFAULT CHARSET=utf8;
 
 INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (1, 145, '180Darts.jpg', 100),
@@ -13635,112 +13583,63 @@ INSERT INTO `screenshots` (`id`, `gameid`, `filename`, `main`) VALUES
 (3454, 2334, 'Disc999-EscapeFromSolaris.jpg', 100),
 (3455, 2335, 'Disc999-AdventureMcHugh.jpg', 100),
 (3456, 2336, 'Disc999-StarshipAdventure.jpg', 100),
-(3457, 2337, 'Disc999-OpalLily.jpg', 100);
+(3457, 2337, 'Disc999-OpalLily.jpg', 100),
+(3458, 2338, 'Disc999-Rendezvous.jpg', 100),
+(3459, 2339, 'Disc999-MicroPuzzle.jpg', 100),
+(3460, 2340, 'Disc999-DarknessOfRavenWoodSTD.jpg', 100),
+(3461, 2341, 'Disc999-PriceOfMagikSTT.jpg', 100),
+(3462, 2342, 'Disc999-RedMoonSTT.jpg', 100),
+(3463, 2343, 'Disc999-TimeAndMagikTrilogySTD.jpg', 100),
+(3464, 2344, 'Disc999-WormInParadiseSTT.jpg', 100),
+(3465, 2345, 'DiscA01-SnapperV1.jpg', 100);
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `authors`
---
 ALTER TABLE `authors`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `games`
---
 ALTER TABLE `games`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `games_authors`
---
 ALTER TABLE `games_authors`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `game_genre`
---
 ALTER TABLE `game_genre`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `gameid` (`gameid`,`genreid`);
 
---
--- Indexes for table `genres`
---
 ALTER TABLE `genres`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `images`
---
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `publishers`
---
 ALTER TABLE `publishers`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `reltype`
---
 ALTER TABLE `reltype`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `screenshots`
---
 ALTER TABLE `screenshots`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gameid` (`gameid`,`main`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `authors`
---
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1251;
---
--- AUTO_INCREMENT for table `games`
---
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1252;
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2338;
---
--- AUTO_INCREMENT for table `games_authors`
---
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2346;
 ALTER TABLE `games_authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5019;
---
--- AUTO_INCREMENT for table `game_genre`
---
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5036;
 ALTER TABLE `game_genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7789;
---
--- AUTO_INCREMENT for table `genres`
---
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7805;
 ALTER TABLE `genres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=639;
---
--- AUTO_INCREMENT for table `images`
---
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=639;
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2401;
---
--- AUTO_INCREMENT for table `publishers`
---
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2410;
 ALTER TABLE `publishers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=419;
---
--- AUTO_INCREMENT for table `screenshots`
---
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=420;
 ALTER TABLE `screenshots`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3458;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3466;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
