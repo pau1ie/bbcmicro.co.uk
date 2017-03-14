@@ -15,7 +15,7 @@ if ( isset($_GET["h"])) {
   $h="i";
 }
 
-$sql = "select g.id, g.title, g.publisher, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.edit, g.series, g.series_no, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.edit, g.series, g.series_no, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -83,6 +83,18 @@ if ($sth->execute()) {
   $genres=array();
 }
 
+$sql = "select * from games_publishers gp, publishers p where gp.gameid  = ? and gp.pubid = p.id";
+$sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth->bindParam(1, $id, PDO::PARAM_INT);
+if ($sth->execute()) {
+  $publishers = $sth->fetchAll();
+} else {
+  echo "Error:";
+  echo "\n";
+  $sth->debugDumpParams ();
+  $genres=array();
+}
+
 $sql = "select a.name from games_authors ga, authors a where ga.games_id  = ? and ga.authors_id = a.id";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
@@ -125,6 +137,25 @@ if ( ! empty($genres)) {
   $genretab=$genretab . "</td></tr>";
 } else {
   $genretab="";
+}
+
+$s = '';
+if ( count($publishers) > 1) {
+  $s = 's';
+}
+$names='';
+if ( ! empty($publishers)) {
+  $pubtab='<tr><th>Publisher' . $s . '</th><td>';
+  foreach ($publishers as $publisher) {
+    $pubtab=$pubtab . $publisher["name"] . "<br/>";
+    $names.=$publisher["name"].", ";
+  }
+  if ($names) {
+    $names=substr($names,0,strlen($names)-2);
+  } 
+  $pubtab=$pubtab . "</td></tr>";
+} else {
+  $pubtab="";
 }
 
 $s = '';
@@ -174,7 +205,7 @@ if ( ! empty($authors)) {
     <meta property="og:url"                content="<?php echo WS_ROOT . "/game.php?id=" . $game["id"] . "&amp;h=h" ?>" />
     <meta property="og:type"               content="website" />
     <meta property="og:title"              content="<?php echo $game["title"]; ?>" />
-    <meta property="og:description"        content="<?php echo "Published by " . $game["publisher"] . " in " . $game["year"];?>" />
+    <meta property="og:description"        content="<?php echo "Published by " . $names . " in " . $game["year"];?>" />
     <meta property="og:image"              content="<?php echo WS_ROOT . "/gameimg/screenshots/" . $shot[0]["filename"]; ?>" />
   </head>
 
@@ -283,7 +314,7 @@ if ( ! empty($authors)) {
           <table class="table">
             <tr><th>Title</th><td><?php echo $game["title"];?></td></tr>
             <tr><th>Year</th><td><?php echo $game["year"];?></td></tr>
-            <tr><th>Publisher</th><td><?php echo $game["publisher"];?></td></tr>
+            <?php echo $pubtab;?></td></tr>
             <?php echo $authortab;?>
             <tr><th>Release Type</th><td><?php echo $game["reltype"];?></td></tr>
             <tr><th>Primary genre</th><td><?php echo $game["genre"];?></td></tr>
@@ -304,7 +335,59 @@ if ( ! empty($authors)) {
        </div>
       </div>
       <hr>
-     </div> <!-- /container -->
+
+<?php
+$sql="select title,(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers, year from games where parent = ? ";
+$sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth->bindParam(1, $id, PDO::PARAM_INT);
+if ($sth->execute()) {
+  $children = $sth->fetchAll();
+} else {
+  echo "Error:";
+  echo "\n";
+  $sth->debugDumpParams ();
+  $children=array();
+}
+if ( ! empty($children)) {
+?>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Alternative Versions.</div>
+          <div class="panel-body">
+            <p>This entry is representative of all versions of this game, and the disc image is what we consider to be the best version. For specific variants, refer to the list below.</p>
+          </div>
+          <!-- Table -->
+          <table class="table">
+            <thead> <tr> <th>#</th> <th>Title</th> <th>Publisher</th> <th>Year</th> </tr> </thead> <tbody> 
+<?php
+foreach ($children as $child) {
+			$pubs=explode('@',$child["publishers"]);
+			$names='';
+			foreach ($pubs as $pub) {
+				if ($pub) {
+					list($id,$name)=explode('|',$pub);
+					if ($name) $names.="$name, ";
+				}
+			}
+			if ($names) {
+				$names=substr($names,0,strlen($names)-2);
+			} else {
+				$names="<i>No Publisher</i>";
+			}
+?>
+              <tr> <th scope="row">1</th> <td><?php echo $child['title'];?></td> <td><?php echo $names;?></td> <td><?php echo $child['year'];?></td> </tr>
+<?php
+}
+?>
+            </tbody> 
+          </table>
+        </div>
+      </div>
+      <hr>
+<?php
+}
+?>
+    </div> <!-- /container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

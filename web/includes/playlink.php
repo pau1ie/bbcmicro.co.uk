@@ -1,6 +1,7 @@
 <?php
 function get_playlink($image,$jsbeeb,$wsroot) {
 #  print_r($image);
+  $url = Null;
   if ($image['customurl'] === NULL ) {
     if ($image['filename'] === NULL ) {
       $ssd = null;
@@ -8,8 +9,6 @@ function get_playlink($image,$jsbeeb,$wsroot) {
       $ssd = 'gameimg/discs/' . $image["filename"];
       if (file_exists($ssd)) {
         $url = $jsbeeb . $wsroot . '/' . $ssd;
-      } else {
-        $url = NULL;
       }
     }
   } else {

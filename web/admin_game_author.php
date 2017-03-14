@@ -86,7 +86,7 @@ if (!$dbh->errno) {
 }
 
 if ($game_id) {
-	$s="	SELECT 		id,title,publisher,year,
+	$s="	SELECT 		id,title,(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers ,year,
 						(SELECT GROUP_CONCAT(CONCAT(authors.id,'|',authors.name) SEPARATOR '@') FROM games_authors LEFT JOIN authors ON authors_id=authors.id WHERE games_id=games.id) AS authors
 			FROM 		games 
 			WHERE		id=$game_id";
@@ -94,8 +94,15 @@ if ($game_id) {
 	$q=@$dbh->query($s);
 	if (!$dbh->errno) {
 		if ($r=$q->fetch_object()) {
-
-			echo "<br><b>$r->title</b> $r->publisher $r->year<hr>";
+			$pubs=explode('@',$r->publishers);
+			$names='';
+			foreach ($pubs as $pub) {
+				if ($pub) {
+					list($id,$name)=explode('|',$pub);
+					if ($name) $names.="$name, ";
+				}
+			}
+			echo "<br><b>$r->title</b> $names $r->year<hr>";
 
 			echo "<form name='frmGame' method='POST' action='admin_game_author.php'>\n";
 			echo "<input type='hidden' name='id' value='$game_id'>\n";

@@ -179,7 +179,7 @@ function grid($state) {
       $sls[] = "title like :search\n";
     }
     if ( $all || !(array_search('P',$state['only'])===False )) {
-      $sls[] = "pubid in (select id from publishers where name like :search)\n";
+      $sls[] = "id in (select gameid from games_publishers gp, publishers p where p.id = gp.pubid and p.name like :search)\n";
     }
     if ( $all || !(array_search('A',$state['only'])===False )) {
       $sls[] = "id in (select games_id from games_authors ga, authors a where a.id = ga.authors_id and (a.name like :search or a.alias like :search))\n";
@@ -203,7 +203,7 @@ function grid($state) {
   }
 
   if (array_key_exists ('pubid', $state)) {
-    $wc[] = "pubid = :pubid\n";
+    $wc[] = "id in (select gameid from games_publishers gp where gp.pubid = :pubid)\n";
   }
 
   if (array_key_exists ('year', $state)) {
@@ -233,9 +233,11 @@ function grid($state) {
     $page=1;
   }
 
+  $wc[]='parent is null';
+
   $offset = $limit * ($page -1);
   $sql ='select SQL_CALC_FOUND_ROWS * from games WHERE ' . implode(' AND ',$wc) . ' order by title LIMIT :limit OFFSET :offset';
-  $sql2 = 'select distinct upper(substring(title,1,1)) AS c1 from games WHERE ' . implode(' AND ',$wc) . "order by c1"; 
+  $sql2 = 'select distinct upper(substring(title,1,1)) AS c1 from games WHERE ' . implode(' AND ',$wc) . " order by c1"; 
 
   $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $sth2 = $db->prepare($sql2,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -300,8 +302,10 @@ function grid($state) {
 
   $scrsql = 'select filename from screenshots where gameid = :gameid order by main, id limit 1';
   $dscsql = 'select filename, customurl from images where gameid = :gameid order by main, id limit 1';
+  $pubsql = 'select id, name from publishers where id = (select pubid from games_publishers where gameid = :gameid and main = \'Y\' limit 1)';
   $scrpdo = $db->prepare($scrsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $dscpdo = $db->prepare($dscsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+  $pubpdo = $db->prepare($pubsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
   $chars=array();
   if ( $rows > 0 ) {
@@ -333,6 +337,7 @@ function grid($state) {
     foreach ( $res as $game ) {
       $scrpdo->bindParam(':gameid',$game["id"], PDO::PARAM_INT);
       $dscpdo->bindParam(':gameid',$game["id"], PDO::PARAM_INT);
+      $pubpdo->bindParam(':gameid',$game["id"], PDO::PARAM_INT);
       if ($scrpdo->execute()) {
         $img=$scrpdo->fetch(PDO::FETCH_ASSOC);
         if (is_null($img["filename"])||!file_exists('gameimg/screenshots/'.$img["filename"])) {
@@ -350,8 +355,14 @@ function grid($state) {
         echo "Error:";
         $sim->debugDumpParams ();
       }
+      if ($pubpdo->execute()) {
+        $pub=$pubpdo->fetch(PDO::FETCH_ASSOC);
+      } else {
+        echo "Error:";
+        $sim->debugDumpParams ();
+      }
 
-      gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $dnl ,htmlspecialchars($game["publisher"]),$game["year"],$game["pubid"]);
+      gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $dnl ,htmlspecialchars($pub["name"]),$game["year"],$pub["id"]);
     }
     echo "    </div>\n";
     echo $pl;
