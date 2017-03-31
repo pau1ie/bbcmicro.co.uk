@@ -12,23 +12,24 @@ require_once('includes/admin_menu.php');
 
 show_admin_menu();
 
-$s="	SELECT 		id,name
-		FROM 		genres
-		ORDER BY 	name";
-$q=@$dbh->query($s);
-if (!$dbh->errno) {
-	if ($q->num_rows) {
-		echo "$q->num_rows genres<hr>";
+$s='SELECT id,name,
+ (select count(*) from games where genre = genres.id) as "primary",
+ (select count(*) from game_genre where genreid = genres.id) as secondary 
+FROM genres ORDER BY name';
+
+$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+if ($sth->execute()) {
+	if ($sth->rowCount()) {
+		echo $sth->rowCount()." genres<hr>";
 		echo "<table>\n";
-		echo "<tr><td><b>ID</b></td><td><b>Name</b></td></tr>\n";
-		while ($r=$q->fetch_object()) {
-			echo "<tr><td>$r->id</td><td>$r->name</td></tr>\n";
+		echo "<tr><td><b>ID</b></td><td><b>Name</b></td><td> #Primary </td><td> #Secondary </td></tr>\n";
+		while ($r=$sth->fetch()) {
+			echo "<tr><td>".$r['id']."</td><td>".$r['name']."</td><td>".$r['primary']."</td><td>".$r['secondary']."</td></tr>\n";
 		}
 		echo "</table>\n";
 	}
-	$q->free_result();
+	$sth->closeCursor();
 } else {
-	echo "$s gave ".$dbh->error."<br>\n";
+	echo "$s gave ".$dbh->errorCode()."<br>\n";
 }
-$dbh->close();
 ?>

@@ -19,17 +19,21 @@ $s="	SELECT 		id,title,year,
 			(SELECT GROUP_CONCAT(CONCAT(genres.id,'|',genres.name) SEPARATOR '@') FROM game_genre LEFT JOIN genres ON genreid=genres.id WHERE gameid=games.id) AS genres
 	FROM 		games 
 	ORDER BY 	title";
-$q=@$dbh->query($s);
-if (!$dbh->errno) {
-	if ($q->num_rows) {
-		echo "$q->num_rows games<hr>";
-		echo "<table>\n";
-		echo "<tr><td><b>Title</b></td><td><b>Year</b><td><b>Publisher</b></td></td><td><b>Authors</b></td><td><b>Genres</td></tr>\n";
-		while ($r=$q->fetch_object()) {
-			echo "<tr><td>$r->title</td><td>$r->year</td>";
 
-			echo "<td><a href='admin_game_publisher.php?id=$r->id'>";
-			$pubs=explode('@',$r->publishers);
+$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+#$sth->bindParam(1, $game_id, PDO::PARAM_INT);
+if ($sth->execute()) {
+	if ($sth->rowCount()) {
+		echo $sth->rowCount()." games. <a href='admin_game_details.php?id=0'>New game</a><hr>";
+		echo "<table>\n";
+		echo "<tr><td><b>Title</b></td><td><b>Year</b><td><b>Publisher</b></td></td><td><b>Authors</b></td>";
+#		echo "<td><b>Genres</td>";
+		echo "</tr>\n";
+		while ($r=$sth->fetch(PDO::FETCH_ASSOC)) {
+			echo "<tr><td>".$r['title']."</td><td>".$r['year']."</td>";
+
+			echo "<td><a href='admin_game_details.php?id=".$r['id']."'>";
+			$pubs=explode('@',$r['publishers']);
 			$names='';
 			foreach ($pubs as $pub) {
 				if ($pub) {
@@ -44,8 +48,8 @@ if (!$dbh->errno) {
 			}
 			echo "</a></td>";
 
-			echo "<td><a href='admin_game_author.php?id=$r->id'>";
-			$authors=explode('@',$r->authors);
+			echo "<td><a href='admin_game_details.php?id=".$r['id']."'>";
+			$authors=explode('@',$r['authors']);
 			$names='';
 			foreach ($authors as $author) {
 				if ($author) {
@@ -60,28 +64,28 @@ if (!$dbh->errno) {
 			}
 			echo "</a></td>";
 
-			echo "<td><a href='admin_game_genre.php?id=$r->id'>";
-			$genres=explode('@',$r->genres);
-			$names='';
-			foreach ($genres as $genre) {
-				if ($genre) {
-					list($id,$name)=explode('|',$genre);
-					if ($name) $names.="$name, ";
-				}
-			}
-			if ($names) {
-				echo substr($names,0,strlen($names)-2);
-			} else {
-				echo "<i>None</i>";
-			}
-			echo "</a></td>";
+#			echo "<td><a href='admin_game_genre.php?id=".$r['id']."'>";
+#			$genres=explode('@',$r['genres']);
+#			$names='';
+#			foreach ($genres as $genre) {
+#				if ($genre) {
+#					list($id,$name)=explode('|',$genre);
+#					if ($name) $names.="$name, ";
+#				}
+#			}
+#			if ($names) {
+#				echo substr($names,0,strlen($names)-2);
+#			} else {
+#				echo "<i>None</i>";
+#			}
+#			echo "</a></td>";
 			echo "</tr>\n";
 		}
 		echo "</table>\n";
 	}
-	$q->free_result();
+#	$q->free_result();
 } else {
-	echo "$s gave ".$dbh->error."<br>\n";
+	echo "$s gave ".$dbh->errorCode()."<br>\n";
 }
-$dbh->close();
+$sth->closeCursor();
 ?>

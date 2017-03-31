@@ -15,7 +15,7 @@ if ( isset($_GET["h"])) {
   $h="i";
 }
 
-$sql = "select g.id, g.title, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.edit, g.series, g.series_no, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.edit, g.series, g.series_no, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -337,7 +337,7 @@ if ( ! empty($authors)) {
       <hr>
 
 <?php
-$sql="select title,(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers, year from games where parent = ? ";
+$sql="select id, title,(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers, year from games where parent = ? ";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -352,13 +352,13 @@ if ( ! empty($children)) {
 ?>
       <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">Alternative Versions.</div>
+        <div class="panel-heading"><p class="lead">Alternative Versions.</p></div>
           <div class="panel-body">
             <p>This entry is representative of all versions of this game, and the disc image is what we consider to be the best version. For specific variants, refer to the list below.</p>
           </div>
           <!-- Table -->
           <table class="table">
-            <thead> <tr> <th>#</th> <th>Title</th> <th>Publisher</th> <th>Year</th> </tr> </thead> <tbody> 
+            <thead> <tr> <th>Title</th> <th>Publisher</th> <th>Year</th> </tr> </thead> <tbody> 
 <?php
 foreach ($children as $child) {
 			$pubs=explode('@',$child["publishers"]);
@@ -375,7 +375,7 @@ foreach ($children as $child) {
 				$names="<i>No Publisher</i>";
 			}
 ?>
-              <tr> <th scope="row">1</th> <td><?php echo $child['title'];?></td> <td><?php echo $names;?></td> <td><?php echo $child['year'];?></td> </tr>
+              <tr> <td><a href="game.php?id=<?php echo $child['id']; ?>"><?php echo $child['title'];?></a></td> <td><?php echo $names;?></td> <td><?php echo $child['year'];?></td> </tr>
 <?php
 }
 ?>
@@ -386,6 +386,56 @@ foreach ($children as $child) {
       <hr>
 <?php
 }
+if ( ! is_null($game['parent'])) {
+$sql="select id, title,(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers, year from games where id = ? ";
+$sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth->bindParam(1, $game['parent'], PDO::PARAM_INT);
+if ($sth->execute()) {
+  $children = $sth->fetchAll();
+} else {
+  echo "Error:";
+  echo "\n";
+  $sth->debugDumpParams ();
+  $children=array();
+}
+?>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><p class="lead">Other Versions.</p></div>
+          <div class="panel-body">
+            <p>The following entry is representative of all versions of this game, and the disc image is what we consider to be the best version. It also contains a list of variants (Including this one).</p>
+          </div>
+          <!-- Table -->
+          <table class="table">
+            <thead> <tr> <th>Title</th> <th>Publisher</th> <th>Year</th> </tr> </thead> <tbody> 
+<?php
+foreach ($children as $child) {
+			$pubs=explode('@',$child["publishers"]);
+			$names='';
+			foreach ($pubs as $pub) {
+				if ($pub) {
+					list($id,$name)=explode('|',$pub);
+					if ($name) $names.="$name, ";
+				}
+			}
+			if ($names) {
+				$names=substr($names,0,strlen($names)-2);
+			} else {
+				$names="<i>No Publisher</i>";
+			}
+?>
+              <tr> <td><a href="game.php?id=<?php echo $child['id']; ?>"><?php echo $child['title'];?></a></td> <td><?php echo $names;?></td> <td><?php echo $child['year'];?></td> </tr>
+<?php
+}
+?>
+            </tbody> 
+          </table>
+        </div>
+      </div>
+      <hr>
+<?php
+}
+
 ?>
     </div> <!-- /container -->
     <!-- Bootstrap core JavaScript
