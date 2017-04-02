@@ -67,7 +67,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			if ($k=='customurl') {
 				$new_images[0]['customurl']=$v;
 			}
-
 		}
 		# Let's make sure the database matches the new authors list we just got
 		$old_authors=get_game_authors($dbh,$game_id);
@@ -113,6 +112,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		if ($game_id == null) {
 			# New entry
 			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, edit, series, series_no, lastupdater, lastupdated) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
+			if ($_POST['parent'] == '0' || $_POST['parent'] == '' ) {
+				$p_parent = null;
+			} else {
+				$p_parent = $_POST['parent'];
+			}
 			if ($_POST['genre'] == '0') {
 				$p_genre='';
 			} else {
@@ -138,10 +142,26 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			} else {
 				$p_electron=$_POST['electron'];
 			}
-			$sbinds=array($_POST['parent'],$_POST['title'],$_POST['year'],$p_genre,$_POST['reltype'],$_POST['notes'],$_POST['players_min'],$_POST['players_max'],$p_joystick,$p_save,$p_hardware,$p_electron,$_POST['version'],$_POST['edit'],$_POST['series'],$_POST['series_no'],$_SESSION['userid']);
+			$sbinds=array(  array('value' => $p_parent, 		'type' => PDO::PARAM_INT),
+					array('value' => $_POST['title'], 	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['year'], 	'type' => PDO::PARAM_STR),
+					array('value' => $p_genre, 		'type' => PDO::PARAM_INT),
+					array('value' => $_POST['reltype'], 	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['notes'], 	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['players_min'], 'type' => PDO::PARAM_INT),
+					array('value' => $_POST['players_max'], 'type' => PDO::PARAM_INT),
+					array('value' => $p_joystick, 		'type' => PDO::PARAM_STR),
+					array('value' => $p_save, 		'type' => PDO::PARAM_STR),
+					array('value' => $p_hardware, 		'type' => PDO::PARAM_STR),
+					array('value' => $p_electron, 		'type' => PDO::PARAM_STR),
+					array('value' => $_POST['version'], 	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['edit'], 	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['series'], 	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['series_no'], 	'type' => PDO::PARAM_STR),
+					array('value' => $_SESSION['userid'], 	'type' => PDO::PARAM_INT));
 			$sth=$dbh->prepare($s);
 			if (DEBUG) {echo "<pre>$s<br/>"; print_r($sbinds);echo "</pre>";}
-			if ($sth->execute($sbinds)) {
+			if (executeWithDataTypes($sth,$sbinds)) {
 				$game_id = $dbh->lastInsertId();
 			} else {
 				echo "$s gave ".$dbh->errorCode()."<br>\n";
@@ -149,8 +169,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			}
 		} else {
 			# An entry already exists. Compare it.
-			$s="SELECT id, parent, title, year, genre, reltype, notes, players_min,
-players_max, joystick, save, hardware, electron, version, edit, series, series_no FROM games where id = ?";
+			$s="SELECT id, parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, edit, series, series_no FROM games where id = ?";
 
 			$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$sth->bindParam(1, $game_id, PDO::PARAM_INT);
@@ -171,8 +190,12 @@ players_max, joystick, save, hardware, electron, version, edit, series, series_n
 						}
 						if ( $v != $pv ) {
 							$diffs[$k]=$pv;
+							if ( $pv == '' ) {
+								$pv = null;
+							}
 							if ($k = 'id') $abort=True;
 						}
+
 					} else {
 						$abort=True;
 						if (DEBUG) { echo "<br/>$k Missing <br/>";}
@@ -186,11 +209,19 @@ players_max, joystick, save, hardware, electron, version, edit, series, series_n
 				$diffs['lastupdated']=$_SESSION['userid'];
 				$sql_cmds[]="update games set ".join('=?, ',array_keys($diffs)).'=NOW() where id = ?';
 				$bs=array();
-				foreach ($diffs as $b) {
-					$bs[]=$b;
+				foreach ($diffs as $k=>$b) {
+					$t=PDO::PARAM_STR;
+					if ($k == 'parent' or $k == 'genre') {
+						$t=PDO::PARAM_INT;
+						if ($b == '' or $b == '0') {
+							$t=PDO::PARAM_NULL;
+							$b=null;
+						}
+					}
+					$bs[]=array('value'=>$b,'type'=>$t);
 				}
 				array_pop($bs);
-				$bs[]=$game_id;
+				$bs[]=array('value'=>$game_id,'type'=>PDO::PARAM_INT);
 				$sql_binds[]=$bs;
 			}
 			if (DEBUG) { echo "<br/>Diffs<pre>";print_r($diffs);echo "Abort: $abort";echo "</pre><br/>";}
@@ -202,35 +233,42 @@ players_max, joystick, save, hardware, electron, version, edit, series, series_n
 			if ($oid && !in_array($oid,$new_authors)) {
 				#echo "Need to remove author $oid<br>";
 				$sql_cmds[]="DELETE FROM games_authors WHERE games_id=? AND authors_id=?";
-				$sql_binds[]=array($game_id,$oid);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$oid,		'type'=>PDO::PARAM_INT));
 			}
 		}
 		foreach ($old_genres as $oid) {
 			if ($oid && !in_array($oid,$new_genres)) {
 				#echo "Need to remove genre $oid<br>";
 				$sql_cmds[]="DELETE FROM game_genre WHERE gameid=? AND genreid=?";
-				$sql_binds[]=array($game_id,$oid);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$oid,		'type'=>PDO::PARAM_INT));
 			}
 		}
 		foreach ($old_publishers as $oid) {
 			if ($oid && !in_array($oid,$new_publishers)) {
 				#echo "Need to remove publisher $oid<br>";
 				$sql_cmds[]="DELETE FROM games_publishers WHERE gameid=? AND pubid=?";
-				$sql_binds[]=array($game_id,$oid);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$oid,		'type'=>PDO::PARAM_INT));
 			}
 		}
 		foreach ($old_screenshots as $oid) {
 			if ($oid && !in_array($oid,$new_screenshots)) {
 				#echo "Need to remove publisher $oid<br>";
 				$sql_cmds[]="DELETE FROM screenshots WHERE gameid=? AND filename=? AND main=?";
-				$sql_binds[]=array($game_id,$oid,100);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$oid,		'type'=>PDO::PARAM_INT),
+							array('value'=>100,		'type'=>PDO::PARAM_INT));
 			}
 		}
 		foreach ($old_images as $oid) {
 			if ($oid && !in_array($oid,$new_images)) {
 				#echo "Need to remove publisher $oid<br>";
 				$sql_cmds[]="DELETE FROM images WHERE gameid=? AND filename=? AND main=?";
-				$sql_binds[]=array($game_id,$oid['filename'],100);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$oid['filename'],'type'=>PDO::PARAM_STR),
+							array('value'=>100,		'type'=>PDO::PARAM_INT));
 			}
 		}
 
@@ -239,44 +277,50 @@ players_max, joystick, save, hardware, electron, version, edit, series, series_n
 			if ($nid && !in_array($nid,$old_authors)) {
 				#echo "Need to add author $nid<br>";
 				$sql_cmds[]="INSERT INTO games_authors (games_id,authors_id) VALUES(?,?)";
-				$sql_binds[]=array($game_id,$nid);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$nid,		'type'=>PDO::PARAM_INT));
 			}
 		}
 		foreach ($new_genres as $nid) {
 			if ($nid && !in_array($nid,$old_genres)) {
 				#echo "Need to add genre $nid<br>";
 				$sql_cmds[]="INSERT INTO game_genre (gameid,genreid) VALUES(?,?)";
-				$sql_binds[]=array($game_id,$nid);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$nid,		'type'=>PDO::PARAM_INT));
 			}
 		}
 		foreach ($new_publishers as $nid) {
 			if ($nid && !in_array($nid,$old_publishers)) {
 				#echo "Need to add publisher $nid<br>";
 				$sql_cmds[]="INSERT INTO games_publishers (gameid,pubid) VALUES(?,?)";
-				$sql_binds[]=array($game_id,$nid);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$nid,		'type'=>PDO::PARAM_INT));
 			}
 		}
 		foreach ($new_screenshots as $nid) {
 			if ($nid && !in_array($nid,$old_screenshots)) {
 				#echo "Need to add publisher $nid<br>";
 				$sql_cmds[]="INSERT INTO screenshots (gameid,filename,main) VALUES(?,?,?)";
-				$sql_binds[]=array($game_id,$nid,100);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$nid,		'type'=>PDO::PARAM_INT),
+							array('value'=>100,		'type'=>PDO::PARAM_INT));
 			}
 		}
 		foreach ($new_images as $nid) {
 			if ($nid && !in_array($nid,$old_images)) {
 				#echo "Need to add publisher $nid<br>";
 				$sql_cmds[]="INSERT INTO images (gameid,filename,customurl,main) VALUES(?,?,?,?)";
-				$sql_binds[]=array($game_id,$nid['filename'],$nid['customurl'],100);
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$nid['filename'],'type'=>PDO::PARAM_STR),
+							array('value'=>$nid['customurl'],'type'=>PDO::PARAM_STR),
+							array('value'=>100,		'type'=>PDO::PARAM_INT));
 			}
 		}
-
-
 		if ($sql_cmds) {	##################
 			foreach ($sql_cmds as $i => $sql) {
 				if (DEBUG) { echo "<br/>$i<pre>"; print_r($sql); echo "<br/>";print_r($sql_binds[$i]); echo "</pre>"; }
 				$sth = $dbh->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-				if (!$sth->execute($sql_binds[$i])) {
+				if (!executeWithDataTypes($sth,$sql_binds[$i])) {
 					echo "$sql gave ".$dbh->errorCode()."<br>\n";
 				}
 			}
@@ -526,7 +570,7 @@ function make_form($game_id,$r) {
 	echo "<form name='frmGame' method='POST' action='admin_game_details.php'>\n";
 	echo "<input type='hidden' name='id' value='$game_id'>\n";
 
-	echo "<label> Title <input type='text' name='title' size='80' value='".$r['title']."'/></label><br/><br/>";
+	echo "<label> Title <input type='text' name='title' size='80' value='".htmlspecialchars($r['title'],ENT_QUOTES)."'/></label><br/><br/>";
 	echo "<label> Parent ID <input type='text' name='parent' size='4' value='".$r['parent']."'/> ";
 	echo "Note: If populated, this game won't appear in the list, the parent needs to be ";
 	echo "returned in all relevant searches for this game.<br/><br/></label>";
@@ -653,4 +697,12 @@ function make_form($game_id,$r) {
 	echo "</form>\n";
 }
 
+function executeWithDataTypes(PDOStatement $sth, array $values) {
+    $count = 1;
+    foreach($values as $value) {
+        $sth->bindValue($count, $value['value'], $value['type']);
+        $count++;
+    }
+    return $sth->execute();
+}
 ?>
