@@ -1,5 +1,5 @@
 <?php
-define('DEBUG',false);
+define('DEBUG',true);
 
 session_start();
 if (!array_key_exists('bbcmicro',$_SESSION)) {
@@ -264,7 +264,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		}
 		foreach ($old_images as $oid) {
 			if ($oid && !in_array($oid,$new_images)) {
-				#echo "Need to remove publisher $oid<br>";
+				#echo "Need to remove image $oid<br>";
 				$sql_cmds[]="DELETE FROM images WHERE gameid=? AND filename=? AND main=?";
 				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
 							array('value'=>$oid['filename'],'type'=>PDO::PARAM_STR),
@@ -533,7 +533,7 @@ function get_game_images($dbh,$game_id) {
 	$sth->bindParam(1, $game_id, PDO::PARAM_INT);
 	if ($sth->execute()) {
 		while ($r=$sth->fetch()) {
-			$ret[]=array('id'=>$r['id'],'filename'=>$r['filename'],'customurl'=>$r['customurl']);
+			$ret[]=array('filename'=>$r['filename'],'customurl'=>$r['customurl']);
 		}
 		$sth->closeCursor();
 	} else {
