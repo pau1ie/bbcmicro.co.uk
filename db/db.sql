@@ -15964,7 +15964,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `users` (`id`, `username`, `description`, `locked`, `email`, `pwhash`, `lastupdater`, `lastupdated`) VALUES
-(1, 'pau1ie', 'Paul Houghton', 'N', 'paul_huffton@yahoo.co.uk', '$2y$10$j8N2bGwyad0a4DLgoirmIuP4BHimvUmq0cQeENpB034C5mK9nLAai', 1, '2017-03-26 23:50:03'),
+(1, 'pau1ie', 'Paul Houghton', 'N', '', '$2y$10$j8N2bGwyad0a4DLgoirmIuP4BHimvUmq0cQeENpB034C5mK9nLAai', 1, '2017-03-26 23:50:03'),
 (2, 'bob2', 'Mister Bob Two', 'N', 'Bobtwo at boob two dit com', '', 1, '2017-03-28 20:49:00');
 
 
