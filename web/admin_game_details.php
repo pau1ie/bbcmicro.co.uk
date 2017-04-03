@@ -1,5 +1,5 @@
 <?php
-define('DEBUG',true);
+define('DEBUG',false);
 
 session_start();
 if (!array_key_exists('bbcmicro',$_SESSION)) {
@@ -380,7 +380,7 @@ $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 #$sth->bindParam(1, $game_id, PDO::PARAM_INT);
 if ($sth->execute()) {
 	while ($r=$sth->fetch()) {
-		$reltyp_name=$r['name'];
+		$reltyp_name=$r['id'].' - '.$r['name'];
 		$known_reltyps[$r['id']]=$reltyp_name;
 	}
 	$sth->closeCursor();
