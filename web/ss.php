@@ -3,7 +3,7 @@
 require 'includes/config.php';
 require 'includes/db_connect.php';
 
-$sql="select g.id, g.title, g.year, g.genre, g.reltype, g.players_max, g.players_min, g.joystick, i.filename, r.name, g.save, g.hardware, g.electron, g.version, g.edit, g.series, g.series_no, g.notes from games g left join images i on g.id = i.gameid left join genres r on g.genre = r.id order by upper(substr(filename,1,7)), upper(g.title), i.filename COLLATE utf8_bin";
+$sql="select g.id, g.title, g.year, g.genre, g.reltype, g.players_max, g.players_min, g.joystick, i.filename, r.name, g.save, g.hardware, g.electron, g.version, g.compilation, g.series, g.series_no, g.notes from games g left join images i on g.id = i.gameid left join genres r on g.genre = r.id order by upper(substr(filename,1,7)), upper(g.title), i.filename COLLATE utf8_bin";
 
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if ($sth->execute()) {
@@ -27,7 +27,7 @@ $psql="select a.name from publishers a left join games_publishers ga on ga.pubid
 $psth = $db->prepare($psql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $psth->bindParam(1, $id, PDO::PARAM_INT);
 
-print("Disc,title,filename,publisher,Commercial,genre,genre2,year,author,playersmin,playersmax,save,hardware,electron,version,edit,series,seriws_no,notes\n" );
+#print("Disc,title,filename,publisher,Commercial,genre,genre2,year,author,playersmin,playersmax,save,hardware,electron,version,series,series_no,notes\n" );
 
 foreach ($res as $line) {
   // print_r($line);
@@ -126,13 +126,26 @@ foreach ($res as $line) {
 #  $ol[]=$line['players_min'];
 #  $ol[]=$line['players_max'];
 #  $ol[]=$line['joystick'];
-#  $ol[]=$line['save'];
-#  $ol[]=$line['hardware'];
-#  $ol[]=$line['electron'];
-#  $ol[]=$line['version'];
-#  $ol[]=$line['edit'];
-#  $ol[]=$line['series'];
-#  $ol[]=$line['series_no'];
+  if ( $line['save'] == 'D' or $line ['save'] =='T' ) {
+    $ol[]='ST'.$line['save'];
+  } else {
+    $ol[]=$line['save'];
+  }
+  #$ol[]=$line['compilation'];        		// Compilation
+  if (strpos($line['compilation'],',') === False) { 
+    $ol[]=$line['compilation'];
+  } else {
+    $ol[]='"' . $line['compilation'] . '"';
+  }
+
+  $ol[]=trim($line['series'].' '.$line['series_no']);
+  $ol[]=$line['hardware'];
+  if ($line['electron'] == 'Y') {
+    $ol[]=$line['electron'].'es';
+  } else {
+    $ol[]=$line['electron'];
+  }
+  $ol[]=$line['version'];
 #  $ol[]=$line['notes'];
   $ol2=implode(',',$ol);
   print ($ol2 . "\n");

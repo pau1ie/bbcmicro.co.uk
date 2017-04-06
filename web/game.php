@@ -15,7 +15,7 @@ if ( isset($_GET["h"])) {
   $h="i";
 }
 
-$sql = "select g.id, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.edit, g.series, g.series_no, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.compilation, g.electron, g.series, g.series_no, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -276,11 +276,16 @@ if ( ! empty($authors)) {
    $el='';
    if (!empty($game['electron'])) {
       if ( $game['electron'] == 'Y' ) {
-          $el = 'Electron conversion';
+          $el = 'Yes';
       } else {
           $el=$game['electron'];
       }
-      $el = "<tr><th>Source</th><td>" . $el . "</td></tr>";
+      $el = "<tr><th>Electron Release</th><td>" . $el . "</td></tr>";
+   }
+
+   $cmp='';
+   if (!empty($game['compilation'])) {
+      $cmp = "<tr><th>Compilation</th><td>" . $game['compilation'] . "</td></tr>";
    }
 
    $sr='';
@@ -325,6 +330,7 @@ if ( ! empty($authors)) {
             <?php echo $hw;?>
             <?php echo $el;?>
             <?php echo $ver;?>
+            <?php echo $cmp;?>
             <?php echo $sr;?>
             <?php echo $sn;?>
             <?php echo $ed;?>

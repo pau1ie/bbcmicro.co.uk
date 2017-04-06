@@ -18,16 +18,16 @@ show_admin_menu();
 #	'2'=>'Two banks of sideways RAM Required',
 #	'M'=>'Master Only',
 #	'8'=>'8271 DFS Only'];
-$known_hardware=['Sideways Ram Required' => 'Sideways Ram Required',
-	'Sideways Ram used if fitted'=>'Sideways Ram used if fitted',
-	'Two banks of sideways RAM Required'=>'Two banks of sideways RAM Required',
-	'Master Only'=>'Master Only',
-	'8271 DFS Only'=>'8271 DFS Only'];
+#$known_hardware=['Sideways Ram Required' => 'Sideways Ram Required',
+#	'Sideways Ram used if fitted'=>'Sideways Ram used if fitted',
+#	'Two banks of sideways RAM Required'=>'Two banks of sideways RAM Required',
+#	'Master Only'=>'Master Only',
+#	'8271 DFS Only'=>'8271 DFS Only'];
 
 $jopts=[ 'R' => 'Required', 'O' => 'Optional' ];
 $sopts=[ 'D' => 'Save to Disc', 'T' => 'Save to Tape' ];
 $eopts=[ 'Y' => 'Yes' ];
-$drops=array( 'joystick','save','hardware','electron');
+$drops=array( 'joystick','save','electron');
 
 # GET params means want to edit a game ...
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -111,7 +111,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 		if ($game_id == null) {
 			# New entry
-			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, edit, series, series_no, lastupdater, lastupdated) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
+			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version,ff compilation, series, series_no, lastupdater, lastupdated) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
 			if ($_POST['parent'] == '0' || $_POST['parent'] == '' ) {
 				$p_parent = null;
 			} else {
@@ -132,11 +132,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			} else {
 				$p_save=$_POST['save'];
 			}
-			if ($_POST['hardware'] == '0') {
-				$p_hardware='';
-			} else {
-				$p_hardware=$_POST['hardware'];
-			}
+#			if ($_POST['hardware'] == '0') {
+#				$p_hardware='';
+#			} else {
+#				$p_hardware=$_POST['hardware'];
+#			}
 			if ($_POST['electron'] == '0') {
 				$p_electron='';
 			} else {
@@ -155,7 +155,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 					array('value' => $p_hardware, 		'type' => PDO::PARAM_STR),
 					array('value' => $p_electron, 		'type' => PDO::PARAM_STR),
 					array('value' => $_POST['version'], 	'type' => PDO::PARAM_STR),
-					array('value' => $_POST['edit'], 	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['compilation'],	'type' => PDO::PARAM_STR),
 					array('value' => $_POST['series'], 	'type' => PDO::PARAM_STR),
 					array('value' => $_POST['series_no'], 	'type' => PDO::PARAM_STR),
 					array('value' => $_SESSION['userid'], 	'type' => PDO::PARAM_INT));
@@ -169,7 +169,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			}
 		} else {
 			# An entry already exists. Compare it.
-			$s="SELECT id, parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, edit, series, series_no FROM games where id = ?";
+			$s="SELECT id, parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no FROM games where id = ?";
 
 			$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$sth->bindParam(1, $game_id, PDO::PARAM_INT);
@@ -390,7 +390,7 @@ if ($sth->execute()) {
 
 if ($game_id) {
 	$s="	SELECT 	id,title, parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save,
-			hardware, electron, version, edit, series, series_no,
+			hardware, electron, version, compilation, series, series_no,
 			(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') 
 				FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers,
 			(SELECT GROUP_CONCAT(CONCAT(authors.id,'|',authors.name) SEPARATOR '@') 
@@ -417,7 +417,7 @@ if ($game_id) {
 } else {
 	# Make an empty form
 	$r=['id'=>'','title'=>'','parent'=>'','year'=>'19XX','genre'=>'','reltype'=>'W','notes'=>'','players_min'=>'1', 'players_max'=>'1', 'joystick'=>'', 'save'=>'',
-		'hardware'=>'', 'electron'=>'', 'version'=>'', 'edit'=>'', 'series'=>'', 'series_no'=>'','publishers'=>'','authors'=>'',
+		'hardware'=>'', 'electron'=>'', 'version'=>'', 'compilation'=>'', 'series'=>'', 'series_no'=>'','publishers'=>'','authors'=>'',
 		'genres'=>'','images'=>'','screenshots'=>''];
 	make_form(0,$r);
 }
@@ -555,7 +555,7 @@ function make_dd($aid,$nam,$typ,$known) {
 }
 
 function make_form($game_id,$r) {
-	global $known_genres, $known_reltyps, $known_hardware, $known_publishers, $known_authors, $jopts, $sopts, $eopts;
+	global $known_genres, $known_reltyps, $known_publishers, $known_authors, $jopts, $sopts, $eopts;
 	if (DEBUG) { echo "<pre>"; print_r($r); echo "</pre>";}
 	$pubs=explode('@',$r['publishers']);
 	$names='';
@@ -604,20 +604,25 @@ function make_form($game_id,$r) {
 
 	echo "<br/><br/>";
 
-	$id=array_search($r['hardware'],$known_hardware);
-	echo "<label> Select any special hardware if required ";
-	echo make_dd($id,'hardware','Hardware',$known_hardware);
+#	$id=array_search($r['hardware'],$known_hardware);
+#	echo "<label> Select any special hardware if required ";
+#	echo make_dd($id,'hardware','Hardware',$known_hardware);
+#	echo "</label>";
+#	#echo "<br/><br/>";
+
+	echo "<label>Any special hardware required ";
+	echo "<input type='text' name='hardware' size='20' value='".htmlspecialchars($r['hardware'],ENT_QUOTES)."'/></label> ";
 	echo "</label>";
-	#echo "<br/><br/>";
 
 	echo "<label> Electron conversion ";
 	echo make_dd($r['electron'], 'electron','if converted',$eopts);
 	echo "</label>";
 
 	echo "<label> Version <input type='text' name='version' size='5' value='".$r['version']."'/></label> ";
-	echo "<label> Edit <input type='text' name='edit' size='25' value='".$r['edit']."'/></label><br/><br/>";
+	echo "<br/><br/>";
+	echo "<label> Compilation: <input type='text' name='compilation' size='20' value='".htmlspecialchars($r['compilation'],ENT_QUOTES)."'/></label> ";
 	echo "<label> Series - must be identical for each game in series ";
-	echo "<input type='text' name='series' size='20' value='".$r['series']."'/></label> ";
+	echo "<input type='text' name='series' size='20' value='".htmlspecialchars($r['series'],ENT_QUOTES)."'/></label> ";
 	echo "<label> Number in series <input type='text' name='series_no' size='15' value='".$r['series_no']."'/></label> ";
 	echo "<br/><br/>";
 
