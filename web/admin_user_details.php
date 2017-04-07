@@ -1,5 +1,5 @@
 <?php
-define('DEBUG',False);
+define('DEBUG',True);
 
 session_start();
 if (!array_key_exists('bbcmicro',$_SESSION)) {
@@ -79,8 +79,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			if (!empty($_POST['psw'] ) or !empty($_POST['psw2'])) {
 				if ($_POST['psw'] == $_POST['psw2']) {
 					if (strlen($_POST['psw']) > 8) {
-						$diffs[]='pwhash';
-						$bs[]=password_hash($_POST['psw'],PASSWORD_DEFAULT);
+						$diffs['pwhash']=password_hash($_POST['psw'],PASSWORD_DEFAULT);
 					} else {
 						$error='<p><i>Password not updated - too short</i></p>';
 					}
