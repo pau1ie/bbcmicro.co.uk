@@ -76,8 +76,8 @@ function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
       <div class="thumbnail text-center">
        <a href="game.php?id=<?php echo $id; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $image; ?>" class="pic"></a>
        <div class="row-title"><span class="row-title"><a href="game.php?id=<?php echo $id; ?>"><?php echo $title ?></a></span></div>
-       <div class="row-pubdt"><span class="row-pubdt"><a href="?pubid=<?php echo $pubid ?>"><?php echo $publisher?></a>
-       <br/><a href="?year=<?php echo $year ?>"><?php echo $year; ?></a></span></div>
+       <div class="row-pub"><a href="?pubid=<?php echo $pubid ?>"><?php echo $publisher?></a></div>
+       <div class="row-dt"><a href="?year=<?php echo $year ?>"><?php echo $year; ?></a></div>
 <?php
   $playlink=get_playlink($img,$jsbeeb,$root);
   if ($ssd != null && file_exists($ssd)) { ?>
@@ -302,7 +302,7 @@ function grid($state) {
 
   $scrsql = 'select filename from screenshots where gameid = :gameid order by main, id limit 1';
   $dscsql = 'select filename, customurl from images where gameid = :gameid order by main, id limit 1';
-  $pubsql = 'select id, name from publishers where id = (select pubid from games_publishers where gameid = :gameid and main = \'Y\' limit 1)';
+  $pubsql = 'select name from publishers where id in (select pubid from games_publishers where gameid = :gameid)';
   $scrpdo = $db->prepare($scrsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $dscpdo = $db->prepare($dscsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $pubpdo = $db->prepare($pubsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -355,14 +355,18 @@ function grid($state) {
         echo "Error:";
         $sim->debugDumpParams ();
       }
+      $pubs='';
       if ($pubpdo->execute()) {
-        $pub=$pubpdo->fetch(PDO::FETCH_ASSOC);
+        while($pub=$pubpdo->fetch(PDO::FETCH_ASSOC)) {
+          $pubs=$pubs.$pub['name'].', ';
+        }
       } else {
         echo "Error:";
         $sim->debugDumpParams ();
       }
+      $pubs=trim($pubs,', ');
 
-      gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $dnl ,htmlspecialchars($pub["name"]),$game["year"],$pub["id"]);
+      gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $dnl ,htmlspecialchars($pubs),$game["year"],$pub["id"]);
     }
     echo "    </div>\n";
     echo $pl;
@@ -378,6 +382,12 @@ function grid($state) {
     echo $sql;
     echo "\n\nSQL2:\n";
     echo $sql2;
+    echo "\n\nscrsql:\n";
+    echo $scrsql;
+    echo "\n\ndscsql:\n";
+    echo $dscsql;
+    echo "\n\npubsql:\n";
+    echo $pubsql;
     echo "\n\nState:\n";
     print_r($state);
     echo "</pre>";

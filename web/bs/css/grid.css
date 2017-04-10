@@ -1,0 +1,19 @@
+.thumbnail {
+  height: 100%;
+  margin-bottom: 0;
+}
+.thumb1 {
+  padding-bottom: 20px;
+}
+.row-title {
+  height: 48px;
+  line-height: 21px;
+  font-size: 20px;
+  font-weight: 300;
+  padding-top: 6px;
+  overflow: hidden;
+}
+.row-pub {
+  height: 20px;
+  overflow: hidden;
+}

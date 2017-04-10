@@ -27,7 +27,15 @@ $psql="select a.name from publishers a left join games_publishers ga on ga.pubid
 $psth = $db->prepare($psql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $psth->bindParam(1, $id, PDO::PARAM_INT);
 
-#print("Disc,title,filename,publisher,Commercial,genre,genre2,year,author,playersmin,playersmax,save,hardware,electron,version,series,series_no,notes\n" );
+?>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+</head>
+<body>
+<table><tr>
+<th>Disc</th><th>title</th><th>publisher</th><th>filename</th><th>Commercial</th><th>genre</th><th>genre2</th><th>year</th><th>author</th><th>playersmin</th><th>playersmax</th><th>joystick</th><th>save</th><th>hardware</th><th>series/no</th><th>hardware</th><th>electron</th><th>version</th></tr>
+<?php
 
 foreach ($res as $line) {
   // print_r($line);
@@ -71,72 +79,32 @@ foreach ($res as $line) {
 
   $ol[]=strtoupper($fp[0]); 	//Disc
 				// Title
-  if (strpos($line['title'],',') === False) { 
-    $ol[]=$line['title'];
-  } else {
-    $ol[]='"' . $line['title'] . '"';
-  }
+  $ol[]=$line['title'];
 
 				// Publisher
-  if (count($pubs) > 1) {
-    $ol[]='"'.implode(', ',$pubs).'"';
-  } else {
-    if (count($pubs) == 0 ) {
-      $ol[]='';
-    } else {
-      if (strpos($pubs[0],',') === False) { 
-        $ol[]=$pubs[0];
-      } else {
-        $ol[]='"' . $pubs[0] . '"';
-      }
-    }
-  }
+  $ol[]=implode(', ',$pubs);
 
   $ol[]=$line['filename'];	// Filename
 
   $ol[]=$line['reltype'];	// Release Type
   $ol[]=$line['name'];		// Authors
-  if ( count($gen2) > 1 ) {
-    $ol[]='"'.implode(', ',$gen2).'"';
-  } else {
-    $ol[]=implode('',$gen2);
-  }
+
+  $ol[]=implode('',$gen2);
+
   $ol[]=$line['year'];		// Year
-//  $ol[]='B';       		// Platform
-//  $ol[]='';        		// Problems
-//  $ol[]='C';       		// Source
-//  $ol[]='';        		// Availability
-  if (count($auths) > 1) {
-    $ol[]='"'.implode(', ',$auths).'"';
-  } else {
-    if (count($auths) == 0 ) {
-      $ol[]='';
-    } else {
-      $ol[]=$auths[0];
-    }
-  }
-#  if (count($auths) > 1) {
-#    $sauths=array_slice($auths,0,count($auths)-1);
-#    $aus='"'.implode(', ',$sauths);
-#    $aus=$aus . ' & ' . $auths[count($auths)-1] . '"';
-#    $ol[]=$aus;
-#  } else {
-#    $ol[]=implode('',$auths);
-#  }
-#  $ol[]=$line['players_min'];
-#  $ol[]=$line['players_max'];
-#  $ol[]=$line['joystick'];
+
+  $ol[]=implode(', ',$auths);
+
+  $ol[]=$line['players_min'];
+  $ol[]=$line['players_max'];
+  $ol[]=$line['joystick'];
   if ( $line['save'] == 'D' or $line ['save'] =='T' ) {
     $ol[]='ST'.$line['save'];
   } else {
     $ol[]=$line['save'];
   }
-  #$ol[]=$line['compilation'];        		// Compilation
-  if (strpos($line['compilation'],',') === False) { 
-    $ol[]=$line['compilation'];
-  } else {
-    $ol[]='"' . $line['compilation'] . '"';
-  }
+
+  $ol[]=$line['compilation'];
 
   $ol[]=trim($line['series'].' '.$line['series_no']);
   $ol[]=$line['hardware'];
@@ -147,7 +115,7 @@ foreach ($res as $line) {
   }
   $ol[]=$line['version'];
 #  $ol[]=$line['notes'];
-  $ol2=implode(',',$ol);
+  $ol2='<tr><td>'.implode('</td><td>',$ol).'</td></tr>';
   print ($ol2 . "\n");
 
 }

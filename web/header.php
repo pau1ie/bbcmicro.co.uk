@@ -20,23 +20,7 @@ global $site_name;
     <link href="bs/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="bs/offcanvas.css">
     <link rel="stylesheet" href="bs/css/typeahead.css">
-    <style type="text/css">
-      .thumbnail {
-        height: 100%;
-        margin-bottom: 0;
-      }
-      .thumb1 {
-        padding-bottom: 20px;
-      }
-      .row-title {
-        height: 48px;
-        line-height: 21px;
-        font-size: 20px;
-        font-weight: 300;
-        padding-top: 6px;
-        overflow: hidden;
-      }
-    </style>
+    <link rel="stylesheet" href="bs/css/grid.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
