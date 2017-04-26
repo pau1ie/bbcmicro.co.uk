@@ -2,7 +2,7 @@
 function get_playlink($image,$jsbeeb,$wsroot) {
 #  print_r($image);
   $url = Null;
-  if ($image['customurl'] === NULL ) {
+  if ($image['customurl'] === NULL or $image['customurl'] === '') {
     if ($image['filename'] === NULL ) {
       $ssd = null;
     } else {
