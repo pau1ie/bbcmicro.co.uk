@@ -38,19 +38,20 @@ $g2sql = "select id from genres g where g.name = ?";
 $g2sth = $db->prepare($g2sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $g2sth->bindParam(1, $g2n, PDO::PARAM_STR);
 
-$g2isql = "insert into games_publishers (gameid, pubid, main) values (?,?,'Y')";
+$g2isql = "insert into game_genre (gameid, genreid, ord) values (?,?,1)";
 $g2isth = $db->prepare($g2isql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
 $asql = "select id from authors a where a.name = ?";
 $asth = $db->prepare($asql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $asth->bindParam(1, $an, PDO::PARAM_STR);
 
-$aisql = "insert into games_publishers (gameid, pubid, main) values (?,?,'Y')";
+$aisql = "insert into games_authors (games_id, authors_id) values (?,?)";
 $aisth = $db->prepare($aisql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
 
 echo "<pre>";
 foreach ($res as $line) {
+  //print($line['title']."</br>");
   $sql_binds=array();
   // print_r($line);
 
@@ -142,7 +143,7 @@ foreach ($res as $line) {
   $sql_binds[]=array($rowid,PDO::PARAM_INT);
   $scr=substr($line['filename'],0,-3) . 'jpg';
   $sql_binds[]=array($scr,PDO::PARAM_STR);
-  executeWithDataTypes($sthf, $sql_binds);
+  executeWithDataTypes($sths, $sql_binds);
 
   // Publisher
   $sql_binds=array();
@@ -154,7 +155,7 @@ foreach ($res as $line) {
       echo "Missing publisher for ".$line['title']." - ".$line['publisher']."<br/>";
     } else {
       $parr=$psth->fetchAll(PDO::FETCH_ASSOC);
-      $pubid=array($parr[0]['id'],PDO::PARAM_INT);
+      $pubid=$parr[0]['id'];
     }
   } else {
     $pubid = null;
@@ -162,7 +163,7 @@ foreach ($res as $line) {
   if ( !($pubid === null )) {
     $sql_binds[]=array($rowid,PDO::PARAM_INT);
     $sql_binds[]=array($pubid,PDO::PARAM_INT);
-    executeWithDataTypes($sthf, $sql_binds);
+    executeWithDataTypes($pisth, $sql_binds);
   }
 
   // Genre 2
@@ -175,7 +176,7 @@ foreach ($res as $line) {
       echo "Missing genre2 for ".$line['title']." - ".$line['genre2']."<br/>";
     } else {
       $g2arr=$g2sth->fetchAll(PDO::FETCH_ASSOC);
-      $g2id=array($g2arr[0]['id'],PDO::PARAM_INT);
+      $g2id=$g2arr[0]['id'];
     }
   } else {
     $g2id = null;
@@ -196,7 +197,7 @@ foreach ($res as $line) {
       echo "Missing author for ".$line['title']." - ".$line['author']."<br/>";
     } else {
       $aarr=$asth->fetchAll(PDO::FETCH_ASSOC);
-      $aid=array($aarr[0]['id'],PDO::PARAM_INT);
+      $aid=$aarr[0]['id'];
     }
   } else {
     $aid = null;
@@ -212,11 +213,15 @@ foreach ($res as $line) {
 
 
 function executeWithDataTypes(PDOStatement $sth, array $values) {
+    //echo "<pre>";
+    //print_r($values);
+    //echo "</pre>";
     $count = 1;
     foreach($values as $value) {
         $sth->bindValue($count, $value[0], $value[1]);
         $count++;
     }
-    //return $sth->execute();
+    //$sth->debugDumpParams();
+    return $sth->execute();
 }
 ?>
