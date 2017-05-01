@@ -76,7 +76,7 @@ function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
       <div class="thumbnail text-center">
        <a href="game.php?id=<?php echo $id; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $image; ?>" class="pic"></a>
        <div class="row-title"><span class="row-title"><a href="game.php?id=<?php echo $id; ?>"><?php echo $title ?></a></span></div>
-       <div class="row-pub"><a href="?pubid=<?php echo $pubid ?>"><?php echo $publisher?></a></div>
+       <div class="row-pub"><?php echo $publisher ?></div>
        <div class="row-dt"><a href="?year=<?php echo $year ?>"><?php echo $year; ?></a></div>
 <?php
   $playlink=get_playlink($img,$jsbeeb,$root);
@@ -302,7 +302,7 @@ function grid($state) {
 
   $scrsql = 'select filename from screenshots where gameid = :gameid order by main, id limit 1';
   $dscsql = 'select filename, customurl from images where gameid = :gameid order by main, id limit 1';
-  $pubsql = 'select name from publishers where id in (select pubid from games_publishers where gameid = :gameid)';
+  $pubsql = 'select id,name from publishers where id in (select pubid from games_publishers where gameid = :gameid)';
   $scrpdo = $db->prepare($scrsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $dscpdo = $db->prepare($dscsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $pubpdo = $db->prepare($pubsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -358,7 +358,7 @@ function grid($state) {
       $pubs='';
       if ($pubpdo->execute()) {
         while($pub=$pubpdo->fetch(PDO::FETCH_ASSOC)) {
-          $pubs=$pubs.$pub['name'].', ';
+          $pubs=$pubs.'<a href="?pubid='.$pub['id'].'">'.htmlspecialchars($pub['name']).'</a>, ';
         }
       } else {
         echo "Error:";
@@ -366,7 +366,7 @@ function grid($state) {
       }
       $pubs=trim($pubs,', ');
 
-      gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $dnl ,htmlspecialchars($pubs),$game["year"],$pub["id"]);
+      gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $dnl ,$pubs,$game["year"],$pub["id"]);
     }
     echo "    </div>\n";
     echo $pl;
