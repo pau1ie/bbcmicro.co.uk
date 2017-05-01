@@ -68,8 +68,6 @@ function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
    $split=explode('(',$name);
    $title=$split[0];
    
-   $split=explode('(',$publisher);
-   $publisher=$split[0];
    $ssd = 'gameimg/discs/' . $img["filename"];
 ?>
      <div class="col-sm-6 col-md-4 col-lg-3 thumb1">
@@ -358,7 +356,9 @@ function grid($state) {
       $pubs='';
       if ($pubpdo->execute()) {
         while($pub=$pubpdo->fetch(PDO::FETCH_ASSOC)) {
-          $pubs=$pubs.'<a href="?pubid='.$pub['id'].'">'.htmlspecialchars($pub['name']).'</a>, ';
+          $t=explode(' (',$pub['name']);
+          $u=htmlspecialchars($t[0]);
+          $pubs=$pubs.'<a href="?pubid='.$pub['id'].'">'.$u.'</a>, ';
         }
       } else {
         echo "Error:";
