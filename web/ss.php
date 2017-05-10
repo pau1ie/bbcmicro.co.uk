@@ -88,34 +88,44 @@ foreach ($res as $line) {
   $ol[]=$line['filename'];	// Filename
 
   $ol[]=$line['reltype'];	// Release Type
-  $ol[]=$line['name'];		// Authors
+  $ol[]=$line['name'];		// Genre1
 
-  $ol[]=implode('',$gen2);
+  $ol[]=implode(', ',$gen2);	// Genre2
 
   $ol[]=$line['year'];		// Year
 
-  $ol[]=implode(', ',$auths);
+#  $ol[]=$line['notes'];	// Notes
 
-  $ol[]=$line['players_min'];
-  $ol[]=$line['players_max'];
-  $ol[]=$line['joystick'];
+  $ol[]=implode(', ',$auths);	// Authors
+
+				// Save
   if ( $line['save'] == 'D' or $line ['save'] =='T' ) {
     $ol[]='ST'.$line['save'];
   } else {
     $ol[]=$line['save'];
   }
 
-  $ol[]=$line['compilation'];
+  $ol[]=$line['joystick'];	// Joystick
 
+  $ol[]=$line['compilation'];	// Compilation
+
+				// Series.no
   $ol[]=trim($line['series'].' '.$line['series_no']);
-  $ol[]=$line['hardware'];
+
+  $ol[]=$line['players_min'];	// Players
+  $ol[]=$line['players_max'];
+
+  $ol[]=$line['hardware'];	// Hardware
+
+				// Electron release
   if ($line['electron'] == 'Y') {
     $ol[]=$line['electron'].'es';
   } else {
     $ol[]=$line['electron'];
   }
-  $ol[]=$line['version'];
-#  $ol[]=$line['notes'];
+
+  $ol[]=$line['version'];	// Version
+
   $ol2='<tr><td>'.implode('</td><td>',$ol).'</td></tr>';
   print ($ol2 . "\n");
 
