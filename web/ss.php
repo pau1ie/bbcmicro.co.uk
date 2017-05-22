@@ -35,7 +35,7 @@ $psth->bindParam(1, $id, PDO::PARAM_INT);
 </head>
 <body>
 <table><tr>
-<th>Disc</th><th>title</th><th>publisher</th><th>filename</th><th>Commercial</th><th>genre</th><th>genre2</th><th>year</th><th>author</th><th>playersmin</th><th>playersmax</th><th>joystick</th><th>save</th><th>hardware</th><th>series/no</th><th>hardware</th><th>electron</th><th>version</th></tr>
+<th>Disc</th><th>title</th><th>publisher</th><th>filename</th><th>Commercial</th><th>genre</th><th>genre2</th><th>year</th><th>author</th><th>save</th><th>joystick</th><th>Compilation</th><th>series/no</th><th>playersmin</th><th>playersmax</th><th>hardware</th><th>electron</th><th>version</th></tr>
 <?php
 
 foreach ($res as $line) {
