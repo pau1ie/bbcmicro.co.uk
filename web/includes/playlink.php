@@ -1,4 +1,20 @@
 <?php
+function get_scrshot($file,$subdir) {
+  $di='gameimg/screenshots/default.jpg';
+  if ($subdir === NULL or $subdir === '') {
+    $imgfile = 'gameimg/screenshots/' . $file;
+  } else {
+    $imgfile = 'gameimg/screenshots/' . $subdir . '/' . $file;
+  }
+  if ($file === NULL || $file === '') {
+    $imgfile=$di;
+  }
+  if (!file_exists($imgfile)) {
+    $imgfile=$di;
+  }
+  return $imgfile;
+}
+
 function get_playlink($image,$jsbeeb,$wsroot) {
 #  print_r($image);
   $url = Null;

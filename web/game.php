@@ -4,8 +4,6 @@ require 'includes/db_connect.php';
 require 'includes/menu.php';
 require 'includes/playlink.php';
 
-define('SCR_LOC','gameimg/screenshots/');
-
 $id=0;
 
 if ( isset($_GET["id"])) {
@@ -41,11 +39,10 @@ if ($sth->execute()) {
   $shot=array();
 }
 if ( empty($shot) ) {
-  $shot[] = array( "filename" => 'default.jpg' );
+  $shot[] = array( "filename" => NULL, "subdir" => NULL );
 }
-if (!file_exists(SCR_LOC.$shot[0]['filename']) ) {
-  $shot[0] = array( "filename" => 'default.jpg' );
-}
+
+$scrshot=get_scrshot($shot[0]['filename'],$shot[0]['subdir']);
 
 $sql = "select * from images where gameid  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -211,7 +208,7 @@ if ( ! empty($authors)) {
     <meta property="og:type"               content="website" />
     <meta property="og:title"              content="<?php echo $game["title"]; ?>" />
     <meta property="og:description"        content="<?php echo "Published by " . $names . " in " . $game["year"];?>" />
-    <meta property="og:image"              content="<?php echo WS_ROOT . SCR_LOC . $shot[0]["filename"]; ?>" />
+    <meta property="og:image"              content="<?php echo WS_ROOT . '/' . $scrshot; ?>" />
   </head>
 
   <body>
@@ -240,7 +237,7 @@ if ( ! empty($authors)) {
       <div class="row">
         <div class="col-md-8">
           <h2>Screen Shot</h2>
-          <p><img src="<?php echo SCR_LOC . $shot[0]["filename"];?>" class="img-responsive"></p><p>&nbsp;</p>
+          <p><img src="<?php echo $scrshot;?>" class="img-responsive"></p><p>&nbsp;</p>
 <?php
    if ($game["notes"]!=Null ) {
       echo "<h2>Notes</h2><p>".$game["notes"]."</p>";

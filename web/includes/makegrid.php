@@ -298,7 +298,7 @@ function grid($state) {
     echo "</pre>";
   }
 
-  $scrsql = 'select filename from screenshots where gameid = :gameid order by main, id limit 1';
+  $scrsql = 'select filename, subdir from screenshots where gameid = :gameid order by main, id limit 1';
   $dscsql = 'select filename, customurl from images where gameid = :gameid order by main, id limit 1';
   $pubsql = 'select id,name from publishers where id in (select pubid from games_publishers where gameid = :gameid)';
   $scrpdo = $db->prepare($scrsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -338,11 +338,7 @@ function grid($state) {
       $pubpdo->bindParam(':gameid',$game["id"], PDO::PARAM_INT);
       if ($scrpdo->execute()) {
         $img=$scrpdo->fetch(PDO::FETCH_ASSOC);
-        if (is_null($img["filename"])||!file_exists('gameimg/screenshots/'.$img["filename"])) {
-          $shot="default.jpg";
-        } else {
-          $shot = $img["filename"];
-        }
+        $shot = get_scrshot($img['filename'],$img['subdir']);
       } else {
         echo "Error:";
         $sim->debugDumpParams ();
@@ -366,7 +362,7 @@ function grid($state) {
       }
       $pubs=trim($pubs,', ');
 
-      gameitem($game["id"],htmlspecialchars($game["title"]),'gameimg/screenshots/' . $shot, $dnl ,$pubs,$game["year"],$pub["id"]);
+      gameitem($game["id"],htmlspecialchars($game["title"]), $shot, $dnl ,$pubs,$game["year"],$pub["id"]);
     }
     echo "    </div>\n";
     echo $pl;

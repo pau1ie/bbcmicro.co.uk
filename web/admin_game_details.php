@@ -45,8 +45,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		$new_authors=array();
 		$new_genres=array();
 		$new_publishers=array();
-		$new_screenshots=array();
-		$new_images=array();
 		foreach ($_POST as $k=>$v) {
 			if (preg_match('/^author_([0-9]{2})/',$k,$matches)) {
 				$new_authors[$matches[1]]=$v;
@@ -58,22 +56,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			if (preg_match('/^publisher_([0-9]{2})/',$k,$matches)) {
 				$new_publishers[$matches[1]]=$v;
 			}
-			if ($k=='screenshot') {
-				$new_screenshots[0]=$v;
-			}
-			if ($k=='image') {
-				$new_images[0]['filename']=$v;
-			}
-			if ($k=='customurl') {
-				$new_images[0]['customurl']=$v;
-			}
 		}
 		# Let's make sure the database matches the new authors list we just got
 		$old_authors=get_game_authors($dbh,$game_id);
 		$old_genres=get_game_genres($dbh,$game_id);
 		$old_publishers=get_game_pubs($dbh,$game_id);
-		$old_images=get_game_images($dbh,$game_id);
-		$old_screenshots=get_game_shots($dbh,$game_id);
 		if (DEBUG) {
 			echo "<br/>OLD Authors<hr><pre>";
 			print_r($old_authors);
@@ -91,19 +78,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			echo "NEW Publishers<hr><pre>";
 			print_r($new_publishers);
 			echo "</pre>";
-			echo "</pre><br/>OLD Screenshots<hr><pre>";
-			print_r($old_screenshots);
-			echo "<br></pre>";
-			echo "NEW Screenshots<hr><pre>";
-			print_r($new_screenshots);
-			echo "</pre>";
-			echo "</pre><br/>OLD images<hr><pre>";
-			print_r($old_images);
-			echo "<br></pre>";
-			echo "NEW Images<hr><pre>";
-			print_r($new_images);
-			echo "</pre>";
-
 		}
 		$sql_cmds=array();
 		$sql_binds=array();
@@ -132,11 +106,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			} else {
 				$p_save=$_POST['save'];
 			}
-#			if ($_POST['hardware'] == '0') {
-#				$p_hardware='';
-#			} else {
-#				$p_hardware=$_POST['hardware'];
-#			}
 			if ($_POST['electron'] == '0') {
 				$p_electron='';
 			} else {
@@ -253,24 +222,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 							array('value'=>$oid,		'type'=>PDO::PARAM_INT));
 			}
 		}
-		foreach ($old_screenshots as $oid) {
-			if ($oid && !in_array($oid,$new_screenshots)) {
-				#echo "Need to remove publisher $oid<br>";
-				$sql_cmds[]="DELETE FROM screenshots WHERE gameid=? AND filename=? AND main=?";
-				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
-							array('value'=>$oid,		'type'=>PDO::PARAM_INT),
-							array('value'=>100,		'type'=>PDO::PARAM_INT));
-			}
-		}
-		foreach ($old_images as $oid) {
-			if ($oid && !in_array($oid,$new_images)) {
-				#echo "Need to remove image $oid<br>";
-				$sql_cmds[]="DELETE FROM images WHERE gameid=? AND filename=? AND main=?";
-				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
-							array('value'=>$oid['filename'],'type'=>PDO::PARAM_STR),
-							array('value'=>100,		'type'=>PDO::PARAM_INT));
-			}
-		}
 
 		# So if anything in the NEW list that is NOT in the old, we need to add
 		foreach ($new_authors as $nid) {
@@ -297,25 +248,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 							array('value'=>$nid,		'type'=>PDO::PARAM_INT));
 			}
 		}
-		foreach ($new_screenshots as $nid) {
-			if ($nid && !in_array($nid,$old_screenshots)) {
-				#echo "Need to add publisher $nid<br>";
-				$sql_cmds[]="INSERT INTO screenshots (gameid,filename,main) VALUES(?,?,?)";
-				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
-							array('value'=>$nid,		'type'=>PDO::PARAM_INT),
-							array('value'=>100,		'type'=>PDO::PARAM_INT));
-			}
-		}
-		foreach ($new_images as $nid) {
-			if ($nid && !in_array($nid,$old_images)) {
-				#echo "Need to add publisher $nid<br>";
-				$sql_cmds[]="INSERT INTO images (gameid,filename,customurl,main) VALUES(?,?,?,?)";
-				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
-							array('value'=>$nid['filename'],'type'=>PDO::PARAM_STR),
-							array('value'=>$nid['customurl'],'type'=>PDO::PARAM_STR),
-							array('value'=>100,		'type'=>PDO::PARAM_INT));
-			}
-		}
+
 		if ($sql_cmds) {	##################
 			foreach ($sql_cmds as $i => $sql) {
 				if (DEBUG) { echo "<br/>$i<pre>"; print_r($sql); echo "<br/>";print_r($sql_binds[$i]); echo "</pre>"; }
@@ -396,11 +329,7 @@ if ($game_id) {
 			(SELECT GROUP_CONCAT(CONCAT(authors.id,'|',authors.name) SEPARATOR '@') 
 				FROM games_authors LEFT JOIN authors ON authors_id=authors.id WHERE games_id=games.id) AS authors,
 			(SELECT GROUP_CONCAT(CONCAT(genres.id,'|',genres.name) SEPARATOR '@') 
-				FROM game_genre LEFT JOIN genres ON genreid=genres.id WHERE gameid=games.id order by game_genre.id) AS genres,
-			(select group_concat(concat(images.id,'|',images.filename,'|',IFNULL(customurl, '')) SEPARATOR '@')
-				FROM images where images.gameid = games.id and main=100) AS images,
-			(select group_concat(concat(screenshots.id,'|',screenshots.filename) SEPARATOR '@')
-				FROM screenshots where screenshots.gameid = games.id and main=100) AS screenshots
+				FROM game_genre LEFT JOIN genres ON genreid=genres.id WHERE gameid=games.id order by game_genre.id) AS genres
 			FROM 		games 
 			WHERE		id=?";
 
@@ -416,13 +345,13 @@ if ($game_id) {
 	}
 } else {
 	# Make an empty form
-	$r=['id'=>'','title'=>'','parent'=>'','year'=>'19XX','genre'=>'','reltype'=>'W','notes'=>'','players_min'=>'1', 'players_max'=>'1', 'joystick'=>'', 'save'=>'',
-		'hardware'=>'', 'electron'=>'', 'version'=>'', 'compilation'=>'', 'series'=>'', 'series_no'=>'','publishers'=>'','authors'=>'',
-		'genres'=>'','images'=>'','screenshots'=>''];
+	$r=['id'=>'','title'=>'','parent'=>'','year'=>'19XX','genre'=>'',
+            'reltype'=>'W','notes'=>'','players_min'=>'1', 'players_max'=>'1',
+            'joystick'=>'', 'save'=>'','hardware'=>'', 'electron'=>'',
+            'version'=>'', 'compilation'=>'', 'series'=>'', 'series_no'=>'',
+            'publishers'=>'','authors'=>'','genres'=>''];
 	make_form(0,$r);
 }
-
-
 
 exit;
 
@@ -503,48 +432,6 @@ function get_game_pubs($dbh,$game_id) {
 	return $ret;
 }
 
-function get_game_shots($dbh,$game_id) {
-	$ret=array();
-
-	$s="SELECT * from screenshots where gameid = ?";
-
-	$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-	$sth->bindParam(1, $game_id, PDO::PARAM_INT);
-	if ($sth->execute()) {
-		while ($r=$sth->fetch()) {
-			$ret[]=$r['filename'];
-		}
-		$sth->closeCursor();
-	} else {
-		echo "Error:";
-		echo "\n";
-		$sth->debugDumpParams ();
-		echo "$s gave ".$dbh->errorCode()."<br>\n";
-	}
-	return $ret;
-}
-
-function get_game_images($dbh,$game_id) {
-	$ret=array();
-
-	$s="SELECT * from images where gameid = ?";
-
-	$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-	$sth->bindParam(1, $game_id, PDO::PARAM_INT);
-	if ($sth->execute()) {
-		while ($r=$sth->fetch()) {
-			$ret[]=array('filename'=>$r['filename'],'customurl'=>$r['customurl']);
-		}
-		$sth->closeCursor();
-	} else {
-		echo "Error:";
-		echo "\n";
-		$sth->debugDumpParams ();
-		echo "$s gave ".$dbh->errorCode()."<br>\n";
-	}
-	return $ret;
-}
-
 function make_dd($aid,$nam,$typ,$known) {
 	echo "<select name='$nam'>\n<option value='0'>-- Select $typ --</option>";
 	foreach ($known as $id=>$name) {
@@ -595,7 +482,6 @@ function make_form($game_id,$r) {
 	echo "<label>If a joystick is used, select whether it is optional or required.  ";
 	echo make_dd($r['joystick'], 'joystick','Joystick',$jopts);
 	echo "</label>";
-	#echo "<br/><br/>";
 
 	# Save
 	echo "<label>If game state can be saved, select disc or tape as the target.  ";
@@ -603,12 +489,6 @@ function make_form($game_id,$r) {
 	echo "</label>";
 
 	echo "<br/><br/>";
-
-#	$id=array_search($r['hardware'],$known_hardware);
-#	echo "<label> Select any special hardware if required ";
-#	echo make_dd($id,'hardware','Hardware',$known_hardware);
-#	echo "</label>";
-#	#echo "<br/><br/>";
 
 	echo "<label>Any special hardware required ";
 	echo "<input type='text' name='hardware' size='20' value='".htmlspecialchars($r['hardware'],ENT_QUOTES)."'/></label> ";
@@ -625,27 +505,6 @@ function make_form($game_id,$r) {
 	echo "<input type='text' name='series' size='20' value='".htmlspecialchars($r['series'],ENT_QUOTES)."'/></label> ";
 	echo "<label> Number in series <input type='text' name='series_no' size='15' value='".$r['series_no']."'/></label> ";
 	echo "<br/><br/>";
-
-	$screenshots=explode('@',$r['screenshots']);
-	if (False===strpos($screenshots[0],'|')) {
-		$sid=0;
-		$sname='';
-	} else {
-		list($sid,$sname)=explode('|',$screenshots[0]);
-	}
-	echo "<label> Screenshot <input type='text' name='screenshot' size='40' value='".$sname."'/></label> ";
-
-	$images=explode('@',$r['images']);
-	if (False===strpos($images[0],'|')) {
-		$iid=0;
-		$iname='';
-		$iurl='';
-	} else {
-		list($iid,$iname,$iurl)=explode('|',$images[0]);
-	}
-
-	echo "<label> Disc image file <input type='text' name='image' size='40' value='".$iname."'/></label><br/><br/>";
-	echo "<label> Custom URL for jsbeeb <input type='text' name='customurl' size='40' value='".$iurl."'/> Enter NONE to not play in jsbeeb. %jsbeeb% for the jsbeeb location, and %wsurl% for the base URL of the website.</label><br/><br/>";
 
 	echo "<label>Authors<br/>";
 	# Authors
