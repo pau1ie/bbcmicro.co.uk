@@ -68,7 +68,7 @@ function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
    $split=explode('(',$name);
    $title=$split[0];
    
-   $ssd = 'gameimg/discs/' . $img["filename"];
+   $ssd = get_discloc($img["filename"],$img['subdir']);
 ?>
      <div class="col-sm-6 col-md-4 col-lg-3 thumb1">
       <div class="thumbnail text-center">
@@ -299,7 +299,7 @@ function grid($state) {
   }
 
   $scrsql = 'select filename, subdir from screenshots where gameid = :gameid order by main, id limit 1';
-  $dscsql = 'select filename, customurl from images where gameid = :gameid order by main, id limit 1';
+  $dscsql = 'select filename, subdir, customurl from images where gameid = :gameid order by main, id limit 1';
   $pubsql = 'select id,name from publishers where id in (select pubid from games_publishers where gameid = :gameid)';
   $scrpdo = $db->prepare($scrsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $dscpdo = $db->prepare($dscsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

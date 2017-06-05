@@ -56,7 +56,7 @@ if ($sth->execute()) {
   $img=array();
 }
 
-$ssd = 'gameimg/discs/' . $img["filename"];
+$ssd = get_discloc($img["filename"],$img['subdir']);
 $jsbeeb=JB_LOC;
 $root=WS_ROOT;
 

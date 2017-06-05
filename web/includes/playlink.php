@@ -16,16 +16,11 @@ function get_scrshot($file,$subdir) {
 }
 
 function get_playlink($image,$jsbeeb,$wsroot) {
-#  print_r($image);
   $url = Null;
   if ($image['customurl'] === NULL or $image['customurl'] === '') {
-    if ($image['filename'] === NULL ) {
-      $ssd = null;
-    } else {
-      $ssd = 'gameimg/discs/' . $image["filename"];
-      if (file_exists($ssd)) {
-        $url = $jsbeeb . $wsroot . '/' . $ssd;
-      }
+    $ssd=get_discloc($image['filename'],$image['subdir']);
+    if (file_exists($ssd)) {
+      $url = $jsbeeb . $wsroot . '/' . $ssd;
     }
   } else {
     if ($image['customurl']=='NONE') {
@@ -35,7 +30,22 @@ function get_playlink($image,$jsbeeb,$wsroot) {
       $url = str_replace('%wsroot%',$wsroot,$url);
     }
   }
-#  echo "URL:".$url."\n";
   return $url;
+}
+
+function get_discloc($file,$subdir) {
+  $di = Null;
+  if ($subdir === NULL or $subdir === '') {
+    $imgfile = 'gameimg/discs/' . $file;
+  } else {
+    $imgfile = 'gameimg/discs/' . $subdir . '/' . $file;
+  }
+  if ($file === NULL || $file === '') {
+    $imgfile=$di;
+  }
+  if (!file_exists($imgfile)) {
+    $imgfile=$di;
+  }
+  return $imgfile;
 }
 ?>
