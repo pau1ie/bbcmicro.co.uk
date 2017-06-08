@@ -24,8 +24,8 @@ $s="	SELECT 		id,title,year,
 
 $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if ($sth->execute()) {
+	echo $sth->rowCount()." games. <a href='admin_game_details.php?id=0'>New game</a><hr>";
 	if ($sth->rowCount()) {
-		echo $sth->rowCount()." games. <a href='admin_game_details.php?id=0'>New game</a><hr>";
 		echo "<table>\n";
 		echo "<tr><td><b>Title</b></td><td><b>Year</b><td><b>Publisher</b></td></td>";
 //		echo "<td><b>Authors</b></td>";
@@ -50,23 +50,12 @@ if ($sth->execute()) {
 			}
 			echo "</a></td>";
 
-//			echo "<td><a href='admin_game_details.php?id=".$r['id']."'>";
-//			$authors=explode('@',$r['authors']);
-//			$names='';
-//			foreach ($authors as $author) {
-//				if ($author) {
-//					list($id,$name)=explode('|',$author);
-//					if ($name) $names.="$name, ";
-//				}
-//			}
-//			if ($names) {
-//				echo substr($names,0,strlen($names)-2);
-//			} else {
-//				echo "<i>None</i>";
-//			}
-//			echo "</a></td>";
-			echo "<td><a href='admin_file.php?t=s&id=".$r['id']."'>".$r['screenshot']."</a></td>";
-			echo "<td><a href='admin_file.php?t=d&id=".$r['id']."'>".$r['disc']."</a></td>";
+			echo "<td><a href='admin_file.php?t=s&id=".$r['id']."'>";
+			if (empty($r['screenshot'])) echo "None"; else echo $r['screenshot'];
+			echo "</a></td>";
+			echo "<td><a href='admin_file.php?t=d&id=".$r['id']."'>";
+			if (empty($r['disc'])) echo "None"; else echo $r['disc'];
+			echo "</a></td>";
 			echo "</tr>\n";
 		}
 		echo "</table>\n";

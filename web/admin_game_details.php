@@ -1,5 +1,5 @@
 <?php
-define('DEBUG',false);
+define('DEBUG',true);
 
 session_start();
 if (!array_key_exists('bbcmicro',$_SESSION)) {
@@ -85,7 +85,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 		if ($game_id == null) {
 			# New entry
-			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version,ff compilation, series, series_no, lastupdater, lastupdated) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
+			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, lastupdater, lastupdated) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
 			if ($_POST['parent'] == '0' || $_POST['parent'] == '' ) {
 				$p_parent = null;
 			} else {
@@ -121,7 +121,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 					array('value' => $_POST['players_max'], 'type' => PDO::PARAM_INT),
 					array('value' => $p_joystick, 		'type' => PDO::PARAM_STR),
 					array('value' => $p_save, 		'type' => PDO::PARAM_STR),
-					array('value' => $p_hardware, 		'type' => PDO::PARAM_STR),
+					array('value' => $_POST['hardware'], 	'type' => PDO::PARAM_STR),
 					array('value' => $p_electron, 		'type' => PDO::PARAM_STR),
 					array('value' => $_POST['version'], 	'type' => PDO::PARAM_STR),
 					array('value' => $_POST['compilation'],	'type' => PDO::PARAM_STR),
@@ -133,7 +133,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			if (executeWithDataTypes($sth,$sbinds)) {
 				$game_id = $dbh->lastInsertId();
 			} else {
-				echo "$s gave ".$dbh->errorCode()."<br>\n";
+				echo "Error: $s gave ".$dbh->errorCode()."<br><pre>\n";
+				print_r($sbinds);
+				echo "</pre>";
 				exit();
 			}
 		} else {
