@@ -93,7 +93,7 @@ function randomgame() {
     $sth->debugDumpParams ();
     $res=array();
   }
-  $n=rand(1,$res[0][0]);
+  $n=rand(1,$res[0][0])-1;
 
   $sql = "select id from games limit ?,1";
   $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
