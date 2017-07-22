@@ -1,5 +1,5 @@
 <?php
-define('DEBUG',true);
+define('DEBUG',false);
 
 session_start();
 if (!array_key_exists('bbcmicro',$_SESSION)) {

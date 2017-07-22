@@ -19,10 +19,6 @@ define('ADMIN_DB_NAME',DB_NAME);
 define('ADMIN_DB_USER',DB_USER);
 define('ADMIN_DB_PASS',DB_PASS);
 
-# One hard coded administrator. username is clear text, password is a hashed password (Using password_hash)
-define('ADMIN_USER','Administrator');
-define('ADMIN_PASS','$2y$10$phL1hGqXyHlYsDcttcu9Iuf15.f33r954uIq8DHJJGrBaUZ7WCHgW');
-
 # (Mostly) For use with jsbeeb
 define('WS_ROOT','http://localhost/');
 define('JB_LOC', WS_ROOT . '/jsbeeb/play.php?autoboot&disc=');
@@ -33,4 +29,8 @@ define('GD_IPP',36);
 # Used to debug the SQL and state on the main grid page.
 # Set off for live site.
 #define('GD_DEBUG',True); 
+#Allow files to be overwritten?
+define('ST_ALLOW_OVERWRITE',True);
+#Allow files?
+define('ST_FILES',True);
 ?>
