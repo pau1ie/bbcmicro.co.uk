@@ -15,8 +15,12 @@ show_admin_menu();
 
 $s="	SELECT 		id,title,year,
 			(select filename from images where main=100 and gameid = games.id) as disc,
-			(select filename from screenshots where main=100 and gameid = games.id) as screenshot,
-			(select GROUP_CONCAT(CONCAT(files.id,'|',files.filename) SEPARATOR '@') from files where files.gameid = games.id) as files,
+			(select filename from screenshots where main=100 and gameid = games.id) as screenshot,";
+	if (defined('ST_FILES') && ST_FILES ) {
+		$s=$s."
+			(select GROUP_CONCAT(CONCAT(files.id,'|',files.filename) SEPARATOR '@') from files where files.gameid = games.id) as files,";
+	}
+		$s=$s."
 			(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers,
 			(SELECT GROUP_CONCAT(CONCAT(authors.id,'|',authors.name) SEPARATOR '@') FROM games_authors LEFT JOIN authors ON authors_id=authors.id WHERE games_id=games.id) AS authors,
 			(SELECT GROUP_CONCAT(CONCAT(genres.id,'|',genres.name) SEPARATOR '@') FROM game_genre LEFT JOIN genres ON genreid=genres.id WHERE gameid=games.id) AS genres
