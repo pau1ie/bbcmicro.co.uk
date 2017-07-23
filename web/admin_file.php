@@ -44,6 +44,12 @@ if ( isset($_POST['filename']) && is_numeric($_POST['filename'] )) {
   $pf=-1;
 }
 
+if (isset($_POST['customurl']))  {
+  $cu=$_POST['customurl'];
+} else {
+  $cu=-1;
+}
+
 $s="select * from ". $t . " where gameid = ? and main = 100";
 
 $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -162,6 +168,22 @@ if ($pf >= 0 && $pf < $indexCount) {
     if ($sth->execute()) {
       echo "<br/>Database updated.";
       $r['filename']=$dirArray[$pf];
+    } else {
+      echo "<br/>DB Update failed.";
+    }
+  }
+}
+echo "cu=".$cu;
+if (($cu != -1) && ($_GET['t'] == 'd')) {
+  if ($cu != $r['customurl']) {
+    $s="update ".$t." set customurl=? where gameid = ? and main = 100";
+    $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $sth->bindParam(1, $cu, PDO::PARAM_STR);
+    $sth->bindParam(2, $id, PDO::PARAM_INT);
+    echo $s."<br/>";
+    if ($sth->execute()) {
+      echo "<br/>Database updated.";
+      $r['customurl']=$cu;
     } else {
       echo "<br/>DB Update failed.";
     }
