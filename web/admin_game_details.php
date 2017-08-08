@@ -27,7 +27,7 @@ show_admin_menu();
 $jopts=[ 'R' => 'Required', 'O' => 'Optional' ];
 $sopts=[ 'D' => 'Save to Disc', 'T' => 'Save to Tape' ];
 $eopts=[ 'Y' => 'Yes' ];
-$drops=array( 'joystick','save','electron');
+$drops=array( 'joystick','save');
 
 # GET params means want to edit a game ...
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -35,12 +35,15 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 } else {
 	# POST params mean an update
 	if (isset($_POST) && $_POST) {
-		if (DEBUG) { echo "<br/>POST<pre>";print_r($_POST);echo "</pre>";}
 		if (isset($_POST['id']) && is_numeric($_POST['id'])) {
 			$game_id=intval($_POST['id']);
 		} else {
 			$game_id=null;
 		}
+		if (!isset($_POST['electron'])) {
+			$_POST['electron'] = '';
+		}
+		if (DEBUG) { echo "<br/>POST<pre>";print_r($_POST);echo "</pre>";}
 		# We expect author,genre,publisher_01 _02 _03 _04... to be available
 		$new_authors=array();
 		$new_genres=array();
@@ -106,10 +109,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			} else {
 				$p_save=$_POST['save'];
 			}
-			if ($_POST['electron'] == '0') {
-				$p_electron='';
+			if ($_POST['electron'] == 'Y') {
+				$p_electron='Y';
 			} else {
-				$p_electron=$_POST['electron'];
+				$p_electron='';
 			}
 			$sbinds=array(  array('value' => $p_parent, 		'type' => PDO::PARAM_INT),
 					array('value' => $_POST['title'], 	'type' => PDO::PARAM_STR),
@@ -164,7 +167,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 							if ( $pv == '' ) {
 								$pv = null;
 							}
-							if ($k = 'id') $abort=True;
+							if ($k = 'id') {
+								$abort=True;
+								if (DEBUG) { echo "<br/>ID Changed <br/>";}
+							}
 						}
 
 					} else {
@@ -497,7 +503,13 @@ function make_form($game_id,$r) {
 	echo "</label>";
 
 	echo "<label> Electron conversion ";
-	echo make_dd($r['electron'], 'electron','if converted',$eopts);
+//	echo make_dd($r['electron'], 'electron','if converted',$eopts);
+        if ( $r['electron'] == 'Y' ) {
+		$checked='checked';
+	} else {
+		$checked='';
+	}
+	echo '<input type="checkbox" name="electron" '.$checked.' value="Y"/>';
 	echo "</label>";
 
 	echo "<label> Version <input type='text' name='version' size='5' value='".$r['version']."'/></label> ";
