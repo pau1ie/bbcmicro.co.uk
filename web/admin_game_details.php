@@ -275,7 +275,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 }
 
 # First gobble all known authors
-$s="SELECT id,name,alias FROM authors";
+$s="SELECT id,name,alias FROM authors order by name";
 
 $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 #$sth->bindParam(1, $game_id, PDO::PARAM_INT);
