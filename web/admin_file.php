@@ -173,7 +173,7 @@ if ($pf >= 0 && $pf < $indexCount) {
     }
   }
 }
-echo "cu=".$cu;
+//echo "cu=".$cu;
 if (($cu != -1) && ($_GET['t'] == 'd')) {
   if ($cu != $r['customurl']) {
     $s="update ".$t." set customurl=? where gameid = ? and main = 100";
@@ -209,7 +209,7 @@ for($index=0; $index < $indexCount; $index++) {
 </TABLE></br/>
 <?php
 if ( $_GET['t'] == 'd' ) {
-  echo "<label> Custom URL for jsbeeb <input type='text' name='customurl' size='40' value='".$r['customurl']."'/> Enter NONE to not play in jsbeeb. %jsbeeb% for the jsbeeb location, and %wsurl% for the base URL of the website.</label><br/><br/>";
+  echo "<label> Custom URL for jsbeeb <input type='text' name='customurl' size='40' value='".$r['customurl']."'/> Enter NONE to not play in jsbeeb. %jsbeeb% for the jsbeeb location, and %wsroot% for the base URL of the website.</label><br/><br/>";
 }
 ?>
 <input type="submit" value="Submit"></form>

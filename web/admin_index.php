@@ -15,6 +15,7 @@ echo "<hr>";
 
 make_link('Edit Authors (TODO)','admin_authors.php','authors');
 make_link('Edit Games including linking to authors','admin_games.php','games');
+make_link('Bulk Edit Games including linking to authors','admin_games_update.php','games');
 make_link('Edit Genres (TODO)','admin_genres.php','genres');
 make_link('Edit Publishers (TODO)','admin_publishers.php','publishers');
 make_link('Edit Admin Users','admin_users.php','users');

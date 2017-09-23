@@ -196,6 +196,7 @@ function grid($state) {
     }
   }
 
+  $sls[] = "id in (select parent from games where parent is not null and (" . implode (' OR ',$sls) . "))\n";
   if (count($sls) > 0) {
     $wc[] = '(' . implode (' OR ',$sls) . ')';
   }
