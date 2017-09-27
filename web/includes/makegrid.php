@@ -177,10 +177,13 @@ function grid($state) {
       $sls[] = "title like :search\n";
     }
     if ( $all || !(array_search('P',$state['only'])===False )) {
-      $sls[] = "id in (select gameid from games_publishers gp, publishers p where p.id = gp.pubid and p.name like :search)\n";
+      $sls[] = "id in (select gameid\n" .
+               "   from games_publishers gp, publishers p\n" .
+               "   where p.id = gp.pubid and p.name like :search)\n";
     }
     if ( $all || !(array_search('A',$state['only'])===False )) {
-      $sls[] = "id in (select games_id from games_authors ga, authors a where a.id = ga.authors_id and (a.name like :search or a.alias like :search))\n";
+      $sls[] = "id in (select games_id\n   from games_authors ga, authors a\n" .
+               "   where a.id = ga.authors_id and (a.name like :search or a.alias like :search))\n";
     }
     if ( $all || !(array_search('Y',$state['only'])===False )) {
       $sls[] = "year like :search\n";
@@ -196,10 +199,34 @@ function grid($state) {
     }
   }
 
-  $sls[] = "id in (select parent from games where parent is not null and (" . implode (' OR ',$sls) . "))\n";
-  if (count($sls) > 0) {
-    $wc[] = '(' . implode (' OR ',$sls) . ')';
+  if (count($sls)>0) {
+#    $sls[] = "id in (select parent from games where parent is not null and (" . implode (' OR ',$sls) . "))\n";
+# Above is too slow on versions that don't do materialised subqueries. So we will have to
+# materialise it by hand.
+    $subq = "select parent from games where parent is not null and (" . implode ('  OR ',$sls) . ")\n";
+    $sthsq = $db->prepare($subq,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+    if (array_key_exists('search',$state)) {
+      $search="%".str_replace(' ','%',$state['search'])."%";
+      $sthsq->bindParam(':search', $search, PDO::PARAM_STR);
+    }
+    if ($sthsq->execute()) {
+      $ressq = $sthsq->fetchAll(PDO::FETCH_COLUMN,0);
+      if (count($ressq)>0) {
+        $sls[] = "id in (" . implode(',',$ressq) .")\n";
+      }
+print_r($ressq);
+    } else {
+      echo "<pre>Error2:";
+      echo "\n";
+      $sthsq->debugDumpParams ();
+      $ressq=array();
+      print_r($sthsq->ErrorInfo());
+      echo "</pre>";
+    }
   }
+
+  $wc[] = '(' . implode ('  OR ',$sls) . ')';
 
   if (array_key_exists ('pubid', $state)) {
     $wc[] = "id in (select gameid from games_publishers gp where gp.pubid = :pubid)\n";
@@ -223,7 +250,7 @@ function grid($state) {
   if (array_key_exists('rtype',$state)) {
     $wc[]="FIND_IN_SET(reltype,:array)\n";
   } else {
-    $wc[]=" reltype in (select id from reltype where selected = 'Y')\n";
+    $wc[]="reltype in (select id from reltype where selected = 'Y')\n";
   }
 
   if (array_key_exists('page',$state)) {
@@ -235,7 +262,7 @@ function grid($state) {
   $wc[]='parent is null';
 
   $offset = $limit * ($page -1);
-  $sql ='select SQL_CALC_FOUND_ROWS * from games WHERE ' . implode(' AND ',$wc) . ' order by title LIMIT :limit OFFSET :offset';
+  $sql ='select SQL_CALC_FOUND_ROWS * from games WHERE ' . implode(" AND ",$wc) . ' order by title LIMIT :limit OFFSET :offset';
   $sql2 = 'select distinct upper(substring(title,1,1)) AS c1 from games WHERE ' . implode(' AND ',$wc) . " order by c1"; 
 
   $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
