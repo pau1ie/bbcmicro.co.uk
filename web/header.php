@@ -115,7 +115,7 @@ function randomgame() {
 function refines($state) { ?>
      <h4>Only include matches on:</h4>
 <?php
-  $types=array('T'=>'Title','Y'=>'Year','P'=>'Publisher','A'=>'Author','G'=>'Primary Genre','S'=>'Subgenre','Z'=>'Series');
+  $types=array('T'=>'Title','Y'=>'Year','P'=>'Publisher','A'=>'Author','G'=>'Primary Genre','S'=>'Secondary Genre','Z'=>'Series');
   foreach ( $types as $tid => $type ) {
     $checked='';
     if (array_key_exists('only',$state) && count($state['only'])==0){
