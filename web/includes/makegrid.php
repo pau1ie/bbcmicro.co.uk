@@ -215,7 +215,7 @@ function grid($state) {
       if (count($ressq)>0) {
         $sls[] = "id in (" . implode(',',$ressq) .")\n";
       }
-print_r($ressq);
+// print_r($ressq);
     } else {
       echo "<pre>Error2:";
       echo "\n";
@@ -226,7 +226,9 @@ print_r($ressq);
     }
   }
 
-  $wc[] = '(' . implode ('  OR ',$sls) . ')';
+  if (count($sls)>0) {
+    $wc[] = '(' . implode ('  OR ',$sls) . ')';
+  }
 
   if (array_key_exists ('pubid', $state)) {
     $wc[] = "id in (select gameid from games_publishers gp where gp.pubid = :pubid)\n";
