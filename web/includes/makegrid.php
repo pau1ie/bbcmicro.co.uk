@@ -152,7 +152,7 @@ function pager($limit, $rows, $page, $state) {
       }
     }
   }
-  if ( $page != $pages ) {
+  if ( $page < $pages ) {
       $pl.= '     <li><a onclick=\'$.get("getgrid.php", '. json_state($state,'page', ($page + 1)).', function(data){ $("#maingrid").html(data); }); window.scrollTo(0,0); return false;\' href="?'. url_state($state,'page', ($page + 1)). '">&raquo;</a></li>' . "\n";
   }else{
      $pl.= '     <li class="disabled"><span>&raquo;</span></li> '. "\n";
@@ -336,32 +336,33 @@ function grid($state) {
   $pubpdo = $db->prepare($pubsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
   $chars=array();
-  if ( $rows > 0 ) {
-    // Loop through and get relevant starting letters
-    foreach ($res2 as $game ) {
-      $a=strtoupper(substr($game['c1'],0,1));
+
+  // Loop through and get relevant starting letters
+  foreach ($res2 as $game ) {
+    $a=strtoupper(substr($game['c1'],0,1));
       
-      if (is_numeric($a)) {
-         $a='#';
-      }
-
-      if (array_search($a,$chars) === False) {
-         $chars[]=$a;
-      }
-    }
-    if (array_key_exists('atoz',$state)) {
-      $atoz=$state['atoz'];
-    } else {
-      $atoz="";
+    if (is_numeric($a)) {
+       $a='#';
     }
 
-    reltypes($state);
+    if (array_search($a,$chars) === False) {
+       $chars[]=$a;
+    }
+  }
+  if (array_key_exists('atoz',$state)) {
+    $atoz=$state['atoz'];
+  } else {
+    $atoz="";
+  }
 
-    atoz_line($atoz,$chars,'bottom');
+  reltypes($state);
 
-    $pl=pager($limit,$rows,$page,$state);
-    echo $pl;
-    echo '    <div class="row" style="display:flex; flex-wrap: wrap;">'."\n";
+  atoz_line($atoz,$chars,'bottom');
+
+  $pl=pager($limit,$rows,$page,$state);
+  echo $pl;
+  echo '    <div class="row" style="display:flex; flex-wrap: wrap;">'."\n";
+  if ( $rows > 0 ) {
     foreach ( $res as $game ) {
       $scrpdo->bindParam(':gameid',$game["id"], PDO::PARAM_INT);
       $dscpdo->bindParam(':gameid',$game["id"], PDO::PARAM_INT);
@@ -394,13 +395,13 @@ function grid($state) {
 
       gameitem($game["id"],htmlspecialchars($game["title"]), $shot, $dnl ,$pubs,$game["year"],$pub["id"]);
     }
-    echo "    </div>\n";
-    echo $pl;
-    atoz_line($atoz,$chars,'top');
   } else {
     echo '    <div class="row" style="display:flex; flex-wrap: wrap;">'."\n<h2>No games found!</h2>";
     echo "    </div>\n";
   }
+  echo "    </div>\n";
+  echo $pl;
+  atoz_line($atoz,$chars,'top');
 
   if ( defined('GD_DEBUG') && GD_DEBUG == True ) {
     echo "<pre>";
