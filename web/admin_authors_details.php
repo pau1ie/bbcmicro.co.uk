@@ -100,7 +100,7 @@ function make_form($r,$msg) {
   echo "<form name='frmGame' method='POST' action='admin_authors_details.php'>\n";
   echo "<input type='hidden' name='id' value='".$r['id']."'>\n";
 
-  echo "<label>Name: <input type='text' name='name' size='80' value='".htmlspecialchars($r['name'],ENT_QUOTES)."'/></label><br/><br/>";
+  echo "<label>Name: <input type='text' name='name' size='80' autofocus='autofocus' value='".htmlspecialchars($r['name'],ENT_QUOTES)."'/></label><br/><br/>";
   echo "<label>Alias: <input type='text' name='alias' size='80' value='".htmlspecialchars($r['alias'],ENT_QUOTES)."'/></label><br/><br/>";
  
   echo '<br/><input type="submit" value="Submit"></form>';
