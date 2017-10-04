@@ -20,11 +20,11 @@ FROM genres ORDER BY name';
 $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if ($sth->execute()) {
 	if ($sth->rowCount()) {
-		echo $sth->rowCount()." genres<hr>";
+		echo '<p>'.$sth->rowCount()." genres. <a href='admin_genres_details.php?id=0'>New genre</a></p><hr>";
 		echo "<table>\n";
 		echo "<tr><td><b>ID</b></td><td><b>Name</b></td><td> #Primary </td><td> #Secondary </td></tr>\n";
 		while ($r=$sth->fetch()) {
-			echo "<tr><td>".$r['id']."</td><td>".$r['name']."</td><td>".$r['primary']."</td><td>".$r['secondary']."</td></tr>\n";
+			echo "<tr><td>".$r['id']."</td><td><a href=admin_genres_details.php?id=".$r['id'].">".$r['name']."</a></td><td>".$r['primary']."</td><td>".$r['secondary']."</td></tr>\n";
 		}
 		echo "</table>\n";
 	}

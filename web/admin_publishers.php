@@ -19,11 +19,11 @@ $s="	SELECT 		id,name
 $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if ($sth->execute()) {
 	if ($sth->rowCount()) {
-		echo $sth->rowCount()." publishers<hr>";
+		echo '<p>'.$sth->rowCount()." publishers. <a href='admin_publishers_details.php?id=0'>New publisher</a></p><hr>";
 		echo "<table>\n";
 		echo "<tr><td><b>ID</b></td><td><b>Name</b></td></tr>\n";
 		while ($r=$sth->fetch()) {
-			echo "<tr><td>".$r['id']."</td><td>".$r['name']."</td></tr>\n";
+			echo "<tr><td>".$r['id']."</td><td><a href=admin_publishers_details.php?id=".$r['id'].">".$r['name']."</a></td></tr>\n";
 		}
 		echo "</table>\n";
 	}
