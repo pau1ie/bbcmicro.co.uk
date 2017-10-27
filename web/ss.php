@@ -4,7 +4,7 @@ if ( $_SERVER['REQUEST_METHOD']== "GET" ) {
 require 'includes/config.php';
 require 'includes/db_connect.php';
 
-$sql="select g.id, g.title, g.year, g.genre, g.reltype, g.players_max, g.players_min, g.joystick, i.filename, r.name, g.save, g.hardware, g.electron, g.version, g.compilation, g.series, g.series_no, g.notes from games g left join images i on g.id = i.gameid left join genres r on g.genre = r.id order by upper(substr(filename,1,7)), upper(g.title), i.filename COLLATE utf8_bin";
+$sql="select g.parent, g.id, g.title, g.year, g.genre, g.reltype, g.players_max, g.players_min, g.joystick, i.filename, r.name, g.save, g.hardware, g.electron, g.version, g.compilation, g.series, g.series_no, g.notes from games g left join images i on g.id = i.gameid left join genres r on g.genre = r.id order by g.id";
 
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if ($sth->execute()) {
@@ -35,7 +35,7 @@ $psth->bindParam(1, $id, PDO::PARAM_INT);
 </head>
 <body>
 <table><tr>
-<th>Disc</th><th>title</th><th>publisher</th><th>filename</th><th>Commercial</th><th>genre</th><th>genre2</th><th>year</th><th>author</th><th>save</th><th>joystick</th><th>Compilation</th><th>series/no</th><th>playersmin</th><th>playersmax</th><th>hardware</th><th>electron</th><th>version</th></tr>
+<th>Id</th><th>Parent</th><th>Disc</th><th>title</th><th>publisher</th><th>filename</th><th>Commercial</th><th>genre</th><th>genre2</th><th>year</th><th>author</th><th>save</th><th>joystick</th><th>Compilation</th><th>series/no</th><th>playersmin</th><th>playersmax</th><th>hardware</th><th>electron</th><th>version</th></tr>
 <?php
 
 foreach ($res as $line) {
@@ -77,7 +77,8 @@ foreach ($res as $line) {
   }
 
   $ol=array();
-
+  $ol[]=strtoupper($line['id']);
+  $ol[]=strtoupper($line['parent']);
   $ol[]=strtoupper($fp[0]); 	//Disc
 				// Title
   $ol[]=$line['title'];

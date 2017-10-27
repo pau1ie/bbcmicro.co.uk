@@ -50,6 +50,7 @@ require 'includes/menu.php';
     <div class="jumbotron">
       <div class="container">
         <h1><?php echo $site_name?></h1>
+	<p>In 1981, after <a href="http://www.bbc.co.uk/news/technology-15969065" class="postlink">winning a contract from the BBC</a>, <a href="https://en.wikipedia.org/wiki/Acorn_Computers" class="postlink">Acorn Computers</a> released the <a href="https://en.wikipedia.org/wiki/BBC_Micro" class="postlink">8-bit BBC Micro computer</a>. This was used in most schools in the UK, and many of us who were at school during this time remember the computer fondly.</p>
         <p>Over the last few years we have been lovingly restoring some BBC Micro games from the 1980s onwards. We have put them here so you can play them in an emulator, on a real BBC Micro, or on the web. If you would like to help us improve the site, join us in the Stardot forums. See the <a href="contact.php">contact page</a> for more information.</p>
       </div>
     </div>

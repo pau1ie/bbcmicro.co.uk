@@ -34,8 +34,8 @@ if (isset($_POST['games'])) {
 			$id=$r['id'];
 			if ((($r['electron'] == 'Y') && (!isset($_POST['games'][$id]))) ||
 			       (isset($_POST['games'][$id]) && ($r['electron'] !='Y'))) {
-				print_r($r);
-				echo "Update needed!";
+#				print_r($r);
+#				echo "Update needed!";
 				if (isset($_POST['games'][$id])) {
 					$y='Y';
 				} else {

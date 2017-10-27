@@ -53,7 +53,7 @@ function atoz_line($current='',$chars,$margin) {
   echo "<ul style=\"margin-$margin:0;\" class=\"pagination\">";
   foreach ($chars as $char) {
     $active=($current==$char)?' class="active"':'';
-    echo "<li$active><a href='?" . url_state($state,'atoz', urlencode($char))."'>$char</a></li>";
+    echo "<li$active><a href='?" . url_state($state,'atoz', $char)."'>$char</a></li>";
   }
   echo "</ul>";
   echo "</div>";
@@ -115,7 +115,6 @@ function url_state($state, $k, $v) {
   $state[$k]=$v;
   $url='';
 
-#echo "Here!";
   foreach ($state as $key => $value) {
     if ( $key == 'only' ) {
        foreach ($state['only'] as $k => $v ) {
@@ -199,32 +198,32 @@ function grid($state) {
     }
   }
 
-  if (count($sls)>0) {
-#    $sls[] = "id in (select parent from games where parent is not null and (" . implode (' OR ',$sls) . "))\n";
-# Above is too slow on versions that don't do materialised subqueries. So we will have to
-# materialise it by hand.
-    $subq = "select parent from games where parent is not null and (" . implode ('  OR ',$sls) . ")\n";
-    $sthsq = $db->prepare($subq,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-    if (array_key_exists('search',$state)) {
-      $search="%".str_replace(' ','%',$state['search'])."%";
-      $sthsq->bindParam(':search', $search, PDO::PARAM_STR);
-    }
-    if ($sthsq->execute()) {
-      $ressq = $sthsq->fetchAll(PDO::FETCH_COLUMN,0);
-      if (count($ressq)>0) {
-        $sls[] = "id in (" . implode(',',$ressq) .")\n";
-      }
-// print_r($ressq);
-    } else {
-      echo "<pre>Error2:";
-      echo "\n";
-      $sthsq->debugDumpParams ();
-      $ressq=array();
-      print_r($sthsq->ErrorInfo());
-      echo "</pre>";
-    }
-  }
+#  if (count($sls)>0) {
+##    $sls[] = "id in (select parent from games where parent is not null and (" . implode (' OR ',$sls) . "))\n";
+## Above is too slow on versions that don't do materialised subqueries. So we will have to
+## materialise it by hand.
+#    $subq = "select parent from games where parent is not null and (" . implode ('  OR ',$sls) . ")\n";
+#    $sthsq = $db->prepare($subq,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+#
+#    if (array_key_exists('search',$state)) {
+#      $search="%".str_replace(' ','%',$state['search'])."%";
+#      $sthsq->bindParam(':search', $search, PDO::PARAM_STR);
+#    }
+#    if ($sthsq->execute()) {
+#      $ressq = $sthsq->fetchAll(PDO::FETCH_COLUMN,0);
+#      if (count($ressq)>0) {
+#        $sls[] = "id in (" . implode(',',$ressq) .")\n";
+#      }
+#// print_r($ressq);
+#    } else {
+#      echo "<pre>Error2:";
+#      echo "\n";
+#      $sthsq->debugDumpParams ();
+#      $ressq=array();
+#      print_r($sthsq->ErrorInfo());
+#      echo "</pre>";
+#    }
+#  }
 
   if (count($sls)>0) {
     $wc[] = '(' . implode ('  OR ',$sls) . ')';
@@ -242,9 +241,12 @@ function grid($state) {
   if (array_key_exists('atoz',$state)) {
     if ($state['atoz']=='#') {
       $doing_atoz_numbers=true;
-      $wc[]="title REGEXP \"^[0-9]\"\n";
+      $atoz="^[0-9]";
+      $atoz2=".*";
+      $wc[]="title REGEXP :atoz\n";
     } else {
       $atoz=substr($state['atoz'],0,1)."%";
+      $atoz2="%";
       $wc[]="title like :atoz\n";
     }
   }
@@ -261,7 +263,7 @@ function grid($state) {
     $page=1;
   }
 
-  $wc[]='parent is null';
+//  $wc[]='parent is null';
 
   $offset = $limit * ($page -1);
   $sql ='select SQL_CALC_FOUND_ROWS * from games WHERE ' . implode(" AND ",$wc) . ' order by title LIMIT :limit OFFSET :offset';
@@ -275,10 +277,8 @@ function grid($state) {
     $sth->bindParam(':search', $search, PDO::PARAM_STR);
     $sth2->bindParam(':search', $search, PDO::PARAM_STR);
   }
-  if (array_key_exists('atoz',$state) && !$doing_atoz_numbers) {
-    $atoz=$state['atoz'].'%';
+  if (array_key_exists('atoz',$state)) {
     $sth->bindParam(':atoz',$atoz, PDO::PARAM_STR);
-    $atoz2='%';
     $sth2->bindParam(':atoz',$atoz2, PDO::PARAM_STR);
   }
   if (array_key_exists('rtype',$state)) {
