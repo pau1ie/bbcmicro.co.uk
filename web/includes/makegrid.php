@@ -190,6 +190,9 @@ function grid($state) {
     if ( $all || !(array_search('Z',$state['only'])===False )) {
       $sls[] = "series like :search\n";
     }
+    if ( $all || !(array_search('C',$state['only'])===False )) {
+      $sls[] = "compilation like :search\n";
+    }
     if ( $all || !(array_search('G',$state['only'])===False )) {
       $sls[] = "genre in (select id from genres where name like :search)\n";
     }
@@ -197,33 +200,6 @@ function grid($state) {
       $sls[] = "id in (select gameid from game_genre m, genres g where g.id = m.genreid and g.name like :search)\n";
     }
   }
-
-#  if (count($sls)>0) {
-##    $sls[] = "id in (select parent from games where parent is not null and (" . implode (' OR ',$sls) . "))\n";
-## Above is too slow on versions that don't do materialised subqueries. So we will have to
-## materialise it by hand.
-#    $subq = "select parent from games where parent is not null and (" . implode ('  OR ',$sls) . ")\n";
-#    $sthsq = $db->prepare($subq,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-#
-#    if (array_key_exists('search',$state)) {
-#      $search="%".str_replace(' ','%',$state['search'])."%";
-#      $sthsq->bindParam(':search', $search, PDO::PARAM_STR);
-#    }
-#    if ($sthsq->execute()) {
-#      $ressq = $sthsq->fetchAll(PDO::FETCH_COLUMN,0);
-#      if (count($ressq)>0) {
-#        $sls[] = "id in (" . implode(',',$ressq) .")\n";
-#      }
-#// print_r($ressq);
-#    } else {
-#      echo "<pre>Error2:";
-#      echo "\n";
-#      $sthsq->debugDumpParams ();
-#      $ressq=array();
-#      print_r($sthsq->ErrorInfo());
-#      echo "</pre>";
-#    }
-#  }
 
   if (count($sls)>0) {
     $wc[] = '(' . implode ('  OR ',$sls) . ')';

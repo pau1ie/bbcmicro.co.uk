@@ -115,7 +115,7 @@ function randomgame() {
 function refines($state) { ?>
      <h4>Only include matches on:</h4>
 <?php
-  $types=array('T'=>'Title','Y'=>'Year','P'=>'Publisher','A'=>'Author','G'=>'Primary Genre','S'=>'Secondary Genre','Z'=>'Series');
+  $types=array('T'=>'Title','Y'=>'Year','P'=>'Publisher','A'=>'Author','G'=>'Primary Genre','S'=>'Secondary Genre','Z'=>'Series','C'=>'Compilation');
   foreach ( $types as $tid => $type ) {
     $checked='';
     if (array_key_exists('only',$state) && count($state['only'])==0){
@@ -170,6 +170,7 @@ function containend() {
 function htmlfoot() {
 ?>
 
+ <script src="bs/count.js"></script>
  <script src="bs/jquery.min.js"></script>
  <script src="bs/js/bootstrap.min.js"></script>
  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -177,18 +178,7 @@ function htmlfoot() {
  <script src="bs/offcanvas.js"></script>
  <script src="bs/js/typeahead.js"></script>
  <script>
-// Make the boxes the same height
-function equalHeight(group) {    
-    var tallest = 0;    
-    group.each(function() {       
-        var thisHeight = $(this).height();       
-        if(thisHeight > tallest) {          
-            tallest = thisHeight;       
-        }    
-    });    
-    group.each(function() { $(this).height(tallest); });
-} 
-
+//addTracker(window, 'load', get_targeted_links('btn'));
 <?php // Set up the typeahead search ?>
 $(document).ready(function() {
   var suggestions = new Bloodhound({
@@ -213,8 +203,6 @@ $(document).ready(function() {
   $( "#reltypes" ).change(function() {
      $("form").submit();
   });
-
- // equalHeight($(".row"));
 });
 
   </script>
