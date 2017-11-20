@@ -27,6 +27,8 @@ show_admin_menu();
 $jopts=[ 'R' => 'Required', 'O' => 'Optional' ];
 $sopts=[ 'D' => 'Save to Disc', 'T' => 'Save to Tape' ];
 $eopts=[ 'Y' => 'Yes' ];
+$copts=[ 'Y' => 'Yes', 'N' => 'No' ];
+$mcopts=[ 'Y' => 'Yes', 'N' => 'No', 'P' => 'Partial' ];
 $drops=array( 'joystick','save');
 
 # GET params means want to edit a game ...
@@ -88,7 +90,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 		if ($game_id == null) {
 			# New entry
-			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, lastupdater, lastupdated) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
+			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, lastupdater, lastupdated, created, creator, compat_a, compat_b, compat_master) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?,?,?)";
 			if ($_POST['parent'] == '0' || $_POST['parent'] == '' ) {
 				$p_parent = null;
 			} else {
@@ -130,7 +132,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 					array('value' => $_POST['compilation'],	'type' => PDO::PARAM_STR),
 					array('value' => $_POST['series'], 	'type' => PDO::PARAM_STR),
 					array('value' => $_POST['series_no'], 	'type' => PDO::PARAM_STR),
-					array('value' => $_SESSION['userid'], 	'type' => PDO::PARAM_INT));
+					array('value' => $_SESSION['userid'], 	'type' => PDO::PARAM_INT),
+					array('value' => $_SESSION['userid'], 	'type' => PDO::PARAM_INT),
+					array('value' => $_SESSION['compat_a'], 'type' => PDO::PARAM_INT),
+					array('value' => $_SESSION['compat_b'],	'type' => PDO::PARAM_INT),
+					array('value' => $_SESSION['compat_master'], 'type' => PDO::PARAM_INT)
+			);
 			$sth=$dbh->prepare($s);
 			if (DEBUG) {echo "<pre>$s<br/>"; print_r($sbinds);echo "</pre>";}
 			if (executeWithDataTypes($sth,$sbinds)) {
@@ -143,7 +150,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			}
 		} else {
 			# An entry already exists. Compare it.
-			$s="SELECT id, parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no FROM games where id = ?";
+			$s="SELECT id, parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, compat_a, compat_b, compat_master FROM games where id = ?";
 
 			$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$sth->bindParam(1, $game_id, PDO::PARAM_INT);
@@ -331,7 +338,7 @@ if ($sth->execute()) {
 
 if ($game_id) {
 	$s="	SELECT 	id,title, parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save,
-			hardware, electron, version, compilation, series, series_no,
+			hardware, electron, version, compilation, series, series_no, compat_a, compat_b, compat_master,
 			(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') 
 				FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers,
 			(SELECT GROUP_CONCAT(CONCAT(authors.id,'|',authors.name) SEPARATOR '@') 
@@ -450,7 +457,7 @@ function make_dd($aid,$nam,$typ,$known) {
 }
 
 function make_form($game_id,$r) {
-	global $known_genres, $known_reltyps, $known_publishers, $known_authors, $jopts, $sopts, $eopts;
+	global $known_genres, $known_reltyps, $known_publishers, $known_authors, $jopts, $sopts, $eopts, $copts, $mcopts;
 	if (DEBUG) { echo "<pre>"; print_r($r); echo "</pre>";}
 	$pubs=explode('@',$r['publishers']);
 	$names='';
@@ -514,6 +521,22 @@ function make_form($game_id,$r) {
 
 	echo "<label> Version <input type='text' name='version' size='5' value='".$r['version']."'/></label> ";
 	echo "<br/><br/>";
+
+	# Model A Compatibility
+	echo "<label>Model A Compatibility.  ";
+	echo make_dd($r['compat_a'], 'compat_a','Model A',$copts);
+	echo "</label>";
+
+	# Model B Compatibility
+	echo "<label>Model B Compatibility.  ";
+	echo make_dd($r['compat_b'], 'compat_b','Model B',$copts);
+	echo "</label>";
+
+	# Master Compatibility
+	echo "<label>Master Compatibility.  ";
+	echo make_dd($r['compat_master'], 'compat_master','Master',$mcopts);
+	echo "</label><br/><br/>";
+
 	echo "<label> Compilation: <input type='text' name='compilation' size='20' value='".htmlspecialchars($r['compilation'],ENT_QUOTES)."'/></label> ";
 	echo "<label> Series - must be identical for each game in series ";
 	echo "<input type='text' name='series' size='20' value='".htmlspecialchars($r['series'],ENT_QUOTES)."'/></label> ";

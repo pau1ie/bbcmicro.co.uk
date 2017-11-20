@@ -15,7 +15,7 @@ if ( isset($_GET["h"])) {
   $h="i";
 }
 
-$sql = "select g.id, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.compilation, g.electron, g.series, g.series_no, n.name as genre, r.name as reltype from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.compilation, g.electron, g.series, g.series_no, n.name as genre, r.name as reltype, g.compat_a, g.compat_b, g.compat_master from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -314,6 +314,35 @@ if ( ! empty($authors)) {
    } else {
       $players=$game["players_min"] . " to " . $game["players_max"];
    }
+
+   $compat='';
+   if (!empty($game['compat_a'])) {
+     if ($game['compat_a'] == 'Y') {
+       $compat = 'A:&#10004; ';
+     } else {
+       $compat = "A:&#10008; ";
+     }
+   }
+
+   if (!empty($game['compat_b'])) {
+     if ($game['compat_b'] == 'Y') {
+       $compat = $compat . "B:&#10004; ";
+     } else {
+       $compat = $compat . "B:&#10008; ";
+     }
+   }
+
+   if (!empty($game['compat_master'])) {
+     if ($game['compat_master'] == 'Y') {
+       $compat = $compat . "Master:&#10004; ";
+     } elseif ($game['compat_master'] == 'N') {
+       $compat = $compat . "Master:&#10008; ";
+     } else {
+       $compat = $compat . "Master: Partial ";
+     }
+   } else {
+     $compat = $compat . "Master: Untested ";
+   }
 ?>
         </div>
         <div class="col-md-4">
@@ -329,6 +358,7 @@ if ( ! empty($authors)) {
             <tr><th>Joystick</th><td><?php echo $js;?></td></tr>
             <tr><th>Players</th><td><?php echo $players;?></td></tr>
             <tr><th>Save</th><td><?php echo $sa;?></td></tr>
+            <tr><th>Compatibility</th><td><?php echo $compat;?></td></tr>
             <?php echo $hw;?>
             <?php echo $el;?>
             <?php echo $ver;?>
