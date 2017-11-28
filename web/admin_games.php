@@ -1,10 +1,5 @@
 <?php
-session_start();
-if (!array_key_exists('bbcmicro',$_SESSION)) {
-	header("Location: login.php");
-	exit;
-}
-
+require('includes/admin_session.php');
 require_once('includes/config.php');
 require_once('includes/admin_db_open.php');
 

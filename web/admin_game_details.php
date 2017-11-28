@@ -1,11 +1,7 @@
 <?php
 define('DEBUG',false);
 
-session_start();
-if (!array_key_exists('bbcmicro',$_SESSION)) {
-	header("Location: login.php");
-	exit;
-}
+require('includes/admin_session.php');
 
 require_once('includes/config.php');
 require_once('includes/admin_db_open.php');
@@ -90,7 +86,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 		if ($game_id == null) {
 			# New entry
-			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, lastupdater, lastupdated, created, creator, compat_a, compat_b, compat_master) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?,?,?)";
+			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, lastupdater, lastupdated, created, creator, compat_a, compat_b, compat_master) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?,?,?,?)";
 			if ($_POST['parent'] == '0' || $_POST['parent'] == '' ) {
 				$p_parent = null;
 			} else {
@@ -134,9 +130,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 					array('value' => $_POST['series_no'], 	'type' => PDO::PARAM_STR),
 					array('value' => $_SESSION['userid'], 	'type' => PDO::PARAM_INT),
 					array('value' => $_SESSION['userid'], 	'type' => PDO::PARAM_INT),
-					array('value' => $_SESSION['compat_a'], 'type' => PDO::PARAM_INT),
-					array('value' => $_SESSION['compat_b'],	'type' => PDO::PARAM_INT),
-					array('value' => $_SESSION['compat_master'], 'type' => PDO::PARAM_INT)
+					array('value' => $_POST['compat_a'],    'type' => PDO::PARAM_STR),
+					array('value' => $_POST['compat_b'],	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['compat_master'], 'type' => PDO::PARAM_STR)
 			);
 			$sth=$dbh->prepare($s);
 			if (DEBUG) {echo "<pre>$s<br/>"; print_r($sbinds);echo "</pre>";}
