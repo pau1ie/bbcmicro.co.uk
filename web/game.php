@@ -62,13 +62,13 @@ $root=WS_ROOT;
 
 $playlink=get_playlink($img,$jsbeeb,$root);
 if ( $ssd != NULL && file_exists($ssd)) {
-  $imglink='<p><a type="button" class="btn btn-primary btn-lg center-block" href="' . $ssd . '">Download</a></p>';
+  $imglink='<p><a type="button" class="btn btn-primary btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $ssd . '">Download</a></p>';
 } else {
   $imglink="<p>No disc image available</p>";
 }
 
 if ($playlink != NULL ) {
-  $imglink=$imglink .'<p><a type="button" class="btn btn-primary btn-lg center-block" href="' . $playlink . '" >Play</a></p>';
+  $imglink=$imglink .'<p><a type="button" class="btn btn-primary btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $playlink . '" >Play</a></p>';
 } else {
   $imglink=$imglink."<p>Can't be played online.</p>";
 }
@@ -484,6 +484,15 @@ foreach ($children as $child) {
     <script src="bs/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bs/js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+// Log downloads.
+function log(a,b) {
+  var i = document.createElement("img");
+  i.src = "count.php?t="+b+"&id="+a;
+  return true;
+}
+log(<?php echo $id ?>,'g');
+    </script>
 <?php include_once("includes/googleid.php") ?>
   </body>
 </html>

@@ -170,7 +170,6 @@ function containend() {
 function htmlfoot() {
 ?>
 
- <script src="bs/count.js"></script>
  <script src="bs/jquery.min.js"></script>
  <script src="bs/js/bootstrap.min.js"></script>
  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -204,7 +203,12 @@ $(document).ready(function() {
      $("form").submit();
   });
 });
-
+// Log downloads.
+function log(a) {
+  var i = document.createElement("img");
+  i.src = "count.php?t=d&id="+a;
+  return true;
+}
   </script>
 <?php include_once("includes/googleid.php") ?>
 </body>

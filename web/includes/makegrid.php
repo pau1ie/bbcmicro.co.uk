@@ -79,10 +79,10 @@ function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
 <?php
   $playlink=get_playlink($img,$jsbeeb,$root);
   if ($ssd != null && file_exists($ssd)) { ?>
-       <p><a href="<?php echo $ssd ?>" type="button" class="btn btn-default">Download</a><?php
+       <p><a href="<?php echo $ssd ?>" type="button"  onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Download</a><?php
   }
   if ($playlink != null) { ?>
-          <a id="plybtn" href="<?php echo $playlink ?>" type="button" class="btn btn-default">Play</a></p>
+          <a id="plybtn" href="<?php echo $playlink ?>" type="button" onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Play</a></p>
 <?php
   }
 ?>
