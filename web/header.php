@@ -77,38 +77,13 @@ function searchbox($state) {
       <label for="search"><h3>Search</h3></label>
       <input id="searchbox" name="search" class="typeahead form-control" type="text" placeholder="Search" value="<?php echo $search ; ?>" />
      </fieldset>
+     <fieldset class="form-group" id="order">
 <?php
 }
 
 function randomgame() {
-  global $db;
-
-  $sql = "select count(*) from games";
-  $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-  if ($sth->execute()) {
-    $res = $sth->fetchAll();
-  } else {
-    echo "Error:";
-    echo "\n";
-    $sth->debugDumpParams ();
-    $res=array();
-  }
-  $n=rand(1,$res[0][0])-1;
-
-  $sql = "select id from games limit ?,1";
-  $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-  $sth->bindParam(1, $n, PDO::PARAM_INT);
-  if ($sth->execute()) {
-    $res = $sth->fetchAll();
-  } else {
-    echo "Error:";
-    echo "\n";
-    $sth->debugDumpParams ();
-    $res=array();
-  }
-  $id=$res[0][0];
 ?>     <p>&nbsp;</p><h3>Random Game</h3>
-       <p><a href="game.php?id=<?php echo $id; ?>&h=h" class="btn btn-default btn-lg btn-block">Lucky Dip</a></p>
+       <p><a href="q/random.php" class="btn btn-default btn-lg btn-block">Lucky Dip</a></p>
 <?php
 }
 
@@ -138,12 +113,26 @@ function refines($state) { ?>
 
 
 function searchbuttons() {
+  global $state;
+
+  $sortbtn='';
+  if (isset($state['sort'])) {
+    $sortbtn='name="sort'.$state['sort'].'"';
+  }
 ?>
-     <!--div id="refine" class="form-actions center-block" -->
-      <!--div class="form-actions center-block" -->
-       <button type="submit" class="btn btn-default btn-lg btn-block">Search</button>
-      <!--/div-->
-     <!--/div-->
+<div class="btn-group btn-block">
+  <button type="submit" class="btn btn-default btn-lg" <?php echo $sortbtn; ?> style="display: block;width: 75%;">Search</button>
+  <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" style="display: block;width: 25%;">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><button class="list-group-item" type="submit" name="sortp">Popular</a></li>
+    <li><button class="list-group-item" type="submit" name="sorta">Alphabetic</a></li>
+    <li><button class="list-group-item" type="submit" name="sortu">Latest Updates</a></li>
+    <li><button class="list-group-item" type="submit" name="sortb">Latest Releases</a></li>
+    <li><button class="list-group-item" type="submit" name="sortr">Earliest Releases</a></li>
+  </ul>
+</div> 
 <?php
 }
 

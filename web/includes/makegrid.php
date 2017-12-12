@@ -102,6 +102,8 @@ function json_state($state, $ko, $vo) {
        foreach ($state['rtype'] as $k => $v ) {
          $s2['rt_'.$v]='on';
        }
+    } elseif ( $key == 'sort' ) {
+      $s2['sort'.$value]='';
     } else {
       $s2[$key]=$value;
     }
@@ -124,6 +126,8 @@ function url_state($state, $k, $v) {
        foreach ($state['rtype'] as $k => $v ) {
          $url=$url.'&rt_'.$v.'=on';
        }
+    }  elseif ( $key == 'sort' ) {
+      $url=$url.'&'.$key.$value.'=';
     } else {
       $url=$url.'&'.$key.'='.urlencode ( $value );
     }
@@ -173,31 +177,31 @@ function grid($state) {
 
   if (array_key_exists ('search', $state)) {
     if ( $all || !(array_search('T',$state['only'])===False )) {
-      $sls[] = "title like :search\n";
+      $sls[] = "g.title like :search\n";
     }
     if ( $all || !(array_search('P',$state['only'])===False )) {
-      $sls[] = "id in (select gameid\n" .
+      $sls[] = "g.id in (select gameid\n" .
                "   from games_publishers gp, publishers p\n" .
                "   where p.id = gp.pubid and p.name like :search)\n";
     }
     if ( $all || !(array_search('A',$state['only'])===False )) {
-      $sls[] = "id in (select games_id\n   from games_authors ga, authors a\n" .
+      $sls[] = "g.id in (select games_id\n   from games_authors ga, authors a\n" .
                "   where a.id = ga.authors_id and (a.name like :search or a.alias like :search))\n";
     }
     if ( $all || !(array_search('Y',$state['only'])===False )) {
-      $sls[] = "year like :search\n";
+      $sls[] = "g.year like :search\n";
     }
     if ( $all || !(array_search('Z',$state['only'])===False )) {
-      $sls[] = "series like :search\n";
+      $sls[] = "g.series like :search\n";
     }
     if ( $all || !(array_search('C',$state['only'])===False )) {
-      $sls[] = "compilation like :search\n";
+      $sls[] = "g.compilation like :search\n";
     }
     if ( $all || !(array_search('G',$state['only'])===False )) {
-      $sls[] = "genre in (select id from genres where name like :search)\n";
+      $sls[] = "g.genre in (select id from genres where name like :search)\n";
     }
     if ( $all || !(array_search('S',$state['only'])===False )) {
-      $sls[] = "id in (select gameid from game_genre m, genres g where g.id = m.genreid and g.name like :search)\n";
+      $sls[] = "g.id in (select gameid from game_genre m, genres g where g.id = m.genreid and g.name like :search)\n";
     }
   }
 
@@ -240,10 +244,33 @@ function grid($state) {
   }
 
 //  $wc[]='parent is null';
+  if (isset($state['sort'])) {
+    $srt=$state['sort'];
+  } else {
+    $srt='';
+  }
+
+  switch ($srt) {
+    case "r":
+      $ob = "order by year";
+      break;
+    case "b":
+      $ob = "order by year desc";
+      break;
+    case "u":
+      $ob = "order by lastupdated desc";
+      break;
+    case "a":
+      $ob = "order by title";
+      break;
+    default:
+      $ob = "order by popularity desc";
+  }
 
   $offset = $limit * ($page -1);
-  $sql ='select SQL_CALC_FOUND_ROWS * from games WHERE ' . implode(" AND ",$wc) . ' order by title LIMIT :limit OFFSET :offset';
-  $sql2 = 'select distinct upper(substring(title,1,1)) AS c1 from games WHERE ' . implode(' AND ',$wc) . " order by c1"; 
+  $sql ='select SQL_CALC_FOUND_ROWS g.*, sum(d.downloads)+sum(d.gamepages) as popularity from games g'."\n";
+  $sql.=' left join game_downloads d on g.id = d.id WHERE ' . implode(" AND ",$wc) . ' group by g.id '. $ob . ' LIMIT :limit OFFSET :offset';
+  $sql2 = 'select distinct upper(substring(title,1,1)) AS c1 from games g WHERE ' . implode(' AND ',$wc) . " order by c1"; 
 
   $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $sth2 = $db->prepare($sql2,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

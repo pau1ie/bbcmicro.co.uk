@@ -75,6 +75,28 @@ function getstate() {
     }
   }
 
+  // Search Order
+
+  if ( isset($_GET["sortr"])) {
+    $state['sort']='r';
+  }
+
+  if ( isset($_GET["sortb"])) {
+    $state['sort']='b';
+  }
+
+  if ( isset($_GET["sortu"])) {
+    $state['sort']='u';
+  }
+
+  if ( isset($_GET["sorta"])) {
+    $state['sort']='a';
+  }
+
+  if ( isset($_GET["sortp"])) {
+    $state['sort']='p';
+  }
+
 
   return $state;
 }

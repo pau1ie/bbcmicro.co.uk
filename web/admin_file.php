@@ -18,6 +18,7 @@ if ( $_GET['t'] == 'd' ) {
   $updir='gameimg/discs/';
   $t="images";
   $title="<b>Image</b>";
+  $fu=false;
 } elseif ( $_GET['t'] == 's' ) {
   // Screenshot
   $updir='gameimg/screenshots/';
@@ -131,6 +132,9 @@ if (!empty($_FILES["file"])) {
         echo "Filename is too long (> 255 chars). Please shorten it.";
       } else {
         move_uploaded_file($_FILES["file"]["tmp_name"],$ldir.'/'.$fn);
+        if ($fn==$r['filename']) {
+          $fu=True
+        }
       }
     }
   }
@@ -163,6 +167,7 @@ if ($pf >= 0 && $pf < $indexCount) {
     if ($sth->execute()) {
       echo "<br/>Database updated.";
       $r['filename']=$dirArray[$pf];
+      $fu=True;
     } else {
       echo "<br/>DB Update failed.";
     }
@@ -179,9 +184,24 @@ if (($cu != -1) && ($_GET['t'] == 'd')) {
     if ($sth->execute()) {
       echo "<br/>Database updated.";
       $r['customurl']=$cu;
+      $fu=True;
     } else {
       echo "<br/>DB Update failed.";
     }
+  }
+}
+
+if ($fu == True && $_GET['t']=='d') {
+  $s="update games set updated=?, updater=? where id = ?";
+  $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+  $sth->bindParam(1, date('Y-m-d H:i:s'), PDO::PARAM_STR);
+  $sth->bindParam(2, $_SESSION['userid'], $_SESSION['userid'];
+  $sth->bindParam(3, $id, PDO::PARAM_INT);
+  echo $s."<br/>";
+  if ($sth->execute()) {
+    echo "<br/>Database timestamp updated.";
+  } else {
+    echo "<br/>DB Update timestamp failed.";
   }
 }
 
