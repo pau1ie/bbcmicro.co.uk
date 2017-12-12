@@ -264,11 +264,11 @@ function grid($state) {
       $ob = "order by title";
       break;
     default:
-      $ob = "order by popularity desc";
+      $ob = "order by dl desc, gp desc";
   }
 
   $offset = $limit * ($page -1);
-  $sql ='select SQL_CALC_FOUND_ROWS g.*, sum(d.downloads)+sum(d.gamepages) as popularity from games g'."\n";
+  $sql ='select SQL_CALC_FOUND_ROWS g.*, sum(d.downloads) as dl, sum(d.gamepages) as gp from games g'."\n";
   $sql.=' left join game_downloads d on g.id = d.id WHERE ' . implode(" AND ",$wc) . ' group by g.id '. $ob . ' LIMIT :limit OFFSET :offset';
   $sql2 = 'select distinct upper(substring(title,1,1)) AS c1 from games g WHERE ' . implode(' AND ',$wc) . " order by c1"; 
 
