@@ -13,6 +13,7 @@ if ( isset($_GET['id']) && is_numeric($_GET['id']) ) {
   exit(1);
 }
 
+$rec=0;
 if ( $_GET['t'] == 'd' ) {
   // Disc image
   $updir='gameimg/discs/';
@@ -133,7 +134,7 @@ if (!empty($_FILES["file"])) {
       } else {
         move_uploaded_file($_FILES["file"]["tmp_name"],$ldir.'/'.$fn);
         if ($fn==$r['filename']) {
-          $fu=True
+          $fu=True;
         }
       }
     }
@@ -163,7 +164,7 @@ if ($pf >= 0 && $pf < $indexCount) {
     $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $sth->bindParam(1, $dirArray[$pf], PDO::PARAM_STR);
     $sth->bindParam(2, $id, PDO::PARAM_INT);
-    echo $s."<br/>";
+//    echo $s."<br/>";
     if ($sth->execute()) {
       echo "<br/>Database updated.";
       $r['filename']=$dirArray[$pf];
@@ -180,7 +181,7 @@ if (($cu != -1) && ($_GET['t'] == 'd')) {
     $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $sth->bindParam(1, $cu, PDO::PARAM_STR);
     $sth->bindParam(2, $id, PDO::PARAM_INT);
-    echo $s."<br/>";
+//    echo $s."<br/>";
     if ($sth->execute()) {
       echo "<br/>Database updated.";
       $r['customurl']=$cu;
@@ -191,17 +192,24 @@ if (($cu != -1) && ($_GET['t'] == 'd')) {
   }
 }
 
+$date=date('Y-m-d H:i:s');
 if ($fu == True && $_GET['t']=='d') {
-  $s="update games set updated=?, updater=? where id = ?";
+  $s="update games set imgupdated=?, imgupdater=? where id = ?";
   $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-  $sth->bindParam(1, date('Y-m-d H:i:s'), PDO::PARAM_STR);
-  $sth->bindParam(2, $_SESSION['userid'], $_SESSION['userid'];
+  $sth->bindParam(1, $date, PDO::PARAM_STR);
+  $sth->bindParam(2, $_SESSION['userid'], $_SESSION['userid']);
   $sth->bindParam(3, $id, PDO::PARAM_INT);
-  echo $s."<br/>";
+//  echo $s."<br/>";
   if ($sth->execute()) {
     echo "<br/>Database timestamp updated.";
   } else {
     echo "<br/>DB Update timestamp failed.";
+    echo "<pre>Error:";
+    echo "\n";
+    $sth->debugDumpParams ();
+    $res=array();
+    print_r($sth->ErrorInfo());
+    echo "</pre>";
   }
 }
 

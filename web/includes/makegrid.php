@@ -258,7 +258,7 @@ function grid($state) {
       $ob = "order by year desc";
       break;
     case "u":
-      $ob = "order by lastupdated desc";
+      $ob = "order by imgupdated desc";
       break;
     case "a":
       $ob = "order by title";

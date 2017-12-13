@@ -107,6 +107,26 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			} else {
 				$p_save=$_POST['save'];
 			}
+			if ($_POST['compat_a'] == '0') {
+				$p_compat_a='N';
+			} else {
+				$p_compat_a=$_POST['compat_a'];
+			}
+			if ($_POST['compat_b'] == '0') {
+				$p_compat_b='Y';
+			} else {
+				$p_compat_b=$_POST['compat_b'];
+			}
+			if ($_POST['compat_master'] == '0') {
+				$p_compat_master='N';
+			} else {
+				$p_compat_master=$_POST['compat_master'];
+			}
+			if ($_POST['compat_a'] == '0') {
+				$p_compat_a='N';
+			} else {
+				$p_compat_a=$_POST['compat_a'];
+			}
 			if ($_POST['electron'] == 'Y') {
 				$p_electron='Y';
 			} else {
@@ -127,12 +147,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 					array('value' => $_POST['version'], 	'type' => PDO::PARAM_STR),
 					array('value' => $_POST['compilation'],	'type' => PDO::PARAM_STR),
 					array('value' => $_POST['series'], 	'type' => PDO::PARAM_STR),
-					array('value' => $_POST['series_no'], 	'type' => PDO::PARAM_STR),
-					array('value' => $_SESSION['userid'], 	'type' => PDO::PARAM_INT),
-					array('value' => $_SESSION['userid'], 	'type' => PDO::PARAM_INT),
-					array('value' => $_POST['compat_a'],    'type' => PDO::PARAM_STR),
-					array('value' => $_POST['compat_b'],	'type' => PDO::PARAM_STR),
-					array('value' => $_POST['compat_master'], 'type' => PDO::PARAM_STR)
+					array('value' => $_POST['series_no'],	'type' => PDO::PARAM_STR),
+					array('value' => $_SESSION['userid'],	'type' => PDO::PARAM_INT),
+					array('value' => $_SESSION['userid'],	'type' => PDO::PARAM_INT),
+					array('value' => $p_compat_a,		'type' => PDO::PARAM_STR),
+					array('value' => $p_compat_b,		'type' => PDO::PARAM_STR),
+					array('value' => $p_compat_master,	'type' => PDO::PARAM_STR)
 			);
 			$sth=$dbh->prepare($s);
 			if (DEBUG) {echo "<pre>$s<br/>"; print_r($sbinds);echo "</pre>";}
