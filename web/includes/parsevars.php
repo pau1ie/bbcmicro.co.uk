@@ -61,19 +61,19 @@ function getstate() {
     }
   }
 
-  if ( isset($_GET["pubid"])) {
-    $pubid=intval($_GET["pubid"]);
-    if ($pubid > 0 ) {
-      $state['pubid']=$pubid;
-    }
-  }
+//  if ( isset($_GET["pubid"])) {
+//    $pubid=intval($_GET["pubid"]);
+//    if ($pubid > 0 ) {
+//      $state['pubid']=$pubid;
+//    }
+//  }
 
-  if ( isset($_GET["year"])) {
-    $year=intval($_GET["year"]);
-    if ($year > 0 ) {
-      $state['year']=$year;
-    }
-  }
+//  if ( isset($_GET["year"])) {
+//    $year=intval($_GET["year"]);
+//    if ($year > 0 ) {
+//      $state['year']=$year;
+//    }
+//  }
 
   // Search Order
 

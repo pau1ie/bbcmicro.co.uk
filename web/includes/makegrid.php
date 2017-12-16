@@ -75,7 +75,7 @@ function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
        <a href="game.php?id=<?php echo $id; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $image; ?>" class="pic"></a>
        <div class="row-title"><span class="row-title"><a href="game.php?id=<?php echo $id; ?>"><?php echo $title ?></a></span></div>
        <div class="row-pub"><?php echo $publisher ?></div>
-       <div class="row-dt"><a href="?year=<?php echo $year ?>"><?php echo $year; ?></a></div>
+       <div class="row-dt"><a href="?search=<?php echo $year ?>&on_Y=on"><?php echo $year; ?></a></div>
 <?php
   $playlink=get_playlink($img,$jsbeeb,$root);
   if ($ssd != null && file_exists($ssd)) { ?>
@@ -209,13 +209,13 @@ function grid($state) {
     $wc[] = '(' . implode ('  OR ',$sls) . ')';
   }
 
-  if (array_key_exists ('pubid', $state)) {
-    $wc[] = "id in (select gameid from games_publishers gp where gp.pubid = :pubid)\n";
-  }
+//  if (array_key_exists ('pubid', $state)) {
+//    $wc[] = "id in (select gameid from games_publishers gp where gp.pubid = :pubid)\n";
+//  }
 
-  if (array_key_exists ('year', $state)) {
-    $wc[] = "year = :year\n";
-  }
+//  if (array_key_exists ('year', $state)) {
+//    $wc[] = "year = :year\n";
+//  }
 
   $doing_atoz_numbers=false;
   if (array_key_exists('atoz',$state)) {
@@ -255,7 +255,7 @@ function grid($state) {
       $ob = "order by year";
       break;
     case "b":
-      $ob = "order by year desc";
+      $ob = "order by year desc, id desc";
       break;
     case "u":
       $ob = "order by imgupdated desc";
@@ -289,14 +289,14 @@ function grid($state) {
     $sth->bindParam(':array',$t);
     $sth2->bindParam(':array',$t);
   }
-  if (array_key_exists ('pubid', $state)) {
-    $sth->bindParam(':pubid', $state['pubid'], PDO::PARAM_STR);
-    $sth2->bindParam(':pubid', $state['pubid'], PDO::PARAM_STR);
-  }
-  if (array_key_exists ('year', $state)) {
-    $sth->bindParam(':year', $state['year'], PDO::PARAM_STR);
-    $sth2->bindParam(':year', $state['year'], PDO::PARAM_STR);
-  }
+//  if (array_key_exists ('pubid', $state)) {
+//    $sth->bindParam(':pubid', $state['pubid'], PDO::PARAM_STR);
+//    $sth2->bindParam(':pubid', $state['pubid'], PDO::PARAM_STR);
+//  }
+//  if (array_key_exists ('year', $state)) {
+//    $sth->bindParam(':year', $state['year'], PDO::PARAM_STR);
+//    $sth2->bindParam(':year', $state['year'], PDO::PARAM_STR);
+//  }
 
   $sth->bindParam(':limit',$limit, PDO::PARAM_INT);
   $sth->bindParam(':offset',$offset, PDO::PARAM_INT);
@@ -388,7 +388,7 @@ function grid($state) {
         while($pub=$pubpdo->fetch(PDO::FETCH_ASSOC)) {
           $t=explode(' (',$pub['name']);
           $u=htmlspecialchars($t[0]);
-          $pubs=$pubs.'<a href="?pubid='.$pub['id'].'">'.$u.'</a>, ';
+          $pubs=$pubs.'<a href="?search='.$pub['name'].'&on_P=on">'.$u.'</a>, ';
         }
       } else {
         echo "Error:";
