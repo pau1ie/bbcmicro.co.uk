@@ -75,7 +75,7 @@ function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
        <a href="game.php?id=<?php echo $id; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $image; ?>" class="pic"></a>
        <div class="row-title"><span class="row-title"><a href="game.php?id=<?php echo $id; ?>"><?php echo $title ?></a></span></div>
        <div class="row-pub"><?php echo $publisher ?></div>
-       <div class="row-dt"><a href="?search=<?php echo $year ?>&on_Y=on"><?php echo $year; ?></a></div>
+       <div class="row-dt"><a href="?search=<?php echo urlencode($year) ?>&on_Y=on"><?php echo $year; ?></a></div>
 <?php
   $playlink=get_playlink($img,$jsbeeb,$root);
   if ($ssd != null && file_exists($ssd)) { ?>
@@ -388,7 +388,7 @@ function grid($state) {
         while($pub=$pubpdo->fetch(PDO::FETCH_ASSOC)) {
           $t=explode(' (',$pub['name']);
           $u=htmlspecialchars($t[0]);
-          $pubs=$pubs.'<a href="?search='.$pub['name'].'&on_P=on">'.$u.'</a>, ';
+          $pubs=$pubs.'<a href="?search='.urlencode($pub['name']).'&on_P=on">'.$u.'</a>, ';
         }
       } else {
         echo "Error:";
