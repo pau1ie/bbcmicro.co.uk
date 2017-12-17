@@ -134,7 +134,7 @@ if ( count($genres) > 1) {
 if ( ! empty($genres)) {
   $genretab='<tr><th>Secondary genre' . $s . '</th><td>';
   foreach ($genres as $genre) {
-    $genretab=$genretab . $genre["name"] . "<br/>";
+    $genretab=$genretab . '<a href="index.php?search='.urlencode($genre["name"]).'&on_S=on">' . $genre["name"] . "</a><br/>";
   }
   $genretab=$genretab . "</td></tr>";
 } else {
@@ -149,7 +149,7 @@ $names='';
 if ( ! empty($publishers)) {
   $pubtab='<tr><th>Publisher' . $s . '</th><td>';
   foreach ($publishers as $publisher) {
-    $pubtab=$pubtab . $publisher["name"] . "<br/>";
+    $pubtab=$pubtab . '<a href="index.php?search='. urlencode($publisher["name"]) .'&on_P=on">'.$publisher["name"] . "</a><br/>";
     $names.=$publisher["name"].", ";
   }
   if ($names) {
@@ -168,7 +168,7 @@ if ( count($authors) > 1) {
 if ( ! empty($authors)) {
   $authortab='<tr><th>Author' . $s . '</th><td>';
   foreach ($authors as $author) {
-    $authortab=$authortab . $author["name"] . "<br/>";
+    $authortab=$authortab . '<a href="index.php?search=' . urlencode($author["name"]) . '&on_A=on">' . $author["name"] . "</a><br/>";
   }
   $authortab=$authortab . "</td></tr>";
 } else {
@@ -287,12 +287,12 @@ if ( ! empty($authors)) {
 
    $cmp='';
    if (!empty($game['compilation'])) {
-      $cmp = "<tr><th>Compilation</th><td>" . $game['compilation'] . "</td></tr>";
+      $cmp = '<tr><th>Compilation</th><td><a href="index.php?search=' . urlencode($game['compilation']) . '&on_C=on">'. $game['compilation'] . "</a></td></tr>";
    }
 
    $sr='';
    if (!empty($game['series'])) {
-      $sr = "<tr><th>Series</th><td>" . $game['series'] . "</td></tr>";
+      $sr = '<tr><th>Series</th><td><a href="index.php?search=' . urlencode($game['series']) . '&on_Z=on">' . $game['series'] . "</a></td></tr>";
    }
 
    $sn='';
@@ -349,11 +349,11 @@ if ( ! empty($authors)) {
           <h2>Details</h2>
           <table class="table">
             <tr><th>Title</th><td><?php echo $game["title"];?></td></tr>
-            <tr><th>Year</th><td><?php echo $game["year"];?></td></tr>
-            <?php echo $pubtab;?></td></tr>
+            <tr><th>Year</th><td><a href="index.php?search=<?php echo $game["year"];?>&on_Y=on"><?php echo $game["year"];?></a></td></tr>
+            <?php echo $pubtab;?>
             <?php echo $authortab;?>
             <tr><th>Release Type</th><td><?php echo $game["reltype"];?></td></tr>
-            <tr><th>Primary genre</th><td><?php echo $game["genre"];?></td></tr>
+            <tr><th>Primary genre</th><td><a href="index.php?search=<?php echo urlencode($game["genre"]);?>&on_G=on"><?php echo $game["genre"];?></a></td></tr>
             <?php echo $genretab;?>
             <tr><th>Joystick</th><td><?php echo $js;?></td></tr>
             <tr><th>Players</th><td><?php echo $players;?></td></tr>
