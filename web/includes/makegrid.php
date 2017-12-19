@@ -102,8 +102,8 @@ function json_state($state, $ko, $vo) {
        foreach ($state['rtype'] as $k => $v ) {
          $s2['rt_'.$v]='on';
        }
-    } elseif ( $key == 'sort' ) {
-      $s2['sort'.$value]='';
+//    } elseif ( $key == 'sort' ) {
+//      $s2['sort']=$value;
     } else {
       $s2[$key]=$value;
     }
@@ -126,8 +126,8 @@ function url_state($state, $k, $v) {
        foreach ($state['rtype'] as $k => $v ) {
          $url=$url.'&rt_'.$v.'=on';
        }
-    }  elseif ( $key == 'sort' ) {
-      $url=$url.'&'.$key.$value.'=';
+//    }  elseif ( $key == 'sort' ) {
+//      $url=$url.'&'.$key.$value.'=';
     } else {
       $url=$url.'&'.$key.'='.urlencode ( $value );
     }
