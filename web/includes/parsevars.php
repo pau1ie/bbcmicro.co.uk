@@ -61,42 +61,12 @@ function getstate() {
     }
   }
 
-//  if ( isset($_GET["pubid"])) {
-//    $pubid=intval($_GET["pubid"]);
-//    if ($pubid > 0 ) {
-//      $state['pubid']=$pubid;
-//    }
-//  }
-
-//  if ( isset($_GET["year"])) {
-//    $year=intval($_GET["year"]);
-//    if ($year > 0 ) {
-//      $state['year']=$year;
-//    }
-//  }
-
   // Search Order
-
-  if ( isset($_GET["sortr"])) {
-    $state['sort']='r';
+  if ( isset($_GET["sort"])) {
+    if ($_GET["sort"]=='p' || $_GET["sort"]=='a' || $_GET["sort"]=='b' || $_GET["sort"]=='u') {
+      $state["sort"]=$_GET["sort"];
+    }
   }
-
-  if ( isset($_GET["sortb"])) {
-    $state['sort']='b';
-  }
-
-  if ( isset($_GET["sortu"])) {
-    $state['sort']='u';
-  }
-
-  if ( isset($_GET["sorta"])) {
-    $state['sort']='a';
-  }
-
-  if ( isset($_GET["sortp"])) {
-    $state['sort']='p';
-  }
-
 
   return $state;
 }

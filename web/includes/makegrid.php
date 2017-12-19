@@ -251,20 +251,18 @@ function grid($state) {
   }
 
   switch ($srt) {
-    case "r":
-      $ob = "order by year";
-      break;
-    case "b":
-      $ob = "order by year desc, id desc";
-      break;
     case "u":
-      $ob = "order by imgupdated desc";
+      $ob = "order by g.imgupdated desc";
       break;
     case "a":
-      $ob = "order by title";
+      $ob = "order by g.title";
       break;
-    default:
+    case "p":
       $ob = "order by dl desc, gp desc";
+      break;
+    case "b":
+    default:
+      $ob = "order by g.year desc, g.id desc";
   }
 
   $offset = $limit * ($page -1);

@@ -111,11 +111,10 @@ function refines($state) { ?>
 }
 
 
-
 function searchbuttons() {
   global $state;
 
-  $s='p';
+  $s='b'; // Default sort order - Releases. 
   $sortbtn='';
   if (isset($state['sort'])) {
     $sortbtn='name="sort'.$state['sort'].'"';
@@ -123,18 +122,14 @@ function searchbuttons() {
   }
   $sel='<span style="float:right">&#10004;</span>';
 ?>
+<br/>
+<h4>Sort by</h4>
+<input type="radio" name="sort" value="p" <?php if ($s=="p") echo "checked"; ?>> Popular</input><br>
+<input type="radio" name="sort" value="a" <?php if ($s=="a") echo "checked"; ?>> Alphabetic</input><br>
+<input type="radio" name="sort" value="u" <?php if ($s=="u") echo "checked"; ?>> Latest Releases</input><br/>
+<input type="radio" name="sort" value="b" <?php if ($s=="b") echo "checked"; ?>> Latest Updates</input><br/>
 <div class="btn-group btn-block">
-  <button type="submit" class="btn btn-default btn-lg" <?php echo $sortbtn; ?> style="display: block;width: 75%;">Search</button>
-  <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" style="display: block;width: 25%;">
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><button class="list-group-item" type="submit" name="sortp">Popular <?php if ($s=='p') echo $sel; ?></a></li>
-    <li><button class="list-group-item" type="submit" name="sorta">Alphabetic <?php if ($s=='a') echo $sel; ?></a></li>
-    <li><button class="list-group-item" type="submit" name="sortu">Latest Updates <?php if ($s=='u') echo $sel; ?></a></li>
-    <li><button class="list-group-item" type="submit" name="sortb">Latest Releases <?php if ($s=='b') echo $sel; ?></a></li>
-    <li><button class="list-group-item" type="submit" name="sortr">Earliest Releases <?php if ($s=='r') echo $sel; ?></a></li>
-  </ul>
+  <button type="submit" class="btn btn-default btn-lg btn-block">Search</button>
 </div> 
 <?php
 }
