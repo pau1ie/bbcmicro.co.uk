@@ -124,10 +124,10 @@ function searchbuttons() {
 ?>
 <br/>
 <h4>Sort by</h4>
-<input type="radio" name="sort" value="p" <?php if ($s=="p") echo "checked"; ?>> Popular</input><br>
-<input type="radio" name="sort" value="a" <?php if ($s=="a") echo "checked"; ?>> Alphabetic</input><br>
-<input type="radio" name="sort" value="u" <?php if ($s=="u") echo "checked"; ?>> Latest Releases</input><br/>
-<input type="radio" name="sort" value="b" <?php if ($s=="b") echo "checked"; ?>> Latest Updates</input><br/>
+<label style="font-weight: 400"><input type="radio" name="sort" value="p" <?php if ($s=="p") echo "checked"; ?>> Popular</input></label><br/>
+<label style="font-weight: 400"><input type="radio" name="sort" value="a" <?php if ($s=="a") echo "checked"; ?>> Alphabetic</input></label><br/>
+<label style="font-weight: 400"><input type="radio" name="sort" value="u" <?php if ($s=="u") echo "checked"; ?>> Latest Releases</input></label><br/>
+<label style="font-weight: 400"><input type="radio" name="sort" value="b" <?php if ($s=="b") echo "checked"; ?>> Latest Updates</input></label><br/>
 <div class="btn-group btn-block">
   <button type="submit" class="btn btn-default btn-lg btn-block">Search</button>
 </div> 
