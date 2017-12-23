@@ -32,19 +32,34 @@ function getstate() {
   }
 
   // Tick boxes
-  $rtype = array();
-
   foreach($_GET as $k => $v ) {
-    if (preg_match('/^rt_[A-Z]$/',$k)) {
+    if (preg_match('/^rt_[A-Z]$/',$k)) {  //Release types checkbox (Hidden)
       $state['rtype'][] = substr($k,-1);
+    }
+    if (preg_match('/^ro_[A-Z]$/',$k)) {  //Release type radio (Display only)
+      $ro = substr($k,-1);
+    }
+    if (preg_match('/^rs_[A-Z]$/',$k)) {  //Release types toggle
+      $rt = substr($k,-1);
     }
     if (preg_match('/^on_[A-Z]$/',$k)) {
       $state['only'][] = substr($k,-1);
     }
   }
 
-  if (count($rtype)>0) {
-    $state['rtype']=$rtype;
+  if (isset($ro)) {                       // Radio - Only set this one
+     $state['rtype']=array();
+     $state['rtype'][]=$ro;
+  } else if (isset($rt)) {                // Toggle
+     if (in_array($rt,$state['rtype'])) {
+       $i=array_search($rt,$state['rtype']);
+       unset($state['rtype'][$i]);
+       if (count($state['rtype']) == 0 ) {
+         unset($state['rtype']);
+       }
+     } else {
+       $state['rtype'][]=$rt;
+     }
   }
 
   if ( isset($_GET["atoz"])) {

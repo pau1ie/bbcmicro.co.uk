@@ -21,27 +21,31 @@ function get_reltypes() {
 function reltypes($state) {
 ?>
      <h4>Browse release types:</h4>
-      <div id="reltypes" class="form-inline">
+      <div id="reltypes">
 <?php
    $reltyps=get_reltypes();
    foreach ( $reltyps as $reltyp ) {
       $checked='';
+      $active=' btn-default';
       if (!array_key_exists('rtype',$state) || count($state['rtype'])==0){
          if ($reltyp['selected'] == 'Y') {
-            $checked='checked';
+            $checked='  <input type="hidden" name="rt_' . $reltyp['id'] .'">';
+            $active=' btn-primary';
          }
       } else {
          if (array_key_exists('rtype',$state) && array_search($reltyp['id'],$state['rtype'])===False) {
             ;
          }else{
-            $checked='checked';
+            $checked='  <input type="hidden" name="rt_' . $reltyp['id'] .'">';
+            $active=' btn-primary';
          }
       }
 ?>
-      <div class="checkbox">
-       <label><input type="checkbox" name="rt_<?php echo $reltyp['id']; ?>" <?php echo $checked ?>> <?php echo $reltyp['name'] ?>&emsp; </label>
-      </div>
-<?php
+
+<div class="btn-group" style="margin-bottom:5px;">
+  <button type="submit" name="rs_<?php echo $reltyp['id']; ?>" title="Toggle <?php echo $reltyp['name'] ?>" class="btn<?php echo $active; ?>"><?php echo $reltyp['name'] ?></button>
+  <button type="submit" name="ro_<?php echo $reltyp['id']; ?>" title="Select only <?php echo $reltyp['name'] ?>" class="btn<?php echo $active; ?>">&#9675;</button></div>
+<?php echo $checked; 
    }
    echo "      </div>";
 }

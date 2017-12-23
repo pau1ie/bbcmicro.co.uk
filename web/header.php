@@ -185,10 +185,6 @@ $(document).ready(function() {
         return t;
     }
   });
-  // Make release type tick boxes dynamic
-  $( "#reltypes" ).change(function() {
-     $("form").submit();
-  });
 });
 // Log downloads.
 function log(a) {
