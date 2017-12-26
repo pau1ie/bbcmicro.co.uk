@@ -15,7 +15,7 @@ if ( isset($_GET["h"])) {
   $h="i";
 }
 
-$sql = "select g.id, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.compilation, g.electron, g.series, g.series_no, n.name as genre, r.name as reltype, g.compat_a, g.compat_b, g.compat_master from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.compilation, g.electron, g.series, g.series_no, n.name as genre, r.id as relid, r.name as reltype, g.compat_a, g.compat_b, g.compat_master from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -352,7 +352,7 @@ if ( ! empty($authors)) {
             <tr><th>Year</th><td><a href="index.php?search=<?php echo $game["year"];?>&on_Y=on"><?php echo $game["year"];?></a></td></tr>
             <?php echo $pubtab;?>
             <?php echo $authortab;?>
-            <tr><th>Release Type</th><td><?php echo $game["reltype"];?></td></tr>
+            <tr><th>Release Type</th><td><a href="index.php?rt_<?php echo $game["relid"];?>="><?php echo $game["reltype"];?></a></td></tr>
             <tr><th>Primary genre</th><td><a href="index.php?search=<?php echo urlencode($game["genre"]);?>&on_G=on"><?php echo $game["genre"];?></a></td></tr>
             <?php echo $genretab;?>
             <tr><th>Joystick</th><td><?php echo $js;?></td></tr>
