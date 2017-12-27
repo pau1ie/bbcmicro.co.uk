@@ -104,7 +104,7 @@ function refines($state) { ?>
     }
 ?>
       <div class="checkbox">
-       <label><input type="checkbox" name="on_<?php echo $tid; ?>" <?php echo $checked ?>><?php echo $type ?></label>
+       <label><input type="checkbox" name="on_<?php echo $tid; ?>" <?php echo $checked ?>/><?php echo $type ?></label>
       </div>
 <?php
   }
@@ -124,10 +124,10 @@ function searchbuttons() {
 ?>
 <br/>
 <h4>Sort by</h4>
-<label style="font-weight: 400"><input type="radio" name="sort" value="p" <?php if ($s=="p") echo "checked"; ?>> Popular</input></label><br/>
-<label style="font-weight: 400"><input type="radio" name="sort" value="a" <?php if ($s=="a") echo "checked"; ?>> Alphabetic</input></label><br/>
-<label style="font-weight: 400"><input type="radio" name="sort" value="u" <?php if ($s=="u") echo "checked"; ?>> Latest Updates</input></label><br/>
-<label style="font-weight: 400"><input type="radio" name="sort" value="b" <?php if ($s=="b") echo "checked"; ?>> Latest Releases</input></label><br/>
+<label style="font-weight: 400"><input type="radio" name="sort" value="p" <?php if ($s=="p") echo "checked"; ?>/> Popular</label><br/>
+<label style="font-weight: 400"><input type="radio" name="sort" value="a" <?php if ($s=="a") echo "checked"; ?>/> Alphabetic</label><br/>
+<label style="font-weight: 400"><input type="radio" name="sort" value="u" <?php if ($s=="u") echo "checked"; ?>/> Latest Updates</label><br/>
+<label style="font-weight: 400"><input type="radio" name="sort" value="b" <?php if ($s=="b") echo "checked"; ?>/> Latest Releases</label><br/>
 <div class="btn-group btn-block">
   <button type="submit" class="btn btn-default btn-lg btn-block">Search</button>
 </div> 
@@ -142,7 +142,8 @@ function containstart($state) {
    <div class="col-xs-12 col-sm-10">
     <p class="pull-right visible-xs">
      <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Search</button>
-    </p>
+    </p><?php // Add a button to catch searches using the enter key ?>
+    <button style="overflow: visible !important; height: 0 !important; width: 0 !important; margin: 0 !important; border: 0 !important; padding: 0 !important; display: block !important;" type="submit"></button>
 <?php
 }
 
@@ -164,13 +165,11 @@ function htmlfoot() {
  <script src="bs/offcanvas.js"></script>
  <script src="bs/js/typeahead.js"></script>
  <script>
-//addTracker(window, 'load', get_targeted_links('btn'));
 <?php // Set up the typeahead search ?>
 $(document).ready(function() {
   var suggestions = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    //prefetch: '../data/films/post_1960.json',
     remote: {
       url: 'q?qt=suggestions&qv=%QUERY%',
       wildcard: '%QUERY'
