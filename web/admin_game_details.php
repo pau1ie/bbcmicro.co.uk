@@ -1,4 +1,4 @@
-<?php
+<!DOCTYPE html><?php
 define('DEBUG',false);
 
 require('includes/admin_session.php');
@@ -7,18 +7,19 @@ require_once('includes/config.php');
 require_once('includes/admin_db_open.php');
 
 require_once('includes/admin_menu.php');
+?><html><head>
+<script src=tinymce/tinymce.min.js></script>
+<script>
+tinymce.init({
+   selector: '#notes',
+    plugins: "advlist charmap code help hr link lists table",
+    browser_spellcheck: true
+});
+</script>
+</head>
+<body><?php
 show_admin_menu();
 
-#$known_hardware=['R' => 'Sideways Ram Required',
-#	'S'=>'Sideways Ram used if fitted',
-#	'2'=>'Two banks of sideways RAM Required',
-#	'M'=>'Master Only',
-#	'8'=>'8271 DFS Only'];
-#$known_hardware=['Sideways Ram Required' => 'Sideways Ram Required',
-#	'Sideways Ram used if fitted'=>'Sideways Ram used if fitted',
-#	'Two banks of sideways RAM Required'=>'Two banks of sideways RAM Required',
-#	'Master Only'=>'Master Only',
-#	'8271 DFS Only'=>'8271 DFS Only'];
 
 $jopts=[ 'R' => 'Required', 'O' => 'Optional' ];
 $sopts=[ 'D' => 'Save to Disc', 'T' => 'Save to Tape' ];
@@ -606,12 +607,13 @@ function make_form($game_id,$r) {
 		echo make_dd(0,'publisher_'.sprintf("%02d",$ac++),'publisher',$known_publishers);
 	} while ($ac<=4);
 
-	echo "<br/><br/><label> Notes: <textarea name='notes' rows='5' cols='132' >".htmlspecialchars($r['notes'])."</textarea></label><br/>";
+	echo "<br/><br/><label> Notes: <textarea id='notes' name='notes' rows='5' cols='132' >".htmlspecialchars($r['notes'])."</textarea></label><br/>";
 	echo "Take care with this field. It allows any HTML to be entered so it is possible to completely mess up the formatting of the page!";
 
 	echo "<br><br><input type='submit' value='Save'>\n";
 
 	echo "</form>\n";
+?></body></html><?php
 }
 
 function executeWithDataTypes(PDOStatement $sth, array $values) {
@@ -622,4 +624,3 @@ function executeWithDataTypes(PDOStatement $sth, array $values) {
     }
     return $sth->execute();
 }
-?>
