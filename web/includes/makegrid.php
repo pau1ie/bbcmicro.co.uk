@@ -268,10 +268,10 @@ function grid($state) {
     default:
       $ob = "order by g.year desc, g.id desc";
   }
-
+  $ym=date("Ym",time()-90*24*60*60);
   $offset = $limit * ($page -1);
   $sql ='select SQL_CALC_FOUND_ROWS g.*, sum(d.downloads) as dl, sum(d.gamepages) as gp from games g'."\n";
-  $sql.=' left join game_downloads d on g.id = d.id WHERE ' . implode(" AND ",$wc) . ' group by g.id '. $ob . ' LIMIT :limit OFFSET :offset';
+  $sql.=' left join game_downloads d on g.id = d.id and d.year > ' . $ym . ' where ' . implode(" AND ",$wc) . ' group by g.id '. $ob . ' LIMIT :limit OFFSET :offset';
   $sql2 = 'select distinct upper(substring(title,1,1)) AS c1 from games g WHERE ' . implode(' AND ',$wc) . " order by c1"; 
 
   $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -291,14 +291,6 @@ function grid($state) {
     $sth->bindParam(':array',$t);
     $sth2->bindParam(':array',$t);
   }
-//  if (array_key_exists ('pubid', $state)) {
-//    $sth->bindParam(':pubid', $state['pubid'], PDO::PARAM_STR);
-//    $sth2->bindParam(':pubid', $state['pubid'], PDO::PARAM_STR);
-//  }
-//  if (array_key_exists ('year', $state)) {
-//    $sth->bindParam(':year', $state['year'], PDO::PARAM_STR);
-//    $sth2->bindParam(':year', $state['year'], PDO::PARAM_STR);
-//  }
 
   $sth->bindParam(':limit',$limit, PDO::PARAM_INT);
   $sth->bindParam(':offset',$offset, PDO::PARAM_INT);

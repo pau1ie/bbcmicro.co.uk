@@ -11,11 +11,12 @@ if ($_GET['t'] == "d" ) {
 }
 
 $id=(int)$_GET['id'];
-$year=(int)date("Y");
+$ym=(int)date("Ym");
 
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
-$sth->bindParam(2, $year, PDO::PARAM_INT);
+$sth->bindParam(2, $ym, PDO::PARAM_INT);
+
 if ($sth->execute()) {
   echo "OK";
 } else {
