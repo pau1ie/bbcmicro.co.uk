@@ -9,11 +9,6 @@ $id=0;
 if ( isset($_GET["id"])) {
   $id=intval($_GET["id"]);
 }
-if ( isset($_GET["h"])) {
-  $h=$_GET["h"];
-} else { 
-  $h="i";
-}
 
 $sql = "select g.id, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.compilation, g.electron, g.series, g.series_no, n.name as genre, r.id as relid, r.name as reltype, g.compat_a, g.compat_b, g.compat_master from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -119,7 +114,7 @@ if (count($split) > 1 ) {
 
 $back_url='index.php';
 $back_desc='home page';
-if ($h != "h" && array_key_exists('HTTP_REFERER', $_SERVER)) {
+if (array_key_exists('HTTP_REFERER', $_SERVER)) {
   if ( parse_url($_SERVER["HTTP_REFERER"],PHP_URL_HOST) == $_SERVER["SERVER_NAME"] ) {
     $back_url = "javascript:history.go(-1)";
     $back_desc='list';
@@ -403,8 +398,8 @@ foreach ($children as $child) {
 			$names='';
 			foreach ($pubs as $pub) {
 				if ($pub) {
-					list($id,$name)=explode('|',$pub);
-					if ($name) $names.="$name, ";
+					list($pid,$pname)=explode('|',$pub);
+					if ($pname) $names.="$pname, ";
 				}
 			}
 			if ($names) {
@@ -452,8 +447,8 @@ foreach ($children as $child) {
 			$names='';
 			foreach ($pubs as $pub) {
 				if ($pub) {
-					list($id,$name)=explode('|',$pub);
-					if ($name) $names.="$name, ";
+					list($pid,$pname)=explode('|',$pub);
+					if ($pname) $names.="$pname, ";
 				}
 			}
 			if ($names) {
@@ -479,8 +474,7 @@ foreach ($children as $child) {
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bs/jquery.min.js"></script>
     <script src="bs/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bs/js/ie10-viewport-bug-workaround.js"></script>
