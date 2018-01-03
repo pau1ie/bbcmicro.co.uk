@@ -16,17 +16,24 @@ function get_scrshot($file,$subdir) {
 }
 
 function get_playlink($image,$jsbeeb,$wsroot) {
+  $jsbdisc=$jsbeeb . '?autoboot&disc=';
+  $jsbtape=$jsbeeb . '?autochain&tape=';
   $url = Null;
   if ($image['customurl'] === NULL or $image['customurl'] === '') {
     $ssd=get_discloc($image['filename'],$image['subdir']);
     if (file_exists($ssd)) {
-      $url = $jsbeeb . $wsroot . '/' . $ssd;
+      $file_parts = pathinfo($ssd);
+      if (strtolower($file_parts['extension']) == 'uef') {
+        $url = $jsbtape . $wsroot . '/' . $ssd;
+      } else {
+        $url = $jsbdisc . $wsroot . '/' . $ssd;
+      }
     }
   } else {
     if ($image['customurl']=='NONE') {
       $url=NULL;
     } else {
-      $url = str_replace('%jsbeeb%',$jsbeeb,$image['customurl']);
+      $url = str_replace('%jsbeeb%',$jsbdisc,$image['customurl']);
       $url = str_replace('%wsroot%',$wsroot,$url);
     }
   }
