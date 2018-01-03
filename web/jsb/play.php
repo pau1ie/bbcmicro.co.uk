@@ -74,8 +74,9 @@ if (isset($_GET['bg'])) {
     <div class="container">
 
    <div id="cub-monitor">
-        <div>            
-            <canvas id="screen" width="921" height="682"></canvas>
+        <div>
+            <img id="#cub-monitor-pic" width="896" height="648" src="images/black-border.png">            
+            <canvas id="screen" width="896" height="600"></canvas>
         </div>
     </div>
     <div id="leds" style="display:none">
