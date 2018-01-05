@@ -232,7 +232,7 @@ for($index=0; $index < $indexCount; $index++) {
 </TABLE></br/>
 <?php
 if ( $_GET['t'] == 'd' ) {
-  echo "<label> Custom URL for jsbeeb <input type='text' name='customurl' size='40' value='".$r['customurl']."'/> Enter NONE to not play in jsbeeb. %jsbeeb% for the jsbeeb location, and %wsroot% for the base URL of the website.</label><br/><br/>";
+  echo "<label> Custom URL for jsbeeb <input type='text' name='customurl' size='40' value='".$r['customurl']."'/> Enter NONE to not play in jsbeeb, PROB for game with problems in jsbeeb. %jsbeeb% for the jsbeeb location, and %wsroot% for the base URL of the website.</label><br/><br/>";
 }
 ?>
 <input type="submit" value="Submit"></form>

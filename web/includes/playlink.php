@@ -15,11 +15,11 @@ function get_scrshot($file,$subdir) {
   return $imgfile;
 }
 
-function get_playlink($image,$jsbeeb,$wsroot) {
+function get_playlink($image,$jsbeeb,$wsroot,$link='I') {
   $jsbdisc=$jsbeeb . '?autoboot&disc=';
   $jsbtape=$jsbeeb . '?autochain&tape=';
   $url = Null;
-  if ($image['customurl'] === NULL or $image['customurl'] === '') {
+  if ($image['customurl'] === NULL or $image['customurl'] === '' or ($image['customurl']=='PROB' and $link!='I')) {
     $ssd=get_discloc($image['filename'],$image['subdir']);
     if (file_exists($ssd)) {
       $file_parts = pathinfo($ssd);
@@ -30,7 +30,7 @@ function get_playlink($image,$jsbeeb,$wsroot) {
       }
     }
   } else {
-    if ($image['customurl']=='NONE') {
+    if ($image['customurl']=='NONE' or ($image['customurl']=='PROB' and $link='I')) {
       $url=NULL;
     } else {
       $url = str_replace('%jsbeeb%',$jsbdisc,$image['customurl']);

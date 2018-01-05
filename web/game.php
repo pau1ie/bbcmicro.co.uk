@@ -51,11 +51,12 @@ if ($sth->execute()) {
   $img=array();
 }
 
+
 $ssd = get_discloc($img["filename"],$img['subdir']);
 $jsbeeb=JB_LOC;
 $root=WS_ROOT;
 
-$playlink=get_playlink($img,$jsbeeb,$root);
+$playlink=get_playlink($img,$jsbeeb,$root,'P');
 if ( $ssd != NULL && file_exists($ssd)) {
   $imglink='<p><a type="button" class="btn btn-primary btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $ssd . '">Download</a></p>';
 } else {
@@ -63,7 +64,13 @@ if ( $ssd != NULL && file_exists($ssd)) {
 }
 
 if ($playlink != NULL ) {
-  $imglink=$imglink .'<p><a type="button" class="btn btn-primary btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $playlink . '" >Play</a></p>';
+  echo "xxxxxx";
+  print_r($img['customurl']);
+  if ($img['customurl']=='PROB') {
+    $imglink='<p style="text-align: center">This game doesn\'t work properly in jsbeeb.</p>' . $imglink .'<p><a type="button" class="btn btn-warning btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $playlink . '" >Play Anyway</a></p>';
+  }else{
+    $imglink=$imglink .'<p><a type="button" class="btn btn-primary btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $playlink . '" >Play</a></p>';
+  }
 } else {
   $imglink=$imglink."<p>Can't be played online.</p>";
 }
