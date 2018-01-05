@@ -119,7 +119,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 				$p_compat_b=$_POST['compat_b'];
 			}
 			if ($_POST['compat_master'] == '0') {
-				$p_compat_master='N';
+				$p_compat_master=Null;
 			} else {
 				$p_compat_master=$_POST['compat_master'];
 			}
