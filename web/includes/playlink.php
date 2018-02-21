@@ -30,7 +30,7 @@ function get_playlink($image,$jsbeeb,$wsroot,$link='I') {
       }
     }
   } else {
-    if ($image['customurl']=='NONE' or ($image['customurl']=='PROB' and $link='I')) {
+    if ($image['customurl']=='NONE' or ($image['customurl']=='PROB' and $link=='I')) {
       $url=NULL;
     } else {
       $url = str_replace('%jsbeeb%',$jsbdisc,$image['customurl']);
