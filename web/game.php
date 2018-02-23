@@ -64,8 +64,6 @@ if ( $ssd != NULL && file_exists($ssd)) {
 }
 
 if ($playlink != NULL ) {
-  echo "xxxxxx";
-  print_r($img['customurl']);
   if ($img['customurl']=='PROB') {
     $imglink='<p style="text-align: center">This game doesn\'t work properly in jsbeeb.</p>' . $imglink .'<p><a type="button" class="btn btn-warning btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $playlink . '" >Play Anyway</a></p>';
   }else{
