@@ -21,7 +21,7 @@ define('ADMIN_DB_PASS',DB_PASS);
 
 # (Mostly) For use with jsbeeb
 define('WS_ROOT','http://localhost/');
-define('JB_LOC', WS_ROOT . '/jsbeeb/play.php?autoboot&disc=');
+define('JB_LOC', WS_ROOT . '/jsbeeb/play.php');
 
 #Items per page on the grid. Ideally has factors of 3,4
 define('GD_IPP',36);
