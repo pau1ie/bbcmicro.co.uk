@@ -137,6 +137,11 @@ foreach ($res as $line) {
   print ($ol2 . "\n");
 
 }
+?>
+</table>
+</body>
+</html>
+<?php
 }
 
 ?>
