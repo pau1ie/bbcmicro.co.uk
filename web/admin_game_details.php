@@ -87,7 +87,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 		if ($game_id == null) {
 			# New entry
-			$s="INSERT INTO games ( parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, lastupdater, lastupdated, created, creator, compat_a, compat_b, compat_master) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?,?,?,?)";
+			$s="INSERT INTO games ( parent, title_article, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, lastupdater, lastupdated, created, creator, compat_a, compat_b, compat_master) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?,?,?,?)";
 			if ($_POST['parent'] == '0' || $_POST['parent'] == '' ) {
 				$p_parent = null;
 			} else {
@@ -133,27 +133,28 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			} else {
 				$p_electron='';
 			}
-			$sbinds=array(  array('value' => $p_parent, 		'type' => PDO::PARAM_INT),
-					array('value' => $_POST['title'], 	'type' => PDO::PARAM_STR),
-					array('value' => $_POST['year'], 	'type' => PDO::PARAM_STR),
-					array('value' => $p_genre, 		'type' => PDO::PARAM_INT),
-					array('value' => $_POST['reltype'], 	'type' => PDO::PARAM_STR),
-					array('value' => $_POST['notes'], 	'type' => PDO::PARAM_STR),
-					array('value' => $_POST['players_min'], 'type' => PDO::PARAM_INT),
-					array('value' => $_POST['players_max'], 'type' => PDO::PARAM_INT),
-					array('value' => $p_joystick, 		'type' => PDO::PARAM_STR),
-					array('value' => $p_save, 		'type' => PDO::PARAM_STR),
-					array('value' => $_POST['hardware'], 	'type' => PDO::PARAM_STR),
-					array('value' => $p_electron, 		'type' => PDO::PARAM_STR),
-					array('value' => $_POST['version'], 	'type' => PDO::PARAM_STR),
-					array('value' => $_POST['compilation'],	'type' => PDO::PARAM_STR),
-					array('value' => $_POST['series'], 	'type' => PDO::PARAM_STR),
-					array('value' => $_POST['series_no'],	'type' => PDO::PARAM_STR),
-					array('value' => $_SESSION['userid'],	'type' => PDO::PARAM_INT),
-					array('value' => $_SESSION['userid'],	'type' => PDO::PARAM_INT),
-					array('value' => $p_compat_a,		'type' => PDO::PARAM_STR),
-					array('value' => $p_compat_b,		'type' => PDO::PARAM_STR),
-					array('value' => $p_compat_master,	'type' => PDO::PARAM_STR)
+			$sbinds=array(  array('value' => $p_parent, 			'type' => PDO::PARAM_INT),
+					array('value' => $_POST['title_article'], 	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['title'], 		'type' => PDO::PARAM_STR),
+					array('value' => $_POST['year'], 		'type' => PDO::PARAM_STR),
+					array('value' => $p_genre, 			'type' => PDO::PARAM_INT),
+					array('value' => $_POST['reltype'],	 	'type' => PDO::PARAM_STR),
+					array('value' => $_POST['notes'], 		'type' => PDO::PARAM_STR),
+					array('value' => $_POST['players_min'], 	'type' => PDO::PARAM_INT),
+					array('value' => $_POST['players_max'],		'type' => PDO::PARAM_INT),
+					array('value' => $p_joystick, 			'type' => PDO::PARAM_STR),
+					array('value' => $p_save, 			'type' => PDO::PARAM_STR),
+					array('value' => $_POST['hardware'],	 	'type' => PDO::PARAM_STR),
+					array('value' => $p_electron, 			'type' => PDO::PARAM_STR),
+					array('value' => $_POST['version'], 		'type' => PDO::PARAM_STR),
+					array('value' => $_POST['compilation'],		'type' => PDO::PARAM_STR),
+					array('value' => $_POST['series'], 		'type' => PDO::PARAM_STR),
+					array('value' => $_POST['series_no'],		'type' => PDO::PARAM_STR),
+					array('value' => $_SESSION['userid'],		'type' => PDO::PARAM_INT),
+					array('value' => $_SESSION['userid'],		'type' => PDO::PARAM_INT),
+					array('value' => $p_compat_a,			'type' => PDO::PARAM_STR),
+					array('value' => $p_compat_b,			'type' => PDO::PARAM_STR),
+					array('value' => $p_compat_master,		'type' => PDO::PARAM_STR)
 			);
 			$sth=$dbh->prepare($s);
 			if (DEBUG) {echo "<pre>$s<br/>"; print_r($sbinds);echo "</pre>";}
@@ -167,7 +168,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			}
 		} else {
 			# An entry already exists. Compare it.
-			$s="SELECT id, parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, compat_a, compat_b, compat_master FROM games where id = ?";
+			$s="SELECT id, parent, title_article, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, compat_a, compat_b, compat_master FROM games where id = ?";
 
 			$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$sth->bindParam(1, $game_id, PDO::PARAM_INT);
@@ -354,7 +355,7 @@ if ($sth->execute()) {
 }
 
 if ($game_id) {
-	$s="	SELECT 	id,title, parent, title, year, genre, reltype, notes, players_min, players_max, joystick, save,
+	$s="	SELECT 	id,title, parent, title_article, title, year, genre, reltype, notes, players_min, players_max, joystick, save,
 			hardware, electron, version, compilation, series, series_no, compat_a, compat_b, compat_master,
 			(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') 
 				FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers,
@@ -377,7 +378,7 @@ if ($game_id) {
 	}
 } else {
 	# Make an empty form
-	$r=['id'=>'','title'=>'','parent'=>'','year'=>'19XX','genre'=>'',
+	$r=['id'=>'','title_article'=>'','title'=>'','parent'=>'','year'=>'19XX','genre'=>'',
             'reltype'=>'W','notes'=>'','players_min'=>'1', 'players_max'=>'1',
             'joystick'=>'', 'save'=>'','hardware'=>'', 'electron'=>'',
             'version'=>'', 'compilation'=>'', 'series'=>'', 'series_no'=>'',
@@ -489,6 +490,7 @@ function make_form($game_id,$r) {
 	echo "<form name='frmGame' method='POST' action='admin_game_details.php'>\n";
 	echo "<input type='hidden' name='id' value='$game_id'>\n";
 
+	echo "<label> Article <input type='text' name='title_article' size='5' value='".htmlspecialchars($r['title_article'],ENT_QUOTES)."'/></label>  ";
 	echo "<label> Title <input type='text' name='title' size='80' value='".htmlspecialchars($r['title'],ENT_QUOTES)."'/></label><br/><br/>";
 	echo "<label> Parent ID <input type='text' name='parent' size='4' value='".$r['parent']."'/> ";
 	echo "Note: If populated, this game won't appear in the list, the parent needs to be ";

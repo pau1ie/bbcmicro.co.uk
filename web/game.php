@@ -10,7 +10,7 @@ if ( isset($_GET["id"])) {
   $id=intval($_GET["id"]);
 }
 
-$sql = "select g.id, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.compilation, g.electron, g.series, g.series_no, n.name as genre, r.id as relid, r.name as reltype, g.compat_a, g.compat_b, g.compat_master from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title_article, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.compilation, g.electron, g.series, g.series_no, n.name as genre, r.id as relid, r.name as reltype, g.compat_a, g.compat_b, g.compat_master from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -109,8 +109,14 @@ if ($sth->execute()) {
   $authors=array();
 }
 
+if (strlen($game["title_article"]) > 0) {
+   $ta=$game["title_article"].' ';
+} else {
+   $ta='';
+}
+
 $split=explode('(',$game["title"]);
-$title='<h1>' . $split[0];
+$title='<h1>' . $ta . $split[0];
 if (count($split) > 1 ) {
    $title = $title . '</h1><p>(' . implode('(',array_slice($split,1)) . "</p>";
 }  else {
@@ -186,7 +192,7 @@ if ( ! empty($authors)) {
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title><?php echo $game["title"]; ?></title>
+    <title><?php echo $ta . $game["title"]; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="bs/css/bootstrap.min.css" rel="stylesheet">
@@ -348,7 +354,7 @@ if ( ! empty($authors)) {
         <div class="col-md-4">
           <h2>Details</h2>
           <table class="table">
-            <tr><th>Title</th><td><?php echo $game["title"];?></td></tr>
+            <tr><th>Title</th><td><?php echo $ta . $game["title"];?></td></tr>
             <tr><th>Year</th><td><a href="index.php?search=<?php echo $game["year"];?>&on_Y=on"><?php echo $game["year"];?></a></td></tr>
             <?php echo $pubtab;?>
             <?php echo $authortab;?>

@@ -63,14 +63,17 @@ function atoz_line($current='',$chars,$margin) {
   echo "</div>";
 }
 
-function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
+function gameitem( $id, $ta, $name, $image, $img, $publisher, $year, $pubid) {
    global $sid;
 
    $jsbeeb=JB_LOC;
    $root=WS_ROOT;
 
    $split=explode('(',$name);
-   $title=$split[0];
+   $title=trim($split[0]);
+   if (strlen($ta)>0){
+     $title=$title.', '.$ta;
+   }
    
    $ssd = get_discloc($img["filename"],$img['subdir']);
 ?>
@@ -83,7 +86,7 @@ function gameitem( $id,  $name, $image, $img, $publisher, $year, $pubid) {
 <?php
   $playlink=get_playlink($img,$jsbeeb,$root);
   if ($ssd != null && file_exists($ssd)) { ?>
-       <p><a href="<?php echo $ssd ?>" type="button"  onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Download</a><?php
+       <p><a href="<?php echo $ssd ?>" type="button" onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Download</a><?php
   }
   if ($playlink != null) { ?>
           <a id="plybtn" href="<?php echo $playlink ?>" type="button" onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Play</a></p>
@@ -390,7 +393,7 @@ function grid($state) {
       }
       $pubs=trim($pubs,', ');
 
-      gameitem($game["id"],htmlspecialchars($game["title"]), $shot, $dnl ,$pubs,$game["year"],$pub["id"]);
+      gameitem($game["id"],htmlspecialchars($game["title_article"]),htmlspecialchars($game["title"]), $shot, $dnl ,$pubs,$game["year"],$pub["id"]);
     }
   } else {
     echo '    <div class="row" style="display:flex; flex-wrap: wrap;">'."\n<h2>No games found!</h2>";
