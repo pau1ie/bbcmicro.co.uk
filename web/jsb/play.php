@@ -75,7 +75,9 @@ if (isset($_GET['bg'])) {
 
    <div id="cub-monitor">
         <div>
-            <img id="#cub-monitor-pic" width="896" height="648" src="images/black-border.png">            
+            <?php if (!isset($_GET['noborder'])) { ?>
+            <img id="#cub-monitor-pic" width="896" height="648" src="images/black-border.png"/>            
+            <?php } ?>
             <canvas id="screen" width="896" height="600"></canvas>
         </div>
     </div>
@@ -339,16 +341,6 @@ if (isset($_GET['bg'])) {
     <script src="../bs/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../bs/js/ie10-viewport-bug-workaround.js"></script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-80530510-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
   </body>
 </html>
 
