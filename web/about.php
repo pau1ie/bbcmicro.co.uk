@@ -62,14 +62,14 @@ require 'includes/menu.php';
           <p>Which game should you play? There are more than 2000 games on the website, but which are the very best? In the <a href="http://stardot.org.uk/forums/viewtopic.php?f=1&t=8259">Stardot forums</a>, members contributed their favourite games. The top 20 are:</p>
           <ol>
             <li><a href="game.php?id=366">Elite</a>. The classic space trading game.</li>
-            <li><a href="game.php?id=25">Chuckie Egg</a>. There are also some unofficial variants.</li>
-            <li><a href="game.php?id=425">Repton 3</a>. Search for other Repton games.</li>
+            <li><a href="game.php?id=25">Chuckie Egg</a>. There are also some <a href="index.php?search=Chuckie+Egg">variants</a>.</li>
+            <li><a href="game.php?id=425">Repton 3</a>. <a href="index.php?search=Repton">Search for other Repton games</a>.</li>
             <li><a href="game.php?id=709">Exile</a></li>
             <li><a href="game.php?id=35">Starship Command</a></li>
             <li><a href="game.php?id=432">Thrust</a></li>
             <li><a href="game.php?id=290">Citadel</a></li>
             <li><a href="game.php?id=298">Repton 2</a></li>
-            <li><a href="game.php?id=267">Revs</a>. See also, <a href="game.php?id=1128">Revs 4 tracks.</a></li>
+            <li><a href="game.php?id=267">Revs</a>. See also, <a href="game.php?id=1128">Revs 4 Tracks.</a> and <a href="game.php?id=2203">Revs 5 Tracks</a></li>
             <li><a href="game.php?id=266">Repton</a></li>
             <li><a href="game.php?id=512">Imogen</a></li>
             <li><a href="game.php?id=564">Codename: Droid</a></li>
@@ -80,13 +80,16 @@ require 'includes/menu.php';
             <li><a href="game.php?id=238">Castle Quest</a></li>
             <li><a href="game.php?id=438">Galaforce</a>. The sequel, <a href="game.php?id=692">Aliens' Revenge</a> came in at 51</li>
             <li><a href="game.php?id=822">Skirmish</a></li>
-            <li><a href="game.php?id=14">Snapper</a>. This looks very much like Pacman. Hmmm</li>
+            <li><a href="game.php?id=14">Snapper</a>. This looks very much like <a href="index.php?search=Pac-Man">Pac-Man</a>. Hmmm</li>
           </ol>
           <p> What do you think? Have we missed your favourite game? Sign up and let us know at the forum!</p>
         </div>
         <div class="col-md-4">
           <h2>Status</h2>
-          <p>The site is still under development. We believe we have most of the games written for the BBC Micro apart from a few very obscure ones which we are still trying to track down. If you know of a game we have missed, or even better if you own one, contact us in the forums and we will get it added to the database. We maintain a list of titles which we believe to be <a href="http://stardot.org.uk/forums/viewtopic.php?f=7&t=3437&start=90#p134474">missing from the archive</a> in the forums. </p>
+          <p>The site is still under development. We believe we have most of the games written for the BBC Micro apart from a few very obscure ones which we are still trying to track down. If you know of a game we have missed, or even better if you own one, contact us in the forums and we will get it added to the database. We maintain a list of titles which we believe to be <a href="http://stardot.org.uk/forums/viewtopic.php?f=7&t=14458">missing from the archive</a> in the forums. </p>
+	  <p>&nbsp;</p>
+          <h2>Ideology</h2>
+          <p>We strive for ease of use rather than exact preservation of the original. Software has been transferred from tape to disc image, to speed loading. Changes have been made to enhance usability - see the <i>Who we are</i> section for more detail. Any major changes are noted on the game's page. </p>
 	  <p>&nbsp;</p>
           <h2>Thanks</h2>
           <p>In addition to the people who worked on the archive and the website, we would like to give a big <strong>thank you</strong> to <a href="https://plus.google.com/+MattGodbolt">Matt Godbolt</a> for developing <a href="http://bbc.godbolt.org">jsbeeb</a>, and sharing it with the world on <a href="https://github.com/mattgodbolt/jsbeeb">github</a>. It makes the website come alive - anyone can play the BBC Micro games right in the browser!</p>
