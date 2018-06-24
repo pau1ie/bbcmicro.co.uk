@@ -396,9 +396,9 @@ if ( ! empty($children)) {
 ?>
       <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><p class="lead">Alternative Versions.</p></div>
+        <div class="panel-heading"><p class="lead">Alternative Versions</p></div>
           <div class="panel-body">
-            <p>This entry is representative of all versions of this game, and the disc image is what we consider to be the best version. For specific variants, refer to the list below.</p>
+            <p>This page is the entry for the canonical version of the game. For specific variants, see the list below.</p>
           </div>
           <!-- Table -->
           <table class="table">
@@ -445,9 +445,9 @@ if ($sth->execute()) {
 ?>
       <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><p class="lead">Other Versions.</p></div>
+        <div class="panel-heading"><p class="lead">Other Versions</p></div>
           <div class="panel-body">
-            <p>The following entry is representative of all versions of this game, and the disc image is what we consider to be the best version. It also contains a list of variants (Including this one).</p>
+            <p>Click the link below to see the canonical version of the game, plus any variants.</p>
           </div>
           <!-- Table -->
           <table class="table">

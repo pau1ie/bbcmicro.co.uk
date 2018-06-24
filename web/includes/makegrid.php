@@ -72,7 +72,7 @@ function gameitem( $id, $ta, $name, $image, $img, $publisher, $year, $pubid) {
    $split=explode('(',$name);
    $title=trim($split[0]);
    if (strlen($ta)>0){
-     $title=$title.', '.$ta;
+     $title=$ta.' '.$title;
    }
    
    $ssd = get_discloc($img["filename"],$img['subdir']);
@@ -169,6 +169,16 @@ function pager($limit, $rows, $page, $state) {
   }
   $pl.= "    </ul>\n";
   return $pl;
+}
+
+function prepare_search($string) {
+  $string=preg_replace('/^(A|An|The) /i','',$string);
+echo "1". $string;
+  $string=preg_replace('/,? (A|An|The)$/i','',$string);
+echo "2".$string;
+  $string="%".str_replace(' ','%',$string)."%";
+echo "3".$string;
+  return $string;
 }
 
 function grid($state) {
@@ -281,7 +291,7 @@ function grid($state) {
   $sth2 = $db->prepare($sql2,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
   if (array_key_exists('search',$state)) {
-    $search="%".str_replace(' ','%',$state['search'])."%";
+    $search=prepare_search($state['search']);
     $sth->bindParam(':search', $search, PDO::PARAM_STR);
     $sth2->bindParam(':search', $search, PDO::PARAM_STR);
   }
