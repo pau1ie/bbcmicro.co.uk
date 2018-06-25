@@ -376,7 +376,7 @@ if ( ! empty($authors)) {
           </table>
           <?php echo $imglink; ?>
           <p><a type="button" class="btn btn-primary btn-lg center-block" href="<?php echo $back_url ?>" title="Back">Back to <?php echo $back_desc ?></a></p>
-       </div>
+        </div>
       </div>
       <hr>
 
@@ -397,12 +397,12 @@ if ( ! empty($children)) {
       <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading"><p class="lead">Alternative Versions</p></div>
-          <div class="panel-body">
-            <p>This page is the entry for the canonical version of the game. For specific variants, see the list below.</p>
-          </div>
-          <!-- Table -->
-          <table class="table">
-            <thead> <tr> <th>Title</th> <th>Publisher</th> <th>Year</th> </tr> </thead> <tbody> 
+        <div class="panel-body">
+          <p>This page is the entry for the canonical version of the game. For specific variants, see the list below.</p>
+        </div>
+        <!-- Table -->
+        <table class="table">
+          <thead> <tr> <th>Title</th> <th>Publisher</th> <th>Year</th> </tr> </thead> <tbody> 
 <?php
 foreach ($children as $child) {
 			$pubs=explode('@',$child["publishers"]);
@@ -423,9 +423,8 @@ foreach ($children as $child) {
 <?php
 }
 ?>
-            </tbody> 
-          </table>
-        </div>
+          </tbody> 
+        </table>
       </div>
       <hr>
 <?php
@@ -446,12 +445,12 @@ if ($sth->execute()) {
       <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading"><p class="lead">Other Versions</p></div>
-          <div class="panel-body">
-            <p>Click the link below to see the canonical version of the game, plus any variants.</p>
-          </div>
-          <!-- Table -->
-          <table class="table">
-            <thead> <tr> <th>Title</th> <th>Publisher</th> <th>Year</th> </tr> </thead> <tbody> 
+        <div class="panel-body">
+          <p>Click the link below to see the canonical version of the game, plus any variants.</p>
+        </div>
+        <!-- Table -->
+        <table class="table">
+          <thead> <tr> <th>Title</th> <th>Publisher</th> <th>Year</th> </tr> </thead> <tbody> 
 <?php
 foreach ($children as $child) {
 			$pubs=explode('@',$child["publishers"]);
@@ -472,9 +471,8 @@ foreach ($children as $child) {
 <?php
 }
 ?>
-            </tbody> 
-          </table>
-        </div>
+          </tbody> 
+        </table>
       </div>
       <hr>
 <?php
