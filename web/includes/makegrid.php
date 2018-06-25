@@ -173,11 +173,8 @@ function pager($limit, $rows, $page, $state) {
 
 function prepare_search($string) {
   $string=preg_replace('/^(A|An|The) /i','',$string);
-echo "1". $string;
   $string=preg_replace('/,? (A|An|The)$/i','',$string);
-echo "2".$string;
   $string="%".str_replace(' ','%',$string)."%";
-echo "3".$string;
   return $string;
 }
 
