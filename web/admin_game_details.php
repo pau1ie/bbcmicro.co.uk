@@ -491,10 +491,9 @@ function make_form($game_id,$r) {
 	echo "<input type='hidden' name='id' value='$game_id'>\n";
 
 	echo "<label> Article <input type='text' name='title_article' size='5' value='".htmlspecialchars($r['title_article'],ENT_QUOTES)."'/></label>  ";
-	echo "<label> Title <input type='text' name='title' size='80' value='".htmlspecialchars($r['title'],ENT_QUOTES)."'/></label><br/><br/>";
+	echo "<label> Title <input type='text' name='title' size='80' value='".htmlspecialchars($r['title'],ENT_QUOTES)."'/></label>";
 	echo "<label> Parent ID <input type='text' name='parent' size='4' value='".$r['parent']."'/> ";
-	echo "Note: If populated, this game won't appear in the list, the parent needs to be ";
-	echo "returned in all relevant searches for this game.<br/><br/></label>";
+	echo "</label><br/><br/>";
 	echo "<label> Year. 19XX if unknown. <input type='text' name='year' size='4' value='".$r['year']."'/></label>";
 
 	echo "<label> Primary Genre ";
