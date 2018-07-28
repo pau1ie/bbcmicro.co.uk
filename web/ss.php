@@ -32,6 +32,7 @@ $psth->bindParam(1, $id, PDO::PARAM_INT);
 <html lang="en">
 <head>
  <meta charset="utf-8">
+ <meta name="robots" content="noindex">
 </head>
 <body>
 <table><tr>
