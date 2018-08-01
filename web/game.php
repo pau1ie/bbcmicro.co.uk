@@ -242,7 +242,7 @@ if ( ! empty($authors)) {
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-8">
-          <h2>Screen Shot</h2>
+          <h2>Screenshot</h2>
           <p><img src="<?php echo $scrshot;?>" class="img-responsive"></p><p>&nbsp;</p>
 <?php
    if ($game["notes"]!=Null ) {
