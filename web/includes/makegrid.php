@@ -391,7 +391,7 @@ function grid($state) {
       if ($pubpdo->execute()) {
         while($pub=$pubpdo->fetch(PDO::FETCH_ASSOC)) {
           $t=preg_split('/[,(]/',$pub['name']);
-          $u=htmlspecialchars($t[0]);
+          $u=htmlspecialchars(trim($t[0]));
           $pubs=$pubs.'<a href="?search='.urlencode($pub['name']).'&on_P=on">'.$u.'</a>, ';
         }
       } else {
