@@ -24,13 +24,19 @@ if ($sth->execute()) {
 $cwd=getcwd();
 //echo $cwd . '<br/>';
 $zipf=$cwd . '/' . 'tmp/allfiles.zip';
+$dump=$cwd . '/' . 'tmp/db.sql';
 $stat=stat($zipf);
 //echo "<pre>";
 //print_r($stat);
 //echo "</pre>";
-if ($stat && (strtotime($ags['dt']) < $stat['mtime'])) {
+//echo "<br/><br/>";
+//echo "<table><tr><th>Time: </th><th>" . strtotime($ags[0]['dt']) ."</th></tr>";
+//echo "<tr><th>File time: </th><th>".$stat['mtime'];
+//echo "</th></tr></table>";
+if ($stat && (strtotime($ags[0]['dt']) < $stat['mtime'])) {
    echo "Using cached file<br/>";
 } else {
+  exportDatabase(DB_HOST, DB_USER, DB_PASS, DB_NAME, $dump);
   $zip = new ZipArchive;
   $rc=$zip->open($zipf, ZipArchive::CREATE);
 
@@ -71,4 +77,11 @@ if ($stat && (strtotime($ags['dt']) < $stat['mtime'])) {
 }
 echo "<a href='tmp/allfiles.zip'>All files(zip)</a><br>";
 echo "<a href='tmp/allscr.zip'>All screenshots(zip)</a><br>";
+
+function exportDatabase($host, $user, $password, $database, $targetFilePath)
+{
+//    echo 'mysqldump --host '. $host .' --user '. $user .' --password='. $password .' '. $database .' --result-file='.$targetFilePath;
+    //returns true iff successfull
+    return exec('mysqldump --host '. $host .' --user '. $user .' --password='. $password .' '. $database .' --result-file='.$targetFilePath) === 0;
+}
 ?>
