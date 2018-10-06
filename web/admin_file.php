@@ -47,6 +47,16 @@ if (isset($_POST['customurl']))  {
   $cu=-1;
 }
 
+if (isset($_POST['probs']))  {
+  if ( $_POST['probs'] == 'N' or $_POST['probs'] == 'P' or $_POST['probs'] == 'O' ) {
+    $probs=$_POST['probs'];
+  } else {
+    $probs=-1;
+  }
+} else {
+  $probs=-1;
+}
+
 $s="select * from ". $t . " where gameid = ? and main = 100";
 
 $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -174,7 +184,7 @@ if ($pf >= 0 && $pf < $indexCount) {
     }
   }
 }
-//echo "cu=".$cu;
+
 if (($cu != -1) && ($_GET['t'] == 'd')) {
   if ($cu != $r['customurl']) {
     $s="update ".$t." set customurl=? where gameid = ? and main = 100";
@@ -183,11 +193,28 @@ if (($cu != -1) && ($_GET['t'] == 'd')) {
     $sth->bindParam(2, $id, PDO::PARAM_INT);
 //    echo $s."<br/>";
     if ($sth->execute()) {
-      echo "<br/>Database updated.";
+      echo "<br/>Database updated with customurl.";
       $r['customurl']=$cu;
       $fu=True;
     } else {
-      echo "<br/>DB Update failed.";
+      echo "<br/>DB Update of customurl failed.";
+    }
+  }
+}
+
+if (($probs != -1) && ($_GET['t'] == 'd')) {
+  if ($probs != $r['probs']) {
+    $s="update ".$t." set probs=? where gameid = ? and main = 100";
+    $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $sth->bindParam(1, $probs, PDO::PARAM_STR);
+    $sth->bindParam(2, $id, PDO::PARAM_INT);
+//    echo $s."<br/>";
+    if ($sth->execute()) {
+      echo "<br/>Database updated with problems.";
+      $r['probs']=$probs;
+      $fu=True;
+    } else {
+      echo "<br/>DB Update of problems failed.";
     }
   }
 }
@@ -229,10 +256,19 @@ for($index=0; $index < $indexCount; $index++) {
       </TR>";
 }
 ?>
-</TABLE></br/>
+</TABLE><br/>
 <?php
 if ( $_GET['t'] == 'd' ) {
-  echo "<label> Custom URL for jsbeeb <input type='text' name='customurl' size='40' value='".$r['customurl']."'/> Enter NONE to not play in jsbeeb, PROB for game with problems in jsbeeb. %jsbeeb% for the jsbeeb location, and %wsroot% for the base URL of the website.</label><br/><br/>";
+  $p=array('N'=>"",'O'=>"",'P'=>"");
+  $p[$r['probs']] = "selected" ;
+  ?> <label>Are there any issues with the image or playing it in jsbeeb <select name="probs">
+<option value="0">-- Problems? --</option><option <?php echo $p['N']; ?> value="N">Don't play in jsbeeb</option>
+<option <?php echo $p['P']; ?> value="P">Problematic in jsbeeb</option>
+<option <?php echo $p['O']; ?> value="O">Good image</option>
+</select>
+</label>
+  <?php
+  echo "<br/><br/><label> Custom URL for jsbeeb <input type='text' name='customurl' size='40' value='".$r['customurl']."'/> %jsbeeb% is the jsbeeb location, %wsroot% is the base URL of the website.</label><br/><br/>";
 }
 ?>
 <input type="submit" value="Submit"></form>

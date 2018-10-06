@@ -88,7 +88,7 @@ function gameitem( $id, $ta, $name, $image, $img, $publisher, $year, $pubid) {
   if ($ssd != null && file_exists($ssd)) { ?>
        <p><a href="<?php echo $ssd ?>" type="button" onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Download</a><?php
   }
-  if ($playlink != null) { ?>
+  if (($img['probs'] != 'N' and $img['probs'] != 'P') and $playlink != null) { ?>
           <a id="plybtn" href="<?php echo $playlink ?>" type="button" onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Play</a></p>
 <?php
   }
@@ -336,7 +336,7 @@ function grid($state) {
   }
 
   $scrsql = 'select filename, subdir from screenshots where gameid = :gameid order by main, id limit 1';
-  $dscsql = 'select filename, subdir, customurl from images where gameid = :gameid order by main, id limit 1';
+  $dscsql = 'select filename, subdir, customurl, probs from images where gameid = :gameid order by main, id limit 1';
   $pubsql = 'select id,name from publishers where id in (select pubid from games_publishers where gameid = :gameid)';
   $scrpdo = $db->prepare($scrsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $dscpdo = $db->prepare($dscsql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
