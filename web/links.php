@@ -71,6 +71,8 @@ require 'includes/menu.php';
 	<a href='http://www.stairwaytohell.com' target='_blank'>Stairway To Hell (No longer maintained)</a><br>
 	<br>
 	<a href='http://www.8bs.com' target='_blank'>8-Bit Software</a><br>
+	<br>
+	<a href='http://www.flaxcottage.com/educational/' target='_blank'>Educational Software Archive</a><br>
 
       </div>
     </div>
