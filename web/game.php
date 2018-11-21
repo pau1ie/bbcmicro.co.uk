@@ -10,7 +10,8 @@ if ( isset($_GET["id"])) {
   $id=intval($_GET["id"]);
 }
 
-$sql = "select g.id, g.title_article, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, g.compilation, g.electron, g.series, g.series_no, n.name as genre, r.id as relid, r.name as reltype, g.compat_a, g.compat_b, g.compat_master from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
+$sql = "select g.id, g.title_article, g.title, g.parent, g.year, g.notes, g.joystick, g.players_min, g.players_max, g.save, g.hardware, g.version, 
+g.electron, g.series, g.series_no, n.name as genre, r.id as relid, r.name as reltype, g.compat_a, g.compat_b, g.compat_master from games g left join genres n on n.id = g.genre left join reltype r on r.id = g.reltype where g.id  = ?";
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->bindParam(1, $id, PDO::PARAM_INT);
 if ($sth->execute()) {
@@ -109,6 +110,20 @@ if ($sth->execute()) {
   $authors=array();
 }
 
+$sql = "select c.name from games_compilations gc, compilations c where gc.games_id  = ? and gc.compilations_id = c.id";
+$sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth->bindParam(1, $id, PDO::PARAM_INT);
+if ($sth->execute()) {
+  $compilations = $sth->fetchAll();
+} else {
+  echo "Error:";
+  echo "\n";
+  $sth->debugDumpParams ();
+  $compilations=array();
+}
+
+//print_r($compilations);
+
 if (strlen($game["title_article"]) > 0) {
    $ta=$game["title_article"].' ';
 } else {
@@ -179,6 +194,21 @@ if ( ! empty($authors)) {
   $authortab=$authortab . "</td></tr>";
 } else {
   $authortab="";
+}
+
+$s = '';
+if ( count($compilations) > 1) {
+  $s = 's';
+}
+
+if ( ! empty($compilations)) {
+  $compilationtab='<tr><th>Compilation' . $s . '</th><td>';
+  foreach ($compilations as $compilation) {
+    $compilationtab=$compilationtab . '<a href="index.php?search=' . urlencode($compilation["name"]) . '&on_C=on">' . $compilation["name"] . "</a><br/>";
+  }
+  $compilationtab=$compilationtab . "</td></tr>";
+} else {
+  $compilationtab="";
 }
 
 ?><!DOCTYPE html>
@@ -291,11 +321,6 @@ if ( ! empty($authors)) {
       $el = "<tr><th>Electron Release</th><td>" . $el . "</td></tr>";
    }
 
-   $cmp='';
-   if (!empty($game['compilation'])) {
-      $cmp = '<tr><th>Compilation</th><td><a href="index.php?search=' . urlencode($game['compilation']) . '&on_C=on">'. $game['compilation'] . "</a></td></tr>";
-   }
-
    $sr='';
    if (!empty($game['series'])) {
       $sr = '<tr><th>Series</th><td><a href="index.php?search=' . urlencode($game['series']) . '&on_Z=on">' . $game['series'] . "</a></td></tr>";
@@ -368,7 +393,7 @@ if ( ! empty($authors)) {
             <?php echo $hw;?>
             <?php echo $el;?>
             <?php echo $ver;?>
-            <?php echo $cmp;?>
+            <?php echo $compilationtab;?>
             <?php echo $sr;?>
             <?php echo $sn;?>
             <?php echo $ed;?>

@@ -209,7 +209,8 @@ function grid($state) {
       $sls[] = "g.series like :search\n";
     }
     if ( $all || !(array_search('C',$state['only'])===False )) {
-      $sls[] = "g.compilation like :search\n";
+      $sls[] = "g.id in (select games_id from games_compilations gc, compilations c\n" .
+               "  where c.id = gc.compilations_id and c.name like :search\n)";
     }
     if ( $all || !(array_search('G',$state['only'])===False )) {
       $sls[] = "g.genre in (select id from genres where name like :search)\n";

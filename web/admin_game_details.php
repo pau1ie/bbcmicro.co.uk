@@ -1,5 +1,5 @@
 <!DOCTYPE html><?php
-define('DEBUG',false);
+define('DEBUG',true);
 
 require('includes/admin_session.php');
 
@@ -45,11 +45,15 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		if (DEBUG) { echo "<br/>POST<pre>";print_r($_POST);echo "</pre>";}
 		# We expect author,genre,publisher_01 _02 _03 _04... to be available
 		$new_authors=array();
+		$new_compilations=array();
 		$new_genres=array();
 		$new_publishers=array();
 		foreach ($_POST as $k=>$v) {
 			if (preg_match('/^author_([0-9]{2})/',$k,$matches)) {
 				$new_authors[$matches[1]]=$v;
+			}
+			if (preg_match('/^compilation_([0-9]{2})/',$k,$matches)) {
+				$new_compilations[$matches[1]]=$v;
 			}
 			if (preg_match('/^genre_([0-9]{2})/',$k,$matches)) {
 				$new_genres[$matches[1]]=$v;
@@ -61,6 +65,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		}
 		# Let's make sure the database matches the new authors list we just got
 		$old_authors=get_game_authors($dbh,$game_id);
+		$old_compilations=get_game_compilations($dbh,$game_id);
 		$old_genres=get_game_genres($dbh,$game_id);
 		$old_publishers=get_game_pubs($dbh,$game_id);
 		if (DEBUG) {
@@ -69,6 +74,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			echo "</pre><br>";
 			echo "NEW Authors<hr><pre>";
 			print_r($new_authors);
+			echo "</pre><br/>OLD Compilations<hr><pre>";
+			print_r($old_compilations);
+			echo "</pre><br>";
+			echo "NEW Compilations<hr><pre>";
+			print_r($new_compilations);
 			echo "</pre><br/>OLD Genres<hr><pre>";
 			print_r($old_genres);
 			echo "</pre><br>";
@@ -239,6 +249,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 							array('value'=>$oid,		'type'=>PDO::PARAM_INT));
 			}
 		}
+		foreach ($old_compilations as $oid) {
+			if ($oid && !in_array($oid,$new_compilations)) {
+				#echo "Need to remove compilation $oid<br>";
+				$sql_cmds[]="DELETE FROM games_compilations WHERE games_id=? AND compilations_id=?";
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$oid,		'type'=>PDO::PARAM_INT));
+			}
+		}
 		foreach ($old_genres as $oid) {
 			if ($oid && !in_array($oid,$new_genres)) {
 				#echo "Need to remove genre $oid<br>";
@@ -261,6 +279,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			if ($nid && !in_array($nid,$old_authors)) {
 				#echo "Need to add author $nid<br>";
 				$sql_cmds[]="INSERT INTO games_authors (games_id,authors_id) VALUES(?,?)";
+				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
+							array('value'=>$nid,		'type'=>PDO::PARAM_INT));
+			}
+		}
+		foreach ($new_compilations as $nid) {
+			if ($nid && !in_array($nid,$old_compilations)) {
+				#echo "Need to add compilations $nid<br>";
+				$sql_cmds[]="INSERT INTO games_compilations (games_id,compilations_id) VALUES(?,?)";
 				$sql_binds[]=array(	array('value'=>$game_id,	'type'=>PDO::PARAM_INT),
 							array('value'=>$nid,		'type'=>PDO::PARAM_INT));
 			}
@@ -315,6 +341,22 @@ if ($sth->execute()) {
 	echo "$s gave ".$dbh->errorCode()."<br>\n";
 }
 
+# First gobble all known compilations
+$s="SELECT id,name FROM compilations order by name";
+
+$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+#$sth->bindParam(1, $game_id, PDO::PARAM_INT);
+if ($sth->execute()) {
+	while ($r=$sth->fetch()) {
+		$compilation_name=$r['name'];
+		if ($r['alias']) $compilation_name.=" (".$r['alias'].")";
+		$known_compilations[$r['id']]=$compilation_name;
+	}
+	$sth->closeCursor();
+} else {
+	echo "$s gave ".$dbh->errorCode()."<br>\n";
+}
+
 $s="SELECT id,name FROM genres order by name";
 $sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 #$sth->bindParam(1, $game_id, PDO::PARAM_INT);
@@ -361,6 +403,8 @@ if ($game_id) {
 				FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers,
 			(SELECT GROUP_CONCAT(CONCAT(authors.id,'|',authors.name) SEPARATOR '@') 
 				FROM games_authors LEFT JOIN authors ON authors_id=authors.id WHERE games_id=games.id) AS authors,
+			(SELECT GROUP_CONCAT(CONCAT(compilations.id,'|',compilations.name) SEPARATOR '@') 
+				FROM games_compilations LEFT JOIN compilations ON compilations_id=compilations.id WHERE games_id=games.id) AS compilations,
 			(SELECT GROUP_CONCAT(CONCAT(genres.id,'|',genres.name) SEPARATOR '@') 
 				FROM game_genre LEFT JOIN genres ON genreid=genres.id WHERE gameid=games.id order by game_genre.id) AS genres
 			FROM 		games 
@@ -382,7 +426,7 @@ if ($game_id) {
             'reltype'=>'W','notes'=>'','players_min'=>'1', 'players_max'=>'1',
             'joystick'=>'', 'save'=>'','hardware'=>'', 'electron'=>'',
             'version'=>'', 'compilation'=>'', 'series'=>'', 'series_no'=>'',
-            'publishers'=>'','authors'=>'','genres'=>''];
+            'publishers'=>'','authors'=>'','compilations'=>'','genres'=>''];
 	make_form(0,$r);
 }
 
@@ -412,6 +456,32 @@ function get_game_authors($dbh,$game_id) {
 
 	return $ret;
 }
+
+function get_game_compilations($dbh,$game_id) {
+	$ret=array();
+
+	$s="	SELECT 		compilations.id AS compilations_id,name 
+		FROM 		games_compilations 
+		LEFT JOIN 	compilations ON compilations_id=compilations.id 
+		WHERE		games_id=?";
+
+	$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+	$sth->bindParam(1, $game_id, PDO::PARAM_INT);
+	if ($sth->execute()) {
+		while ($r=$sth->fetch()) {
+			$ret[]=$r['compilations_id'];
+		}
+		$sth->closeCursor();
+	} else {
+		echo "Error:";
+		echo "\n";
+		$sth->debugDumpParams ();
+		echo "$s gave ".$dbh->errorCode()."<br>\n";
+	}
+
+	return $ret;
+}
+
 
 
 function get_game_genres($dbh,$game_id) {
@@ -475,7 +545,7 @@ function make_dd($aid,$nam,$typ,$known) {
 }
 
 function make_form($game_id,$r) {
-	global $known_genres, $known_reltyps, $known_publishers, $known_authors, $jopts, $sopts, $eopts, $copts, $mcopts;
+	global $known_genres, $known_reltyps, $known_publishers, $known_authors, $known_compilations, $jopts, $sopts, $eopts, $copts, $mcopts;
 	if (DEBUG) { echo "<pre>"; print_r($r); echo "</pre>";}
 	$pubs=explode('@',$r['publishers']);
 	$names='';
@@ -555,7 +625,7 @@ function make_form($game_id,$r) {
 	echo make_dd($r['compat_master'], 'compat_master','Master',$mcopts);
 	echo "</label><br/><br/>";
 
-	echo "<label> Compilation: <input type='text' name='compilation' size='20' value='".htmlspecialchars($r['compilation'],ENT_QUOTES)."'/></label> ";
+//	echo "<label> Compilation: <input type='text' name='compilation' size='20' value='".htmlspecialchars($r['compilation'],ENT_QUOTES)."'/></label> ";
 	echo "<label> Series - must be identical for each game in series ";
 	echo "<input type='text' name='series' size='20' value='".htmlspecialchars($r['series'],ENT_QUOTES)."'/></label> ";
 	echo "<label> Number in series <input type='text' name='series_no' size='15' value='".$r['series_no']."'/></label> ";
@@ -576,6 +646,23 @@ function make_form($game_id,$r) {
 	do {
 		echo make_dd(0,'author_'.sprintf("%02d",$ac++),'author',$known_authors);
 	} while ($ac<=4);
+
+	echo "<br/><br/>";
+	echo "<label>Compilations<br/>";
+	# Compilations
+	$ac=1;
+	$compilations=explode('@',$r['compilations']);
+	#if (DEBUG) { echo "<pre>"; print_r($compilations); echo "</pre>";}
+	foreach ($compilations as $compilation) {
+		if (!(False === strpos($compilation,'|' ))) {
+			list($id,$name)=explode('|',$compilation);
+			echo make_dd($id,'compilation_'.sprintf("%02d",$ac++),'compilation',$known_compilations);
+		}
+	}
+	# Allow up to 4 compilations per title
+	do {
+		echo make_dd(0,'compilation_'.sprintf("%02d",$ac++),'compilation',$known_compilations);
+	} while ($ac<=2);
 
 	echo "</label><br/><br/><label>Secondary Genres<br/>";
 
@@ -609,9 +696,7 @@ function make_form($game_id,$r) {
 	} while ($ac<=4);
 
 	echo "<br/><br/><label> Notes: <textarea id='notes' name='notes' rows='5' cols='132' >".htmlspecialchars($r['notes'])."</textarea></label><br/>";
-	echo "Take care with this field. It allows any HTML to be entered so it is possible to completely mess up the formatting of the page!";
-
-	echo "<br><br><input type='submit' value='Save'>\n";
+	echo "<input type='submit' value='Save'>\n";
 
 	echo "</form>\n";
 ?></body></html><?php
