@@ -4,7 +4,7 @@ if ( $_SERVER['REQUEST_METHOD']== "GET" ) {
 require 'includes/config.php';
 require 'includes/db_connect.php';
 
-$sql="select g.parent, g.id, g.title_article, g.title, g.year, g.genre, g.reltype, g.players_max, g.players_min, g.joystick, i.filename, r.name, g.save, g.hardware, g.electron, g.version, g.compilation, g.series, g.series_no, g.notes, g.compat_a, g.compat_b, g.compat_master from games g left join images i on g.id = i.gameid left join genres r on g.genre = r.id order by g.id";
+$sql="select g.parent, g.id, g.title_article, g.title, g.year, g.genre, g.reltype, g.players_max, g.players_min, g.joystick, i.filename, r.name, g.save, g.hardware, g.electron, g.version, g.series, g.series_no, g.notes, g.compat_a, g.compat_b, g.compat_master from games g left join images i on g.id = i.gameid left join genres r on g.genre = r.id order by g.id";
 
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 if ($sth->execute()) {
@@ -27,6 +27,10 @@ $asth->bindParam(1, $id, PDO::PARAM_INT);
 $psql="select a.name from publishers a left join games_publishers ga on ga.pubid = a.id where ga.gameid =?";
 $psth = $db->prepare($psql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $psth->bindParam(1, $id, PDO::PARAM_INT);
+
+$csql="select c.name from compilations c left join games_compilations gc on gc.compilations_id = c.id where gc.games_id =?";
+$csth = $db->prepare($csql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$csth->bindParam(1, $id, PDO::PARAM_INT);
 
 ?>
 <html lang="en">
@@ -60,10 +64,10 @@ foreach ($res as $line) {
   $auths=array();
   // print_r($ags);
   foreach ($ags as $auth) { 
-    if ( count($auth['alias']) > 0 ) {
-      $auths[]=$auth['name'] . ' (' . $auth['alias'] . ')';
-    }else{
+    if ( empty($auth['alias']) ) {
       $auths[]=$auth['name'];
+    }else{
+      $auths[]=$auth['name'] . ' (' . $auth['alias'] . ')';
     }
   }
 
@@ -75,6 +79,16 @@ foreach ($res as $line) {
   // print_r($ags);
   foreach ($pgs as $pub) {
     $pubs[]=$pub['name'];
+  }
+
+  // Compilation
+
+  $csth->execute(); 
+  $cgs=$csth->fetchAll();
+  $comps=array();
+  // print_r($cgs);
+  foreach ($cgs as $comp) {
+    $comps[]=$comp['name'];
   }
 
   $ol=array();
@@ -110,7 +124,7 @@ foreach ($res as $line) {
 
   $ol[]=$line['joystick'];	// Joystick
 
-  $ol[]=$line['compilation'];	// Compilation
+  $ol[]=implode(', ',$comps);	// Compilation
 
 				// Series.no
   $ol[]=trim($line['series'].' '.$line['series_no']);
