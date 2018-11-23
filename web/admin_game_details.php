@@ -1,5 +1,5 @@
 <!DOCTYPE html><?php
-define('DEBUG',true);
+define('DEBUG',false);
 
 require('includes/admin_session.php');
 
