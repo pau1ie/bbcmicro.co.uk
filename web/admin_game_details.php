@@ -97,7 +97,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 		if ($game_id == null) {
 			# New entry
-			$s="INSERT INTO games ( parent, title_article, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, lastupdater, lastupdated, created, creator, compat_a, compat_b, compat_master) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?,?,?,?)";
+			$s="INSERT INTO games ( parent, title_article, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, series, series_no, lastupdater, lastupdated, created, creator, compat_a, compat_b, compat_master) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?,?,?,?)";
 			if ($_POST['parent'] == '0' || $_POST['parent'] == '' ) {
 				$p_parent = null;
 			} else {
@@ -178,7 +178,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			}
 		} else {
 			# An entry already exists. Compare it.
-			$s="SELECT id, parent, title_article, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, compilation, series, series_no, compat_a, compat_b, compat_master FROM games where id = ?";
+			$s="SELECT id, parent, title_article, title, year, genre, reltype, notes, players_min, players_max, joystick, save, hardware, electron, version, series, series_no, compat_a, compat_b, compat_master FROM games where id = ?";
 
 			$sth = $dbh->prepare($s,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$sth->bindParam(1, $game_id, PDO::PARAM_INT);
@@ -398,7 +398,7 @@ if ($sth->execute()) {
 
 if ($game_id) {
 	$s="	SELECT 	id,title, parent, title_article, title, year, genre, reltype, notes, players_min, players_max, joystick, save,
-			hardware, electron, version, compilation, series, series_no, compat_a, compat_b, compat_master,
+			hardware, electron, version, series, series_no, compat_a, compat_b, compat_master,
 			(SELECT GROUP_CONCAT(CONCAT(publishers.id,'|',publishers.name) SEPARATOR '@') 
 				FROM games_publishers LEFT JOIN publishers ON pubid=publishers.id WHERE gameid=games.id) AS publishers,
 			(SELECT GROUP_CONCAT(CONCAT(authors.id,'|',authors.name) SEPARATOR '@') 
