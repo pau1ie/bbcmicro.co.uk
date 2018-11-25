@@ -16,7 +16,7 @@ if ( isset($_GET["qv"])) {
 
 switch ($qtype) {
   case "suggestions":
-    $sql = "select title from games where title like :query union select name from publishers where name like :query union select series from games where series like :query union select name from genres where name like :query union select distinct year from games where year like :query union select name from authors where name like :query union select compilation from games where compilation like :query";
+    $sql = "select substring_index(title,'(',1) as title from games where title like :query union select substring_index(name,'(',1) as name from publishers where name like :query union select series from games where series like :query union select substring_index(name,'(',1) as name from genres where name like :query union select distinct year as name from games where year like :query union select name from authors where name like :query union select substring_index(name,'(',1) as name from compilations where name like :query";
     $qvalue = $qvalue.'%';
     break;
   case "publisher":
