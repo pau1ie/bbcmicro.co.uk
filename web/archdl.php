@@ -20,6 +20,9 @@ $asth = $db->prepare($sqla,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $asth->execute();
 $ags=$asth->fetchAll();
 
+$files="BBCMicroFiles.zip";
+$scrs="BBCMicroScShots.zip";
+
 $sql="select g.id, g.title, i.filename as ifile, i.subdir as idir, s.subdir as sdir, s.filename as sfile from games g left join images i on g.id = i.gameid left join screenshots s on g.id = s.gameid order by g.title";
 
 $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -33,7 +36,7 @@ if ($sth->execute()) {
 }
 
 $cwd=getcwd();
-$zipf=$cwd . '/' . 'tmp/allfiles.zip';
+$zipf=$cwd . '/' . 'tmp/'.$files;
 $stat=stat($zipf);
 
 if ($stat && (strtotime($ags[0]['dt']) < $stat['mtime'])) {
@@ -51,13 +54,15 @@ if ($stat && (strtotime($ags[0]['dt']) < $stat['mtime'])) {
         $zip->addFile($lfile, $fn);
       }
     }
-    $text = get_data();
-    $zip->addFromString('00index.html',$text);
+    $text = get_data('Y');
+    $readme="<html><head></head><body><h1>BBC Micro Archive</h1><p>This is the downloaded archive of <a href='http://bbcmicro.co.uk'>bbcmicro.co.uk</a>. It was created on ".date(DATE_COOKIE) .". This contains all disc images on the archive organised by title. An <a href=00index.html>index</a> of the files is also included. </p><p>An archive of screenshots is also available, the filename is ".$scrs.".</p></html>";
+    $zip->addFromString('readme.html',$readme);
+    $zip->addFromString('index.html',$text);
   } else {
     echo "<br/>Error" . $rc . '<br/>';
   }
 
-  $zipf=$cwd . '/' . 'tmp/allscr.zip';
+  $zipf=$cwd . '/' . 'tmp/'.$scrs;
   $zip = new ZipArchive;
   $rc=$zip->open($zipf, Ziparchive::CREATE | ZipArchive::OVERWRITE);
 
@@ -75,22 +80,8 @@ if ($stat && (strtotime($ags[0]['dt']) < $stat['mtime'])) {
   }
 
 }
-echo "<a href='tmp/allfiles.zip'>All files(zip)</a><br>";
-echo "<a href='tmp/allscr.zip'>All screenshots(zip)</a><br>";
+echo "<a href='tmp/".$files."'>All files(zip)</a><br>";
+echo "<a href='tmp/".$scrs."'>All screenshots(zip)</a><br>";
 echo "</p></body></html>";
-
-function get_fn($otitle,$file,$id) {
-  $path_parts = pathinfo($file);
-  $title=preg_split('/[,(]/',$otitle)[0];
-  $title=preg_replace("/[^a-zA-Z0-9]+/","",$title);
-  $tf=substr($otitle,0,1);
-  if (is_numeric($tf)) {
-    $tf = '0';
-  } else {
-    $tf = strtoupper($tf);
-  }
-  $fn=$tf . '/' . $title.'-'.$id.'.'.$path_parts['extension'];
-  return $fn;
-}
 
 ?>

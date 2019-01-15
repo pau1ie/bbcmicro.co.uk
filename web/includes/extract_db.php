@@ -1,6 +1,20 @@
 <?php
 
-function get_data () {
+function get_fn($otitle,$file,$id) {
+  $path_parts = pathinfo($file);
+  $title=preg_split('/[,(]/',$otitle)[0];
+  $title=preg_replace("/[^a-zA-Z0-9]+/","",$title);
+  $tf=substr($otitle,0,1);
+  if (is_numeric($tf)) {
+    $tf = '0';
+  } else {
+    $tf = strtoupper($tf);
+  }
+  $fn=$tf . '/' . $title.'-'.$id.'.'.$path_parts['extension'];
+  return $fn;
+}
+
+function get_data ($arch='N') {
 global $db;
 $sql="select g.parent, g.id, g.title_article, g.title, g.year, g.genre, g.reltype, g.players_max, g.players_min, g.joystick, i.filename, r.name, g.save, g.hardware, g.electron, g.version, g.series, g.series_no, g.notes, g.compat_a, g.compat_b, g.compat_master from games g left join images i on g.id = i.gameid left join genres r on g.genre = r.id order by g.id";
 
@@ -96,10 +110,19 @@ foreach ($res as $line) {
   $ol[]=$line['title_article'];
   $ol[]=$line['title'];
 
-				// Publisher
-  $ol[]=implode(', ',$pubs);
+  $ol[]=implode(', ',$pubs);	// Publisher
 
-  $ol[]=$line['filename'];	// Filename
+  if ($arch=='N') {
+    $ol[]=$line['filename'];	// Filename
+  } else {
+    if ($line['filename'] > ' ') {
+      $archfn=get_fn($line['title'],$line['filename'],$line['id']);
+      $archfn='<a href="'.$archfn.'">'.$archfn.'</a>';
+    } else {
+      $archfn = ' ';
+    }
+    $ol[]=$archfn;		// File name
+  }
 
   $ol[]=$line['reltype'];	// Release Type
   $ol[]=$line['name'];		// Genre1
@@ -107,8 +130,6 @@ foreach ($res as $line) {
   $ol[]=implode(', ',$gen2);	// Genre2
 
   $ol[]=$line['year'];		// Year
-
-#  $ol[]=$line['notes'];	// Notes
 
   $ol[]=implode(', ',$auths);	// Authors
 
