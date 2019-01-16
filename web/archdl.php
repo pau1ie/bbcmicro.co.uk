@@ -55,7 +55,7 @@ if ($stat && (strtotime($ags[0]['dt']) < $stat['mtime'])) {
       }
     }
     $text = get_data('Y');
-    $readme="<html><head></head><body><h1>BBC Micro Archive</h1><p>This is the downloaded archive of <a href='http://bbcmicro.co.uk'>bbcmicro.co.uk</a>. It was created on ".date(DATE_COOKIE) .". This contains all disc images on the archive organised by title. An <a href=00index.html>index</a> of the files is also included. </p><p>An archive of screenshots is also available, the filename is ".$scrs.".</p></html>";
+    $readme="<html><head></head><body><h1>BBC Micro Archive</h1><p>This is the downloaded archive of <a href='http://bbcmicro.co.uk'>bbcmicro.co.uk</a>. It was created on ".date(DATE_COOKIE) .". This contains all disc images on the archive organised by title. An <a href=index.html>index</a> of the files is also included. </p><p>An archive of screenshots is also available, the filename is ".$scrs.".</p></html>";
     $zip->addFromString('readme.html',$readme);
     $zip->addFromString('index.html',$text);
   } else {
