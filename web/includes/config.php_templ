@@ -12,6 +12,9 @@ define('DB_NAME','bbc');
 define('DB_USER','bbc');
 define('DB_PASS','password');
 
+# Email address to send email from the contact form.Email address to send email from the contact form.
+define('CONTACT_EMAIL','user@localhost');
+
 # Admin credentials for DB. Allows read only credentials for
 # main site if required.
 define('ADMIN_DB_HOST',DB_HOST);
