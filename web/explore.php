@@ -38,6 +38,16 @@ $ssd = get_discloc($img["filename"],$img['subdir']);
 $filename = basename($ssd);
 
 
+$back_url='index.php';
+$back_desc='Home Page';
+if (array_key_exists('HTTP_REFERER', $_SERVER)) {
+  if ( parse_url($_SERVER["HTTP_REFERER"],PHP_URL_HOST) == $_SERVER["SERVER_NAME"] ) {
+    $back_url = "javascript:history.go(-1)";
+    $back_desc='Back to Details';
+  }
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,12 +124,13 @@ $filename = basename($ssd);
     <div id="diskContents" style="display: none;">
 
       <div class="container-fluid">
-       <div class="row"><div class="col-md-8">
+       <div class="flexContainer">
         <h3 class="flexItem removeMarginsAndPadding">Disc Contents <small id="diskContentName"></small>
         </h3>
-       </div><div class="col-md-4"><div class="pull-right">
-        <a href="game.php?id=<?php echo $id; ?>" type="button" class="btn btn-primary">Details page</a>
-       </div></div>
+        <div class="spacer">&nbsp;</div>
+        <div class="flexItem" id="backButton">
+          <a class="btn btn-primary btn-sm" href="<?php echo $back_url; ?>"><?php echo $back_desc; ?></a>
+        </div>
       </div>
 
       <br/>

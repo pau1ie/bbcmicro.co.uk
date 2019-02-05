@@ -76,6 +76,7 @@ function gameitem( $id, $ta, $name, $image, $img, $publisher, $year, $pubid) {
    }
    
    $ssd = get_discloc($img["filename"],$img['subdir']);
+   $fn=basename($ssd);
 ?>
      <div class="col-sm-6 col-md-4 col-lg-3 thumb1">
       <div class="thumbnail text-center">
@@ -86,7 +87,7 @@ function gameitem( $id, $ta, $name, $image, $img, $publisher, $year, $pubid) {
 <?php
   $playlink=get_playlink($img,$jsbeeb,$root);
   if ($ssd != null && file_exists($ssd)) { ?>
-       <p><a href="<?php echo $ssd ?>" type="button" onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Download</a><?php
+       <p><a href="<?php echo $ssd ?>" download="<?php echo $fn ?>" type="button" onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Download</a><?php
   }
   if (($img['probs'] != 'N' and $img['probs'] != 'P') and $playlink != null) { ?>
           <a id="plybtn" href="<?php echo $playlink ?>" type="button" onmousedown="log(<?php echo $id; ?>);" class="btn btn-default">Play</a></p>
