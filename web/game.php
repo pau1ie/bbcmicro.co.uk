@@ -59,15 +59,8 @@ $jsbeeb=JB_LOC;
 $root=WS_ROOT;
 
 $playlink=get_playlink($img,$jsbeeb,$root);
-if ( $ssd != NULL && file_exists($ssd)) {
-  $imglink='<p><a type="button" download="'.$ssd_info['basename'].'" class="btn btn-primary btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $ssd . '">Download</a></p>';
-  if ( $ssd_info['extension'] = 'ssd' ) {
-    $imglink=$imglink.'<p><a href="explore.php?id='.$id.'" type="button" class="btn btn-primary btn-lg center-block">Explore Disc</a></p>';
-  }
-} else {
-  $imglink="<p>No disc image available</p>";
-}
 
+$imglink="";
 if ($img['probs'] != 'N' and $playlink != NULL ) {
   if ($img['probs']=='P') {
     $imglink='<p style="text-align: center">This game doesn\'t work properly in jsbeeb.</p>' . $imglink .'<p><a type="button" class="btn btn-warning btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $playlink . '" >Play Anyway</a></p>';
@@ -76,6 +69,15 @@ if ($img['probs'] != 'N' and $playlink != NULL ) {
   }
 } else {
   $imglink=$imglink."<p>Can't be played online.</p>";
+}
+
+if ( $ssd != NULL && file_exists($ssd)) {
+  $imglink=$imglink.'<p><a type="button" download="'.$ssd_info['basename'].'" class="btn btn-primary btn-lg center-block" onmousedown="log('.$id.',\'d\');" href="' . $ssd . '">Download</a></p>';
+  if ( $ssd_info['extension'] = 'ssd' ) {
+    $imglink=$imglink.'<p><a href="explore.php?id='.$id.'" type="button" class="btn btn-primary btn-lg center-block">Explore Disc</a></p>';
+  }
+} else {
+  $imglink=$imglink."<p>No disc image available</p>";
 }
 
 $sql = "select * from game_genre gg, genres g where gg.gameid  = ? and gg.genreid = g.id";
