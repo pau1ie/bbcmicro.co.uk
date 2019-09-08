@@ -344,7 +344,7 @@ if ( ! empty($compilations)) {
 
    if ($game["players_min"] == $game["players_max"]) {
       if ($game["players_min"] == 1) {
-         $players="Single player";
+         $players="Single Player";
       } else {
          $players=$game["players_min"] . " players";
       }
