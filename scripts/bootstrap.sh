@@ -8,7 +8,7 @@ echo "+++ Installing packages "
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y apache2 php mariadb-server php-mysql
+apt-get install -y apache2 php mariadb-server php-mysql unzip
 
 echo "Password is $PASSWORD"
 echo "+++ Setting up the databse"
@@ -24,7 +24,7 @@ mysql -vu "$DBUSER" -D "$DBNAME" -p"$PASSWORD" < /vagrant/db/db.sql  > /vagrant/
 echo "+++ Creating and loading user table."
 mysql -vu "$DBUSER" -D "$DBNAME" -p"$PASSWORD" < /vagrant/db/users.sql  > /vagrant/db/users.log
 
-echo "+++Setting up config"
+echo "+++ Setting up config"
 
 sed -e "s/DB_NAME','bbc'/DB_NAME','$DBNAME'/" \
     -e "s/DB_USER','bbc'/DB_USER','$DBUSER'/" \
@@ -44,4 +44,27 @@ sed 's/;extension=pdo_mysql/extension=pdo_mysql/' /etc/php/"$PHPV"/apache2/php.i
 
 sudo systemctl restart apache2.service
 
+if [[ -f BBCMicroFiles.zip ]] && [[ -f BBCMicroScShots.zip ]]
+then
+echo "++ Files already downloaded."
+else
+echo "+++ Getting files"
+wget http://bbcmicro.co.uk/tmp/BBCMicroFiles.zip
+wget http://bbcmicro.co.uk/tmp/BBCMicroScShots.zip
+fi
+echo "+++ Unzipping files"
+
+[[ -d files ]] || mkdir files
+[[ -d screens ]] || mkdir screens
+cd files
+unzip -f ../BBCMicroFiles.zip
+cd ../screens
+unzip -f ../BBCMicroScShots.zip
+
+echo "+++ Copy disc images and screenshots into place"
+php scripts/copyfiles.php
+echo "+++ Copy jsbeeb"
+cd /vagrant/web
+git clone https://github.com/mattgodbolt/jsbeeb.git
+cp -pr jsb/* jsbeeb
 echo "+++Done!"
