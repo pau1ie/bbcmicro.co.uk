@@ -29,7 +29,7 @@ echo "+++Setting up config"
 sed -e "s/DB_NAME','bbc'/DB_NAME','$DBNAME'/" \
     -e "s/DB_USER','bbc'/DB_USER','$DBUSER'/" \
     -e "s/DB_PASS','password'/DB_PASS','$PASSWORD'/" \
-    -e "s/WS_ROOT','http:\/\/localhost\/'/WS_ROOT','http:\/\/localhost:8080\/' \
+    -e "s/WS_ROOT','http:\/\/localhost\/'/WS_ROOT','http:\/\/localhost:8080\/'/" \
     /vagrant/web/includes/config.php_templ > /vagrant/web/includes/config.php
 
 rm -rf /var/www/html
