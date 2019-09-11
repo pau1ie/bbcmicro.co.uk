@@ -178,11 +178,11 @@ if (array_key_exists('HTTP_REFERER', $_SERVER)) {
         </div>
         <div id="scr" class="tab-pane fade">
           <pre id="contentsscr">
-            <div><canvas class="canvas" id="beebScreen0" width="640" height="512"></canvas></div>
-            <div><canvas class="canvas" id="beebScreen1" width="640" height="512"></canvas></div>
-            <div><canvas class="canvas" id="beebScreen2" width="640" height="512"></canvas></div>
-            <div><canvas class="canvas" id="beebScreen4" width="640" height="512"></canvas></div>
-            <div><canvas class="canvas" id="beebScreen5" width="640" height="512"></canvas></div>
+            <div><p>Mode 0</p><canvas class="canvas" id="beebScreen0" width="640" height="512"></canvas></div>
+            <div><p>Mode 1</p><canvas class="canvas" id="beebScreen1" width="640" height="512"></canvas></div>
+            <div><p>Mode 2</p><canvas class="canvas" id="beebScreen2" width="640" height="512"></canvas></div>
+            <div><p>Mode 4</p><canvas class="canvas" id="beebScreen4" width="640" height="512"></canvas></div>
+            <div><p>Mode 5</p><canvas class="canvas" id="beebScreen5" width="640" height="512"></canvas></div>
           </pre>
         </div>
       </div>

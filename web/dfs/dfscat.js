@@ -576,7 +576,11 @@ function d_basic(catalogIndex)
         }
       }
       if (String.fromCharCode(fileData[i]) == '"' ) { raw=1-raw; }
-      decode += d;
+      if ( d == '<' ) {
+        decode += "&lt;";
+      } else {
+        decode += d;
+      }
     }
     listing+=String("     "+line).slice(-6)+decode+"\n";
   }
@@ -1110,7 +1114,7 @@ function d_scr(catalogIndex)
     idata.data.set(buffer.slice(0,4*modeTable[mode].width*modeTable[mode].height));
     ctx.putImageData(idata, 0, 0);
   }
-  if ( catalog[catalogIndex].fileLoad >= 12288 && catalog[catalogIndex].fileLoad + catalog[catalogIndex].fileLength <= 32768 ) {
+  if ( catalog[catalogIndex].fileLoad >= 12288 && catalog[catalogIndex].fileLoad + catalog[catalogIndex].fileLength <= 32768 && catalog[catalogIndex].fileLength % 8 == 0 ) {
     return true;
   } else { 
     return false;
