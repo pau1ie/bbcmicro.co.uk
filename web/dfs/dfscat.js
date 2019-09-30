@@ -6,6 +6,7 @@ var catalogEntryCount = 0;
 var sectorCount = 0;
 var bootOptions = 0;
 var gFileId = String("0");
+var ddd=false;
 var bootOptTab = {
   0: "0: *None",
   1: "1: *Load $.!BOOT",
@@ -75,6 +76,7 @@ function openDisk(diskName)
   networkGetBinaryBlob(diskPath)
     .then(function ()
     {
+	  checkDiskType();
       decodeDiskCatalog();
       displayDiskCatalog();
     });
@@ -88,6 +90,48 @@ function downloadDisk(diskName)
     .then(function () {
       downloadBinaryData(diskName, binaryDiskBlob);
     });
+}
+
+function checkDiskType()
+{
+	checklocs = Array(parseInt('0x001',16),parseInt('0x002',16),parseInt('0x003',16),parseInt('0x004',16),
+					  parseInt('0x005',16),parseInt('0x006',16),parseInt('0x007',16),parseInt('0x008',16),
+					  parseInt('0x009',16),parseInt('0x00A',16),parseInt('0x100',16),parseInt('0x101',16),
+					  parseInt('0x102',16),parseInt('0x103',16));
+	var dfs=true;
+	var imgsz;
+	var j,k,l,m,o,p;
+	var offset=parseInt('0xA00',16);
+	ddd=true;
+	for (i=0; i<checklocs.length; i++) {
+		j=getEightBitValueFromBinary(checklocs[i]);
+		if (j > 127 || ( j > 0 && j < 31 )) {
+			dfs=false;
+		}
+		j=getEightBitValueFromBinary(checklocs[i]+offset);
+		if (j > 127 || ( j > 0 && j < 31 )) {
+			ddd=false;
+		}
+	}
+	j=getEightBitValueFromBinary(parseInt('0x105',16));
+	k=getEightBitValueFromBinary(parseInt('0x106',16));
+	if (j&7 || k&parseInt('0xCC',16)) 
+	{
+		dfs=false;
+		ddd=false;
+	}
+	l=getEightBitValueFromBinary(parseInt('0x105',16)+offset);
+	m=getEightBitValueFromBinary(parseInt('0x106',16)+offset);
+	o=getEightBitValueFromBinary(parseInt('0x107',16));
+	p=parseInt('0x100',16);
+	if (l&7 || m&parseInt('0xCC',16) ) 
+	{
+		ddd=false;
+	}
+	imgsz=(o+256*(k&3))*p;
+	console.log("Image size: "+ binaryDiskBlob.byteLength + "; Sectors*Tracks: "+imgsz);
+	if (dfs) console.log("DFS Disc");
+	if (ddd) console.log("Double sided disc");
 }
 
 function decodeDiskCatalog()
@@ -262,6 +306,44 @@ function decimalToHex(d, padding)
   return hex;
 }
 
+function getFileData(catalogIndex)
+{
+	var fileData;
+	var fileItem = catalog[catalogIndex];
+	var track=Math.floor(fileItem.startSector/10);
+	var tracksect=fileItem.startSector%10;
+	var startOffset;
+
+	fileData = new Uint8Array(fileItem.fileLength);
+	
+	if (ddd)
+	{
+		var currTrack = track;
+		var currSect=tracksect;
+		var bytesLeft=fileItem.fileLength;
+		var hwm=0;
+		while (bytesLeft>0) {
+			if (bytesLeft > 2560-currSect*256) {
+				l = 2560-currSect*256;
+			} else {
+				l=bytesLeft;
+			}
+			bytesLeft = bytesLeft - l;
+			startOffset = 256*(currTrack*2*10+currSect);
+			console.log(startOffset,l);
+			fileData.set(new Uint8Array(binaryDiskBlob, startOffset, l),hwm);
+			hwm=hwm+l;
+			currSect = 0; // Next time we start at the first sector
+			currTrack++;
+		}
+	} else {
+		startOffset = 256*(track*10+tracksect);
+		fileData.set(new Uint8Array(binaryDiskBlob, startOffset, fileItem.fileLength));
+	}
+	console.log("Double sided: "+ ddd+" Start Sector: "+fileItem.startSector+" Track: "+track+" Sector in track: "+tracksect+" Start Offset: "+startOffset+" Length: "+fileItem.fileLength);
+	return fileData;
+}
+
 function downloadSingleFile(catalogIndex)
 {
   var fileItem = catalog[catalogIndex];
@@ -343,9 +425,7 @@ function displaySingleFile(catalogIndex)
 function d_text(catalogIndex)
 {
   var fileItem = catalog[catalogIndex];
-
-  var startOffset = fileItem.startSector * 256; // DFS Disks have 256 bytes per sector
-  var fileData = new Uint8Array(binaryDiskBlob, startOffset, fileItem.fileLength);
+  var fileData = getFileData(catalogIndex);
   var text = new String;
   var good=0;
 
@@ -372,11 +452,8 @@ function d_text(catalogIndex)
 
 function d_hex(catalogIndex)
 {
-
   var fileItem = catalog[catalogIndex];
-
-  var startOffset = fileItem.startSector * 256; // DFS Disks have 256 bytes per sector
-  var fileData = new Uint8Array(binaryDiskBlob, startOffset, fileItem.fileLength);
+  var fileData = getFileData(catalogIndex);
 
   var c = new String;
   var d = new String;
@@ -415,12 +492,8 @@ function d_hex(catalogIndex)
 
 function d_basic(catalogIndex)
 {
-
   var fileItem = catalog[catalogIndex];
-
-  var startOffset = fileItem.startSector * 256; // DFS Disks have 256 bytes per sector
-  var fileData = new Uint8Array(binaryDiskBlob, startOffset, fileItem.fileLength);
-
+  var fileData = getFileData(catalogIndex);
   /* Thanks to https://www.sweharris.org for letting me convert the code in
   *  list.pl part of his MMB_Utils https://github.com/sweharris/MMB_Utils
   *  to javascript and relicense it for use in this code.
@@ -590,12 +663,9 @@ function d_basic(catalogIndex)
 
 function d_dis(catalogIndex)
 {
-
   var fileItem = catalog[catalogIndex];
-
-  var startOffset = fileItem.startSector * 256; // DFS Disks have 256 bytes per sector
-  var fileData = new Uint8Array(binaryDiskBlob, startOffset, fileItem.fileLength);
-
+  var fileData = getFileData(catalogIndex);
+	
   var l = new String;
   var text = new String;
 
@@ -1086,9 +1156,7 @@ function unpackFourBitColor(packedInputData, screenMode, length)
 function d_scr(catalogIndex)
 {
   var fileItem = catalog[catalogIndex];
-  var startOffset = fileItem.startSector * 256; // DFS Disks have 256 bytes per sector
-  var fileData = new Uint8Array(binaryDiskBlob, startOffset, fileItem.fileLength);
-  var canvas, ctx;
+  var fileData = getFileData(catalogIndex);  var canvas, ctx;
   var buffer = "";
 
   for (mode in modeTable) {
