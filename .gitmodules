@@ -1,3 +1,6 @@
 [submodule "web/dfs"]
 	path = web/dfs
 	url = git@github.com:pau1ie/BBCB_DFS_Catalog.git
+[submodule "web/jsbeeb"]
+	path = web/jsbeeb
+	url = https://github.com/mattgodbolt/jsbeeb.git

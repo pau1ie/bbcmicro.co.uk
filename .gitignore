@@ -1,6 +1,5 @@
 web/includes/config.php
 web/gameimg/discs
 web/gameimg/screenshots
-web/jsbeeb
 *.log
 .vagrant
