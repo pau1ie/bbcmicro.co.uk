@@ -4,7 +4,7 @@ require 'playlink.php';
 function get_reltypes() {
   global $db;
 
-  $sql = "select distinct id, name, selected from reltype order by rel_order";
+  $sql = "select distinct id, name, selected, rel_order from reltype order by rel_order";
   $sth = $db->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   if ($sth->execute()) {
     $res = $sth->fetchAll();
